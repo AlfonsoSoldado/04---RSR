@@ -14,4 +14,4 @@ mirar la restricción de precio con menos de un euro (0,80 euros)
 Añadir al projetsii
 
  
-- Tarea reunión recapitulación al final de todo lo hecho.
+- Tarea reunión recapitulación al final de todo lo hecho
