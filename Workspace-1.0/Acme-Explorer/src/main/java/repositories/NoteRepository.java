@@ -7,5 +7,7 @@ import domain.Note;
 
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Integer>{
+	
 
+	
 }

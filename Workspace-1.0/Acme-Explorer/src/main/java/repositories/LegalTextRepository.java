@@ -7,5 +7,7 @@ import domain.LegalText;
 
 @Repository
 public interface LegalTextRepository extends JpaRepository<LegalText, Integer>{
+	
 
+	
 }

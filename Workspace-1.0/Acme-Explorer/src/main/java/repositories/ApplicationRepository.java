@@ -8,4 +8,7 @@ import domain.Application;
 @Repository
 public interface ApplicationRepository extends JpaRepository<Application, Integer>{
 
+	
+	
+	
 }

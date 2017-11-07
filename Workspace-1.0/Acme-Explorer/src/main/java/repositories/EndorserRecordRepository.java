@@ -7,5 +7,8 @@ import domain.EndorserRecord;
 
 @Repository
 public interface EndorserRecordRepository extends JpaRepository<EndorserRecord, Integer>{
+	
+	
 
+	
 }

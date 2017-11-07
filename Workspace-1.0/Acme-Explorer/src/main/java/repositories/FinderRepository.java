@@ -7,5 +7,6 @@ import domain.Finder;
 
 @Repository
 public interface FinderRepository extends JpaRepository<Finder, Integer>{
+	
 
 }

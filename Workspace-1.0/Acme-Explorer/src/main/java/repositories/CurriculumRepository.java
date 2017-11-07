@@ -7,5 +7,8 @@ import domain.Curriculum;
 
 @Repository
 public interface CurriculumRepository extends JpaRepository<Curriculum, Integer>{
+	
 
+	
+	
 }

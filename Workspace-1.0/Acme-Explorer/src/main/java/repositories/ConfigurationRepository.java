@@ -7,5 +7,6 @@ import domain.Configuration;
 
 @Repository
 public interface ConfigurationRepository extends JpaRepository<Configuration, Integer>{
-
+	
+	
 }

@@ -7,5 +7,7 @@ import domain.MiscellaneousRecord;
 
 @Repository
 public interface MiscellaneousRecordRepository extends JpaRepository<MiscellaneousRecord, Integer>{
+	
 
+	
 }

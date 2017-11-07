@@ -7,5 +7,6 @@ import domain.Emergency;
 
 @Repository
 public interface EmergencyRepository extends JpaRepository<Emergency, Integer>{
+	
 
 }

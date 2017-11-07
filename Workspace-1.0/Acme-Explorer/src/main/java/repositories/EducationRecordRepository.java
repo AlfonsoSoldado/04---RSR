@@ -8,4 +8,5 @@ import domain.EducationRecord;
 @Repository
 public interface EducationRecordRepository extends JpaRepository<EducationRecord, Integer>{
 
+	
 }

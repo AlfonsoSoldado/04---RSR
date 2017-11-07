@@ -7,5 +7,7 @@ import domain.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
+	
 
+	
 }
