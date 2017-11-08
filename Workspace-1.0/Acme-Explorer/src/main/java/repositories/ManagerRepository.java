@@ -1,6 +1,5 @@
 package repositories;
 
-import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +15,9 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer>{
 	
 	//C-2
 	@Query("select avg(m.trip.size), min(m.trip.size), max(m.trip.size), sqrt(sum(m.trip.size*m.trip.size)/count(m.trip.size)-(avg(m.trip.size)*avg(m.trip.size))) from Manager m")
-	Collection<Integer> avgMinMaxSqtr();
+	Object[] avgMinMaxSqtr();
 	
-	
+	//B-6
+	@Query("select count(m)/((select count(m2) from Manager m2)+0.0) from Manager m where m.suspicious=true")
+	Double ratioManagerSuspicious();
 }
