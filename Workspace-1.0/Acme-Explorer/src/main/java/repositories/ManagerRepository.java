@@ -20,4 +20,5 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer>{
 	//B-6
 	@Query("select count(m)/((select count(m2) from Manager m2)+0.0) from Manager m where m.suspicious=true")
 	Double ratioManagerSuspicious();
+	
 }

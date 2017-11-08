@@ -14,5 +14,4 @@ public interface CurriculumRepository extends JpaRepository<Curriculum, Integer>
 	@Query("select count(c)/((select count(c2) from Curriculum c2)+0.0) from Curriculum c where c.endorserRecord.size>0")
 	Double ratioRangerEndorser();
 	
-	
 }

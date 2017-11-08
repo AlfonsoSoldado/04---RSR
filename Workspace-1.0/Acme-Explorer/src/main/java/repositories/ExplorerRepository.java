@@ -10,4 +10,5 @@ public interface ExplorerRepository {
 	
 	@Query("select e from Explorer e.userAccount.id=?1")
 	Explorer findExplorerByUserAccountId(int uA);
+	
 }
