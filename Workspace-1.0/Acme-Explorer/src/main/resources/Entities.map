@@ -1,5 +1,5 @@
 #./src/main/resources/Entities.map
-#Tue Oct 31 16:22:48 CET 2017
+#Thu Nov 09 10:34:50 CET 2017
 trashBoxExplorer4=3702
 trashBoxExplorer3=3696
 trashBoxExplorer2=3690
@@ -95,7 +95,9 @@ note2=3814
 note1=3813
 sponsor2=3775
 sponsor1=3774
+professionalRecord2=3765
 audit2=3812
+professionalRecord1=3760
 audit1=3811
 outBoxSponsor2=3724
 outBoxSponsor1=3718
@@ -103,8 +105,6 @@ outBoxRanger2=3676
 outBoxRanger1=3670
 trashBoxManager2=3738
 trashBoxManager1=3732
-profesionalRecord2=3765
-profesionalRecord1=3760
 trashBoxRanger2=3678
 trashBoxRanger1=3672
 spam=3796

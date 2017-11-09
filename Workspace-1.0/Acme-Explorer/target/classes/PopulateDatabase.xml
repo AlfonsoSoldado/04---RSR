@@ -1063,9 +1063,9 @@
 			<ref bean="miscellaneousRecord1"/>
 		</list>
 	</property>
-	<property name="profesionalRecord">
+	<property name="professionalRecord">
 		<list>
-			<ref bean="profesionalRecord1"/>
+			<ref bean="professionalRecord1"/>
 		</list>
 	</property>
 	<property name="educationRecord">
@@ -1090,9 +1090,9 @@
 			<ref bean="miscellaneousRecord2"/>
 		</list>
 	</property>
-	<property name="profesionalRecord">
+	<property name="professionalRecord">
 		<list>
-			<ref bean="profesionalRecord2"/>
+			<ref bean="professionalRecord2"/>
 		</list>
 	</property>
 	<property name="educationRecord">
@@ -1142,11 +1142,11 @@
 	<property name="comment" value="Comentario"/>
 	</bean>
 	
-							<!-- PROFESIONALRECORD -->
+							<!-- PROFESSIONALRECORD -->
 	
-	<!-- PROFESIONALRECORD1 -->
+	<!-- PROFESSIONALRECORD1 -->
 	
-	<bean id="profesionalRecord1" class="domain.ProfesionalRecord">
+	<bean id="professionalRecord1" class="domain.ProfessionalRecord">
 	<property name="companyName" value="Nombre empresa1" />
 	<property name="start" value="2017/08/03" />
 	<property name="end" value="2017/08/18" />
@@ -1155,9 +1155,9 @@
 	<property name="comment" value="Comentario"/>
 	</bean>
 	
-	<!-- PROFESIONALRECORD2 -->
+	<!-- PROFESSIONALRECORD2 -->
 	
-	<bean id="profesionalRecord2" class="domain.ProfesionalRecord">
+	<bean id="professionalRecord2" class="domain.ProfessionalRecord">
 	<property name="companyName" value="Nombre empresa2" />
 	<property name="start" value="2017/08/04" />
 	<property name="end" value="2017/08/19" />

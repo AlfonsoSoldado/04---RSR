@@ -14,7 +14,7 @@ import domain.EducationRecord;
 import domain.EndorserRecord;
 import domain.MiscellaneousRecord;
 import domain.PersonalRecord;
-import domain.ProfesionalRecord;
+import domain.ProfessionalRecord;
 
 @Service
 @Transactional
@@ -37,12 +37,12 @@ public class CurriculumService {
 	
 	public Curriculum create() {
 		Curriculum res = new Curriculum();
-		Collection<ProfesionalRecord> profesionalRecord = new ArrayList<ProfesionalRecord>();
+		Collection<ProfessionalRecord> professionalRecord = new ArrayList<ProfessionalRecord>();
 		Collection<EducationRecord> educationRecord = new ArrayList<EducationRecord>();
 		Collection<EndorserRecord> endorserRecord = new ArrayList<EndorserRecord>();
 		Collection<MiscellaneousRecord> miscellaneousRecord = new ArrayList<MiscellaneousRecord>();
 		PersonalRecord personalRecord = new PersonalRecord();
-		res.setProfesionalRecord(profesionalRecord);
+		res.setProfessionalRecord(professionalRecord);
 		res.setEducationRecord(educationRecord);
 		res.setEndorserRecord(endorserRecord);
 		res.setMiscellaneousRecord(miscellaneousRecord);

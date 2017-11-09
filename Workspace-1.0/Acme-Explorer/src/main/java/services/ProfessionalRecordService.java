@@ -7,23 +7,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.ProfesionalRecordRepository;
+import repositories.ProfessionalRecordRepository;
 import domain.ProfessionalRecord;
 
 @Service
 @Transactional
-public class ProfesionalRecordService {
+public class ProfessionalRecordService {
 
 	// Managed repository
 
 	@Autowired
-	private ProfesionalRecordRepository profesionalRecordRepository;
+	private ProfessionalRecordRepository profesionalRecordRepository;
 
 	// Supporting services
 
 	// Constructors
 
-	public ProfesionalRecordService() {
+	public ProfessionalRecordService() {
 		super();
 	}
 

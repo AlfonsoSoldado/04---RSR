@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import domain.ProfessionalRecord;
 
 @Repository
-public interface ProfesionalRecordRepository extends JpaRepository<ProfessionalRecord, Integer>{
+public interface ProfessionalRecordRepository extends JpaRepository<ProfessionalRecord, Integer>{
 
 	
 }

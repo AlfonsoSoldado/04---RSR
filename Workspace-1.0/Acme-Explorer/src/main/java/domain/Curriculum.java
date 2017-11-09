@@ -46,7 +46,7 @@ public class Curriculum extends DomainEntity {
 	private PersonalRecord personalRecord;
 	private Collection<EndorserRecord> endorserRecord;
 	private Collection<MiscellaneousRecord> miscellaneousRecord;
-	private Collection<ProfessionalRecord> profesionalRecord;
+	private Collection<ProfessionalRecord> professionalRecord;
 	private Collection<EducationRecord> educationRecord;
 
 	@Valid
@@ -95,13 +95,13 @@ public class Curriculum extends DomainEntity {
 	@Valid
 	@NotNull
 	@OneToMany(cascade = CascadeType.ALL)
-	public Collection<ProfessionalRecord> getProfesionalRecord() {
-		return profesionalRecord;
+	public Collection<ProfessionalRecord> getProfessionalRecord() {
+		return professionalRecord;
 	}
 
-	public void setProfesionalRecord(
-			Collection<ProfessionalRecord> profesionalRecord) {
-		this.profesionalRecord = profesionalRecord;
+	public void setProfessionalRecord(
+			Collection<ProfessionalRecord> professionalRecord) {
+		this.professionalRecord = professionalRecord;
 	}
 
 	@Valid
