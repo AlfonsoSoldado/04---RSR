@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -32,7 +33,7 @@ public class Message extends DomainEntity {
 	private Date moment;
 	private String subject;
 	private String body;
-	private Priority priority;
+	private String priority;
 	private Boolean spam;
 
 	@NotNull
@@ -65,11 +66,12 @@ public class Message extends DomainEntity {
 
 	@Valid
 	@NotNull
-	public Priority getPriority() {
+	@Pattern(regexp = "^((HIGH)|(NEUTRAL)|(LOW))$")
+	public String getPriority() {
 		return priority;
 	}
 
-	public void setPriority(Priority priority) {
+	public void setPriority(String priority) {
 		this.priority = priority;
 	}
 

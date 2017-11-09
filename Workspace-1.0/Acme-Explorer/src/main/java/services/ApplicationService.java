@@ -31,10 +31,10 @@ public class ApplicationService {
 	
 	public Application create() {
 		Application res = new Application();
-		//String status;
+		String status;
 		String comment = new String();
-		//status = "ACCEPTED";
-		//res.setStatus(status);
+		status = "ACCEPTED";
+		res.setStatus(status);
 		res.setComment(comment);
 		return res;
 	}
