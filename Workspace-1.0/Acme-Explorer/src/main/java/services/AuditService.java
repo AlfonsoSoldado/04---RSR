@@ -29,6 +29,13 @@ public class AuditService {
 	
 	// Simple CRUD methods
 	
+	public Audit create() {
+		Audit res;
+		
+		res = new Audit();
+		return res;
+	}
+	
 	public Collection<Audit> findAll() {
 		Collection<Audit> res;
 		res = this.auditRepository.findAll();

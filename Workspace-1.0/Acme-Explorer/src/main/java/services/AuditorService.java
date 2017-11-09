@@ -41,20 +41,13 @@ public class AuditorService {
 	// Simple CRUD methods
 	
 	public Auditor create() {
-		Auditor res;
-		UserAccount userAccount;
-		Authority authority;
-		Collection<SocialId> socialId;
-		Collection<Folder> folder;
-		Collection<Note> note;
-		Collection<Audit> audit;
-		res = new Auditor();
-		userAccount = new UserAccount();
-		authority = new Authority();
-		socialId = new ArrayList<SocialId>();
-		folder = new ArrayList<Folder>();
-		note = new ArrayList<Note>();
-		audit = new ArrayList<Audit>();
+		Auditor res = new Auditor();
+		UserAccount userAccount = new UserAccount();
+		Authority authority = new Authority();
+		Collection<SocialId> socialId = new ArrayList<SocialId>();
+		Collection<Folder> folder = new ArrayList<Folder>();
+		Collection<Note> note = new ArrayList<Note>();
+		Collection<Audit> audit = new ArrayList<Audit>();
 		authority.setAuthority(Authority.AUDITOR);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);

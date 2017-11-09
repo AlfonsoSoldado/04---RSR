@@ -30,8 +30,11 @@ Java: @Pattern(regexp = "^((PENDING)|(REJECTED)|(DUE)|(ACCEPTED)|(CANCELLED))$")
 (Hay que crear un parametro String status...)
 
 Hecho: ActorService, AdminitratorService(una parte), ApplicationService(falta meterle status),
-AuditorService(faltaría meterle la creación de folders por defecto).
+AuditorService(faltaría meterle la creación de folders por defecto). Todos los CRUD.
 
 Falta el resto de Services.
 
 ¿Hay que hacer ConfigurationSerice?
+
+AuditService creo que el delete va en función de si es draftMode. (Mirar si el save es así)
+Falta terminar create y de Other business methods el draftMode.

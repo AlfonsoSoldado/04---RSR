@@ -29,6 +29,12 @@ public class CategoryService {
 	
 	// Simple CRUD methods
 	
+	public Category create() {
+		Category res;
+		res = new Category();
+		return res;
+	}
+	
 	public Collection<Category> findAll() {
 		Collection<Category> res;
 		res = this.categoryRepository.findAll();
