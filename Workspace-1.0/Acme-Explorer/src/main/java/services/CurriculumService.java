@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,11 @@ import org.springframework.util.Assert;
 
 import repositories.CurriculumRepository;
 import domain.Curriculum;
+import domain.EducationRecord;
+import domain.EndorserRecord;
+import domain.MiscellaneousRecord;
+import domain.PersonalRecord;
+import domain.ProfesionalRecord;
 
 @Service
 @Transactional
@@ -28,6 +34,22 @@ public class CurriculumService {
 	}
 	
 	// Simple CRUD methods
+	
+	public Curriculum create() {
+		Curriculum res = new Curriculum();
+		Collection<ProfesionalRecord> profesionalRecord = new ArrayList<ProfesionalRecord>();
+		Collection<EducationRecord> educationRecord = new ArrayList<EducationRecord>();
+		Collection<EndorserRecord> endorserRecord = new ArrayList<EndorserRecord>();
+		Collection<MiscellaneousRecord> miscellaneousRecord = new ArrayList<MiscellaneousRecord>();
+		PersonalRecord personalRecord = new PersonalRecord();
+		res.setProfesionalRecord(profesionalRecord);
+		res.setEducationRecord(educationRecord);
+		res.setEndorserRecord(endorserRecord);
+		res.setMiscellaneousRecord(miscellaneousRecord);
+		res.setPersonalRecord(personalRecord);
+		res = new Curriculum();
+		return res;
+	}
 	
 	public Collection<Curriculum> findAll() {
 		Collection<Curriculum> res;

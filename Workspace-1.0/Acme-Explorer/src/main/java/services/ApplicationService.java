@@ -30,12 +30,10 @@ public class ApplicationService {
 	// Simple CRUD methods
 	
 	public Application create() {
-		Application res;
+		Application res = new Application();
 		//String status;
-		String comment;
-		res = new Application();
+		String comment = new String();
 		//status = "ACCEPTED";
-		comment = new String();
 		//res.setStatus(status);
 		res.setComment(comment);
 		return res;

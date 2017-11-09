@@ -12,7 +12,7 @@ import repositories.AdministratorRepository;
 import security.Authority;
 import security.UserAccount;
 import domain.Administrator;
-import domain.Message;
+import domain.Folder;
 import domain.SocialId;
 
 @Service
@@ -38,17 +38,16 @@ public class AdministratorService {
 	// Simple CRUD methods
 	
 	public Administrator create() {
-		Administrator res;
-		UserAccount userAccount;
-		Authority authority;
-		Collection<SocialId> socialId;
-		Collection<Message> message;
-		
-		res = new Administrator();
-		userAccount = new UserAccount();
-		authority = new Authority();
-		socialId = new ArrayList<SocialId>();
-		message = new ArrayList<Message>();
+		Administrator res = new Administrator();
+		UserAccount userAccount = new UserAccount();
+		Authority authority = new Authority();
+		Collection<SocialId> socialId = new ArrayList<SocialId>();
+		Collection<Folder> folder = new ArrayList<Folder>();
+		authority.setAuthority(Authority.ADMIN);
+		userAccount.addAuthority(authority);
+		res.setUserAccount(userAccount);
+		res.setSocialId(socialId);
+		res.setFolders(folder);
 		return res;
 	}
 	
