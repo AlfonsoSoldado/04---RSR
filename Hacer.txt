@@ -22,7 +22,7 @@ Terminar AdministratorService los miles de Other business methods
 
 
 Cambiar status (en application) y priority (en message) por pattern y eliminar los
-datatypes. Cambiar modelos, en domain java, el populate y añadirlo en create de los Service.
+datatypes. Cambiar modelos y añadirlo en create de los Service.
 
 Modelos: status : String {Pattern((PENDING)|(REJECTED)|(DUE)|(ACCEPTED)|(CANCELLED))}
 Java: @Pattern(regexp = "^((PENDING)|(REJECTED)|(DUE)|(ACCEPTED)|(CANCELLED))$")
