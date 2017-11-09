@@ -1,5 +1,8 @@
 package services;
 
+import java.util.Collection;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -7,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import utilities.AbstractTest;
+import domain.Actor;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,7 +25,17 @@ public class ActorServiceTest extends AbstractTest{
 	@Autowired
 	private ActorService actorService;
 	
+	
 	// Test --------------------------------------
 	
+	@Test
+	public void testSaveActors(){
+		Actor actor, saved;
+		Collection<Actor> actors;
+		
+		//actor = actorService.create();
+		//TODO: terminar
+		
+	}
 
 }
