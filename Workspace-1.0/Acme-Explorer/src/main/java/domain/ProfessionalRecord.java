@@ -15,11 +15,11 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class ProfesionalRecord extends DomainEntity {
+public class ProfessionalRecord extends DomainEntity {
 
 	// Constructors
 
-	public ProfesionalRecord() {
+	public ProfessionalRecord() {
 		super();
 	}
 

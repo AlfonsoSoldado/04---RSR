@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ProfesionalRecordRepository;
-import domain.ProfesionalRecord;
+import domain.ProfessionalRecord;
 
 @Service
 @Transactional
@@ -29,29 +29,29 @@ public class ProfesionalRecordService {
 
 	// Simple CRUD methods
 
-	public Collection<ProfesionalRecord> findAll() {
-		Collection<ProfesionalRecord> res;
+	public Collection<ProfessionalRecord> findAll() {
+		Collection<ProfessionalRecord> res;
 		res = this.profesionalRecordRepository.findAll();
 		Assert.notNull(res);
 		return res;
 	}
 
-	public ProfesionalRecord findOne(int profesionalRecord) {
+	public ProfessionalRecord findOne(int profesionalRecord) {
 		Assert.isTrue(profesionalRecord != 0);
-		ProfesionalRecord res;
+		ProfessionalRecord res;
 		res = this.profesionalRecordRepository.findOne(profesionalRecord);
 		Assert.notNull(res);
 		return res;
 	}
 
-	public ProfesionalRecord save(ProfesionalRecord profesionalRecord) {
+	public ProfessionalRecord save(ProfessionalRecord profesionalRecord) {
 		Assert.notNull(profesionalRecord);
-		ProfesionalRecord res;
+		ProfessionalRecord res;
 		res = this.profesionalRecordRepository.save(profesionalRecord);
 		return res;
 	}
 
-	public void delete(ProfesionalRecord profesionalRecord) {
+	public void delete(ProfessionalRecord profesionalRecord) {
 		Assert.notNull(profesionalRecord);
 		Assert.isTrue(profesionalRecord.getId() != 0);
 		Assert.isTrue(this.profesionalRecordRepository.exists(profesionalRecord
