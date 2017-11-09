@@ -83,4 +83,12 @@ public class ActorService {
 			result = true;
 		return result;
 	}
+	
+	public Actor findByUserAccount(UserAccount userAccount) {
+		Assert.notNull(userAccount);
+		Actor res;
+		res = actorRepository.findActorByUserAccountId(userAccount.getId());
+		Assert.notNull(res);
+		return res;
+	}
 }
