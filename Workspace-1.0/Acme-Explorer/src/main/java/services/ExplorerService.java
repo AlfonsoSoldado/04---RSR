@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ExplorerRepository;
+import security.LoginService;
+import security.UserAccount;
+import domain.Auditor;
 import domain.Explorer;
 
 @Service
@@ -62,5 +65,13 @@ public class ExplorerService {
 	}
 
 	// Other business methods
-
+	
+	public Explorer findByPrincipal() {
+		Explorer res;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		res = this.explorerRepository.findExplorerByUserAccountId(userAccount.getId());
+		Assert.notNull(res);
+		return res;
+	}
 }

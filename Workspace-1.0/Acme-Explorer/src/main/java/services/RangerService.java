@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.RangerRepository;
+import security.LoginService;
+import security.UserAccount;
+import domain.Manager;
 import domain.Ranger;
 
 @Service
@@ -62,5 +65,13 @@ public class RangerService {
 	}
 
 	// Other business methods
-
+	
+	public Ranger findByPrincipal() {
+		Ranger res;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		res = this.rangerRepository.findRangerByUserAccountId(userAccount.getId());
+		Assert.notNull(res);
+		return res;
+	}
 }
