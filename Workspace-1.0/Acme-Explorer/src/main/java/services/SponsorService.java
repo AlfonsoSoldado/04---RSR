@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SponsorRepository;
+import security.LoginService;
+import security.UserAccount;
+import domain.Ranger;
 import domain.Sponsor;
 
 @Service
@@ -62,5 +65,13 @@ public class SponsorService {
 	}
 
 	// Other business methods
-
+	
+	public Sponsor findByPrincipal() {
+		Sponsor res;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		res = this.sponsorRepository.findSponsorByUserAccountId(userAccount.getId());
+		Assert.notNull(res);
+		return res;
+	}
 }
