@@ -33,3 +33,5 @@ Hecho: ActorService, AdminitratorService(una parte), ApplicationService(falta me
 AuditorService(faltaría meterle la creación de folders por defecto).
 
 Falta el resto de Services.
+
+¿Hay que hacer ConfigurationSerice?
