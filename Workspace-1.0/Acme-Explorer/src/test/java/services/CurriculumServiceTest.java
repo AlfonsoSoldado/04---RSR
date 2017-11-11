@@ -21,7 +21,7 @@ import domain.PersonalRecord;
 @Transactional
 public class CurriculumServiceTest extends AbstractTest {
 	
-		// Serice under test -------------------------
+		// Service under test -------------------------
 	
 		@Autowired
 		private CurriculumService curriculumService;
