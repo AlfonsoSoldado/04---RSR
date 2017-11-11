@@ -1266,7 +1266,7 @@
 	<property name="title" value="Second" />
 	<property name="body" value="A comment of something" />
 	<property name="numberLaw" value = "10" />
-	<property name="moment" value="23/10/2013" />
+	<property name="moment" value="23/10/2013 19:13" />
 	<property name="trip" ref="trip1" />
 	</bean>
 	
@@ -1276,7 +1276,7 @@
 	<property name="title" value="Second" />
 	<property name="body" value="A comment of something" />
 	<property name="numberLaw" value = "285" />
-	<property name="moment" value="23/10/2015" />
+	<property name="moment" value="23/10/2015 10:15" />
 	<property name="trip" ref="trip2" />
 	</bean>
 	
@@ -2160,7 +2160,7 @@
 	<bean id="survival1" class="domain.Survival">
 	<property name="title" value="SECOND" />
 	<property name="description" value="third" />
-	<property name="moment" value="01/10/2017" />
+	<property name="moment" value="01/10/2017 12:13" />
 	<property name="location" ref="gps1" />
 	<property name="trip" ref="trip1" />
 	<property name="manager" ref="manager1" />
@@ -2171,7 +2171,7 @@
 	<bean id="survival2" class="domain.Survival">
 	<property name="title" value="First" />
 	<property name="description" value="Something" />
-	<property name="moment" value="23/10/2017" />
+	<property name="moment" value="23/10/2017 14:15" />
 	<property name="location" ref="gps2" />
 	<property name="trip" ref="trip2" />
 	<property name="manager" ref="manager2" />
@@ -2182,7 +2182,7 @@
 	<!-- AUDIT1 -->
 	
 	<bean id="audit1" class="domain.Audit">
-	<property name="moment" value="23/10/2015" />
+	<property name="moment" value="23/10/2015 10:13" />
 	<property name="title" value="First" />
 	<property name="description" value="Something" />
 	<property name="trip" ref="trip1" />
@@ -2198,7 +2198,7 @@
 	<!-- AUDIT2 -->
 	
 	<bean id="audit2" class="domain.Audit">
-	<property name="moment" value="02/10/2014" />
+	<property name="moment" value="02/10/2014 18:13" />
 	<property name="title" value="Second" />
 	<property name="description" value="thing" />
 	<property name="trip" ref="trip1" />
@@ -2216,10 +2216,10 @@
 	<!-- NOTE1 -->
 	
 	<bean id="note1" class="domain.Note">
-	<property name="moment" value="23/10/2013" />
+	<property name="moment" value="23/10/2013 14:13" />
 	<property name="remark" value="First" />
 	<property name="reply" value="Something" />
-	<property name="momentReply" value="05/10/2014"/>
+	<property name="momentReply" value="05/10/2014 17:24"/>
 	<property name="trip" ref="trip2" />
 	<property name="auditor" ref="auditor1" />
 	</bean>
@@ -2230,7 +2230,7 @@
 	<property name="moment" value="25/10/2014" />
 	<property name="remark" value="Second" />
 	<property name="reply" value="Some" />
-	<property name="momentReply" value="08/10/2015"/>
+	<property name="momentReply" value="08/10/2015 22:47"/>
 	<property name="trip" ref="trip2" />
 	<property name="auditor" ref="auditor2" />
 	</bean>
@@ -2240,7 +2240,7 @@
 	<!-- APPLICATION1 -->
 	
 	<bean id="application1" class="domain.Application">
-	<property name="moment" value="25/10/2013" />
+	<property name="moment" value="25/10/2013 20:13" />
 	<property name="comment" value="Comentario"/>
 	<property name="explorer" ref="explorer1" />
 	<property name="trip" ref="trip1" />
@@ -2250,7 +2250,7 @@
 	<!-- APPLICATION2 -->
 	
 	<bean id="application2" class="domain.Application">
-	<property name="moment" value="10/10/2014" />
+	<property name="moment" value="10/10/2014 11:10" />
 	<property name="comment" value="Comentario"/>
 	<property name="explorer" ref="explorer2" />
 	<property name="trip" ref="trip2" />
@@ -2260,7 +2260,7 @@
 	<!-- APPLICATION3 -->
 	
 	<bean id="application3" class="domain.Application">
-	<property name="moment" value="10/09/2014" />
+	<property name="moment" value="10/09/2014 12:11" />
 	<property name="comment" value="Comentario"/>
 	<property name="explorer" ref="explorer3" />
 	<property name="trip" ref="trip1"/>
@@ -2270,7 +2270,7 @@
 	<!-- APPLICATION4 -->
 	
 	<bean id="application4" class="domain.Application">
-	<property name="moment" value="10/09/2014" />
+	<property name="moment" value="10/09/2014 13:14" />
 	<property name="comment" value="Comentario"/>
 	<property name="explorer" ref="explorer4" />
 	<property name="trip" ref="trip2"/>
