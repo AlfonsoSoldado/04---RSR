@@ -10,10 +10,13 @@ import org.springframework.util.Assert;
 
 import repositories.AdministratorRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
+import domain.Auditor;
 import domain.Folder;
 import domain.SocialId;
+import domain.Trip;
 
 @Service
 @Transactional
@@ -81,4 +84,132 @@ public class AdministratorService {
 	}
 	
 	// Other business methods
+	
+	public Administrator findByPrincipal() {
+		Administrator res;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		res = this.administratorRepository.findAdministratorByUserAccountId(userAccount.getId());
+		Assert.notNull(res);
+		return res;
+	}
+	
+	public void checkAuthority() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		Collection<Authority> authority = userAccount.getAuthorities();
+		Assert.notNull(authority);
+		Authority res = new Authority();
+		res.setAuthority("ADMIN");
+		Assert.isTrue(authority.contains(res));
+	}
+	
+	public Double ApplicationPending() {
+		Double res;
+		res = this.administratorRepository.ApplicationPending();
+		return res;
+	}
+	
+	public Double ApplicationDue() {
+		Double res;
+		res = this.administratorRepository.ApplicationDue();
+		return res;
+	}
+	
+	public Double ApplicationAccepted() {
+		Double res;
+		res = this.administratorRepository.ApplicationAccepted();
+		return res;
+	}
+	
+	public Double ApplicationCancelled() {
+		Double res;
+		res = this.administratorRepository.ApplicationCancelled();
+		return res;
+	}
+	
+	public Double AratioRangerEndorser() {
+		Double res;
+		res = this.administratorRepository.ratioRangerEndorser();
+		return res;
+	}
+	
+	public Object[] avgMinMaxSqtrManager() {
+		Object[] res;
+		res = this.administratorRepository.avgMinMaxSqtrManager();
+		return res;
+	}
+	
+	public Double ratioManagerSuspicious() {
+		Double res;
+		res = this.administratorRepository.ratioManagerSuspicious();
+		return res;
+	}
+	
+	public Object[] avgMinMaxSqtrRanger() {
+		Object[] res;
+		res = this.administratorRepository.avgMinMaxSqtrRanger();
+		return res;
+	}
+	
+	public Double ratioRangerCurriculum() {
+		Double res;
+		res = this.administratorRepository.ratioRangerCurriculum();
+		return res;
+	}
+	
+	public Double ratioSuspiciousRanger() {
+		Double res;
+		res = this.administratorRepository.ratioSuspiciousRanger();
+		return res;
+	}
+	
+	public Object[] avgMinMaxSqtr() {
+		Object[] res;
+		res = this.administratorRepository.avgMinMaxSqtr();
+		return res;
+	}
+	
+	public Object[] avgMinMaxSqtr2() {
+		Object[] res;
+		res = this.administratorRepository.avgMinMaxSqtr2();
+		return res;
+	}
+	
+	public Double ratioTripsCancelled() {
+		Double res;
+		res = this.administratorRepository.ratioTripsCancelled();
+		return res;
+	}
+	
+	public Collection<Trip> tripsThanAverage() {
+		Collection<Trip> res;
+		res = this.administratorRepository.tripsThanAverage();
+		return res;
+	}
+	
+	public Double tripsLegalTextReferenced() {
+		Double res;
+		res = this.administratorRepository.tripsLegalTextReferenced();
+		return res;
+	}
+	
+	public Object[] avgMinMaxSqtr3() {
+		Object[] res;
+		res = this.administratorRepository.avgMinMaxSqtr3();
+		return res;
+	}
+	
+	public Object[] avgMinMaxSqtr4() {
+		Object[] res;
+		res = this.administratorRepository.avgMinMaxSqtr4();
+		return res;
+	}
+	
+	public Object[] avgMinMaxSqtr5() {
+		Object[] res;
+		res = this.administratorRepository.avgMinMaxSqtr5();
+		return res;
+	}
 }
