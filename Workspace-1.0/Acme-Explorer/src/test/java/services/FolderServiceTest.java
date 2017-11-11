@@ -66,7 +66,7 @@ public class FolderServiceTest extends AbstractTest {
 	 @Test
 	 public void testDeleteFolder(){
 		 Folder folder;
-		 folder = this.folderService.findOne(super.getEntityId("outBoxModificado"));
+		 folder = this.folderService.findOne(super.getEntityId("outBoxRanger1"));
 		 this.folderService.delete(folder);
 	 }
 }
