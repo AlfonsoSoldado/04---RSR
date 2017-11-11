@@ -9,7 +9,7 @@ import domain.Sponsor;
 @Repository
 public interface SponsorRepository extends JpaRepository<Sponsor, Integer>{
 	
-	@Query("select s from Sponsor s.userAccount.id=?1")
+	@Query("select s from Sponsor s where s.userAccount.id=?1")
 	Sponsor findSponsorByUserAccountId(int uA);
 	
 }

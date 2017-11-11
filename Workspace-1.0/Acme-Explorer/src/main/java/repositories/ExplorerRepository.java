@@ -9,7 +9,7 @@ import domain.Explorer;
 @Repository
 public interface ExplorerRepository extends JpaRepository<Explorer, Integer> {
 	
-	@Query("select e from Explorer e.userAccount.id=?1")
+	@Query("select e from Explorer e where e.userAccount.id=?1")
 	Explorer findExplorerByUserAccountId(int uA);
 	
 }
