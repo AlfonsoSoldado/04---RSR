@@ -2316,6 +2316,7 @@
 	<!-- GPS1 -->
 	
 	<bean id="gps1" class="domain.Gps">
+	<property name="name" value="Sevilla" />
 	<property name="latitude" value="90.0" />
 	<property name="longitude" value="180.0" />
 	</bean>
@@ -2323,6 +2324,7 @@
 	<!-- GPS2 -->
 	
 	<bean id="gps2" class="domain.Gps">
+	<property name="name" value="Barcelona" />
 	<property name="latitude" value="60.0" />
 	<property name="longitude" value="100.0" />
 	</bean>
