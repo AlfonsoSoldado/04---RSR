@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ApplicationRepository;
+import security.Authority;
 import domain.Application;
 
 @Service
@@ -20,6 +22,10 @@ public class ApplicationService {
 	private ApplicationRepository applicationRepository;
 	
 	// Supporting services
+	
+	//13
+	@Autowired
+	private ActorService actorService;
 	
 	// Constructors
 	
@@ -69,5 +75,26 @@ public class ApplicationService {
 	}
 	
 	// Other business methods
+	
+	//13.2
+	public Collection<Application> findApplicationExplorer(){
+		Collection<Application> res = new ArrayList<Application>();
+		//comprobamos que es un Explorer
+		Assert.isTrue(actorService.findByPrincipal().getUserAccount().getAuthorities().contains(Authority.EXPLORER));
+		//añadimos las applications
+		res.addAll(applicationRepository.findApplicationExplorer());
+		Assert.notNull(res);
+		return res;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
