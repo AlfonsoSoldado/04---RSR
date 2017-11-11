@@ -33,6 +33,7 @@ public class Audit extends DomainEntity {
 	private String title;
 	private String description;
 	private Collection<String> attachment;
+	private Boolean draftMode;
 
 	@Past
 	@NotNull
@@ -71,6 +72,15 @@ public class Audit extends DomainEntity {
 
 	public void setAttachment(Collection<String> attachment) {
 		this.attachment = attachment;
+	}
+	
+	@NotNull
+	public Boolean getDraftMode() {
+		return draftMode;
+	}
+
+	public void setDraftMode(Boolean draftMode) {
+		this.draftMode = draftMode;
 	}
 
 	// Relationships

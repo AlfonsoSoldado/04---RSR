@@ -1,5 +1,3 @@
-Según requisito 33 habría que añadir un nuevo parámetro a Audit que sea draft mode.
-
 Hacer la correspondiente query en Repository. Creo que sería:
 select a from Audit a where a.draftMode = true and a.auditor.id=?1
 Collection<Audit> ...
@@ -15,8 +13,6 @@ Collection<Tag> ...
 
 Leer PDF para ver qué hay más hay que añadir en Trip
 
-
-¡¡¡¡Poner las queries que hicimos para esta entrega en administrator!!!!
 
 Terminar AdministratorService los miles de Other business methods
 

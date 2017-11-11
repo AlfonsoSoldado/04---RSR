@@ -1267,6 +1267,7 @@
 	<property name="body" value="A comment of something" />
 	<property name="numberLaw" value = "10" />
 	<property name="moment" value="23/10/2013 19:13" />
+	<property name="draftMode" value="true" />
 	<property name="trip" ref="trip1" />
 	</bean>
 	
@@ -1277,6 +1278,7 @@
 	<property name="body" value="A comment of something" />
 	<property name="numberLaw" value = "285" />
 	<property name="moment" value="23/10/2015 10:15" />
+	<property name="draftMode" value="true" />
 	<property name="trip" ref="trip2" />
 	</bean>
 	
@@ -2185,6 +2187,7 @@
 	<property name="moment" value="23/10/2015 10:13" />
 	<property name="title" value="First" />
 	<property name="description" value="Something" />
+	<property name="draftMode" value="true" />
 	<property name="trip" ref="trip1" />
 	<property name="auditor" ref="auditor1" />
 	<property name="attachment">
@@ -2201,6 +2204,7 @@
 	<property name="moment" value="02/10/2014 18:13" />
 	<property name="title" value="Second" />
 	<property name="description" value="thing" />
+	<property name="draftMode" value="true" />
 	<property name="trip" ref="trip1" />
 	<property name="auditor" ref="auditor2" />
 	<property name="attachment">

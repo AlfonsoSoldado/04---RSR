@@ -31,6 +31,7 @@ public class LegalText extends DomainEntity {
 	private String body;
 	private Integer numberLaw;
 	private Date moment;
+	private Boolean draftMode;
 
 	@NotBlank
 	public String getTitle() {
@@ -68,6 +69,15 @@ public class LegalText extends DomainEntity {
 
 	public void setMoment(Date moment) {
 		this.moment = moment;
+	}
+	
+	@NotNull
+	public Boolean getDraftMode() {
+		return draftMode;
+	}
+
+	public void setDraftMode(Boolean draftMode) {
+		this.draftMode = draftMode;
 	}
 
 	// Relationships
