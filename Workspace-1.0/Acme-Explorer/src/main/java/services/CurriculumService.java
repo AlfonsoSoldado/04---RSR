@@ -15,6 +15,7 @@ import domain.EndorserRecord;
 import domain.MiscellaneousRecord;
 import domain.PersonalRecord;
 import domain.ProfessionalRecord;
+import domain.Ranger;
 
 @Service
 @Transactional
@@ -26,6 +27,9 @@ public class CurriculumService {
 	private CurriculumRepository curriculumRepository;
 	
 	// Supporting services
+	
+	@Autowired
+	private RangerService rangerService;
 	
 	// Constructors
 	
@@ -42,12 +46,13 @@ public class CurriculumService {
 		Collection<EndorserRecord> endorserRecord = new ArrayList<EndorserRecord>();
 		Collection<MiscellaneousRecord> miscellaneousRecord = new ArrayList<MiscellaneousRecord>();
 		PersonalRecord personalRecord = new PersonalRecord();
+		
 		res.setProfessionalRecord(professionalRecord);
 		res.setEducationRecord(educationRecord);
 		res.setEndorserRecord(endorserRecord);
 		res.setMiscellaneousRecord(miscellaneousRecord);
 		res.setPersonalRecord(personalRecord);
-		res = new Curriculum();
+		
 		return res;
 	}
 	
@@ -67,9 +72,21 @@ public class CurriculumService {
 	}
 	
 	public Curriculum save(Curriculum curriculum) {
+		Ranger ranger;
+		ranger = this.rangerService.findByPrincipal();
+		
 		Assert.notNull(curriculum);
+		Assert.notNull(curriculum.getPersonalRecord());
+		Assert.notNull(curriculum.getEndorserRecord());
+		Assert.notNull(curriculum.getMiscellaneousRecord());
+		Assert.notNull(curriculum.getProfessionalRecord());
+		Assert.notNull(curriculum.getEducationRecord());
+		
 		Curriculum res;
 		res = this.curriculumRepository.save(curriculum);
+		
+		ranger.setCurriculum(res);
+		
 		return res;
 	}
 	
@@ -77,6 +94,7 @@ public class CurriculumService {
 		Assert.notNull(curriculum);
 		Assert.isTrue(curriculum.getId() != 0);
 		Assert.isTrue(this.curriculumRepository.exists(curriculum.getId()));
+		
 		this.curriculumRepository.delete(curriculum);
 	}
 	
