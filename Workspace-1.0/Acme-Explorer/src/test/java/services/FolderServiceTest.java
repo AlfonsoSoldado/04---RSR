@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Folder;
+import domain.Message;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -54,19 +56,21 @@ public class FolderServiceTest extends AbstractTest {
 	 
 	 @Test
 	 public void testSaveFolder() {
-		 this.authenticate("ranger1");
+		 this.authenticate("admin");
 		 Folder folder;
 		 folder = this.folderService.create();
-		 folder.setName("outBoxModificado");
+		 Collection<Message> messages = new ArrayList<Message>();
+		 folder.setMessages(messages);
+		 folder.setName("customFunciona");
 		 folder.setSystemFolder(false);
+		 folder.setCustomFolder(folder);
 		 this.folderService.save(folder);
-		 unauthenticate();
 	 }
 	 
 	 @Test
 	 public void testDeleteFolder(){
-		 Folder folder;
-		 folder = this.folderService.findOne(super.getEntityId("outBoxRanger1"));
+		 Folder folder = new Folder();
+		 folder = this.folderService.findOne(super.getEntityId("customBoxRanger1"));
 		 this.folderService.delete(folder);
 	 }
 }

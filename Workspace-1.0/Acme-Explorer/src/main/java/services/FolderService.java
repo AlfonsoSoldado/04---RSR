@@ -63,6 +63,7 @@ public class FolderService {
 		Folder res;
 		res = this.folderRepository.save(folder);
 		actor.getFolders().add(res);
+		Assert.notNull(res);
 		return res;
 	}
 
