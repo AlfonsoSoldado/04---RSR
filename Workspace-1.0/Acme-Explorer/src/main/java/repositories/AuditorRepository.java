@@ -9,7 +9,7 @@ import domain.Auditor;
 @Repository
 public interface AuditorRepository extends JpaRepository<Auditor, Integer>{
 	
-	@Query("select a from Auditor a.userAccount.id=?1")
+	@Query("select a from Auditor a where a.userAccount.id=?1")
 	Auditor findAuditorByUserAccountId(int uA);
 	
 }
