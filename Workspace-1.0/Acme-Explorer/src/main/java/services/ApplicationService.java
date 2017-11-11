@@ -9,8 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ApplicationRepository;
-import security.Authority;
 import domain.Application;
+import domain.Explorer;
+import domain.Manager;
 
 @Service
 @Transactional
@@ -23,9 +24,11 @@ public class ApplicationService {
 	
 	// Supporting services
 	
-	//13
-	@Autowired
-	private ActorService actorService;
+	@Autowired //12
+	private ManagerService managerService;
+	
+	@Autowired //13
+	private ExplorerService explorerService;
 	
 	// Constructors
 	
@@ -76,13 +79,33 @@ public class ApplicationService {
 	
 	// Other business methods
 	
-	//13.2
-	public Collection<Application> findApplicationExplorer(){
+	// 12.2 (changing)
+	// public Application changingStatus() {
+	//
+	// }
+
+	//12.2 (listing)
+	public Collection<Application> findApplicationsByManager(int id){
 		Collection<Application> res = new ArrayList<Application>();
-		//comprobamos que es un Explorer
-		Assert.isTrue(actorService.findByPrincipal().getUserAccount().getAuthorities().contains(Authority.EXPLORER));
-		//añadimos las applications
-		res.addAll(applicationRepository.findApplicationExplorer());
+		Manager m = new Manager();
+		//comprobamos que la application seleccionada sea de este manager
+		m = managerService.findByPrincipal();
+		Assert.notNull(m);
+		res.addAll(applicationRepository.findApplicationsByManager(id));
+		Assert.notNull(res);
+		return res;
+	}
+		
+	//13.2
+	//TODO: falta lo de agruparlos por status
+	public Collection<Application> findApplicationByExplorer(int id){
+		Collection<Application> res = new ArrayList<Application>();
+		Explorer e = new Explorer();
+		//comprobamos que la application seleccionada sea de este explorer
+		e = explorerService.findByPrincipal();
+		Assert.notNull(e);
+		//añadimos todas las application mediante la query
+		res.addAll(applicationRepository.findApplicationByExplorer(id));
 		Assert.notNull(res);
 		return res;
 	}

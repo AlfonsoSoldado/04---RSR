@@ -10,7 +10,6 @@ import org.springframework.util.Assert;
 import repositories.ManagerRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Explorer;
 import domain.Manager;
 
 @Service

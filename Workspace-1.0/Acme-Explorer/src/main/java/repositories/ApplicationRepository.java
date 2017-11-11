@@ -12,7 +12,11 @@ import domain.Application;
 @Repository
 public interface ApplicationRepository extends JpaRepository<Application, Integer>{
 
+	//12.3
+	@Query("select a from Manager m join m.application a where m.id = ?1")
+	Collection<Application> findApplicationsByManager(int id);
+	
 	//13.2
-	@Query("select e.application from Explorer e join e.application a where a.status like 'ACCEPTED'")
-	Collection<Application> findApplicationExplorer();
+	@Query("select a from Manager m join m.application a where m.id = ?1")
+	Collection<Application> findApplicationByExplorer(int id);
 }
