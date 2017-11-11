@@ -29,7 +29,7 @@ public class CurriculumService {
 	// Supporting services
 	
 	@Autowired
-	private RangerService rangerService;
+	private ActorService actorService;
 	
 	// Constructors
 	
@@ -39,59 +39,103 @@ public class CurriculumService {
 	
 	// Simple CRUD methods
 	
-	public Curriculum create() {
-		Curriculum res = new Curriculum();
-		Collection<ProfessionalRecord> professionalRecord = new ArrayList<ProfessionalRecord>();
-		Collection<EducationRecord> educationRecord = new ArrayList<EducationRecord>();
-		Collection<EndorserRecord> endorserRecord = new ArrayList<EndorserRecord>();
-		Collection<MiscellaneousRecord> miscellaneousRecord = new ArrayList<MiscellaneousRecord>();
-		PersonalRecord personalRecord = new PersonalRecord();
+//	public Curriculum create() {
+//		Curriculum res = new Curriculum();
+//		Collection<ProfessionalRecord> professionalRecord = new ArrayList<ProfessionalRecord>();
+//		Collection<EducationRecord> educationRecord = new ArrayList<EducationRecord>();
+//		Collection<EndorserRecord> endorserRecord = new ArrayList<EndorserRecord>();
+//		Collection<MiscellaneousRecord> miscellaneousRecord = new ArrayList<MiscellaneousRecord>();
+//		PersonalRecord personalRecord = new PersonalRecord();
+//		
+//		res.setProfessionalRecord(professionalRecord);
+//		res.setEducationRecord(educationRecord);
+//		res.setEndorserRecord(endorserRecord);
+//		res.setMiscellaneousRecord(miscellaneousRecord);
+//		res.setPersonalRecord(personalRecord);
+//		
+//		return res;
+//	}
+//	
+//	public Collection<Curriculum> findAll() {
+//		Collection<Curriculum> res;
+//		res = this.curriculumRepository.findAll();
+//		Assert.notNull(res);
+//		return res;
+//	}
+//	
+//	public Curriculum findOne(int curriculum) {
+//		Assert.isTrue(curriculum != 0);
+//		Curriculum res;
+//		res = this.curriculumRepository.findOne(curriculum);
+//		Assert.notNull(res);
+//		return res;
+//	}
+//	
+//	public Curriculum save(Curriculum curriculum) {
+//		Ranger ranger;
+//		ranger = this.rangerService.findByPrincipal();
+//		
+//		Assert.notNull(curriculum);
+//		Assert.notNull(curriculum.getPersonalRecord());
+//		
+//		Curriculum res;
+//		res = this.curriculumRepository.save(curriculum);
+//		
+//		ranger.setCurriculum(res);
+//		
+//		return res;
+//	}
+//	
+//	public void delete(Curriculum curriculum) {
+//		Assert.notNull(curriculum);
+//		Assert.isTrue(curriculum.getId() != 0);
+//		Assert.isTrue(this.curriculumRepository.exists(curriculum.getId()));
+//		
+//		this.curriculumRepository.delete(curriculum);
+//	}
+	
+	public Curriculum create(){
+		Assert.isTrue(actorService.checkAuthority("RANGER"));
+		Curriculum res;
 		
-		res.setProfessionalRecord(professionalRecord);
-		res.setEducationRecord(educationRecord);
-		res.setEndorserRecord(endorserRecord);
-		res.setMiscellaneousRecord(miscellaneousRecord);
-		res.setPersonalRecord(personalRecord);
-		
+		res = new Curriculum();
 		return res;
 	}
 	
-	public Collection<Curriculum> findAll() {
+	public Curriculum findOne(Integer ID){
+		Assert.isTrue(actorService.checkAuthority("RANGER"));
+		Curriculum res;
+		
+		res = curriculumRepository.findOne(ID);
+		Assert.notNull(res);
+		return res;
+	}
+	
+	public Collection<Curriculum> findAll(){
+		Assert.isTrue(actorService.checkAuthority("RANGER"));
 		Collection<Curriculum> res;
-		res = this.curriculumRepository.findAll();
-		Assert.notNull(res);
-		return res;
-	}
-	
-	public Curriculum findOne(int curriculum) {
-		Assert.isTrue(curriculum != 0);
-		Curriculum res;
-		res = this.curriculumRepository.findOne(curriculum);
-		Assert.notNull(res);
-		return res;
-	}
-	
-	public Curriculum save(Curriculum curriculum) {
-		Ranger ranger;
-		ranger = this.rangerService.findByPrincipal();
 		
+		res = curriculumRepository.findAll();
+		Assert.notNull(res);
+		return res;
+	}
+	
+	public Curriculum save(Curriculum curriculum){
+		Assert.isTrue(actorService.checkAuthority("RANGER"));
 		Assert.notNull(curriculum);
-		Assert.notNull(curriculum.getPersonalRecord());
 		
 		Curriculum res;
-		res = this.curriculumRepository.save(curriculum);
-		
-		ranger.setCurriculum(res);
-		
+		res = curriculumRepository.save(curriculum);
 		return res;
 	}
 	
-	public void delete(Curriculum curriculum) {
+	public void delete(Curriculum curriculum){
+		Assert.isTrue(actorService.checkAuthority("RANGER"));
 		Assert.notNull(curriculum);
 		Assert.isTrue(curriculum.getId() != 0);
-		Assert.isTrue(this.curriculumRepository.exists(curriculum.getId()));
+		Assert.isTrue(curriculumRepository.exists(curriculum.getId()));
 		
-		this.curriculumRepository.delete(curriculum);
+		curriculumRepository.delete(curriculum);
 	}
 	
 	// Other business methods
