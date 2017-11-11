@@ -28,6 +28,12 @@ public class PersonalRecordService {
 	}
 
 	// Simple CRUD methods
+	
+	public PersonalRecord create() {
+		PersonalRecord personalRecord;
+		personalRecord = new PersonalRecord();
+		return personalRecord;
+	}
 
 	public Collection<PersonalRecord> findAll() {
 		Collection<PersonalRecord> res;

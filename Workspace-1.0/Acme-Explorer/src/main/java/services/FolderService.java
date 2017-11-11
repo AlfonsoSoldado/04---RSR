@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.FolderRepository;
+import domain.Actor;
 import domain.Folder;
+import domain.Message;
 
 @Service
 @Transactional
@@ -21,6 +24,8 @@ public class FolderService {
 
 	// Supporting services
 
+	private ActorService actorService;
+
 	// Constructors
 
 	public FolderService() {
@@ -28,6 +33,13 @@ public class FolderService {
 	}
 
 	// Simple CRUD methods
+
+	public Folder create() {
+		Folder folder = new Folder();
+		Collection<Message> message = new ArrayList<Message>();
+		folder.setMessages(message);
+		return folder;
+	}
 
 	public Collection<Folder> findAll() {
 		Collection<Folder> res;
@@ -45,14 +57,19 @@ public class FolderService {
 	}
 
 	public Folder save(Folder folder) {
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
 		Assert.notNull(folder);
 		Folder res;
 		res = this.folderRepository.save(folder);
+		actor.getFolders().add(res);
+		Assert.notNull(res);
 		return res;
 	}
 
 	public void delete(Folder folder) {
-		Assert.notNull(folder);
+		Assert.isTrue(folder.getSystemFolder() == false);
 		Assert.isTrue(folder.getId() != 0);
 		Assert.isTrue(this.folderRepository.exists(folder.getId()));
 		this.folderRepository.delete(folder);
@@ -60,4 +77,28 @@ public class FolderService {
 
 	// Other business methods
 
+	public Collection<Folder> systemFolders() {
+		Collection<Folder> folders = new ArrayList<Folder>();
+		Folder inBox = new Folder();
+		Folder outBox = new Folder();
+		Folder notification = new Folder();
+		Folder trash = new Folder();
+		Folder spam = new Folder();
+		inBox.setName("In Box");
+		outBox.setName("Out Box");
+		notification.setName("Notification");
+		trash.setName("Trash");
+		spam.setName("Spam");
+		inBox.setSystemFolder(true);
+		outBox.setSystemFolder(true);
+		notification.setSystemFolder(true);
+		trash.setSystemFolder(true);
+		spam.setSystemFolder(true);
+		folders.add(inBox);
+		folders.add(outBox);
+		folders.add(notification);
+		folders.add(trash);
+		folders.add(inBox);
+		return folders;
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
@@ -75,13 +76,35 @@ public class ActorService {
 		return res;
 	}
 	
-	public boolean checkAuthority() {
-		boolean result = false;
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		if (userAccount != null)
-			result = true;
-		return result;
+//	public boolean checkAuthority() {
+//		boolean result = false;
+//		UserAccount userAccount;
+//		userAccount = LoginService.getPrincipal();
+//		if (userAccount != null)
+//			result = true;
+//		return result;
+//	}
+	
+	public boolean checkAuthority(String authority){
+		boolean res;
+		Actor actor;
+		Collection<Authority> authorities;
+		res = false;
+		
+		try {
+			actor = this.findByPrincipal();
+			authorities = actor.getUserAccount().getAuthorities();
+			for(Authority auth: authorities){
+				if(auth.getAuthority().equals(authority.toUpperCase())){
+					res = true;
+					break;
+				}
+			}
+		} catch(IllegalArgumentException e){
+			res = false;
+		}
+		
+		return res;
 	}
 	
 	public Actor findByUserAccount(UserAccount userAccount) {

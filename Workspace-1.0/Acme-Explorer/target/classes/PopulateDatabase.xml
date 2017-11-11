@@ -1403,6 +1403,7 @@
 	<property name="tripStart" value="12/12/17" />
 	<property name="tripEnd" value="20/12/17" />
 	<property name="reason" value="Because yes" />
+	<property name="cancelled" value="false" />
 	<property name="ranger" ref="ranger1" />
 	<property name="manager" ref="manager1" />
 	<property name="legalText" ref="legalText1" />
@@ -1458,6 +1459,7 @@
 	<property name="title" value="Beach1" />
 	<property name="description" value="Something" />
 	<property name="price" value="800.0" />
+	<property name="cancelled" value="false" />
 	<property name="requirement">
 		<list>
 			<value>Requirement 3</value>
@@ -1624,6 +1626,28 @@
 	<property name="expirationMonth" value="05" />
 	<property name="expirationYear" value="2020" />
 	<property name="CVV" value="223" />
+	</bean>
+	
+	<!-- CREDITCARD3 -->
+	
+	<bean id="creditCard3" class="domain.CC">
+	<property name="holderName" value="Caixa" />
+	<property name="brandName" value="VISA" />
+	<property name="number" value="4532566499329455" />
+	<property name="expirationMonth" value="09" />
+	<property name="expirationYear" value="2021" />
+	<property name="CVV" value="193" />
+	</bean>
+	
+	<!-- CREDITCARD4 -->
+	
+	<bean id="creditCard4" class="domain.CC">
+	<property name="holderName" value="Santander" />
+	<property name="brandName" value="VISA" />
+	<property name="number" value="5557989485680979" />
+	<property name="expirationMonth" value="04" />
+	<property name="expirationYear" value="2019" />
+	<property name="CVV" value="543" />
 	</bean>
 	
 									<!-- EXPLORER -->
@@ -2246,6 +2270,8 @@
 	<bean id="application1" class="domain.Application">
 	<property name="moment" value="25/10/2013 20:13" />
 	<property name="comment" value="Comentario"/>
+	<property name="reason" value="Because yes" />
+	<property name="creditCard" ref="creditCard1" />
 	<property name="explorer" ref="explorer1" />
 	<property name="trip" ref="trip1" />
 	<property name="status" value="DUE" />
@@ -2256,6 +2282,8 @@
 	<bean id="application2" class="domain.Application">
 	<property name="moment" value="10/10/2014 11:10" />
 	<property name="comment" value="Comentario"/>
+	<property name="reason" value="Because yes" />
+	<property name="creditCard" ref="creditCard2" />
 	<property name="explorer" ref="explorer2" />
 	<property name="trip" ref="trip2" />
 	<property name="status" value="ACCEPTED" />
@@ -2266,6 +2294,8 @@
 	<bean id="application3" class="domain.Application">
 	<property name="moment" value="10/09/2014 12:11" />
 	<property name="comment" value="Comentario"/>
+	<property name="reason" value="Because yes" />
+	<property name="creditCard" ref="creditCard3" />
 	<property name="explorer" ref="explorer3" />
 	<property name="trip" ref="trip1"/>
 	<property name="status" value="PENDING" />
@@ -2276,6 +2306,8 @@
 	<bean id="application4" class="domain.Application">
 	<property name="moment" value="10/09/2014 13:14" />
 	<property name="comment" value="Comentario"/>
+	<property name="reason" value="Because yes" />
+	<property name="creditCard" ref="creditCard4" />
 	<property name="explorer" ref="explorer4" />
 	<property name="trip" ref="trip2"/>
 	<property name="status" value="PENDING" />
@@ -2286,6 +2318,7 @@
 	<!-- GPS1 -->
 	
 	<bean id="gps1" class="domain.Gps">
+	<property name="name" value="Sevilla" />
 	<property name="latitude" value="90.0" />
 	<property name="longitude" value="180.0" />
 	</bean>
@@ -2293,6 +2326,7 @@
 	<!-- GPS2 -->
 	
 	<bean id="gps2" class="domain.Gps">
+	<property name="name" value="Barcelona" />
 	<property name="latitude" value="60.0" />
 	<property name="longitude" value="100.0" />
 	</bean>

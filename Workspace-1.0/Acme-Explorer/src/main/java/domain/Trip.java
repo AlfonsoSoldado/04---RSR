@@ -44,6 +44,7 @@ public class Trip extends DomainEntity {
 	private Date tripStart;
 	private Date tripEnd;
 	private String reason;
+	private Boolean cancelled;
 
 	@NotBlank
 	@Column(unique = true)
@@ -132,6 +133,14 @@ public class Trip extends DomainEntity {
 
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+	
+	public Boolean getCancelled() {
+		return cancelled;
+	}
+
+	public void setCancelled(Boolean cancelled) {
+		this.cancelled = cancelled;
 	}
 
 	// Relationships
