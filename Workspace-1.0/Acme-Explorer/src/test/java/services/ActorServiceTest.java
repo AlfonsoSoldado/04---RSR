@@ -25,7 +25,6 @@ public class ActorServiceTest extends AbstractTest{
 	@Autowired
 	private ActorService actorService;
 	
-	
 	// Test --------------------------------------
 	
 	@Test
