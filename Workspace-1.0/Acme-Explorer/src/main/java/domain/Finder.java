@@ -12,6 +12,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -58,7 +59,8 @@ public class Finder extends DomainEntity {
 		this.maxPrice = maxPrice;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getStart() {
 		return start;
 	}
@@ -67,7 +69,8 @@ public class Finder extends DomainEntity {
 		this.start = start;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getEnd() {
 		return end;
 	}

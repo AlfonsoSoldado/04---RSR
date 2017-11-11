@@ -21,6 +21,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -94,6 +95,7 @@ public class Trip extends DomainEntity {
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getPublication() {
 		return publication;
 	}
@@ -104,6 +106,7 @@ public class Trip extends DomainEntity {
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getTripStart() {
 		return tripStart;
 	}
@@ -114,6 +117,7 @@ public class Trip extends DomainEntity {
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getTripEnd() {
 		return tripEnd;
 	}
