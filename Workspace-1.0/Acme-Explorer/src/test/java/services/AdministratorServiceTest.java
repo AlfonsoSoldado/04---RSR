@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Administrator;
-import domain.Curriculum;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,7 +32,7 @@ public class AdministratorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testCreateAdministrator(){
-		authenticate("administrator1");
+		authenticate("admin");
 		Administrator administrator;
 		administrator = this.administratorService.create();
 		Assert.notNull(administrator);
@@ -42,7 +41,6 @@ public class AdministratorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testFindAllAdministrator(){
-		authenticate("administrator1");
 		Collection<Administrator> administrators;
 		administrators = this.administratorService.findAll();
 		Assert.notNull(administrators);
@@ -50,7 +48,6 @@ public class AdministratorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testFindOneAdministrator(){
-		authenticate("administrator1");
 		Administrator administrator;
 		administrator = this.administratorService.findOne(super.getEntityId("administrator1"));
 		Assert.notNull(administrator);
@@ -58,7 +55,7 @@ public class AdministratorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testSaveAdministrator(){
-		this.authenticate("administrator1");
+		this.authenticate("admin");
 		Administrator administrator;
 		administrator = this.administratorService.create();
 		administrator.setEmail("jojo@hotmail.com");
@@ -70,7 +67,6 @@ public class AdministratorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testDeleteAdministrator(){
-		authenticate("administrator1");
 		Administrator administrator;
 		administrator = this.administratorService.findOne(super.getEntityId("administrator1"));
 		this.administratorService.delete(administrator);

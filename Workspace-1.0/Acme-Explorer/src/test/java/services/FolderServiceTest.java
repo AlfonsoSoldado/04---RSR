@@ -33,7 +33,6 @@ public class FolderServiceTest extends AbstractTest {
 	 
 	 @Test
 	 public void testCreateFolder(){
-		 this.authenticate("ranger1");
 		 Folder folder;
 		 folder = this.folderService.create();
 		 Assert.notNull(folder);
@@ -65,6 +64,7 @@ public class FolderServiceTest extends AbstractTest {
 		 folder.setSystemFolder(false);
 		 folder.setCustomFolder(folder);
 		 this.folderService.save(folder);
+		 unauthenticate();
 	 }
 	 
 	 @Test

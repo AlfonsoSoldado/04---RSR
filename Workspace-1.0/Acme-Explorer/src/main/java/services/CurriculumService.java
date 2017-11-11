@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +9,6 @@ import org.springframework.util.Assert;
 
 import repositories.CurriculumRepository;
 import domain.Curriculum;
-import domain.EducationRecord;
-import domain.EndorserRecord;
-import domain.MiscellaneousRecord;
-import domain.PersonalRecord;
-import domain.ProfessionalRecord;
-import domain.Ranger;
 
 @Service
 @Transactional
@@ -105,8 +98,7 @@ public class CurriculumService {
 	public Curriculum findOne(Integer ID){
 		Assert.isTrue(actorService.checkAuthority("RANGER"));
 		Curriculum res;
-		
-		res = curriculumRepository.findOne(ID);
+		res = this.curriculumRepository.findOne(ID);
 		Assert.notNull(res);
 		return res;
 	}
@@ -115,7 +107,7 @@ public class CurriculumService {
 		Assert.isTrue(actorService.checkAuthority("RANGER"));
 		Collection<Curriculum> res;
 		
-		res = curriculumRepository.findAll();
+		res = this.curriculumRepository.findAll();
 		Assert.notNull(res);
 		return res;
 	}

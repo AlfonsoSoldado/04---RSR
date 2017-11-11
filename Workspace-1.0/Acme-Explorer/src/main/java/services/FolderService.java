@@ -57,6 +57,7 @@ public class FolderService {
 	}
 
 	public Folder save(Folder folder) {
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
 		Actor actor = this.actorService.findByPrincipal();
 		Assert.notNull(actor);
 		Assert.notNull(folder);
@@ -68,7 +69,6 @@ public class FolderService {
 	}
 
 	public void delete(Folder folder) {
-		Assert.notNull(folder);
 		Assert.isTrue(folder.getSystemFolder() == false);
 		Assert.isTrue(folder.getId() != 0);
 		Assert.isTrue(this.folderRepository.exists(folder.getId()));

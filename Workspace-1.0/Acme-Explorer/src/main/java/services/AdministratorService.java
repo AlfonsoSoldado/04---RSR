@@ -27,6 +27,9 @@ public class AdministratorService {
 	private AdministratorRepository administratorRepository;
 
 	// Supporting services
+	
+	@Autowired
+	private ActorService actorService;
 
 	@Autowired
 	private FolderService folderService;
@@ -70,6 +73,7 @@ public class AdministratorService {
 	}
 
 	public Administrator save(Administrator administrator) {
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
 		Assert.notNull(administrator);
 		Administrator res;
 		res = this.administratorRepository.save(administrator);
