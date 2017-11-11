@@ -13,17 +13,7 @@ Collection<Tag> ...
 
 Leer PDF para ver qué hay más hay que añadir en Trip
 
-
 Terminar AdministratorService los miles de Other business methods
-
-
-Cambiar status (en application) y priority (en message) por pattern y eliminar los
-datatypes. Cambiar modelos y añadirlo en create de los Service.
-
-Modelos: status : String {Pattern((PENDING)|(REJECTED)|(DUE)|(ACCEPTED)|(CANCELLED))}
-Java: @Pattern(regexp = "^((PENDING)|(REJECTED)|(DUE)|(ACCEPTED)|(CANCELLED))$")
-
-(Hay que crear un parametro String status...)
 
 Hecho: ActorService, AdminitratorService(una parte), ApplicationService(falta meterle status),
 AuditorService(faltaría meterle la creación de folders por defecto). Todos los CRUD.
