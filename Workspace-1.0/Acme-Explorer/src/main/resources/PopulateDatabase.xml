@@ -1403,6 +1403,7 @@
 	<property name="tripStart" value="12/12/17" />
 	<property name="tripEnd" value="20/12/17" />
 	<property name="reason" value="Because yes" />
+	<property name="cancelled" value="false" />
 	<property name="ranger" ref="ranger1" />
 	<property name="manager" ref="manager1" />
 	<property name="legalText" ref="legalText1" />
@@ -1458,6 +1459,7 @@
 	<property name="title" value="Beach1" />
 	<property name="description" value="Something" />
 	<property name="price" value="800.0" />
+	<property name="cancelled" value="false" />
 	<property name="requirement">
 		<list>
 			<value>Requirement 3</value>
