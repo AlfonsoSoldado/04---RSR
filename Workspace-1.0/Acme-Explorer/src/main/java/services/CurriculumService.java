@@ -77,10 +77,6 @@ public class CurriculumService {
 		
 		Assert.notNull(curriculum);
 		Assert.notNull(curriculum.getPersonalRecord());
-		Assert.notNull(curriculum.getEndorserRecord());
-		Assert.notNull(curriculum.getMiscellaneousRecord());
-		Assert.notNull(curriculum.getProfessionalRecord());
-		Assert.notNull(curriculum.getEducationRecord());
 		
 		Curriculum res;
 		res = this.curriculumRepository.save(curriculum);

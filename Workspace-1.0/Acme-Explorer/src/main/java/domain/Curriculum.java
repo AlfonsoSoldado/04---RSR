@@ -60,6 +60,7 @@ public class Curriculum extends DomainEntity {
 	}
 
 	@Valid
+	@NotNull
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	public PersonalRecord getPersonalRecord() {
 		return personalRecord;
@@ -70,7 +71,6 @@ public class Curriculum extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
 	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<EndorserRecord> getEndorserRecord() {
 		return endorserRecord;
@@ -81,7 +81,6 @@ public class Curriculum extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
 	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<MiscellaneousRecord> getMiscellaneousRecord() {
 		return miscellaneousRecord;
@@ -93,7 +92,6 @@ public class Curriculum extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
 	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<ProfessionalRecord> getProfessionalRecord() {
 		return professionalRecord;
@@ -105,7 +103,6 @@ public class Curriculum extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
 	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<EducationRecord> getEducationRecord() {
 		return educationRecord;
