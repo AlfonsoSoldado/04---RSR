@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -32,10 +33,12 @@ public class Audit extends DomainEntity {
 	private String title;
 	private String description;
 	private Collection<String> attachment;
+	private Boolean draftMode;
 
 	@Past
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
 		return moment;
 	}
@@ -69,6 +72,15 @@ public class Audit extends DomainEntity {
 
 	public void setAttachment(Collection<String> attachment) {
 		this.attachment = attachment;
+	}
+	
+	@NotNull
+	public Boolean getDraftMode() {
+		return draftMode;
+	}
+
+	public void setDraftMode(Boolean draftMode) {
+		this.draftMode = draftMode;
 	}
 
 	// Relationships

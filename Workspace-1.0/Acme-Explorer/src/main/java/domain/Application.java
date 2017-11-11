@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Application extends DomainEntity {
@@ -29,10 +31,13 @@ public class Application extends DomainEntity {
 	private Date moment;
 	private String status;
 	private String comment;
+	private String reason;
+	private CC creditCard;
 
 	@Past
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
 		return moment;
 	}
@@ -57,6 +62,24 @@ public class Application extends DomainEntity {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	
+	@Valid
+	@NotNull
+	public CC getCreditCard() {
+		return creditCard;
+	}
+
+	public void setCreditCard(CC creditCard) {
+		this.creditCard = creditCard;
 	}
 
 	// Relationships
