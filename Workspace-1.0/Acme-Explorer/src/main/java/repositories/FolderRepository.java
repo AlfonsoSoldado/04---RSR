@@ -7,6 +7,5 @@ import domain.Folder;
 
 @Repository
 public interface FolderRepository extends JpaRepository<Folder, Integer>{
-
 	
 }
