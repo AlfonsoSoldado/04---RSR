@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Audit;
+import domain.Curriculum;
 import domain.Trip;
 
 @Repository
@@ -38,4 +40,12 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 	// 10.3
 	@Query("select t from Trip t where t.ticker like ?1 or t.title like ?1 or t.description like ?1")
 	Collection<Trip> findTrips(String search);
+	
+	//30.1
+	@Query("select r.curriculum from Trip t join t.ranger r where t.id = ?1")
+	Collection<Curriculum> findCurriculumRangerByTrip(int id);
+	
+	// 30.2
+	@Query("select t.audit from Trip t where t.id = ?1")
+	Collection<Audit> findAuditsByTrip(int id);
 }
