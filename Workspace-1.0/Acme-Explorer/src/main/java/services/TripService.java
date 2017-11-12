@@ -153,24 +153,24 @@ public class TripService {
 	}
 
 	// 12.3
-//	public Collection<Trip> findTripsPublishedAndNotStarted() {
-//		Collection<Trip> res = new ArrayList<Trip>();
-//		Collection<Trip> ts = new ArrayList<Trip>();
-//		Date d = new Date();
-//		// comprobamos que es un Manager
-//		// TODO: revisar esto
-//		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
-//				.getAuthorities().contains(Authority.MANAGER));
-//		res.addAll(tripRepository.findTripsPublishedAndNotStarted());
-//		Assert.notNull(res);
-//		// has not started, yet
-//		for (Trip t : ts) {
-//			if (t.getTripStart().after(d) == true) {
-//				res.add(t);
-//			}
-//		}
-//		return res;
-//	}
+	// public Collection<Trip> findTripsPublishedAndNotStarted() {
+	// Collection<Trip> res = new ArrayList<Trip>();
+	// Collection<Trip> ts = new ArrayList<Trip>();
+	// Date d = new Date();
+	// // comprobamos que es un Manager
+	// // TODO: revisar esto
+	// Assert.isTrue(actorService.findByPrincipal().getUserAccount()
+	// .getAuthorities().contains(Authority.MANAGER));
+	// res.addAll(tripRepository.findTripsPublishedAndNotStarted());
+	// Assert.notNull(res);
+	// // has not started, yet
+	// for (Trip t : ts) {
+	// if (t.getTripStart().after(d) == true) {
+	// res.add(t);
+	// }
+	// }
+	// return res;
+	// }
 
 	// 13.1
 	public Collection<Trip> findTripsByExplorer(int id) {
@@ -198,6 +198,31 @@ public class TripService {
 			}
 		}
 		return res;
+	}
+
+	// 10.2
+	public Collection<Trip> browseTripsByActor() {
+		Collection<Trip> res = new ArrayList<Trip>();
+		res = this.tripRepository.browseTripsByCategories();
+		Assert.notNull(res);
+		return res;
+	}
+
+	// 10.4
+	public Collection<Trip> browseTripsByCategories() {
+		Collection<Trip> res = new ArrayList<Trip>();
+		res = this.tripRepository.browseTripsByCategories();
+		Assert.notNull(res);
+		return res;
+	}
+
+	// 10.3
+	public Collection<Trip> findTrips(String search) {
+
+		Assert.notNull(search);
+		Assert.isTrue(search.length() != 0);
+
+		return this.tripRepository.findTrips(search);
 	}
 
 }

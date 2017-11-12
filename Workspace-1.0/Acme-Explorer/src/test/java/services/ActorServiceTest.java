@@ -1,6 +1,8 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Actor;
@@ -20,7 +23,7 @@ import domain.Actor;
 @Transactional
 public class ActorServiceTest extends AbstractTest{
 	
-	// Serice under test -------------------------
+	// Service under test -------------------------
 	
 	@Autowired
 	private ActorService actorService;
@@ -28,13 +31,35 @@ public class ActorServiceTest extends AbstractTest{
 	// Test --------------------------------------
 	
 	@Test
-	public void testSaveActors(){
-		Actor actor, saved;
+	public void testFindAllActor(){
 		Collection<Actor> actors;
-		
-		//actor = actorService.create();
-		//TODO: terminar
-		
+		actors = this.actorService.findAll();
+		Assert.notNull(actors);
+	}
+	
+	@Test
+	public void testFindOneActor(){
+		Actor actor;
+		actor = this.actorService.findOne(super.getEntityId("administrator1"));
+		Assert.notNull(actor);
 	}
 
+	@Test
+	public void testSaveActor() {
+		this.authenticate("admin");
+		List<Actor> actor;
+		actor = new ArrayList<>(this.actorService.findAll());
+		Actor res;
+		res = actor.get(0);
+		res.setEmail("prueba@hotmal.es");
+		this.actorService.save(res);
+		unauthenticate();
+	}
+	
+	@Test
+	public void testDeleteActor(){
+		Actor actor;
+		actor = this.actorService.findOne(super.getEntityId("administrator1"));
+		this.actorService.delete(actor);
+	}
 }
