@@ -28,11 +28,11 @@ public class EndorserRecordService {
 	}
 
 	// Simple CRUD methods
-
-	public Collection<EndorserRecord> findAll() {
-		Collection<EndorserRecord> res;
-		res = this.endorserRecordRepository.findAll();
-		Assert.notNull(res);
+	
+	public EndorserRecord create(){
+		EndorserRecord res;
+		
+		res = new EndorserRecord();
 		return res;
 	}
 
@@ -43,9 +43,17 @@ public class EndorserRecordService {
 		Assert.notNull(res);
 		return res;
 	}
+	
+	public Collection<EndorserRecord> findAll() {
+		Collection<EndorserRecord> res;
+		res = this.endorserRecordRepository.findAll();
+		Assert.notNull(res);
+		return res;
+	}
 
 	public EndorserRecord save(EndorserRecord endorserRecord) {
 		Assert.notNull(endorserRecord);
+		
 		EndorserRecord res;
 		res = this.endorserRecordRepository.save(endorserRecord);
 		return res;
