@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SponsorRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Ranger;
+import domain.Folder;
+import domain.SocialId;
 import domain.Sponsor;
+import domain.Sponsorship;
 
 @Service
 @Transactional
@@ -34,6 +38,23 @@ public class SponsorService {
 	}
 
 	// Simple CRUD methods
+
+	public Sponsor create() {
+		Sponsor res = new Sponsor();
+		UserAccount userAccount = new UserAccount();
+		Authority authority = new Authority();
+		Collection<SocialId> socialId = new ArrayList<SocialId>();
+		Collection<Folder> folder = new ArrayList<Folder>();
+		Collection<Sponsorship> sponsorship = new ArrayList<Sponsorship>();
+		folder = this.folderService.systemFolders();
+		res.setSocialId(socialId);
+		res.setFolders(folder);
+		authority.setAuthority(Authority.SPONSOR);
+		userAccount.addAuthority(authority);
+		res.setUserAccount(userAccount);
+		res.setSponsorship(sponsorship);
+		return res;
+	}
 
 	public Collection<Sponsor> findAll() {
 		Collection<Sponsor> res;
@@ -65,13 +86,25 @@ public class SponsorService {
 	}
 
 	// Other business methods
-	
+
 	public Sponsor findByPrincipal() {
 		Sponsor res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		res = this.sponsorRepository.findSponsorByUserAccountId(userAccount.getId());
+		res = this.sponsorRepository.findSponsorByUserAccountId(userAccount
+				.getId());
 		Assert.notNull(res);
 		return res;
+	}
+
+	public void checkAuthority() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		Collection<Authority> authority = userAccount.getAuthorities();
+		Assert.notNull(authority);
+		Authority res = new Authority();
+		res.setAuthority("SPONSOR");
+		Assert.isTrue(authority.contains(res));
 	}
 }
