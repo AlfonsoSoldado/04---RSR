@@ -11,3 +11,6 @@ Hechos a medias:
 13.2
 34
 12.3 (Está todo el código comentado porque peta)
+10.2 (falta por hacer los test)
+10.3 (falta por hacer los test)
+10.4 (falta por hacer los test)
