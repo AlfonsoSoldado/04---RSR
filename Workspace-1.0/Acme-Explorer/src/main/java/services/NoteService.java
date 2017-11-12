@@ -89,12 +89,12 @@ public class NoteService {
 	}
 
 	// 32
-	public Collection<Note> findNotesByManagerID(int id) {
-
-		Collection<Note> res = new ArrayList<Note>();
-		res = this.noteRepository.findNotesByManager(id);
-		Assert.notNull(res);
-		return res;
-
-	}
+//	public Collection<Note> findNotesByManagerID(int id) {
+//
+//		Collection<Note> res = new ArrayList<Note>();
+//		res = this.noteRepository.findNotesByManager(id);
+//		Assert.notNull(res);
+//		return res;
+//
+//	}
 }
