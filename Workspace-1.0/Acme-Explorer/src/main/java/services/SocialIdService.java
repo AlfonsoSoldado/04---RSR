@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SocialIdRepository;
+import domain.Actor;
 import domain.SocialId;
 
 @Service
@@ -20,6 +21,9 @@ public class SocialIdService {
 	private SocialIdRepository socialIdRepository;
 
 	// Supporting services
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors
 
@@ -31,7 +35,11 @@ public class SocialIdService {
 	
 	public SocialId create() {
 		SocialId socialId;
+		Actor actor;
+		actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
 		socialId = new SocialId();
+		socialId.setActor(actor);
 		return socialId;
 	}
 

@@ -28,6 +28,12 @@ public class ValueService {
 	}
 
 	// Simple CRUD methods
+	
+	public Value create() {
+		Value value;
+		value = new Value();
+		return value;
+	}
 
 	public Collection<Value> findAll() {
 		Collection<Value> res;

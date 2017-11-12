@@ -28,6 +28,12 @@ public class StageService {
 	}
 
 	// Simple CRUD methods
+	
+	public Stage create() {
+		Stage stage;
+		stage = new Stage();
+		return stage;
+	}
 
 	public Collection<Stage> findAll() {
 		Collection<Stage> res;

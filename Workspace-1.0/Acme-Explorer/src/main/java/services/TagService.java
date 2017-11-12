@@ -28,6 +28,12 @@ public class TagService {
 	}
 
 	// Simple CRUD methods
+	
+	public Tag create() {
+		Tag tag;
+		tag = new Tag();
+		return tag;
+	}
 
 	public Collection<Tag> findAll() {
 		Collection<Tag> res;

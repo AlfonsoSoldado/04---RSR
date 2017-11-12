@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.StoryRepository;
+import domain.Explorer;
 import domain.Story;
+import domain.Trip;
 
 @Service
 @Transactional
@@ -20,6 +22,9 @@ public class StoryService {
 	private StoryRepository storyRepository;
 
 	// Supporting services
+	
+	@Autowired
+	private ExplorerService explorerService;
 
 	// Constructors
 
@@ -28,6 +33,19 @@ public class StoryService {
 	}
 
 	// Simple CRUD methods
+	
+	public Story create() {
+		Story story;
+		story = new Story();
+		Explorer explorer;
+		Trip trip;
+		explorer = this.explorerService.findByPrincipal();
+		Assert.notNull(explorer);
+		trip = new Trip();
+		story.setWriter(explorer);
+		story.setTrip(trip);
+		return story;
+	}
 
 	public Collection<Story> findAll() {
 		Collection<Story> res;

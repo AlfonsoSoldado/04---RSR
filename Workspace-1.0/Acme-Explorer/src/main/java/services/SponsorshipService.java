@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SponsorshipRepository;
+import domain.Sponsor;
 import domain.Sponsorship;
+import domain.Trip;
 
 @Service
 @Transactional
@@ -20,6 +22,9 @@ public class SponsorshipService {
 	private SponsorshipRepository sponsorshipRepository;
 
 	// Supporting services
+	
+	@Autowired
+	private SponsorService sponsorService;
 
 	// Constructors
 
@@ -28,6 +33,19 @@ public class SponsorshipService {
 	}
 
 	// Simple CRUD methods
+	
+	public Sponsorship create() {
+		Sponsorship sponsorship;
+		Sponsor sponsor;
+		Trip trip;
+		sponsor = this.sponsorService.findByPrincipal();
+		Assert.notNull(sponsor);
+		sponsorship = new Sponsorship();
+		trip = new Trip();
+		sponsorship.setSponsor(sponsor);
+		sponsorship.setTrip(trip);
+		return sponsorship;
+	}
 
 	public Collection<Sponsorship> findAll() {
 		Collection<Sponsorship> res;
