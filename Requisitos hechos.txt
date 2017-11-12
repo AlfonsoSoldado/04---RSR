@@ -4,13 +4,16 @@ Hechos:
 13.4
 31
 
+
 -----------------------------------------------
 
 Hechos a medias:
 12.2
 13.2
 34
-12.3 (Est· todo el cÛdigo comentado porque peta)
+12.3 (Est√° todo el c√≥digo comentado porque peta)
 10.2 (falta por hacer los test)
 10.3 (falta por hacer los test)
 10.4 (falta por hacer los test)
+33 (falta por hacer los test)
+32 (falta por hacer los test)

@@ -25,8 +25,7 @@ public class NoteService {
 	// Supporting services
 	@Autowired
 	private AuditorService auditorService;
-	
-	
+
 	// Constructors
 
 	public NoteService() {
@@ -35,20 +34,19 @@ public class NoteService {
 
 	// Simple CRUD methods
 
-	//33
-	public Note create(){
+	// 33
+	public Note create() {
 		Note res = new Note();
 		Auditor a = new Auditor();
 		Date d = new Date();
-		//Confirmo que es un actor registrado 
+		// Confirmo que es un actor registrado
 		a = auditorService.findByPrincipal();
 		Assert.notNull(a);
 		res.setMoment(d);
 		res.setAuditor(a);
 		return res;
 	}
-	
-	
+
 	public Collection<Note> findAll() {
 		Collection<Note> res;
 		res = this.noteRepository.findAll();
@@ -81,14 +79,22 @@ public class NoteService {
 	// }
 
 	// Other business methods
-	
-	public Collection<Note> findNotesByAuditor(int id){
+
+	public Collection<Note> findNotesByAuditor(int id) {
 		Collection<Note> res = new ArrayList<Note>();
-		//añadimos todas las notes mediante la query
+		// añadimos todas las notes mediante la query
 		res.addAll(noteRepository.findNotesByAuditor(id));
 		Assert.notNull(res);
 		return res;
 	}
-	
 
+	// 32
+	public Collection<Note> findNotesByManagerID(int id) {
+
+		Collection<Note> res = new ArrayList<Note>();
+		res = this.noteRepository.findNotesByManager(id);
+		Assert.notNull(res);
+		return res;
+
+	}
 }
