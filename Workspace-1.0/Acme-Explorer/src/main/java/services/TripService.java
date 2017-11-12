@@ -153,24 +153,24 @@ public class TripService {
 	}
 
 	// 12.3
-	public Collection<Trip> findTripsPublishedAndNotStarted() {
-		Collection<Trip> res = new ArrayList<Trip>();
-		Collection<Trip> ts = new ArrayList<Trip>();
-		Date d = new Date();
-		// comprobamos que es un Manager
-		// TODO: revisar esto
-		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
-				.getAuthorities().contains(Authority.MANAGER));
-		res.addAll(tripRepository.findTripsPublishedAndNotStarted());
-		Assert.notNull(res);
-		// has not started, yet
-		for (Trip t : ts) {
-			if (t.getTripStart().after(d) == true) {
-				res.add(t);
-			}
-		}
-		return res;
-	}
+//	public Collection<Trip> findTripsPublishedAndNotStarted() {
+//		Collection<Trip> res = new ArrayList<Trip>();
+//		Collection<Trip> ts = new ArrayList<Trip>();
+//		Date d = new Date();
+//		// comprobamos que es un Manager
+//		// TODO: revisar esto
+//		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
+//				.getAuthorities().contains(Authority.MANAGER));
+//		res.addAll(tripRepository.findTripsPublishedAndNotStarted());
+//		Assert.notNull(res);
+//		// has not started, yet
+//		for (Trip t : ts) {
+//			if (t.getTripStart().after(d) == true) {
+//				res.add(t);
+//			}
+//		}
+//		return res;
+//	}
 
 	// 13.1
 	public Collection<Trip> findTripsByExplorer(int id) {
