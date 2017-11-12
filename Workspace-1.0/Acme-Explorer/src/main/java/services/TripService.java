@@ -160,7 +160,7 @@ public class TripService {
 	// public Collection<Trip> findTripsPublishedAndNotStarted() {
 	// Collection<Trip> res = new ArrayList<Trip>();
 	// Collection<Trip> ts = new ArrayList<Trip>();
-	// Date d = new Date();
+	// Date d = new Date(System.currentTimeMillis()-1);
 	// // comprobamos que es un Manager
 	// // TODO: revisar esto
 	// Assert.isTrue(actorService.findByPrincipal().getUserAccount()
@@ -189,7 +189,7 @@ public class TripService {
 	public Collection<Trip> findTripsAccepted() {
 		Collection<Trip> res = new ArrayList<Trip>();
 		Collection<Trip> trips = new ArrayList<Trip>();
-		Date date = new Date();
+		Date date = new Date(System.currentTimeMillis()-1);
 		// comprobamos que es un Explorer
 		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
 				.getAuthorities().contains(Authority.EXPLORER));

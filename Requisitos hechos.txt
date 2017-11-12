@@ -18,3 +18,4 @@ Hechos a medias:
 10.4 (falta por hacer los test)
 33 (falta por hacer los test)FALTA LO DEL WRITING
 32 (falta por hacer los test)FALTA LO DEL WRITING
+43 (falta test)
