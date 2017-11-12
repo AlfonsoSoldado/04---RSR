@@ -110,31 +110,31 @@ public class AdministratorService {
 		Assert.isTrue(authority.contains(res));
 	}
 
-	public Double ApplicationPending() {
+	public Double applicationPending() {
 		Double res;
-		res = this.administratorRepository.ApplicationPending();
+		res = this.administratorRepository.applicationPending();
 		return res;
 	}
 
-	public Double ApplicationDue() {
+	public Double applicationDue() {
 		Double res;
-		res = this.administratorRepository.ApplicationDue();
+		res = this.administratorRepository.applicationDue();
 		return res;
 	}
 
-	public Double ApplicationAccepted() {
+	public Double applicationAccepted() {
 		Double res;
-		res = this.administratorRepository.ApplicationAccepted();
+		res = this.administratorRepository.applicationAccepted();
 		return res;
 	}
 
-	public Double ApplicationCancelled() {
+	public Double applicationCancelled() {
 		Double res;
-		res = this.administratorRepository.ApplicationCancelled();
+		res = this.administratorRepository.applicationCancelled();
 		return res;
 	}
 
-	public Double AratioRangerEndorser() {
+	public Double ratioRangerEndorser() {
 		Double res;
 		res = this.administratorRepository.ratioRangerEndorser();
 		return res;

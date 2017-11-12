@@ -17,19 +17,19 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	
 	// C-5
 	@Query("select cast(count(a) as float)/(select count(a) from Application a) from Application a where a.status='PENDING'")
-	Double ApplicationPending();
+	Double applicationPending();
 
 	// C-6
 	@Query("select cast(count(a) as float)/(select count(a) from Application a) from Application a where a.status='DUE'")
-	Double ApplicationDue();
+	Double applicationDue();
 
 	// C-7
 	@Query("select cast(count(a) as float)/(select count(a) from Application a) from Application a where a.status='ACCEPTED'")
-	Double ApplicationAccepted();
+	Double applicationAccepted();
 
 	// C-8
 	@Query("select cast(count(a) as float)/(select count(a) from Application a) from Application a where a.status='CANCELLED'")
-	Double ApplicationCancelled();
+	Double applicationCancelled();
 
 	// B-5
 	@Query("select count(c)/((select count(c2) from Curriculum c2)+0.0) from Curriculum c where c.endorserRecord.size>0")

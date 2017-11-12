@@ -49,8 +49,11 @@ public class TripService {
 
 	// 12.1 (creating)
 	public Trip create() {
-		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		//TODO: mirar lo del manager
 		Manager m = new Manager();
+		m = managerService.findByPrincipal();
+		Assert.notNull(m);
+		
 		Collection<Audit> audits = new ArrayList<Audit>();
 		Collection<Note> notes = new ArrayList<Note>();
 		Collection<Application> applications = new ArrayList<Application>();
@@ -77,7 +80,7 @@ public class TripService {
 	}
 
 	public Collection<Trip> findAll() {
-		Collection<Trip> res;
+		Collection<Trip> res = new ArrayList<Trip>();
 		res = this.tripRepository.findAll();
 		Assert.notNull(res);
 		return res;
