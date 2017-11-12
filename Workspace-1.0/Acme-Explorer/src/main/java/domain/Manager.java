@@ -36,6 +36,7 @@ public class Manager extends Actor {
 
 	private Collection<Survival> survival;
 	private Collection<Trip> trip;
+	private Collection<Application> application;
 
 	@Valid
 	@NotNull
@@ -59,5 +60,14 @@ public class Manager extends Actor {
 		this.trip = trip;
 	}
 
-	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "manager")
+	public Collection<Application> getApplication() {
+		return this.application;
+	}
+
+	public void setApplication(Collection<Application> application) {
+		this.application = application;
+	}
 }

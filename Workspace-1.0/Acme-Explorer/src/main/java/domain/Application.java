@@ -85,6 +85,7 @@ public class Application extends DomainEntity {
 	// Relationships
 
 	private Trip trip;
+	private Manager manager;
 	private Explorer explorer;
 
 	@Valid
@@ -107,5 +108,15 @@ public class Application extends DomainEntity {
 	public void setExplorer(Explorer explorer) {
 		this.explorer = explorer;
 	}
+	
+	@Valid
+	@NotNull
+	@OneToOne(optional = false)
+	public Manager getManager() {
+		return manager;
+	}
 
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
 }

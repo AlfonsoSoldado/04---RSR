@@ -48,6 +48,7 @@ public class AuditorService {
 		Collection<Folder> folder = new ArrayList<Folder>();
 		Collection<Note> note = new ArrayList<Note>();
 		Collection<Audit> audit = new ArrayList<Audit>();
+		folder = this.folderService.systemFolders();
 		authority.setAuthority(Authority.AUDITOR);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);
