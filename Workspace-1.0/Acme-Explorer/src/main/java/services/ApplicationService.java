@@ -85,16 +85,16 @@ public class ApplicationService {
 	// }
 
 	//12.2 (listing)
-	public Collection<Application> findApplicationsByManager(int id){
-		Collection<Application> res = new ArrayList<Application>();
-		Manager m = new Manager();
-		//comprobamos que la application seleccionada sea de este manager
-		m = managerService.findByPrincipal();
-		Assert.notNull(m);
-		res.addAll(applicationRepository.findApplicationsByManager(id));
-		Assert.notNull(res);
-		return res;
-	}
+//	public Collection<Application> findApplicationsByManager(int id){
+//		Collection<Application> res = new ArrayList<Application>();
+//		Manager m = new Manager();
+//		//comprobamos que la application seleccionada sea de este manager
+//		m = managerService.findByPrincipal();
+//		Assert.notNull(m);
+//		res.addAll(applicationRepository.findApplicationsByManager(id));
+//		Assert.notNull(res);
+//		return res;
+//	}
 		
 	//13.2
 	//TODO: falta lo de agruparlos por status

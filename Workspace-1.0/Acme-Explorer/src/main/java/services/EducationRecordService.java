@@ -29,10 +29,10 @@ public class EducationRecordService {
 	
 	// Simple CRUD methods
 	
-	public Collection<EducationRecord> findAll() {
-		Collection<EducationRecord> res;
-		res = this.educationRecordRepository.findAll();
-		Assert.notNull(res);
+	public EducationRecord create(){
+		EducationRecord res;
+		
+		res = new EducationRecord();
 		return res;
 	}
 	
@@ -44,8 +44,16 @@ public class EducationRecordService {
 		return res;
 	}
 	
+	public Collection<EducationRecord> findAll() {
+		Collection<EducationRecord> res;
+		res = this.educationRecordRepository.findAll();
+		Assert.notNull(res);
+		return res;
+	}
+	
 	public EducationRecord save(EducationRecord educationRecord) {
 		Assert.notNull(educationRecord);
+		
 		EducationRecord res;
 		res = this.educationRecordRepository.save(educationRecord);
 		return res;
@@ -55,6 +63,7 @@ public class EducationRecordService {
 		Assert.notNull(educationRecord);
 		Assert.isTrue(educationRecord.getId() != 0);
 		Assert.isTrue(this.educationRecordRepository.exists(educationRecord.getId()));
+		
 		this.educationRecordRepository.delete(educationRecord);
 	}
 	

@@ -58,8 +58,8 @@ public class AdministratorServiceTest extends AbstractTest{
 		this.authenticate("admin");
 		Administrator administrator;
 		administrator = this.administratorService.create();
-		administrator.setEmail("jojo@hotmail.com");
-		administrator.setAddress("C/ Valencia");
+		administrator.setEmail("prueba@gmail.com");
+		administrator.setAddress("Av. Valencia");
 		administrator.setName("Rafael");
 		this.administratorService.save(administrator);
 		unauthenticate();

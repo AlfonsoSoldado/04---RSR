@@ -11,6 +11,7 @@ import repositories.ActorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountService;
 import domain.Actor;
 
 @Service
@@ -26,6 +27,9 @@ public class ActorService {
 	
 	@Autowired
 	private FolderService folderService;
+	
+	@Autowired
+	private UserAccountService	userAccountService;
 	
 	// Constructors
 	
@@ -51,6 +55,7 @@ public class ActorService {
 	}
 	
 	public Actor save(Actor actor) {
+		Assert.isTrue(checkAuthority("ADMIN"));
 		Assert.notNull(actor);
 		Actor res;
 		res = this.actorRepository.save(actor);
@@ -66,7 +71,6 @@ public class ActorService {
 	
 	// Other business methods
 	
-	// El actor que está realizando la acción
 	public Actor findByPrincipal() {
 		Actor res;
 		UserAccount userAccount;
@@ -107,10 +111,10 @@ public class ActorService {
 		return res;
 	}
 	
-	public Actor findByUserAccount(UserAccount userAccount) {
-		Assert.notNull(userAccount);
-		Actor res;
-		res = actorRepository.findActorByUserAccountId(userAccount.getId());
+	public UserAccount findByUserAccount(Actor actor) {
+		Assert.notNull(actor);
+		UserAccount res;
+		res = userAccountService.findByActor(actor);
 		Assert.notNull(res);
 		return res;
 	}

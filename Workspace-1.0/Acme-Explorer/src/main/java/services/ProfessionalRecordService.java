@@ -28,14 +28,14 @@ public class ProfessionalRecordService {
 	}
 
 	// Simple CRUD methods
-
-	public Collection<ProfessionalRecord> findAll() {
-		Collection<ProfessionalRecord> res;
-		res = this.profesionalRecordRepository.findAll();
-		Assert.notNull(res);
+	
+	public ProfessionalRecord create(){
+		ProfessionalRecord res;
+		
+		res = new ProfessionalRecord();
 		return res;
 	}
-
+	
 	public ProfessionalRecord findOne(int profesionalRecord) {
 		Assert.isTrue(profesionalRecord != 0);
 		ProfessionalRecord res;
@@ -44,8 +44,17 @@ public class ProfessionalRecordService {
 		return res;
 	}
 
+	public Collection<ProfessionalRecord> findAll() {
+		Collection<ProfessionalRecord> res;
+		
+		res = this.profesionalRecordRepository.findAll();
+		Assert.notNull(res);
+		return res;
+	}
+
 	public ProfessionalRecord save(ProfessionalRecord profesionalRecord) {
 		Assert.notNull(profesionalRecord);
+		
 		ProfessionalRecord res;
 		res = this.profesionalRecordRepository.save(profesionalRecord);
 		return res;
@@ -56,6 +65,7 @@ public class ProfessionalRecordService {
 		Assert.isTrue(profesionalRecord.getId() != 0);
 		Assert.isTrue(this.profesionalRecordRepository.exists(profesionalRecord
 				.getId()));
+		
 		this.profesionalRecordRepository.delete(profesionalRecord);
 	}
 
