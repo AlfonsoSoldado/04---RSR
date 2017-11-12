@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,8 +13,10 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Application;
+import domain.CC;
 import domain.Explorer;
 import domain.Manager;
+import domain.Trip;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -34,6 +37,9 @@ public class ApplicationServiceTest extends AbstractTest {
 	
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private TripService tripService;
 			
 	// Test --------------------------------------
 	
@@ -70,23 +76,39 @@ public class ApplicationServiceTest extends AbstractTest {
 		Application application;
 		application = this.applicationService.create();
 		
-		Explorer explorer = this.explorerService.create();
-		explorer.setAddress("C/ Bolonia");
-		explorer.setEmail("otroemail@gmail.com");
-		explorer.setName("ExplorerNuevo");
-		explorer.setApplication(application);
-		
-		application.setExplorer(explorer);
-		application.setComment("comentario de un explorer");
-		application.setReason("Estaba cabreado");
-		
-		Manager manager = this.managerService.create();
-		manager.setAddress("C/ Domingo");
-		manager.setEmail("alberto@gmail.com");
-		manager.setName("Alberto");
+		Manager manager;
+		manager = this.managerService.create();
+		manager.setAddress("C/ Jueves");
+		manager.setEmail("fernan@gmail.com");
+		manager.setName("Fernando");
 		Collection<Application> applicationManager = manager.getApplication();
 		applicationManager.add(application);
 		manager.setApplication(applicationManager);
+		application.setManager(manager);
+		
+		Date moment = new Date(System.currentTimeMillis() - 1);
+		application.setMoment(moment);
+		
+		application.setReason("Muy mala comida");
+		application.setStatus("DUE");
+		
+		Trip trip;
+		trip = this.tripService.create();
+		application.setTrip(trip);
+		
+		application.setComment("comentario de un explorer");
+		
+		CC creditCard;
+		creditCard = new CC();
+		application.setCreditCard(creditCard);
+		
+		Explorer explorer;
+		explorer = this.explorerService.create();
+		explorer.setAddress("C/ Venecia");
+		explorer.setEmail("otromas@gmail.com");
+		explorer.setName("Gonzalo");
+		explorer.setApplication(application);
+		application.setExplorer(explorer);
 		
 		this.applicationService.save(application);
 		unauthenticate();
@@ -135,23 +157,39 @@ public class ApplicationServiceTest extends AbstractTest {
 		Application application;
 		application = this.applicationService.create();
 		
-		Explorer explorer = this.explorerService.create();
-		explorer.setAddress("C/ Italia");
-		explorer.setEmail("otroemailmas@gmail.com");
-		explorer.setName("ManagerNuevo");
-		explorer.setApplication(application);
-		
-		application.setExplorer(explorer);
-		application.setComment("comentario de un manager");
-		application.setReason("Mala atención");
-		
-		Manager manager = this.managerService.create();
+		Manager manager;
+		manager = this.managerService.create();
 		manager.setAddress("C/ Viernes");
 		manager.setEmail("francisco@gmail.com");
 		manager.setName("Francisco");
 		Collection<Application> applicationManager = manager.getApplication();
 		applicationManager.add(application);
 		manager.setApplication(applicationManager);
+		application.setManager(manager);
+		
+		Date moment = new Date(System.currentTimeMillis() - 1);
+		application.setMoment(moment);
+		
+		application.setReason("Mala atención");
+		application.setStatus("DUE");
+		
+		Trip trip;
+		trip = this.tripService.create();
+		application.setTrip(trip);
+		
+		application.setComment("comentario de un manager");
+		
+		CC creditCard;
+		creditCard = new CC();
+		application.setCreditCard(creditCard);
+		
+		Explorer explorer;
+		explorer = this.explorerService.create();
+		explorer.setAddress("C/ Italia");
+		explorer.setEmail("otroemailmas@gmail.com");
+		explorer.setName("ManagerNuevo");
+		explorer.setApplication(application);
+		application.setExplorer(explorer);
 		
 		this.applicationService.save(application);
 		unauthenticate();
