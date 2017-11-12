@@ -13,6 +13,8 @@ import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
 import domain.Actor;
+import domain.Category;
+import domain.Trip;
 
 @Service
 @Transactional
@@ -27,6 +29,9 @@ public class ActorService {
 	
 	@Autowired
 	private UserAccountService	userAccountService;
+	
+	@Autowired
+	private TripService tripService;
 	
 	// Constructors
 	
@@ -113,6 +118,28 @@ public class ActorService {
 		UserAccount res;
 		res = userAccountService.findByActor(actor);
 		Assert.notNull(res);
+		return res;
+	}
+	
+	// 10.2
+	
+	public Collection<Trip> browseAllTrips(){
+		Collection<Trip> res;
+		res = this.tripService.findAll();
+		return res;
+	}
+	
+	// 10.3
+	
+	public Collection<Trip> searchTripsBySingleKey(String singleKey){
+		Collection<Trip> res;
+		res = this.tripService.findTrips(singleKey);
+		return res;
+	}
+	
+	public Collection<Trip> searchTripsByCategory(Category category){
+		Collection<Trip> res;
+		res = this.tripService.findTripsByCategory(category);
 		return res;
 	}
 }

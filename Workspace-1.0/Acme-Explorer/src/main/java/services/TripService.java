@@ -87,7 +87,7 @@ public class TripService {
 		return res;
 	}
 
-	public Trip findOne(int trip) {
+	public Trip findOne(int trip) {	
 		Assert.isTrue(trip != 0);
 		Trip res;
 		res = this.tripRepository.findOne(trip);
@@ -99,6 +99,10 @@ public class TripService {
 		Assert.notNull(trip);
 		Trip res;
 		res = this.tripRepository.save(trip);
+		if(res.getPublication().before(res.getTripStart())){
+			res.setCancelled(true);
+		}
+		
 		return res;
 	}
 
@@ -107,7 +111,7 @@ public class TripService {
 		Assert.notNull(trip);
 		Assert.isTrue(trip.getId() != 0);
 		// as they have not been published
-		Assert.isTrue(trip.getPublication() == null);
+		Assert.isTrue(trip.getPublication().after(new Date()) || trip.getPublication() == null);
 		// comprobamos que el trip seleccionado sea de este manager
 		Assert.notNull(trip);
 		Manager m = trip.getManager();
@@ -116,22 +120,12 @@ public class TripService {
 		this.tripRepository.delete(trip);
 	}
 
-	// 12.3
-	// public Trip update(Trip t){
-	// Trip res;
-	// Assert.notNull(t);
-	// Collection<Trip> trips = new ArrayList<Trip>();
-	// trips.addAll(findTripsPublishedAndNotStarted());
-	// Assert.isTrue(trips.contains(t));
-	// t.setCancelled(true);
-	// res = tripRepository.save(t);
-	// return res;
-	// }
-
 	// Other business methods
 
 	// 12.1 (listing)
 	public Collection<Trip> findTripsByManager(int id) {
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
 		Collection<Trip> res = new ArrayList<Trip>();
 		res = tripRepository.findTripsByManager(id);
 		Assert.notNull(res);
@@ -140,12 +134,14 @@ public class TripService {
 
 	// 12.1 (modifying)
 	public Trip editByManager(int id) {
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
 		Trip res;
 		Trip t;
 		// selecciono el trip que quiero editar
 		t = tripRepository.findOne(id);
 		// as long as they have not been published
-		Assert.isTrue(t.getPublication() != null);
+		Assert.isTrue(t.getPublication().after(new Date()) || t.getPublication() == null);
 		// comprobamos que el trip seleccionado sea de este manager
 		Assert.notNull(t);
 		Manager m = t.getManager();
@@ -155,26 +151,6 @@ public class TripService {
 		res = tripRepository.save(t);
 		return res;
 	}
-
-	// 12.3
-	// public Collection<Trip> findTripsPublishedAndNotStarted() {
-	// Collection<Trip> res = new ArrayList<Trip>();
-	// Collection<Trip> ts = new ArrayList<Trip>();
-	// Date d = new Date(System.currentTimeMillis()-1);
-	// // comprobamos que es un Manager
-	// // TODO: revisar esto
-	// Assert.isTrue(actorService.findByPrincipal().getUserAccount()
-	// .getAuthorities().contains(Authority.MANAGER));
-	// res.addAll(tripRepository.findTripsPublishedAndNotStarted());
-	// Assert.notNull(res);
-	// // has not started, yet
-	// for (Trip t : ts) {
-	// if (t.getTripStart().after(d) == true) {
-	// res.add(t);
-	// }
-	// }
-	// return res;
-	// }
 
 	// 13.1
 	public Collection<Trip> findTripsByExplorer(int id) {
@@ -186,22 +162,35 @@ public class TripService {
 	}
 
 	// 13.4
-	public Collection<Trip> findTripsAccepted() {
-		Collection<Trip> res = new ArrayList<Trip>();
+//	public Collection<Trip> findTripsAccepted() {
+//		Collection<Trip> res = new ArrayList<Trip>();
+//		Collection<Trip> trips = new ArrayList<Trip>();
+//		Date date = new Date(System.currentTimeMillis()-1);
+//		// comprobamos que es un Explorer
+//		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
+//				.getAuthorities().contains(Authority.EXPLORER));
+//		// añadimos los trips
+//		trips.addAll(tripRepository.findTripsAccepted());
+//		Assert.notNull(res);
+//		for (Trip t : trips) {
+//			if (t.getTripStart().after(date) == true) {
+//				res.add(t);
+//			}
+//		}
+//		return res;
+//	}
+	
+	public void cancelAcceptedTrips(){
 		Collection<Trip> trips = new ArrayList<Trip>();
 		Date date = new Date(System.currentTimeMillis()-1);
-		// comprobamos que es un Explorer
 		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
 				.getAuthorities().contains(Authority.EXPLORER));
-		// añadimos los trips
 		trips.addAll(tripRepository.findTripsAccepted());
-		Assert.notNull(res);
-		for (Trip t : trips) {
-			if (t.getTripStart().after(date) == true) {
-				res.add(t);
+		for(Trip t: trips){
+			if(t.getTripStart().after(date)){
+				t.setCancelled(true);
 			}
 		}
-		return res;
 	}
 
 	// 10.2
@@ -227,6 +216,16 @@ public class TripService {
 		Assert.isTrue(search.length() != 0);
 
 		return this.tripRepository.findTrips(search);
+	}
+	
+	// 10.4
+	public Collection<Trip> findTripsByCategory(Category category){
+		Collection<Trip> res;
+		Assert.notNull(category);
+		Assert.isTrue(category.getId() != 0);
+		res = this.tripRepository.browseTripsByCategories(category.getId());
+		
+		return res;
 	}
 	
 	//30.1

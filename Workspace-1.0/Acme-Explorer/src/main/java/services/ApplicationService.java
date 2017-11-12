@@ -1,10 +1,7 @@
 package services;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,19 +68,10 @@ public class ApplicationService {
 	public Application save(Application application) {
 		Assert.notNull(application);
 		Application res;
-		Date moment;
-		if (application.getId() == 0) {
-			moment = new Date(System.currentTimeMillis() - 1);
-			application.setMoment(moment);
-		}
-		Calendar month;
-		month = new GregorianCalendar();
-		if (application.getStatus().equals("DUE")
-				&& application.getCreditCard().getExpirationMonth() < month
-						.get(Calendar.MONTH) + 1) {
-			application.setStatus("ACCEPTED");
-		}
 		res = this.applicationRepository.save(application);
+		if (application.getStatus().equals("DUE") && application.getCreditCard() != null){
+			res.setStatus("ACCEPTED");
+		}
 		return res;
 	}
 
@@ -111,7 +99,7 @@ public class ApplicationService {
 	// 12.2 (listing)
 	public Collection<Application> findApplicationsByManager(int id) {
 		Collection<Application> res = new ArrayList<Application>();
-		Manager m = new Manager();
+		Manager m = this.managerService.create();
 		// comprobamos que la application seleccionada sea de este manager
 		m = managerService.findByPrincipal();
 		Assert.notNull(m);
@@ -124,7 +112,7 @@ public class ApplicationService {
 	// TODO: falta lo de agruparlos por status
 	public Collection<Application> findApplicationByExplorer(int id) {
 		Collection<Application> res = new ArrayList<Application>();
-		Explorer e = new Explorer();
+		Explorer e = this.explorerService.create();
 		// comprobamos que la application seleccionada sea de este explorer
 		e = explorerService.findByPrincipal();
 		Assert.notNull(e);
