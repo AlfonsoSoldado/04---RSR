@@ -82,7 +82,7 @@ public class AuditService {
 		Assert.notNull(ua);
 		Actor a = actorService.findOne(ua.getId());
 		Assert.notNull(a);
-		
+		Assert.isTrue(audit.getDraftMode() == true);
 		Assert.notNull(audit);
 		Audit res;
 		res = this.auditRepository.save(audit);

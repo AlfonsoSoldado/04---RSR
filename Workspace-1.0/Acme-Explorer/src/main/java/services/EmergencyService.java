@@ -28,6 +28,12 @@ public class EmergencyService {
 	}
 
 	// Simple CRUD methods
+	
+	public Emergency create() {
+		Emergency emergency;
+		emergency = new Emergency();
+		return emergency;
+	}
 
 	public Collection<Emergency> findAll() {
 		Collection<Emergency> res;

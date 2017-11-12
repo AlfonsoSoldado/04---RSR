@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.CategoryRepository;
 import domain.Category;
+import domain.Trip;
 
 @Service
 @Transactional
@@ -32,6 +34,10 @@ public class CategoryService {
 	public Category create() {
 		Category res;
 		res = new Category();
+		Collection<Category> categories = new ArrayList<Category>();
+		Collection<Trip> trip = new ArrayList<Trip>();
+		res.setCategories(categories);
+		res.setTrip(trip);
 		return res;
 	}
 	
