@@ -11,7 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Application;
+import domain.Emergency;
 import domain.Explorer;
+import domain.Finder;
+import domain.Folder;
+import domain.Message;
+import domain.SocialId;
+import domain.Story;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -26,7 +33,27 @@ public class ExplorerServiceTest extends AbstractTest{
 	private ExplorerService explorerService;
 	
 	// Supporting services -----------------------
+	
+	@Autowired
+	private MessageService messageService;
+	
+	@Autowired
+	private SocialIdService socialIdService;
+	
+	@Autowired
+	private StoryService storyService;
+	
+	@Autowired
+	private ApplicationService applicationService;
+	
+	@Autowired
+	private EmergencyService emergencyService;
+	
+	@Autowired
+	private FinderService finderService;
 
+	@Autowired
+	private FolderService folderService;
 			
 	// Test --------------------------------------
 	
@@ -56,12 +83,57 @@ public class ExplorerServiceTest extends AbstractTest{
 		Explorer explorer;
 		explorer = this.explorerService.create();
 		
-		explorer.setAddress("C/ Barcelona");
-		explorer.setEmail("explorernuevo@gmail.com");
 		explorer.setName("ExplorerNuevo");
 		explorer.setPhoneNumber("655112233");
+		
+		Message received;
+		received = this.messageService.create();
+		explorer.setReceived(received);
+		
+		Message sent;
+		sent = this.messageService.create();
+		Collection<Message> sents = explorer.getSent();
+		sents.add(sent);
+		explorer.setSent(sents);
+		
+		SocialId socialId;
+		socialId = this.socialIdService.create();
+		Collection<SocialId> socialIds = explorer.getSocialId();
+		socialIds.add(socialId);
+		explorer.setSocialId(socialIds);
+		
+		Story story;
+		story = this.storyService.create();
+		Collection<Story> stories = explorer.getStories();
+		stories.add(story);
+		explorer.setStories(stories);
+		
 		explorer.setSurname("García");
+		explorer.setAddress("C/ Barcelona");
+		
+		Application application;
+		application = this.applicationService.create();
+		explorer.setApplication(application);
+	
+		explorer.setEmail("explorernuevo@gmail.com");
 
+		Emergency emergency;
+		emergency = this.emergencyService.create();
+		Collection<Emergency> emergencies = explorer.getEmergency();
+		emergencies.add(emergency);
+		explorer.setEmergency(emergencies);
+		
+		Finder finder;
+		finder = this.finderService.create();
+		Collection<Finder> finders = explorer.getFinder();
+		finders.add(finder);
+		explorer.setFinder(finders);
+		
+		Folder customFolder;
+		customFolder = this.folderService.create();
+		Collection<Folder> folders = explorer.getFolders();
+		folders.add(customFolder);
+		explorer.setFolders(folders);
 		this.explorerService.save(explorer);
 	}
 	
