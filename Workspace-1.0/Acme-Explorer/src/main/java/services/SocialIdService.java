@@ -28,6 +28,12 @@ public class SocialIdService {
 	}
 
 	// Simple CRUD methods
+	
+	public SocialId create() {
+		SocialId socialId;
+		socialId = new SocialId();
+		return socialId;
+	}
 
 	public Collection<SocialId> findAll() {
 		Collection<SocialId> res;
