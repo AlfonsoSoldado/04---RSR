@@ -55,6 +55,7 @@ public class ActorService {
 	}
 	
 	public Actor save(Actor actor) {
+		Assert.isTrue(checkAuthority("ADMIN"));
 		Assert.notNull(actor);
 		Actor res;
 		res = this.actorRepository.save(actor);
