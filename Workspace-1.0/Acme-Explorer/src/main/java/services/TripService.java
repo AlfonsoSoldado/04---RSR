@@ -199,5 +199,22 @@ public class TripService {
 		}
 		return res;
 	}
+	
+	//10.2  
+		public Collection<Trip> browseTripsByActor() {
+			Collection<Trip> res = new ArrayList<Trip>();
+			res = this.tripRepository.browseTripsByCategories();
+			Assert.notNull(res);
+			return res;
+		}
+		
+	//10.4
+		public Collection<Trip> browseTripsByCategories() {
+			Collection<Trip> res = new ArrayList<Trip>();
+			res = this.tripRepository.browseTripsByCategories();
+			Assert.notNull(res);
+			return res;
+		}
+		
 
 }
