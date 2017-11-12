@@ -16,7 +16,7 @@ public interface NoteRepository extends JpaRepository<Note, Integer>{
 	Collection<Note> findNotesByAuditor(int id);
 	
 	//32
-	@Query(" select n from Note n where n.manager.id =  ?1")
-	Collection<Note> findNotesByManager(int id);
+//	@Query("select n from Note n where n.manager.id = ?1")
+//	Collection<Note> findNotesByManager(int id);
 	
 }

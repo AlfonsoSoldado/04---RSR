@@ -14,6 +14,7 @@ import security.Authority;
 import domain.Application;
 import domain.Audit;
 import domain.Category;
+import domain.Curriculum;
 import domain.LegalText;
 import domain.Manager;
 import domain.Note;
@@ -226,6 +227,24 @@ public class TripService {
 		Assert.isTrue(search.length() != 0);
 
 		return this.tripRepository.findTrips(search);
+	}
+	
+	//30.1
+	public Collection<Curriculum> findCurriculumRangerByTrip(int id) {
+		Collection<Curriculum> res = new ArrayList<Curriculum>();
+		// añadimos todos los Curriculum mediante la query
+		res.addAll(tripRepository.findCurriculumRangerByTrip(id));
+		Assert.notNull(res);
+		return res;
+	}
+	
+	//30.2
+	public Collection<Audit> findAuditByTrip(int id){
+		Collection<Audit> res = new ArrayList<Audit>();
+		// añadimos todos los Audit mediante la query
+		res.addAll(tripRepository.findAuditsByTrip(id));
+		Assert.notNull(res);
+		return res;
 	}
 
 }
