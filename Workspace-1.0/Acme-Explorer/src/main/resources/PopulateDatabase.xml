@@ -187,6 +187,30 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount15" class="security.UserAccount">
+		<property name="username" value="manager03" />
+		<property name="password" value="fb5afe3f2b6f869f004554d550dcffab" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount16" class="security.UserAccount">
+		<property name="username" value="manager04" />
+		<property name="password" value="62eec00ead9708a781acc44b838dd69e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Other domain beans come here -->	
 	
 									<!-- Folder -->
@@ -847,6 +871,114 @@
 	</bean>
 	
 	<bean id="customBoxManager2" class="domain.Folder">
+		<property name="name" value="customBox" />
+		<property name="systemFolder" value="false"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder"><null/></property>
+	</bean>
+	
+	<bean id="inBoxManager3" class="domain.Folder">
+		<property name="name" value="In Box" />
+		<property name="systemFolder" value="true"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder" ref="customBoxManager3" />
+	</bean>
+	
+	<bean id="outBoxManager3" class="domain.Folder">
+		<property name="name" value="Out Box" />
+		<property name="systemFolder" value="true"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder" ref="customBoxManager3" />
+	</bean>
+	
+	<bean id="notificationBoxManager3" class="domain.Folder">
+		<property name="name" value="Notification" />
+		<property name="systemFolder" value="true"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder" ref="customBoxManager3" />
+	</bean>
+	
+	<bean id="trashBoxManager3" class="domain.Folder">
+		<property name="name" value="Trash" />
+		<property name="systemFolder" value="true"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder" ref="customBoxManager3" />
+	</bean>
+	
+	<bean id="spamBoxManager3" class="domain.Folder">
+		<property name="name" value="Spam" />
+		<property name="systemFolder" value="true"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder" ref="customBoxManager3" />
+	</bean>
+	
+	<bean id="customBoxManager3" class="domain.Folder">
+		<property name="name" value="customBox" />
+		<property name="systemFolder" value="false"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder"><null/></property>
+	</bean>
+	
+	<bean id="inBoxManager4" class="domain.Folder">
+		<property name="name" value="In Box" />
+		<property name="systemFolder" value="true"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder" ref="customBoxManager4" />
+	</bean>
+	
+	<bean id="outBoxManager4" class="domain.Folder">
+		<property name="name" value="Out Box" />
+		<property name="systemFolder" value="true"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder" ref="customBoxManager4" />
+	</bean>
+	
+	<bean id="notificationBoxManager4" class="domain.Folder">
+		<property name="name" value="Notification" />
+		<property name="systemFolder" value="true"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder" ref="customBoxManager4" />
+	</bean>
+	
+	<bean id="trashBoxManager4" class="domain.Folder">
+		<property name="name" value="Trash" />
+		<property name="systemFolder" value="true"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder" ref="customBoxManager4" />
+	</bean>
+	
+	<bean id="spamBoxManager4" class="domain.Folder">
+		<property name="name" value="Spam" />
+		<property name="systemFolder" value="true"/>
+		<property name="messages">
+			<list></list>
+		</property>
+		<property name="customFolder" ref="customBoxManager4" />
+	</bean>
+	
+	<bean id="customBoxManager4" class="domain.Folder">
 		<property name="name" value="customBox" />
 		<property name="systemFolder" value="false"/>
 		<property name="messages">
@@ -2042,6 +2174,11 @@
 			<ref bean="trip2"/>
 		</list>
 	</property>
+	<property name="application">
+		<list>
+			<ref bean="application1"/>
+		</list>
+	</property>
 	<property name="folders">
 		<list>
 			<ref bean="inBoxManager1"/>
@@ -2082,6 +2219,11 @@
 			
 		</list>
 	</property>
+	<property name="application">
+		<list>
+			<ref bean="application2"/>
+		</list>
+	</property>
 	<property name="folders">
 		<list>
 			<ref bean="inBoxManager2"/>
@@ -2090,6 +2232,96 @@
 			<ref bean="trashBoxManager2"/>
 			<ref bean="spamBoxManager2"/>
 			<ref bean="customBoxManager2"/>
+		</list>
+	</property>
+	<property name="sent">
+		<list>
+		</list>
+	</property>
+	<property name="received"><null/></property>
+	</bean>
+	
+	<!-- MANAGER3 -->
+	
+	<bean id="manager3" class="domain.Manager">
+	<property name="suspicious" value="false"/>
+	<property name="name" value="Lolo" />
+	<property name="surname" value="Feo" />
+	<property name="email" value="juas@gmail.com" />
+	<property name="phoneNumber" value="674434234" />
+	<property name="address" value="C/ Hola" />
+	<property name="socialId">
+		<list></list>
+	</property>
+	<property name="userAccount" ref="userAccount15" />
+	<property name="survival">
+		<list>
+			<ref bean="survival2"/>
+		</list>
+	</property>
+	<property name="trip">
+		<list>
+			
+		</list>
+	</property>
+	<property name="application">
+		<list>
+			<ref bean="application3"/>
+		</list>
+	</property>
+	<property name="folders">
+		<list>
+			<ref bean="inBoxManager3"/>
+			<ref bean="outBoxManager3"/>
+			<ref bean="notificationBoxManager3"/>
+			<ref bean="trashBoxManager3"/>
+			<ref bean="spamBoxManager3"/>
+			<ref bean="customBoxManager3"/>
+		</list>
+	</property>
+	<property name="sent">
+		<list>
+		</list>
+	</property>
+	<property name="received"><null/></property>
+	</bean>
+	
+	<!-- MANAGER4 -->
+	
+	<bean id="manager4" class="domain.Manager">
+	<property name="suspicious" value="false"/>
+	<property name="name" value="Kiko" />
+	<property name="surname" value="Rivera" />
+	<property name="email" value="gordo@gmail.com" />
+	<property name="phoneNumber" value="684434234" />
+	<property name="address" value="C/ Veis" />
+	<property name="socialId">
+		<list></list>
+	</property>
+	<property name="userAccount" ref="userAccount16" />
+	<property name="survival">
+		<list>
+			<ref bean="survival2"/>
+		</list>
+	</property>
+	<property name="trip">
+		<list>
+			
+		</list>
+	</property>
+	<property name="application">
+		<list>
+			<ref bean="application4"/>
+		</list>
+	</property>
+	<property name="folders">
+		<list>
+			<ref bean="inBoxManager4"/>
+			<ref bean="outBoxManager4"/>
+			<ref bean="notificationBoxManager4"/>
+			<ref bean="trashBoxManager4"/>
+			<ref bean="spamBoxManager4"/>
+			<ref bean="customBoxManager4"/>
 		</list>
 	</property>
 	<property name="sent">
@@ -2273,6 +2505,7 @@
 	<property name="reason" value="Because yes" />
 	<property name="creditCard" ref="creditCard1" />
 	<property name="explorer" ref="explorer1" />
+	<property name="manager" ref="manager1" />
 	<property name="trip" ref="trip1" />
 	<property name="status" value="DUE" />
 	</bean>
@@ -2285,6 +2518,7 @@
 	<property name="reason" value="Because yes" />
 	<property name="creditCard" ref="creditCard2" />
 	<property name="explorer" ref="explorer2" />
+	<property name="manager" ref="manager2" />
 	<property name="trip" ref="trip2" />
 	<property name="status" value="ACCEPTED" />
 	</bean>
@@ -2297,6 +2531,7 @@
 	<property name="reason" value="Because yes" />
 	<property name="creditCard" ref="creditCard3" />
 	<property name="explorer" ref="explorer3" />
+	<property name="manager" ref="manager3" />
 	<property name="trip" ref="trip1"/>
 	<property name="status" value="PENDING" />
 	</bean>
@@ -2309,6 +2544,7 @@
 	<property name="reason" value="Because yes" />
 	<property name="creditCard" ref="creditCard4" />
 	<property name="explorer" ref="explorer4" />
+	<property name="manager" ref="manager4" />
 	<property name="trip" ref="trip2"/>
 	<property name="status" value="PENDING" />
 	</bean>

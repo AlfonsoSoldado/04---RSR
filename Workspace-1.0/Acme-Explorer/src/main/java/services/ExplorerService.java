@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ExplorerRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Auditor;
+import domain.Application;
+import domain.Emergency;
 import domain.Explorer;
+import domain.Finder;
+import domain.Folder;
+import domain.SocialId;
+import domain.Story;
 
 @Service
 @Transactional
@@ -34,6 +41,30 @@ public class ExplorerService {
 	}
 
 	// Simple CRUD methods
+
+	public Explorer create() {
+		Explorer res = new Explorer();
+		UserAccount userAccount = new UserAccount();
+		Authority authority = new Authority();
+		Collection<SocialId> socialId = new ArrayList<SocialId>();
+		Collection<Folder> folder = new ArrayList<Folder>();
+		Collection<Story> story = new ArrayList<Story>();
+		Application application = new Application();
+		Collection<Finder> finder = new ArrayList<Finder>();
+		Collection<Emergency> emergency = new ArrayList<Emergency>();
+
+		folder = this.folderService.systemFolders();
+		res.setSocialId(socialId);
+		res.setFolders(folder);
+		authority.setAuthority(Authority.EXPLORER);
+		userAccount.addAuthority(authority);
+		res.setUserAccount(userAccount);
+		res.setStories(story);
+		res.setApplication(application);
+		res.setFinder(finder);
+		res.setEmergency(emergency);
+		return res;
+	}
 
 	public Collection<Explorer> findAll() {
 		Collection<Explorer> res;
@@ -65,13 +96,25 @@ public class ExplorerService {
 	}
 
 	// Other business methods
-	
+
 	public Explorer findByPrincipal() {
 		Explorer res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		res = this.explorerRepository.findExplorerByUserAccountId(userAccount.getId());
+		res = this.explorerRepository.findExplorerByUserAccountId(userAccount
+				.getId());
 		Assert.notNull(res);
 		return res;
+	}
+
+	public void checkAuthority() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		Collection<Authority> authority = userAccount.getAuthorities();
+		Assert.notNull(authority);
+		Authority res = new Authority();
+		res.setAuthority("EXPLORER");
+		Assert.isTrue(authority.contains(res));
 	}
 }

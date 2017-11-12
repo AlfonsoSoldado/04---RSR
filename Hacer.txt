@@ -1,26 +1,8 @@
-Hacer la correspondiente query en Repository. Creo que sería:
-select a from Audit a where a.draftMode = true and a.auditor.id=?1
-Collection<Audit> ...
-
-Requisito 11.4 en FolderRepository creo que habría que añadir query.
-select f from Actor a join a.Folder m where a.id=$1
-
 En MessageRepository añadir query de sender, recipient y spamword
-
-TagRepository añadir query de 14.3. Creo que es:
-select distinct(c.tag) from Trip c
-Collection<Tag> ...
-
-Leer PDF para ver qué hay más hay que añadir en Trip
-
-Terminar AdministratorService los miles de Other business methods
-
-Hecho: ActorService, AdminitratorService(una parte), ApplicationService(falta meterle status),
-AuditorService(faltaría meterle la creación de folders por defecto). Todos los CRUD.
-
-Falta el resto de Services.
 
 ¿Hay que hacer ConfigurationSerice?
 
-AuditService creo que el delete va en función de si es draftMode. (Mirar si el save es así)
-Falta terminar create y de Other business methods el draftMode.
+- AuditService queries 33.2
+
+- TripService query 14.3
+

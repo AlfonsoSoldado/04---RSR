@@ -28,12 +28,12 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 	Collection<Trip> findTripsAccepted();
 
 	// 10.2
-	@Query("select t from Trip t where t.publicationDate!=null and t.cancelled=false")
+	@Query("select t from Trip t where t.publication!=null and t.cancelled=false")
 	Collection<Trip> browseTripsByActor();
 
 	// 10.4 //TODO
-	@Query("select t from Category c where c.Trip t")
-	Collection<Trip> browseTripsByCategories();
+//	@Query("select t from Category c where c.Trip t")
+//	Collection<Trip> browseTripsByCategories();
 
 	// 10.3
 	@Query("select t from Trip t where t.ticker like ?1 or t.title like ?1 or t.description like ?1")
