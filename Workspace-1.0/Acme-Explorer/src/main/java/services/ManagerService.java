@@ -103,12 +103,14 @@ public class ManagerService {
 		return res;
 	}
 	
-	public Manager findByUserAccount(UserAccount res) {
-		Manager manager;
-		Assert.notNull(res);
-		manager = this.managerRepository.findManagerByUserAccountId(res
-				.getId());
-		Assert.notNull(res);
-		return manager;
+	public void checkAuthority() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		Collection<Authority> authority = userAccount.getAuthorities();
+		Assert.notNull(authority);
+		Authority res = new Authority();
+		res.setAuthority("MANAGER");
+		Assert.isTrue(authority.contains(res));
 	}
 }

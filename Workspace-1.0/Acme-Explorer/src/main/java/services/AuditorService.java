@@ -100,12 +100,14 @@ public class AuditorService {
 		return res;
 	}
 
-	public Auditor findByUserAccount(UserAccount res) {
-		Auditor auditor;
-		Assert.notNull(res);
-		auditor = this.auditorRepository
-				.findAuditorByUserAccountId(res.getId());
-		Assert.notNull(res);
-		return auditor;
+	public void checkAuthority() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		Collection<Authority> authority = userAccount.getAuthorities();
+		Assert.notNull(authority);
+		Authority res = new Authority();
+		res.setAuthority("AUDITOR");
+		Assert.isTrue(authority.contains(res));
 	}
 }
