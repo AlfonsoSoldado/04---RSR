@@ -1,3 +1,4 @@
 Las Queries que devuelven max, min... es con Object[]-> No
 Que devuelve el C-11, un double??
 Value hay que meterlo en el repositorio y en los servicios??
+Según el requisito 34, mirar si hay que cambiar la relación entre Explorer y Finder. 

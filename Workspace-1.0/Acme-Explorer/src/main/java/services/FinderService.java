@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.FinderRepository;
+import security.Authority;
 import domain.Explorer;
 import domain.Finder;
 import domain.Trip;
@@ -26,7 +27,10 @@ public class FinderService {
 	
 	@Autowired
 	private ExplorerService explorerService;
+	@Autowired
 	private TripService tripService;
+	@Autowired
+	private ActorService actorService;
 	
 	// Constructors
 	
@@ -69,6 +73,17 @@ public class FinderService {
 	}
 
 	// Other business methods
+	
+	public Finder editByExplorer(int id){
+		Finder res;
+		Finder f;
+		f = finderRepository.findOne(id);
+		Assert.notNull(f);
+		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
+				.getAuthorities().contains(Authority.EXPLORER));
+		res = finderRepository.save(f);
+		return res;
+	}
 
 	public Collection<Finder> findSearchCriterial(){
 		Collection<Finder> res = new ArrayList<Finder>();
