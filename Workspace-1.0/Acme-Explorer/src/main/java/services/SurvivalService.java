@@ -38,17 +38,11 @@ public class SurvivalService {
 	//43.1: creating
 	public Survival create(){
 		Manager m = new Manager();
-		m = managerService.findByPrincipal();
-		Assert.notNull(m);
-		
 		Trip trip = new Trip();
-		
 		Survival survival = new Survival();
 		survival.setTrip(trip);
 		survival.setManager(m);
-		
 		return survival;
-		
 	}
 	
 	
