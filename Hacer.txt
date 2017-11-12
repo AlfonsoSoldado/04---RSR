@@ -2,7 +2,8 @@ En MessageRepository añadir query de sender, recipient y spamword
 
 ¿Hay que hacer ConfigurationSerice?
 
-- AuditService queries 33.2
+Servicios que faltan por terminar:
 
-- TripService query 14.3
+- Audit, Note, Message, SocialId, Sponsorship, Stage, Story, Survival, Tag, Trip, Value.
 
+Se pueden hacer los test del resto.
