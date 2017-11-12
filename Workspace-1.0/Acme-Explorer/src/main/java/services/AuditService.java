@@ -80,7 +80,7 @@ public class AuditService {
 	public Audit save(Audit audit) {
 		UserAccount ua = LoginService.getPrincipal();
 		Assert.notNull(ua);
-		Actor a = actorService.findByUserAccount(ua);
+		Actor a = actorService.findOne(ua.getId());
 		Assert.notNull(a);
 		
 		Assert.notNull(audit);
