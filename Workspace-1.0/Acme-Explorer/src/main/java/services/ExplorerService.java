@@ -107,12 +107,14 @@ public class ExplorerService {
 		return res;
 	}
 
-	public Explorer findByUserAccount(UserAccount res) {
-		Explorer explorer;
-		Assert.notNull(res);
-		explorer = this.explorerRepository.findExplorerByUserAccountId(res
-				.getId());
-		Assert.notNull(res);
-		return explorer;
+	public void checkAuthority() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		Collection<Authority> authority = userAccount.getAuthorities();
+		Assert.notNull(authority);
+		Authority res = new Authority();
+		res.setAuthority("EXPLORER");
+		Assert.isTrue(authority.contains(res));
 	}
 }
