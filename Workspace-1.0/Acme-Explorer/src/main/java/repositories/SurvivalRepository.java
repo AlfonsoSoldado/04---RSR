@@ -12,7 +12,7 @@ import domain.Survival;
 public interface SurvivalRepository extends JpaRepository<Survival, Integer>{
 
 	//43.1: listing
-	@Query("select a from Manager m join m.survival s where m.id = ?1")
-	Collection<Survival> findSurvivalByManager(int id);
+//	@Query("select a from Manager m join m.survival s where m.id = ?1")
+//	Collection<Survival> findSurvivalByManager(int id);
 	
 }

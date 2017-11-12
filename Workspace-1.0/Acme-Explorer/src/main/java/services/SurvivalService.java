@@ -82,15 +82,15 @@ public class SurvivalService {
 	// Other business methods
 	
 	//43.1: listing
-	public Collection<Survival> findSurvivalByManager(int id){
-		Collection<Survival> res = new ArrayList<Survival>();
-		Manager m = new Manager();
-		m = managerService.findByPrincipal();
-		Assert.notNull(m);
-		res.addAll(survivalRepository.findSurvivalByManager(id));
-		Assert.notNull(res);
-		return res;
-	}
+//	public Collection<Survival> findSurvivalByManager(int id){
+//		Collection<Survival> res = new ArrayList<Survival>();
+//		Manager m = new Manager();
+//		m = managerService.findByPrincipal();
+//		Assert.notNull(m);
+//		res.addAll(survivalRepository.findSurvivalByManager(id));
+//		Assert.notNull(res);
+//		return res;
+//	}
 	
 	
 	
