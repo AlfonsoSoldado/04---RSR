@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ManagerRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Application;
+import domain.Folder;
 import domain.Manager;
+import domain.SocialId;
+import domain.Survival;
+import domain.Trip;
 
 @Service
 @Transactional
@@ -33,6 +40,28 @@ public class ManagerService {
 	}
 
 	// Simple CRUD methods
+	
+	public Manager create() {
+		Manager res = new Manager();
+		UserAccount userAccount = new UserAccount();
+		Authority authority = new Authority();
+		Collection<SocialId> socialId = new ArrayList<SocialId>();
+		Collection<Folder> folder = new ArrayList<Folder>();
+		Collection<Application> application = new ArrayList<Application>();
+		Collection<Survival> survival = new ArrayList<Survival>();
+		Collection<Trip> trip = new ArrayList<Trip>();
+		folder = this.folderService.systemFolders();
+		res.setSocialId(socialId);
+		res.setFolders(folder);
+		authority.setAuthority(Authority.MANAGER);
+		userAccount.addAuthority(authority);
+		res.setUserAccount(userAccount);
+		res.setSuspicious(false);
+		res.setApplication(application);
+		res.setSurvival(survival);
+		res.setTrip(trip);
+		return res;
+	}
 
 	public Collection<Manager> findAll() {
 		Collection<Manager> res;
@@ -72,5 +101,16 @@ public class ManagerService {
 		res = this.managerRepository.findManagerByUserAccountId(userAccount.getId());
 		Assert.notNull(res);
 		return res;
+	}
+	
+	public void checkAuthority() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+		Collection<Authority> authority = userAccount.getAuthorities();
+		Assert.notNull(authority);
+		Authority res = new Authority();
+		res.setAuthority("MANAGER");
+		Assert.isTrue(authority.contains(res));
 	}
 }

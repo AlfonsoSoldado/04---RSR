@@ -26,9 +26,6 @@ public class ActorService {
 	// Supporting services
 	
 	@Autowired
-	private FolderService folderService;
-	
-	@Autowired
 	private UserAccountService	userAccountService;
 	
 	// Constructors

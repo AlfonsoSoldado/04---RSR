@@ -206,18 +206,18 @@ public class TripService {
 	// 10.2
 	public Collection<Trip> browseTripsByActor() {
 		Collection<Trip> res = new ArrayList<Trip>();
-		res = this.tripRepository.browseTripsByCategories();
+		res = this.tripRepository.browseTripsByActor();
 		Assert.notNull(res);
 		return res;
 	}
 
 	// 10.4
-	public Collection<Trip> browseTripsByCategories() {
-		Collection<Trip> res = new ArrayList<Trip>();
-		res = this.tripRepository.browseTripsByCategories();
-		Assert.notNull(res);
-		return res;
-	}
+//	public Collection<Trip> browseTripsByCategories() {
+//		Collection<Trip> res = new ArrayList<Trip>();
+//		res = this.tripRepository.browseTripsByCategories();
+//		Assert.notNull(res);
+//		return res;
+//	}
 
 	// 10.3
 	public Collection<Trip> findTrips(String search) {

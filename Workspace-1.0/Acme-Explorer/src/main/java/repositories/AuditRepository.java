@@ -16,7 +16,7 @@ public interface AuditRepository extends JpaRepository<Audit, Integer>{
 	Collection<Audit> findAuditDraftTrue(int id);
 	
 	//33.2 (listing)
-	@Query("select a from Audit where a.auditor.id = ?1")
+	@Query("select a from Audit a where a.auditor.id = ?1")
 	Collection<Audit> findAuditsByAuditor(int id);
 	
 	
