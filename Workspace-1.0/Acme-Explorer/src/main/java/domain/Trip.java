@@ -152,7 +152,7 @@ public class Trip extends DomainEntity {
 	private Collection<Stage> stage;
 	private Category category;
 	private LegalText legalText;
-	private Collection<Application> application;
+	private Application application;
 	private Collection<Audit> audit;
 	private Collection<Note> note;
 	private Collection<Value> value;
@@ -244,12 +244,12 @@ public class Trip extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy="trip")
-	public Collection<Application> getApplication() {
+	@OneToOne(mappedBy="trip")
+	public Application getApplication() {
 		return application;
 	}
 
-	public void setApplication(Collection<Application> application) {
+	public void setApplication(Application application) {
 		this.application = application;
 	}
 

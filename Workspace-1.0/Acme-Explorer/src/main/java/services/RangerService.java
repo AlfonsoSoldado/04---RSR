@@ -31,6 +31,9 @@ public class RangerService {
 
 	@Autowired
 	private FolderService folderService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors
 
@@ -41,6 +44,7 @@ public class RangerService {
 	// Simple CRUD methods
 
 	public Ranger create() {
+		Assert.isTrue(this.actorService.checkAuthority("ADMIN"));
 		Ranger res = new Ranger();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
