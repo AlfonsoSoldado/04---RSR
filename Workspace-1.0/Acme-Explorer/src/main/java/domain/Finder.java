@@ -5,10 +5,13 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
@@ -31,7 +34,7 @@ public class Finder extends DomainEntity {
 	private Double maxPrice;
 	private Date start;
 	private Date end;
-	private Collection<String> result;
+	private Date cache;
 
 	public String getSingleKey() {
 		return singleKey;
@@ -79,14 +82,30 @@ public class Finder extends DomainEntity {
 		this.end = end;
 	}
 	
+	@Past
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	public Date getCache() {
+		return cache;
+	}
+
+	public void setCache(Date cache) {
+		this.cache = cache;
+	}
+
+	// Relationships
+
+	private Collection<Trip> trip;
+
+	@Valid
 	@NotEmpty
-	@ElementCollection
-	public Collection<String> getResult() {
-		return result;
+	@OneToMany
+	public Collection<Trip> getTrip() {
+		return trip;
 	}
 
-	public void setResult(Collection<String> result) {
-		this.result = result;
+	public void setTrip(Collection<Trip> trip) {
+		this.trip = trip;
 	}
-
 }
