@@ -73,6 +73,8 @@ public class FinderServiceTest extends AbstractTest {
 		result.add("Res01");
 		result.add("Res02");
 		finder.setResult(result);
+		
+		this.finderService.save(finder);
 	}
 	
 	@Test

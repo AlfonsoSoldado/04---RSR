@@ -12,8 +12,10 @@ import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Administrator;
 import domain.Folder;
+import domain.Message;
 import domain.SocialId;
 import domain.Trip;
 
@@ -27,7 +29,7 @@ public class AdministratorService {
 	private AdministratorRepository administratorRepository;
 
 	// Supporting services
-	
+
 	@Autowired
 	private ActorService actorService;
 
@@ -217,4 +219,26 @@ public class AdministratorService {
 		res = this.administratorRepository.avgMinMaxSqtr5();
 		return res;
 	}
+
+	//14.5
+	public void SendNotificationBroadcast(Message message) {
+		Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+
+		Folder notificationBox = new Folder();
+		notificationBox.setName("notoficationBox");
+
+		Collection<Folder> folders = message.getFolder();
+		Collection<Message> mensajes = new ArrayList<>();
+		mensajes.add(message);
+
+		for (Folder f : folders) {
+			if (f.getName().equals("notificationBox")) {
+
+				f.setMessages(mensajes);
+			}
+		}
+
+	}
+
 }

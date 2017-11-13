@@ -1,11 +1,21 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Auditor;
+import domain.Note;
+import domain.Trip;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -14,4 +24,76 @@ import utilities.AbstractTest;
 @Transactional
 public class NoteServiceTest extends AbstractTest{
 
+	// Service under test ----------
+	
+	@Autowired
+	private NoteService noteService;
+	
+	// Supporting services ---------
+	
+	@Autowired
+	private AuditorService auditorService;
+	@Autowired
+	private TripService tripService;
+	
+	// Test ------------------------
+	
+	@Test
+	public void testCreateNote(){
+		Note note;
+		note = this.noteService.create();
+		Assert.notNull(note);
+	}
+	
+	@Test
+	public void testFindAllNote(){
+		Collection<Note> notes;
+		notes = new ArrayList<Note>();
+		notes = this.noteService.findAll();
+		Assert.notNull(notes);
+	}
+	
+	@Test
+	public void testFindOneNote(){
+		Note note;
+		note = this.noteService.findOne(super.getEntityId("note1"));
+		Assert.notNull(note);
+	}
+	
+	@Test
+	public void testSaveNote(){
+		Note note;
+		note = this.noteService.create();
+		
+		Date moment = new Date(System.currentTimeMillis()-1);
+		note.setMoment(moment);
+		
+		note.setRemark("First");
+		
+		note.setReply("Replay");
+		
+		Date momentReply = new Date(System.currentTimeMillis()-2);
+		note.setMomentReply(momentReply);
+		
+		Auditor auditor;
+		auditor = this.auditorService.create();
+		note.setAuditor(auditor);
+		
+		Trip trip;
+		trip = this.tripService.create();
+		note.setTrip(trip);
+		
+		this.noteService.save(note);
+	}
+	
+	@Test
+	public void testDeleteNote(){
+		
+	}
+	
+	@Test
+	// TODO: testFindNotesByAuditor()
+	public void testFindNotesByAuditor(){
+		
+	}
 }
