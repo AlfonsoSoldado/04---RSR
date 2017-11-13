@@ -220,6 +220,7 @@ public class AdministratorService {
 		return res;
 	}
 
+	//14.5
 	public void SendNotificationBroadcast(Message message) {
 		Actor actor = this.actorService.findByPrincipal();
 		Assert.notNull(actor);

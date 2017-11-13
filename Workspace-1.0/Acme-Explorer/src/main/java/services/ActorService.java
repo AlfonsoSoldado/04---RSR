@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,14 @@ import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
 import domain.Actor;
+import domain.Audit;
 import domain.Category;
+<<<<<<< HEAD
 import domain.Message;
 import domain.SpamWords;
+=======
+import domain.Curriculum;
+>>>>>>> 39aa64bf8892ffb4a04ac44c3f52df5f7568e3d8
 import domain.Trip;
 
 @Service
@@ -195,6 +201,7 @@ public class ActorService {
 		return res;
 	}
 	
+<<<<<<< HEAD
 	
 
 	private boolean checkSpamWords(final Message message) {
@@ -212,5 +219,23 @@ public class ActorService {
 		}
 
 		return result;
+=======
+	//30.1
+	public Collection<Curriculum> findCurriculumRangerByTrip(int id) {
+		Collection<Curriculum> res = new ArrayList<Curriculum>();
+		// añadimos todos los Curriculum mediante la query
+		res.addAll(actorRepository.findCurriculumRangerByTrip(id));
+		Assert.notNull(res);
+		return res;
+	}
+	
+	//30.2
+	public Collection<Audit> findAuditByTrip(int id){
+		Collection<Audit> res = new ArrayList<Audit>();
+		// añadimos todos los Audit mediante la query
+		res.addAll(actorRepository.findAuditsByTrip(id));
+		Assert.notNull(res);
+		return res;
+>>>>>>> 39aa64bf8892ffb4a04ac44c3f52df5f7568e3d8
 	}
 }

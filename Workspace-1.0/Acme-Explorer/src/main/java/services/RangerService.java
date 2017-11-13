@@ -94,6 +94,15 @@ public class RangerService {
 	}
 
 	// Other business methods
+	
+	//35.1
+	public Collection<Ranger> rangersSuspicious(){
+		Collection<Ranger> res = new ArrayList<Ranger>();
+		// añadimos todas los rangers mediante la query
+		res.addAll(rangerRepository.rangersSuspicious());
+		Assert.notNull(res);
+		return res;
+	}
 
 	public Ranger findByPrincipal() {
 		Ranger res;

@@ -43,10 +43,11 @@ public class AuditService {
 	
 	
 	public Audit create() {
+		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
 		Auditor a = new Auditor();
 		Trip trip = new Trip();//TODO: revisar lo del trip
 		Audit res = new Audit();
-		Date d = new Date();
+		Date d = new Date(System.currentTimeMillis() -1);
 		//atributo obligatorio
 		Collection<String> attachments = new ArrayList<String>();
 		//compruebo que el actor registrado sea un auditor
@@ -62,6 +63,7 @@ public class AuditService {
 	}
 	
 	public Collection<Audit> findAll() {
+		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
 		Collection<Audit> res;
 		res = this.auditRepository.findAll();
 		Assert.notNull(res);
@@ -69,6 +71,7 @@ public class AuditService {
 	}
 	
 	public Audit findOne(int auditId) {
+		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
 		Assert.isTrue(auditId != 0);
 		Audit res;
 		res = this.auditRepository.findOne(auditId);
@@ -78,6 +81,7 @@ public class AuditService {
 	
 	//33.2
 	public Audit save(Audit audit) {
+		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
 		UserAccount ua = LoginService.getPrincipal();
 		Assert.notNull(ua);
 		Actor a = actorService.findOne(ua.getId());
@@ -91,6 +95,7 @@ public class AuditService {
 	
 	//33.2
 	public void delete(Audit audit) {
+		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
 		Assert.notNull(audit);
 		Assert.isTrue(audit.getId() != 0);
 		Assert.isTrue(this.auditRepository.exists(audit.getId()));
@@ -138,21 +143,4 @@ public class AuditService {
 		Assert.notNull(res);
 		return res;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

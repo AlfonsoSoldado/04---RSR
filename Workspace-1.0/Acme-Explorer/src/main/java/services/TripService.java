@@ -14,7 +14,6 @@ import security.Authority;
 import domain.Application;
 import domain.Audit;
 import domain.Category;
-import domain.Curriculum;
 import domain.LegalText;
 import domain.Manager;
 import domain.Note;
@@ -98,10 +97,10 @@ public class TripService {
 	public Trip save(Trip trip) {
 		Assert.notNull(trip);
 		Trip res;
-		res = this.tripRepository.save(trip);
+		
 		// 12.3
-		if(res.getPublication().before(res.getTripStart())){
-			res.setCancelled(true);
+		if(trip.getPublication().before(trip.getTripStart())){
+			trip.setCancelled(true);
 		}
 		// 13.4
 		Collection<Trip> trips = new ArrayList<Trip>();
@@ -114,7 +113,9 @@ public class TripService {
 				t.setCancelled(true);
 			}
 		}
-		
+		//14.2
+		Assert.isTrue(trip.getLegalText().getDraftMode());
+		res = this.tripRepository.save(trip);
 		return res;
 	}
 
@@ -206,24 +207,6 @@ public class TripService {
 		Assert.isTrue(category.getId() != 0);
 		res = this.tripRepository.browseTripsByCategories(category.getId());
 		
-		return res;
-	}
-	
-	//30.1
-	public Collection<Curriculum> findCurriculumRangerByTrip(int id) {
-		Collection<Curriculum> res = new ArrayList<Curriculum>();
-		// añadimos todos los Curriculum mediante la query
-		res.addAll(tripRepository.findCurriculumRangerByTrip(id));
-		Assert.notNull(res);
-		return res;
-	}
-	
-	//30.2
-	public Collection<Audit> findAuditByTrip(int id){
-		Collection<Audit> res = new ArrayList<Audit>();
-		// añadimos todos los Audit mediante la query
-		res.addAll(tripRepository.findAuditsByTrip(id));
-		Assert.notNull(res);
 		return res;
 	}
 

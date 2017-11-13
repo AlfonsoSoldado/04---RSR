@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SurvivalRepository;
-import repositories.TripRepository;
+import domain.Application;
+import domain.Explorer;
 import domain.Manager;
 import domain.Survival;
 import domain.Trip;
@@ -26,6 +26,12 @@ public class SurvivalService {
 	// Supporting services
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
+	private ExplorerService explorerService;
 
 	// Constructors
 
@@ -37,6 +43,7 @@ public class SurvivalService {
 	
 	//43.1: creating
 	public Survival create(){
+		this.managerService.checkAuthority();
 		Manager m = new Manager();
 		Trip trip = new Trip();
 		Survival survival = new Survival();
@@ -48,6 +55,7 @@ public class SurvivalService {
 	
 
 	public Collection<Survival> findAll() {
+		this.managerService.checkAuthority();
 		Collection<Survival> res;
 		res = this.survivalRepository.findAll();
 		Assert.notNull(res);
@@ -55,6 +63,7 @@ public class SurvivalService {
 	}
 
 	public Survival findOne(int survival) {
+		this.managerService.checkAuthority();
 		Assert.isTrue(survival != 0);
 		Survival res;
 		res = this.survivalRepository.findOne(survival);
@@ -63,6 +72,7 @@ public class SurvivalService {
 	}
 
 	public Survival save(Survival survival) {
+		this.managerService.checkAuthority();
 		Assert.notNull(survival);
 		Survival res;
 		res = this.survivalRepository.save(survival);
@@ -70,6 +80,7 @@ public class SurvivalService {
 	}
 
 	public void delete(Survival survival) {
+		this.managerService.checkAuthority();
 		Assert.notNull(survival);
 		Assert.isTrue(survival.getId() != 0);
 		Assert.isTrue(this.survivalRepository.exists(survival.getId()));
@@ -79,34 +90,21 @@ public class SurvivalService {
 		this.survivalRepository.delete(survival);
 	}
 
-	// Other business methods
+	// Other business methods	
 	
-	//43.1: listing
-//	public Collection<Survival> findSurvivalByManager(int id){
-//		Collection<Survival> res = new ArrayList<Survival>();
-//		Manager m = new Manager();
-//		m = managerService.findByPrincipal();
-//		Assert.notNull(m);
-//		res.addAll(survivalRepository.findSurvivalByManager(id));
-//		Assert.notNull(res);
-//		return res;
+	// 44.1
+//	public Survival enrolSurvival(Survival survival){
+//		this.explorerService.checkAuthority();
+//		Explorer explorer;
+//		explorer = this.explorerService.findByPrincipal();
+//		Assert.notNull(explorer);
+//		
+//		Trip trip;
+//		trip = this.survivalRepository.enrolSurvivalExplorer(explorer.getId(), survival.getId());
+//		for(Application a: trip.getApplication()){
+//			if(a.getStatus().equals("ACCEPTED")){
+//				
+//			}
+//		}
 //	}
-	
-	
-	
-	//43.1: modifying
-	public Survival editByManager(int id){
-		Survival res;
-		Survival s;
-		s = survivalRepository.findOne(id);
-		Assert.notNull(s);
-		Manager m = s.getManager();
-		Manager a = managerService.findByPrincipal();
-		Assert.isTrue(m.equals(a));
-		
-		res = survivalRepository.save(s);
-		return res;
-	}
-	
-	
 }
