@@ -68,7 +68,7 @@ public class AuditServiceTest extends AbstractTest{
 		audit = this.auditService.create();
 		
 
-		Date moment = new Date(System.currentTimeMillis() -1 );
+		Date moment = new Date(System.currentTimeMillis() -1);
 		audit.setMoment(moment);
 		
 		audit.setTitle("Audit 1");
