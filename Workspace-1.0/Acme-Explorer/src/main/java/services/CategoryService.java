@@ -22,8 +22,11 @@ public class CategoryService {
 	private CategoryRepository categoryRepository;
 	
 	// Supporting services
-	
+	@Autowired
 	private ActorService actorService;
+	@Autowired
+	private TripService tripService;
+	
 	
 	// Constructors
 	
@@ -39,6 +42,9 @@ public class CategoryService {
 		res = new Category();
 		Collection<Category> categories = new ArrayList<Category>();
 		Collection<Trip> trip = new ArrayList<Trip>();
+		Trip trip1;
+		trip1 = tripService.create();
+		trip.add(trip1);
 		res.setCategories(categories);
 		res.setTrip(trip);
 		return res;
