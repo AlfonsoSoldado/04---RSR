@@ -1968,9 +1968,10 @@
 	<property name="maxPrice" value="458.6" />
 	<property name="start" value="10/10/2018" />
 	<property name="end" value="12/10/2018" />
-	<property name="result">
+	<property name="cache" value="01/01/2015 18:30" />
+	<property name="trip">
 		<list>
-			<value>Trip</value>
+			<ref bean="trip1"/>
 		</list>
 	</property>
 	</bean>
@@ -1983,9 +1984,10 @@
 	<property name="maxPrice" value="488.6" />
 	<property name="start" value="10/18/2018" />
 	<property name="end" value="12/19/2018" />
-	<property name="result">
+	<property name="cache" value="01/05/2013 11:40" />
+	<property name="trip">
 		<list>
-			<value>Trip</value>
+			<ref bean="trip2"/>
 		</list>
 	</property>
 	</bean>
