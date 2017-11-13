@@ -20,39 +20,36 @@ import domain.Trip;
 @Service
 @Transactional
 public class AuditService {
-	
+
 	// Managed repository
 
 	@Autowired
 	private AuditRepository auditRepository;
-	
+
 	// Supporting services
 	@Autowired
 	private AuditorService auditorService;
-	
+
 	@Autowired
 	private ActorService actorService;
-	
+
 	// Constructors
-	
-	public AuditService(){
+
+	public AuditService() {
 		super();
 	}
-	
+
 	// Simple CRUD methods
-	
-	
+
 	public Audit create() {
 		auditorService.checkAuthority();
-		
+
 		Audit res = new Audit();
-		
 		Auditor a = new Auditor();
 		a = auditorService.findByPrincipal();
 		Assert.notNull(a);
-		
-		Trip trip = new Trip();//TODO: revisar lo del trip
-		Date d = new Date(System.currentTimeMillis() -1);
+		Trip trip = new Trip();
+		Date d = new Date(System.currentTimeMillis() - 1);
 		Collection<String> attachments = new ArrayList<String>();
 
 		res.setDraftMode(true);
@@ -60,62 +57,58 @@ public class AuditService {
 		res.setAttachment(attachments);
 		res.setAuditor(a);
 		res.setTrip(trip);
-		
+
 		return res;
 	}
-	
+
 	public Collection<Audit> findAll() {
 		auditorService.checkAuthority();
-		
+
 		Collection<Audit> res;
 		res = this.auditRepository.findAll();
 		Assert.notNull(res);
 		return res;
 	}
-	
+
 	public Audit findOne(int auditId) {
 		auditorService.checkAuthority();
-		
+
 		Assert.isTrue(auditId != 0);
 		Audit res;
 		res = this.auditRepository.findOne(auditId);
 		Assert.notNull(res);
 		return res;
 	}
-	
-	//33.2
+
+	// 33.2
 	public Audit save(Audit audit) {
 		auditorService.checkAuthority();
-		
+
 		UserAccount ua = LoginService.getPrincipal();
 		Assert.notNull(ua);
 		Actor a = actorService.findOne(ua.getId());
 		Assert.notNull(a);
-		Assert.isTrue(audit.getDraftMode() == true);
 		Assert.notNull(audit);
 		Audit res;
 		res = this.auditRepository.save(audit);
 		return res;
 	}
-	
-	//33.2
+
+	// 33.2
 	public void delete(Audit audit) {
 		auditorService.checkAuthority();
-		
+
 		Assert.notNull(audit);
 		Assert.isTrue(audit.getId() != 0);
 		Assert.isTrue(this.auditRepository.exists(audit.getId()));
-		Assert.isTrue(audit.getDraftMode() == true);
 		this.auditRepository.delete(audit);
 	}
-	
+
 	// Other business methods
-	
-	
-	//33.2
-	public Collection<Audit> findAuditDraftTrue(int id){
+
+	// 33.2
+	public Collection<Audit> findAuditDraftTrue(int id) {
 		Collection<Audit> res = new ArrayList<Audit>();
-		//añadimos todos los audit mediante la query
 		res.addAll(auditRepository.findAuditDraftTrue(id));
 		Assert.notNull(res);
 		return res;

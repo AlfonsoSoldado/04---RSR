@@ -37,7 +37,7 @@ public class NoteService {
 	// 33
 	public Note create() {
 		auditorService.checkAuthority();
-		
+
 		Note res = new Note();
 		Auditor a = new Auditor();
 		Date d = new Date();
@@ -51,7 +51,7 @@ public class NoteService {
 
 	public Collection<Note> findAll() {
 		auditorService.checkAuthority();
-		
+
 		Collection<Note> res;
 		res = this.noteRepository.findAll();
 		Assert.notNull(res);
@@ -68,11 +68,11 @@ public class NoteService {
 		return res;
 	}
 
-		//33 Once a note is written, it cannot be modified at all or deleted.
+	// 33 Once a note is written, it cannot be modified at all or deleted.
 
 	// Other business methods
 
-	//33
+	// 33
 	public Collection<Note> findNotesByAuditor(int id) {
 		Collection<Note> res = new ArrayList<Note>();
 
@@ -82,12 +82,12 @@ public class NoteService {
 	}
 
 	// 32
-//	public Collection<Note> findNotesByManagerID(int id) {
-//
-//		Collection<Note> res = new ArrayList<Note>();
-//		res = this.noteRepository.findNotesByManager(id);
-//		Assert.notNull(res);
-//		return res;
-//
-//	}
+	// public Collection<Note> findNotesByManagerID(int id) {
+	//
+	// Collection<Note> res = new ArrayList<Note>();
+	// res = this.noteRepository.findNotesByManager(id);
+	// Assert.notNull(res);
+	// return res;
+	//
+	// }
 }

@@ -46,13 +46,13 @@ public class AdministratorService {
 
 	public Administrator create() {
 		Administrator res = new Administrator();
-		
+
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		Collection<SocialId> socialId = new ArrayList<SocialId>();
 		Collection<Folder> folder = new ArrayList<Folder>();
 		folder = this.folderService.systemFolders();
-		
+
 		authority.setAuthority(Authority.ADMIN);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);
@@ -222,20 +222,20 @@ public class AdministratorService {
 		return res;
 	}
 
-	//14.5
+	// 14.5
 	public void SendNotificationBroadcast(Message message) {
 		Actor actor = this.actorService.findByPrincipal();
 		Assert.notNull(actor);
 
 		Folder notificationBox = new Folder();
-		notificationBox.setName("notoficationBox");
+		notificationBox.setName("Notification");
 
 		Collection<Folder> folders = message.getFolder();
 		Collection<Message> mensajes = new ArrayList<>();
 		mensajes.add(message);
 
 		for (Folder f : folders) {
-			if (f.getName().equals("notificationBox")) {
+			if (f.getName().equals("Notification")) {
 
 				f.setMessages(mensajes);
 			}

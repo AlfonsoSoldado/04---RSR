@@ -9,16 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
-import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
 import domain.Actor;
 import domain.Audit;
 import domain.Category;
-
 import domain.Curriculum;
-
 import domain.Trip;
 
 @Service
