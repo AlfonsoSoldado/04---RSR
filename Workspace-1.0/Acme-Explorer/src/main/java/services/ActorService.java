@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
 import domain.Actor;
+import domain.Audit;
 import domain.Category;
+import domain.Curriculum;
 import domain.Trip;
 
 @Service
@@ -140,6 +143,24 @@ public class ActorService {
 	public Collection<Trip> searchTripsByCategory(Category category){
 		Collection<Trip> res;
 		res = this.tripService.findTripsByCategory(category);
+		return res;
+	}
+	
+	//30.1
+	public Collection<Curriculum> findCurriculumRangerByTrip(int id) {
+		Collection<Curriculum> res = new ArrayList<Curriculum>();
+		// añadimos todos los Curriculum mediante la query
+		res.addAll(actorRepository.findCurriculumRangerByTrip(id));
+		Assert.notNull(res);
+		return res;
+	}
+	
+	//30.2
+	public Collection<Audit> findAuditByTrip(int id){
+		Collection<Audit> res = new ArrayList<Audit>();
+		// añadimos todos los Audit mediante la query
+		res.addAll(actorRepository.findAuditsByTrip(id));
+		Assert.notNull(res);
 		return res;
 	}
 }

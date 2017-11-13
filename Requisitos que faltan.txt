@@ -1,7 +1,3 @@
 10.1 (Posiblemente para futura entrega)
 11 (Entero)
-13.4 (Meterlo en el save?)
-14.1 (Meter checkAuthority en manager y ranger o tiene que ver con userAccount?)
 14.2 (Listar por viajes)
-14.3
-14.4 (Meter checkAuthority de Admin en Category)

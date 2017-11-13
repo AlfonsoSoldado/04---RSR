@@ -14,7 +14,6 @@ import security.Authority;
 import domain.Application;
 import domain.Audit;
 import domain.Category;
-import domain.Curriculum;
 import domain.LegalText;
 import domain.Manager;
 import domain.Note;
@@ -57,7 +56,7 @@ public class TripService {
 		
 		Collection<Audit> audits = new ArrayList<Audit>();
 		Collection<Note> notes = new ArrayList<Note>();
-		Application application = new Application();
+		Collection<Application> applications = new ArrayList<Application>();
 		Collection<Story> stories = new ArrayList<Story>();
 		Collection<Stage> stages = new ArrayList<Stage>();
 		LegalText legalText = new LegalText();
@@ -70,7 +69,7 @@ public class TripService {
 		trip.setManager(m);
 		trip.setAudit(audits);
 		trip.setNote(notes);
-		trip.setApplication(application);
+		trip.setApplication(applications);
 		trip.setStory(stories);
 		trip.setStage(stages);
 		trip.setLegalText(legalText);
@@ -99,16 +98,18 @@ public class TripService {
 		Assert.notNull(trip);
 		Trip res;
 		res = this.tripRepository.save(trip);
+		// 12.3
 		if(res.getPublication().before(res.getTripStart())){
 			res.setCancelled(true);
 		}
+		// 13.4
 		Collection<Trip> trips = new ArrayList<Trip>();
 		Date date = new Date(System.currentTimeMillis()-1);
 		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
 				.getAuthorities().contains(Authority.EXPLORER));
 		trips.addAll(tripRepository.findTripsAccepted());
 		for(Trip t: trips){
-			if(t.getTripStart().after(date) && t.getApplication().getStatus().equals("ACCEPTED")){
+			if(t.getTripStart().after(date) && t.getCancelled() == false){
 				t.setCancelled(true);
 			}
 		}
@@ -170,38 +171,7 @@ public class TripService {
 		Assert.notNull(res);
 		return res;
 	}
-
-	// 13.4
-//	public Collection<Trip> findTripsAccepted() {
-//		Collection<Trip> res = new ArrayList<Trip>();
-//		Collection<Trip> trips = new ArrayList<Trip>();
-//		Date date = new Date(System.currentTimeMillis()-1);
-//		// comprobamos que es un Explorer
-//		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
-//				.getAuthorities().contains(Authority.EXPLORER));
-//		// añadimos los trips
-//		trips.addAll(tripRepository.findTripsAccepted());
-//		Assert.notNull(res);
-//		for (Trip t : trips) {
-//			if (t.getTripStart().after(date) == true) {
-//				res.add(t);
-//			}
-//		}
-//		return res;
-//	}
 	
-	public void cancelAcceptedTrips(){
-		Collection<Trip> trips = new ArrayList<Trip>();
-		Date date = new Date(System.currentTimeMillis()-1);
-		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
-				.getAuthorities().contains(Authority.EXPLORER));
-		trips.addAll(tripRepository.findTripsAccepted());
-		for(Trip t: trips){
-			if(t.getTripStart().after(date)){
-				t.setCancelled(true);
-			}
-		}
-	}
 
 	// 10.2
 	public Collection<Trip> browseTripsByActor() {
@@ -235,24 +205,6 @@ public class TripService {
 		Assert.isTrue(category.getId() != 0);
 		res = this.tripRepository.browseTripsByCategories(category.getId());
 		
-		return res;
-	}
-	
-	//30.1
-	public Collection<Curriculum> findCurriculumRangerByTrip(int id) {
-		Collection<Curriculum> res = new ArrayList<Curriculum>();
-		// añadimos todos los Curriculum mediante la query
-		res.addAll(tripRepository.findCurriculumRangerByTrip(id));
-		Assert.notNull(res);
-		return res;
-	}
-	
-	//30.2
-	public Collection<Audit> findAuditByTrip(int id){
-		Collection<Audit> res = new ArrayList<Audit>();
-		// añadimos todos los Audit mediante la query
-		res.addAll(tripRepository.findAuditsByTrip(id));
-		Assert.notNull(res);
 		return res;
 	}
 

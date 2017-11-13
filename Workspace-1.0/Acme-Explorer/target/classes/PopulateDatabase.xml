@@ -1540,7 +1540,12 @@
 	<property name="manager" ref="manager1" />
 	<property name="legalText" ref="legalText1" />
 	<property name="category" ref="category1" />
-	<property name="application" ref="application1"/>
+	<property name="application">
+		<list>
+			<ref bean="application1"/>
+			<ref bean="application3"/>
+		</list>
+	</property>
 	<property name="requirement">
 		<list>
 			<value>Requirement 1</value>
@@ -1601,7 +1606,12 @@
 	<property name="manager" ref="manager1" />
 	<property name="legalText" ref="legalText2" />
 	<property name="category" ref="category2" />
-	<property name="application" ref="application2"/>
+	<property name="application">
+		<list>
+			<ref bean="application2"/>
+			<ref bean="application4"/>
+		</list>
+	</property>
 	<property name="survival">
 		<list>
 			<ref bean="survival2"/>
