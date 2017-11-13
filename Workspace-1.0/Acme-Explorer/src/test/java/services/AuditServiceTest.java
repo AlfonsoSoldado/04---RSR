@@ -32,8 +32,9 @@ public class AuditServiceTest extends AbstractTest{
 	
 	
 	// Supporting services ----------------
-	
+	@Autowired
 	private TripService tripService;
+	@Autowired
 	private AuditorService auditorService;
 	
 	

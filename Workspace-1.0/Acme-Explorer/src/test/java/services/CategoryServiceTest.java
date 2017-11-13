@@ -28,6 +28,7 @@ public class CategoryServiceTest extends AbstractTest{
 	private CategoryService categoryService;
 	
 	// Supporting services ----------------
+	@Autowired
 	private TripService tripService;
 	
 	// Test -------------------------------
