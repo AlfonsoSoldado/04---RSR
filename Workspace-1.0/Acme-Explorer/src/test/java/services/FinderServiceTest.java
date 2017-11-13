@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Finder;
+import domain.Trip;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -27,6 +28,9 @@ public class FinderServiceTest extends AbstractTest {
 	private FinderService finderService;
 	
 	// Supporting services --------------
+	
+	@Autowired
+	private TripService tripService;
 	
 	// Test -----------------------------
 
@@ -69,10 +73,11 @@ public class FinderServiceTest extends AbstractTest {
 		Date end = new Date(System.currentTimeMillis() -50);
 		finder.setEnd(end);
 		
-		Collection<String> result = new ArrayList<String>();
-		result.add("Res01");
-		result.add("Res02");
-		finder.setResult(result);
+		Collection<Trip> result = new ArrayList<Trip>();
+		Trip trip;
+		trip = tripService.create();
+		result.add(trip);
+		finder.setTrip(result);
 		
 		this.finderService.save(finder);
 	}

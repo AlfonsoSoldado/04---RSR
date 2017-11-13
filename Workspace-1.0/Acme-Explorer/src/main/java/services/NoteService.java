@@ -67,6 +67,15 @@ public class NoteService {
 		Assert.notNull(res);
 		return res;
 	}
+	
+	public Note save(Note note) {
+		Assert.notNull(note);
+		Assert.isTrue(note.getId() == 0);
+		
+		Note res;
+		res = this.noteRepository.save(note);
+		return res;
+	}
 
 	// 33 Once a note is written, it cannot be modified at all or deleted.
 

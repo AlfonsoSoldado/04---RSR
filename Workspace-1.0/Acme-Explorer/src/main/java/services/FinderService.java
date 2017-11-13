@@ -85,17 +85,6 @@ public class FinderService {
 	}
 
 	// Other business methods
-	
-	public Finder editByExplorer(int id){
-		Finder res;
-		Finder f;
-		f = finderRepository.findOne(id);
-		Assert.notNull(f);
-		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
-				.getAuthorities().contains(Authority.EXPLORER));
-		res = finderRepository.save(f);
-		return res;
-	}
 
 	public Collection<Trip> findSearchCriterial(String singleKey, Date start, Date end, Double minPrice, Double maxPrice){
 		Collection<Trip> res = new ArrayList<Trip>();
