@@ -26,8 +26,7 @@ public class Value extends DomainEntity{
 	private Collection<Tag> tag;
 	
 	@Valid
-	@NotNull
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Trip getTrip() {
 		return trip;
 	}
