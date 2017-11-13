@@ -139,7 +139,6 @@ public class ActorService {
 		Assert.notNull(res);
 		return res;
 	}
-<<<<<<< HEAD
 	
 	public boolean checkAuthority() {
 		boolean result = false;
@@ -149,21 +148,8 @@ public class ActorService {
 			result = true;
 		return result;
 	}
-	
-	public boolean checkAuthority(String authority){
-=======
-
-	// public boolean checkAuthority() {
-	// boolean result = false;
-	// UserAccount userAccount;
-	// userAccount = LoginService.getPrincipal();
-	// if (userAccount != null)
-	// result = true;
-	// return result;
-	// }
 
 	public boolean checkAuthority(String authority) {
->>>>>>> 87fd2abf31b0a5811b91191472d87f935bd7cb57
 		boolean res;
 		Actor actor;
 		Collection<Authority> authorities;
@@ -214,9 +200,6 @@ public class ActorService {
 		res = this.tripService.findTripsByCategory(category);
 		return res;
 	}
-	
-
-	
 
 	private boolean checkSpamWords(final Message message) {
 
