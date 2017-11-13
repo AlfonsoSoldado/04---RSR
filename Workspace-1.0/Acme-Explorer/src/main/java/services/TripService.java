@@ -98,10 +98,10 @@ public class TripService {
 	public Trip save(Trip trip) {
 		Assert.notNull(trip);
 		Trip res;
-		res = this.tripRepository.save(trip);
+		
 		// 12.3
-		if(res.getPublication().before(res.getTripStart())){
-			res.setCancelled(true);
+		if(trip.getPublication().before(trip.getTripStart())){
+			trip.setCancelled(true);
 		}
 		// 13.4
 		Collection<Trip> trips = new ArrayList<Trip>();
@@ -114,7 +114,9 @@ public class TripService {
 				t.setCancelled(true);
 			}
 		}
-		
+		//14.2
+		Assert.isTrue(trip.getLegalText().getDraftMode());
+		res = this.tripRepository.save(trip);
 		return res;
 	}
 
