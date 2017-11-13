@@ -4,9 +4,9 @@
 13.4 CREEMOS QUE ESTÁ MAL ESPECIFICADO
 33.1 (El save no estamos seguros)
 34 (Mirar método a parte)
-35.1
-35.2 Crear variable ban
-35.3 Crear variable ban
+35.1 (falta lo del spam word)
+35.2 
+35.3 
 43.1 Mirar asociación con respecto a sus Trips
 
 
