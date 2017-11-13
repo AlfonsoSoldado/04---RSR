@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SurvivalRepository;
-import repositories.TripRepository;
+import domain.Application;
+import domain.Explorer;
 import domain.Manager;
 import domain.Survival;
 import domain.Trip;
@@ -29,6 +29,9 @@ public class SurvivalService {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private ExplorerService explorerService;
 
 	// Constructors
 
@@ -88,4 +91,20 @@ public class SurvivalService {
 	}
 
 	// Other business methods	
+	
+	// 44.1
+//	public Survival enrolSurvival(Survival survival){
+//		this.explorerService.checkAuthority();
+//		Explorer explorer;
+//		explorer = this.explorerService.findByPrincipal();
+//		Assert.notNull(explorer);
+//		
+//		Trip trip;
+//		trip = this.survivalRepository.enrolSurvivalExplorer(explorer.getId(), survival.getId());
+//		for(Application a: trip.getApplication()){
+//			if(a.getStatus().equals("ACCEPTED")){
+//				
+//			}
+//		}
+//	}
 }
