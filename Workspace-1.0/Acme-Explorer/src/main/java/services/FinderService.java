@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,7 @@ public class FinderService {
 	
 	@Autowired
 	private ExplorerService explorerService;
-	@Autowired
-	private TripService tripService;
+	
 	@Autowired
 	private ActorService actorService;
 	
@@ -47,7 +47,8 @@ public class FinderService {
 	}
 	
 	public Collection<Finder> findAll() {
-		Assert.isTrue(this.actorService.checkAuthority("EXPLORER"));
+		explorerService.checkAuthority();
+		
 		Collection<Finder> res;
 		res = this.finderRepository.findAll();
 		Assert.notNull(res);
@@ -55,7 +56,8 @@ public class FinderService {
 	}
 
 	public Finder findOne(int finder) {
-		Assert.isTrue(this.actorService.checkAuthority("EXPLORER"));
+		explorerService.checkAuthority();
+		
 		Assert.isTrue(finder != 0);
 		Finder res;
 		res = this.finderRepository.findOne(finder);
@@ -64,7 +66,8 @@ public class FinderService {
 	}
 
 	public Finder save(Finder finder) {
-		Assert.isTrue(this.actorService.checkAuthority("EXPLORER"));
+		explorerService.checkAuthority();
+		
 		Explorer explorer;
 		explorer = this.explorerService.findByPrincipal();
 		
@@ -94,20 +97,10 @@ public class FinderService {
 		return res;
 	}
 
-	public Collection<Finder> findSearchCriterial(){
-		Collection<Finder> res = new ArrayList<Finder>();
+	public Collection<Trip> findSearchCriterial(String singleKey, Date start, Date end, Double minPrice, Double maxPrice){
+		Collection<Trip> res = new ArrayList<Trip>();
+		res.addAll(finderRepository.resultFinder(singleKey, start, end, minPrice, maxPrice));
 		
-		Collection<Finder> totalFinder = this.finderRepository.findAll();
-		Collection<Trip> totalTrip = this.tripService.findAll();
-		
-		for(Finder f: totalFinder){
-			for(Trip t: totalTrip){
-				if(f.getSingleKey().contains(t.getTitle())){
-					res.add(f);
-					f.getResult().add(t.getTitle());
-				}
-			}
-		}	
 		return res;
 	}
 }

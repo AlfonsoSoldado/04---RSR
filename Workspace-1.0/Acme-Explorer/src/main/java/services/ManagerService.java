@@ -34,7 +34,7 @@ public class ManagerService {
 	private FolderService folderService;
 	
 	@Autowired
-	private ActorService actorService;
+	private AdministratorService administratorService;
 
 	// Constructors
 
@@ -45,7 +45,7 @@ public class ManagerService {
 	// Simple CRUD methods
 	
 	public Manager create() {
-		Assert.isTrue(this.actorService.checkAuthority("ADMIN"));
+		administratorService.checkAuthority();
 		Manager res = new Manager();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
@@ -65,6 +65,7 @@ public class ManagerService {
 		res.setApplication(application);
 		res.setSurvival(survival);
 		res.setTrip(trip);
+		
 		return res;
 	}
 

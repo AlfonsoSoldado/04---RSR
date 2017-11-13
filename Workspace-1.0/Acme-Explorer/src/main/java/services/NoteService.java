@@ -25,9 +25,6 @@ public class NoteService {
 	// Supporting services
 	@Autowired
 	private AuditorService auditorService;
-	
-	@Autowired
-	private ActorService actorService;
 
 	// Constructors
 
@@ -39,7 +36,8 @@ public class NoteService {
 
 	// 33
 	public Note create() {
-		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
+		auditorService.checkAuthority();
+		
 		Note res = new Note();
 		Auditor a = new Auditor();
 		Date d = new Date();
@@ -52,7 +50,8 @@ public class NoteService {
 	}
 
 	public Collection<Note> findAll() {
-		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
+		auditorService.checkAuthority();
+		
 		Collection<Note> res;
 		res = this.noteRepository.findAll();
 		Assert.notNull(res);
@@ -60,7 +59,8 @@ public class NoteService {
 	}
 
 	public Note findOne(int note) {
-		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
+		auditorService.checkAuthority();
+
 		Assert.isTrue(note != 0);
 		Note res;
 		res = this.noteRepository.findOne(note);
@@ -68,27 +68,14 @@ public class NoteService {
 		return res;
 	}
 
-	public Note save(Note note) {
-		Assert.notNull(note);
-		Note res;
-		res = this.noteRepository.save(note);
-		return res;
-	}
-
-	// 33
-	// Once a note is written, it cannot be modified at all or deleted.
-	// public void delete(Note note) {
-	// Assert.notNull(note);
-	// Assert.isTrue(note.getId() != 0);
-	// Assert.isTrue(this.noteRepository.exists(note.getId()));
-	// this.noteRepository.delete(note);
-	// }
+		//33 Once a note is written, it cannot be modified at all or deleted.
 
 	// Other business methods
 
+	//33
 	public Collection<Note> findNotesByAuditor(int id) {
 		Collection<Note> res = new ArrayList<Note>();
-		// añadimos todas las notes mediante la query
+
 		res.addAll(noteRepository.findNotesByAuditor(id));
 		Assert.notNull(res);
 		return res;

@@ -58,7 +58,6 @@ public class FolderService {
 	}
 
 	public Folder save(Folder folder) {
-		Assert.isTrue(actorService.checkAuthority("ADMIN"));
 		Actor actor = this.actorService.findByPrincipal();
 		Assert.notNull(actor);
 		Assert.notNull(folder);
@@ -80,26 +79,31 @@ public class FolderService {
 
 	public Collection<Folder> systemFolders() {
 		Collection<Folder> folders = new ArrayList<Folder>();
+		
 		Folder inBox = new Folder();
 		Folder outBox = new Folder();
 		Folder notification = new Folder();
 		Folder trash = new Folder();
 		Folder spam = new Folder();
+		
 		inBox.setName("In Box");
 		outBox.setName("Out Box");
 		notification.setName("Notification");
 		trash.setName("Trash");
 		spam.setName("Spam");
+		
 		inBox.setSystemFolder(true);
 		outBox.setSystemFolder(true);
 		notification.setSystemFolder(true);
 		trash.setSystemFolder(true);
 		spam.setSystemFolder(true);
+		
 		folders.add(inBox);
 		folders.add(outBox);
 		folders.add(notification);
 		folders.add(trash);
 		folders.add(inBox);
+		
 		return folders;
 	}
 }

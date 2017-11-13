@@ -36,6 +36,8 @@ public class MessageService {
 	// Simple CRUD methods
 	
 	public Message create() {
+		actorService.checkAuthority();
+		
 		Message message;
 		message = new Message();
 		Actor sender = this.actorService.findByPrincipal();
@@ -54,6 +56,8 @@ public class MessageService {
 	}
 
 	public Collection<Message> findAll() {
+		actorService.checkAuthority();
+		
 		Collection<Message> res;
 		res = this.messageRepository.findAll();
 		Assert.notNull(res);
@@ -61,6 +65,8 @@ public class MessageService {
 	}
 
 	public Message findOne(int message) {
+		actorService.checkAuthority();
+		
 		Assert.isTrue(message != 0);
 		Message res;
 		res = this.messageRepository.findOne(message);
@@ -69,6 +75,8 @@ public class MessageService {
 	}
 
 	public Message save(Message message) {
+		actorService.checkAuthority();
+		
 		Assert.notNull(message);
 		Message res;
 		res = this.messageRepository.save(message);
@@ -76,6 +84,8 @@ public class MessageService {
 	}
 
 	public void delete(Message message) {
+		actorService.checkAuthority();
+		
 		Assert.notNull(message);
 		Assert.isTrue(message.getId() != 0);
 		Assert.isTrue(this.messageRepository.exists(message.getId()));
@@ -84,8 +94,9 @@ public class MessageService {
 
 	// Other business methods
 	
-	public Message copyMessage(final Message message) {
-
+	public Message copyMessage(Message message) {
+		actorService.checkAuthority();
+		
 		Message result;
 
 		result = this.create();

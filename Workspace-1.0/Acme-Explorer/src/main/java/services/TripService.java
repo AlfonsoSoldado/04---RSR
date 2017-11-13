@@ -137,7 +137,7 @@ public class TripService {
 
 	// 12.1 (listing)
 	public Collection<Trip> findTripsByManager(int id) {
-		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		managerService.checkAuthority();
 		
 		Collection<Trip> res = new ArrayList<Trip>();
 		res = tripRepository.findTripsByManager(id);
@@ -147,7 +147,7 @@ public class TripService {
 
 	// 12.1 (modifying)
 	public Trip editByManager(int id) {
-		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		managerService.checkAuthority();
 		
 		Trip res;
 		Trip t;

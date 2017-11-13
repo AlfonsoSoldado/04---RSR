@@ -21,8 +21,9 @@ public class TagService {
 	private TagRepository tagRepository;
 
 	// Supporting services
+	
 	@Autowired
-	private ActorService actorService;
+	private AdministratorService administratorService;
 	
 	// Constructors
 
@@ -67,7 +68,7 @@ public class TagService {
 		 t.addAll(tagRepository.findTagNotTrip());
 		 tmod = tagRepository.findOne(id);
 		 Assert.notNull(tagRepository.findOne(id));
-		 actorService.checkAuthority("ADMINISTRATOR");
+		 administratorService.checkAuthority();
 		 tmod.setName(newName);
 		 return tmod;
 	 }
@@ -75,7 +76,7 @@ public class TagService {
 	public void delete(Tag tag) {
 		Assert.notNull(tag);
 		Assert.isTrue(tag.getId() != 0);
-		actorService.checkAuthority("ADMINISTRATOR");
+		administratorService.checkAuthority();
 		Assert.isTrue(this.tagRepository.exists(tag.getId()));
 		this.tagRepository.delete(tag);
 	}
