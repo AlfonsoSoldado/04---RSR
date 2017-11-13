@@ -24,6 +24,7 @@ public class FolderService {
 
 	// Supporting services
 
+	@Autowired
 	private ActorService actorService;
 
 	// Constructors

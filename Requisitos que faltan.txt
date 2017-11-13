@@ -1,4 +1,16 @@
 10.1 (Posiblemente para futura entrega)
 11 (Entero)
+<<<<<<< HEAD
+13.4 CREEMOS QUE ESTÁ MAL ESPECIFICADO
 14.2 (Listar por viajes)
 33.1 (El save no estamos seguros)
+34 (Mirar método a parte)
+35.1
+35.2 Crear variable ban
+35.3 Crear variable ban
+43.1 Mirar asociación con respecto a sus Trips
+
+
+!!Donde haya checkAuthority con actor, meter checkAuthority de ese rol¡¡
+=======
+>>>>>>> 684817c85bc0013b1b28bb186c53ebf118bec7ac
