@@ -64,6 +64,8 @@ public class EmergencyServiceTest extends AbstractTest {
 		
 		emergency.setPhoneNumber("654321234");
 		
+		this.emergencyService.save(emergency);
+		
 	}
 	
 	@Test

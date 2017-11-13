@@ -81,6 +81,9 @@ public class CategoryServiceTest extends AbstractTest{
 		trips = category.getTrip();
 		trips.add(trip);
 		category.setTrip(trips);
+		
+		this.categoryService.save(category);
+		
 		unauthenticate();
 	}
 	
