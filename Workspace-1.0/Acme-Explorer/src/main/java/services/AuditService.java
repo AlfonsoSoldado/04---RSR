@@ -46,7 +46,7 @@ public class AuditService {
 		Auditor a = new Auditor();
 		Trip trip = new Trip();//TODO: revisar lo del trip
 		Audit res = new Audit();
-		Date d = new Date();
+		Date d = new Date(System.currentTimeMillis() -1);
 		//atributo obligatorio
 		Collection<String> attachments = new ArrayList<String>();
 		//compruebo que el actor registrado sea un auditor
