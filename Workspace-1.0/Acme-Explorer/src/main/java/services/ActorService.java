@@ -16,12 +16,12 @@ import security.UserAccountService;
 import domain.Actor;
 import domain.Audit;
 import domain.Category;
-<<<<<<< HEAD
+
 import domain.Message;
 import domain.SpamWords;
-=======
+
 import domain.Curriculum;
->>>>>>> 39aa64bf8892ffb4a04ac44c3f52df5f7568e3d8
+
 import domain.Trip;
 
 @Service
@@ -201,7 +201,7 @@ public class ActorService {
 		return res;
 	}
 	
-<<<<<<< HEAD
+
 	
 
 	private boolean checkSpamWords(final Message message) {
@@ -219,7 +219,7 @@ public class ActorService {
 		}
 
 		return result;
-=======
+	}
 	//30.1
 	public Collection<Curriculum> findCurriculumRangerByTrip(int id) {
 		Collection<Curriculum> res = new ArrayList<Curriculum>();
@@ -236,6 +236,6 @@ public class ActorService {
 		res.addAll(actorRepository.findAuditsByTrip(id));
 		Assert.notNull(res);
 		return res;
->>>>>>> 39aa64bf8892ffb4a04ac44c3f52df5f7568e3d8
+
 	}
 }
