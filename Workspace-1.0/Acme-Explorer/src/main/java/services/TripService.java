@@ -57,7 +57,7 @@ public class TripService {
 		
 		Collection<Audit> audits = new ArrayList<Audit>();
 		Collection<Note> notes = new ArrayList<Note>();
-		Collection<Application> applications = new ArrayList<Application>();
+		Application application = new Application();
 		Collection<Story> stories = new ArrayList<Story>();
 		Collection<Stage> stages = new ArrayList<Stage>();
 		LegalText legalText = new LegalText();
@@ -70,7 +70,7 @@ public class TripService {
 		trip.setManager(m);
 		trip.setAudit(audits);
 		trip.setNote(notes);
-		trip.setApplication(applications);
+		trip.setApplication(application);
 		trip.setStory(stories);
 		trip.setStage(stages);
 		trip.setLegalText(legalText);
@@ -101,6 +101,16 @@ public class TripService {
 		res = this.tripRepository.save(trip);
 		if(res.getPublication().before(res.getTripStart())){
 			res.setCancelled(true);
+		}
+		Collection<Trip> trips = new ArrayList<Trip>();
+		Date date = new Date(System.currentTimeMillis()-1);
+		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
+				.getAuthorities().contains(Authority.EXPLORER));
+		trips.addAll(tripRepository.findTripsAccepted());
+		for(Trip t: trips){
+			if(t.getTripStart().after(date) && t.getApplication().getStatus().equals("ACCEPTED")){
+				t.setCancelled(true);
+			}
 		}
 		
 		return res;
