@@ -87,11 +87,6 @@ public class NoteServiceTest extends AbstractTest{
 	}
 	
 	@Test
-	public void testDeleteNote(){
-		
-	}
-	
-	@Test
 	// TODO: testFindNotesByAuditor()
 	public void testFindNotesByAuditor(){
 		
