@@ -7,5 +7,7 @@ import domain.Tag;
 
 @Repository
 public interface TagRepository extends JpaRepository<Tag, Integer>{
-
+	
+	//@Query("select t from Tag t")
+	
 }
