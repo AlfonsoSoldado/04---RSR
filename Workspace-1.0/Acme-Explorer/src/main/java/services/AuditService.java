@@ -106,34 +106,6 @@ public class AuditService {
 	
 	// Other business methods
 	
-	//33.2 (listing)
-//	public Collection<Audit> findAuditsByAuditor(int id){
-//		Collection<Audit> res = new ArrayList<Audit>();
-//		res = auditRepository.findAuditsByAuditor(id);
-//		Assert.notNull(res);
-//		return res;
-//	}
-//	
-//	
-//	//33.2 (modifying)
-//	public Audit editAudit(int id){
-//		Audit res = new Audit();
-//		Audit a = new Audit();
-//		Auditor ar = new Auditor();
-//		Auditor ar2 = new Auditor();
-//		//selecciono el audit que quiero editar
-//		a = auditRepository.findOne(id);
-//		//can be modified or deleted as long as they are saved in draft mode.
-//		Assert.isTrue(a.getDraftMode() == true);
-//		// comprobamos que el audit seleccionado sea de este auditor
-//		Assert.notNull(a);
-//		ar = a.getAuditor();
-//		ar2 = auditorService.findByPrincipal();
-//		Assert.isTrue(ar.equals(ar2));
-//		
-//		res = auditRepository.save(a);
-//		return res;
-//	}
 	
 	//33.2
 	public Collection<Audit> findAuditDraftTrue(int id){

@@ -1,6 +1,7 @@
-10.1 (Posiblemente para futura entrega)
-11 (Entero)
-13.4 CREEMOS QUE ESTÁ MAL ESPECIFICADO
+11.2
+11.3
+11.4
+13.4 CREEMOS QUE ESTÁ MAL ESPECIFICADO (Seguramente meter en application en vez de en trip)
 33.1 (El save no estamos seguros)
 34 (Mirar método a parte)
 35.1 (falta lo del spam word)
@@ -11,4 +12,10 @@
 44.2
 
 
-!!Donde haya checkAuthority con actor, meter checkAuthority de ese rol¡¡
+¡¡Donde haya checkAuthority con actor, meter checkAuthority de ese rol!!
+Cambiar checkAuthority de Actor al antiguo
+
+Para cuando hay requisito del estilo: Cualquier actor... Poner el checkAuthority antiguo
+
+
+HACER TODO MEDIANTE CONSULTAS

@@ -85,14 +85,14 @@ public class ActorService {
 		return res;
 	}
 	
-//	public boolean checkAuthority() {
-//		boolean result = false;
-//		UserAccount userAccount;
-//		userAccount = LoginService.getPrincipal();
-//		if (userAccount != null)
-//			result = true;
-//		return result;
-//	}
+	public boolean checkAuthority() {
+		boolean result = false;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		if (userAccount != null)
+			result = true;
+		return result;
+	}
 	
 	public boolean checkAuthority(String authority){
 		boolean res;

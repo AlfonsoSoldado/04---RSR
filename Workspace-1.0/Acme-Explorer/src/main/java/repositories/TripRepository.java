@@ -15,10 +15,6 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 	@Query("select t from Trip t where t.manager.id = ?1")
 	Collection<Trip> findTripsByManager(int id);
 
-	// 12.3
-	// @Query("select t from Trip where t.publication != null")
-	// Collection<Trip> findTripsPublishedAndNotStarted();
-
 	// 13.1
 	@Query("select t from Trip t join t.application a where a.explorer.id = ?1")
 	Collection<Trip> findTripsByExplorer(int id);

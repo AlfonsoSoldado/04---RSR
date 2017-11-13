@@ -44,7 +44,7 @@ public class RangerService {
 	// Simple CRUD methods
 
 	public Ranger create() {
-		Assert.isTrue(this.actorService.checkAuthority("ADMIN"));
+		Assert.isTrue(!this.actorService.checkAuthority());
 		Ranger res = new Ranger();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
