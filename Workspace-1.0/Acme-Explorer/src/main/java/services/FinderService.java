@@ -47,6 +47,7 @@ public class FinderService {
 	}
 	
 	public Collection<Finder> findAll() {
+		Assert.isTrue(this.actorService.checkAuthority("EXPLORER"));
 		Collection<Finder> res;
 		res = this.finderRepository.findAll();
 		Assert.notNull(res);
@@ -54,6 +55,7 @@ public class FinderService {
 	}
 
 	public Finder findOne(int finder) {
+		Assert.isTrue(this.actorService.checkAuthority("EXPLORER"));
 		Assert.isTrue(finder != 0);
 		Finder res;
 		res = this.finderRepository.findOne(finder);
@@ -62,6 +64,7 @@ public class FinderService {
 	}
 
 	public Finder save(Finder finder) {
+		Assert.isTrue(this.actorService.checkAuthority("EXPLORER"));
 		Explorer explorer;
 		explorer = this.explorerService.findByPrincipal();
 		
@@ -99,7 +102,7 @@ public class FinderService {
 		
 		for(Finder f: totalFinder){
 			for(Trip t: totalTrip){
-				if(f.getSingleKey().equals(t.getTitle())){
+				if(f.getSingleKey().contains(t.getTitle())){
 					res.add(f);
 					f.getResult().add(t.getTitle());
 				}

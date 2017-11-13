@@ -26,6 +26,9 @@ public class SurvivalService {
 	// Supporting services
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors
 
@@ -37,6 +40,7 @@ public class SurvivalService {
 	
 	//43.1: creating
 	public Survival create(){
+		this.managerService.checkAuthority();
 		Manager m = new Manager();
 		Trip trip = new Trip();
 		Survival survival = new Survival();
@@ -48,6 +52,7 @@ public class SurvivalService {
 	
 
 	public Collection<Survival> findAll() {
+		this.managerService.checkAuthority();
 		Collection<Survival> res;
 		res = this.survivalRepository.findAll();
 		Assert.notNull(res);
@@ -55,6 +60,7 @@ public class SurvivalService {
 	}
 
 	public Survival findOne(int survival) {
+		this.managerService.checkAuthority();
 		Assert.isTrue(survival != 0);
 		Survival res;
 		res = this.survivalRepository.findOne(survival);
@@ -63,6 +69,7 @@ public class SurvivalService {
 	}
 
 	public Survival save(Survival survival) {
+		this.managerService.checkAuthority();
 		Assert.notNull(survival);
 		Survival res;
 		res = this.survivalRepository.save(survival);
@@ -70,6 +77,7 @@ public class SurvivalService {
 	}
 
 	public void delete(Survival survival) {
+		this.managerService.checkAuthority();
 		Assert.notNull(survival);
 		Assert.isTrue(survival.getId() != 0);
 		Assert.isTrue(this.survivalRepository.exists(survival.getId()));
@@ -79,34 +87,5 @@ public class SurvivalService {
 		this.survivalRepository.delete(survival);
 	}
 
-	// Other business methods
-	
-	//43.1: listing
-//	public Collection<Survival> findSurvivalByManager(int id){
-//		Collection<Survival> res = new ArrayList<Survival>();
-//		Manager m = new Manager();
-//		m = managerService.findByPrincipal();
-//		Assert.notNull(m);
-//		res.addAll(survivalRepository.findSurvivalByManager(id));
-//		Assert.notNull(res);
-//		return res;
-//	}
-	
-	
-	
-	//43.1: modifying
-	public Survival editByManager(int id){
-		Survival res;
-		Survival s;
-		s = survivalRepository.findOne(id);
-		Assert.notNull(s);
-		Manager m = s.getManager();
-		Manager a = managerService.findByPrincipal();
-		Assert.isTrue(m.equals(a));
-		
-		res = survivalRepository.save(s);
-		return res;
-	}
-	
-	
+	// Other business methods	
 }
