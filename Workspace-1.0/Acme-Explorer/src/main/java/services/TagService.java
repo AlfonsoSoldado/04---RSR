@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TagRepository;
+import domain.Administrator;
 import domain.Tag;
 
 @Service
@@ -20,7 +21,12 @@ public class TagService {
 	private TagRepository tagRepository;
 
 	// Supporting services
-
+	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
+	private AdministratorService administratorService;
+	
 	// Constructors
 
 	public TagService() {
@@ -56,6 +62,10 @@ public class TagService {
 		res = this.tagRepository.save(tag);
 		return res;
 	}
+	
+//	public Tag update(int id, String newName){
+//		
+//	}
 
 	public void delete(Tag tag) {
 		Assert.notNull(tag);
@@ -65,5 +75,8 @@ public class TagService {
 	}
 
 	// Other business methods
+	
+	
+	
 
 }
