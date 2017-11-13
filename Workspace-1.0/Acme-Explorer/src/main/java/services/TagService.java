@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TagRepository;
-import domain.Administrator;
 import domain.Tag;
 
 @Service
@@ -23,9 +23,6 @@ public class TagService {
 	// Supporting services
 	@Autowired
 	private ActorService actorService;
-	
-	@Autowired
-	private AdministratorService administratorService;
 	
 	// Constructors
 
@@ -63,13 +60,22 @@ public class TagService {
 		return res;
 	}
 	
-//	public Tag update(int id, String newName){
-//		
-//	}
+	//14.3
+	 public Tag update(int id, String newName){
+		 Collection<Tag> t = new ArrayList<Tag>();
+		 Tag tmod = new Tag();
+		 t.addAll(tagRepository.findTagNotTrip());
+		 tmod = tagRepository.findOne(id);
+		 Assert.notNull(tagRepository.findOne(id));
+		 actorService.checkAuthority("ADMINISTRATOR");
+		 tmod.setName(newName);
+		 return tmod;
+	 }
 
 	public void delete(Tag tag) {
 		Assert.notNull(tag);
 		Assert.isTrue(tag.getId() != 0);
+		actorService.checkAuthority("ADMINISTRATOR");
 		Assert.isTrue(this.tagRepository.exists(tag.getId()));
 		this.tagRepository.delete(tag);
 	}
