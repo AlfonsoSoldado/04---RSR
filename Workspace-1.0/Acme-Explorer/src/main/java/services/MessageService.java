@@ -83,5 +83,20 @@ public class MessageService {
 	}
 
 	// Other business methods
+	
+	public Message copyMessage(final Message message) {
+
+		Message result;
+
+		result = this.create();
+		result.setBody(message.getBody());
+		result.setFolder(message.getFolder());
+		result.setPriority(message.getPriority());
+		result.setRecipient(message.getRecipient());
+		result.setSender(message.getSender());
+		result.setSubject(message.getSubject());
+
+		return result;
+	}
 
 }
