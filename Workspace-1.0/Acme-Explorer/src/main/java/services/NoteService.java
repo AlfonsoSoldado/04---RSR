@@ -25,6 +25,9 @@ public class NoteService {
 	// Supporting services
 	@Autowired
 	private AuditorService auditorService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors
 
@@ -36,6 +39,7 @@ public class NoteService {
 
 	// 33
 	public Note create() {
+		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
 		Note res = new Note();
 		Auditor a = new Auditor();
 		Date d = new Date();
@@ -48,6 +52,7 @@ public class NoteService {
 	}
 
 	public Collection<Note> findAll() {
+		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
 		Collection<Note> res;
 		res = this.noteRepository.findAll();
 		Assert.notNull(res);
@@ -55,6 +60,7 @@ public class NoteService {
 	}
 
 	public Note findOne(int note) {
+		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
 		Assert.isTrue(note != 0);
 		Note res;
 		res = this.noteRepository.findOne(note);
