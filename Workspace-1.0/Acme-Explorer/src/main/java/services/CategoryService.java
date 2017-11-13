@@ -23,6 +23,8 @@ public class CategoryService {
 	
 	// Supporting services
 	
+	private ActorService actorService;
+	
 	// Constructors
 	
 	public CategoryService(){
@@ -32,6 +34,7 @@ public class CategoryService {
 	// Simple CRUD methods
 	
 	public Category create() {
+		Assert.isTrue(this.actorService.checkAuthority("ADMIN"));
 		Category res;
 		res = new Category();
 		Collection<Category> categories = new ArrayList<Category>();
@@ -57,6 +60,7 @@ public class CategoryService {
 	}
 	
 	public Category save(Category category) {
+		Assert.isTrue(this.actorService.checkAuthority("ADMIN"));
 		Assert.notNull(category);
 		Category res;
 		res = this.categoryRepository.save(category);
@@ -64,6 +68,7 @@ public class CategoryService {
 	}
 	
 	public void delete(Category category) {
+		Assert.isTrue(this.actorService.checkAuthority("ADMIN"));
 		Assert.notNull(category);
 		Assert.isTrue(category.getId() != 0);
 		Assert.isTrue(this.categoryRepository.exists(category.getId()));
