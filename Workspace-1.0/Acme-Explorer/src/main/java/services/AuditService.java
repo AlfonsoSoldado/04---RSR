@@ -43,27 +43,30 @@ public class AuditService {
 	
 	
 	public Audit create() {
-		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
-		Auditor a = new Auditor();
-		Trip trip = new Trip();//TODO: revisar lo del trip
+		auditorService.checkAuthority();
+		
 		Audit res = new Audit();
-		Date d = new Date(System.currentTimeMillis() -1);
-		//atributo obligatorio
-		Collection<String> attachments = new ArrayList<String>();
-		//compruebo que el actor registrado sea un auditor
+		
+		Auditor a = new Auditor();
 		a = auditorService.findByPrincipal();
 		Assert.notNull(a);
-		//le meto los valores
+		
+		Trip trip = new Trip();//TODO: revisar lo del trip
+		Date d = new Date(System.currentTimeMillis() -1);
+		Collection<String> attachments = new ArrayList<String>();
+
 		res.setDraftMode(true);
 		res.setMoment(d);
 		res.setAttachment(attachments);
 		res.setAuditor(a);
 		res.setTrip(trip);
+		
 		return res;
 	}
 	
 	public Collection<Audit> findAll() {
-		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
+		auditorService.checkAuthority();
+		
 		Collection<Audit> res;
 		res = this.auditRepository.findAll();
 		Assert.notNull(res);
@@ -71,7 +74,8 @@ public class AuditService {
 	}
 	
 	public Audit findOne(int auditId) {
-		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
+		auditorService.checkAuthority();
+		
 		Assert.isTrue(auditId != 0);
 		Audit res;
 		res = this.auditRepository.findOne(auditId);
@@ -81,7 +85,8 @@ public class AuditService {
 	
 	//33.2
 	public Audit save(Audit audit) {
-		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
+		auditorService.checkAuthority();
+		
 		UserAccount ua = LoginService.getPrincipal();
 		Assert.notNull(ua);
 		Actor a = actorService.findOne(ua.getId());
@@ -95,11 +100,11 @@ public class AuditService {
 	
 	//33.2
 	public void delete(Audit audit) {
-		Assert.isTrue(this.actorService.checkAuthority("AUDITOR"));
+		auditorService.checkAuthority();
+		
 		Assert.notNull(audit);
 		Assert.isTrue(audit.getId() != 0);
 		Assert.isTrue(this.auditRepository.exists(audit.getId()));
-		//can be modified or deleted as long as they are saved in draft mode.
 		Assert.isTrue(audit.getDraftMode() == true);
 		this.auditRepository.delete(audit);
 	}

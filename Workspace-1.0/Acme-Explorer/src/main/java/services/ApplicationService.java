@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.ApplicationRepository;
 import domain.Application;
+import domain.CC;
 import domain.Explorer;
 import domain.Manager;
 
@@ -25,11 +26,9 @@ public class ApplicationService {
 	// Supporting services
 
 	@Autowired
-	// 12
 	private ManagerService managerService;
 
 	@Autowired
-	// 13
 	private ExplorerService explorerService;
 
 	// Constructors
@@ -42,9 +41,11 @@ public class ApplicationService {
 
 	public Application create() {
 		Application res = new Application();
+		
 		String status;
-		String comment = new String();
 		status = "ACCEPTED";
+		String comment = new String();
+		
 		res.setStatus(status);
 		res.setComment(comment);
 		return res;
@@ -69,9 +70,6 @@ public class ApplicationService {
 		Assert.notNull(application);
 		Application res;
 		res = this.applicationRepository.save(application);
-		if (application.getStatus().equals("DUE") && application.getCreditCard() != null){
-			res.setStatus("ACCEPTED");
-		}
 		return res;
 	}
 
@@ -88,10 +86,14 @@ public class ApplicationService {
 	 public Application changingStatus(Application a, String status) {
 		 Assert.notNull(a);
 		 Assert.notNull(status);
+		 
+		 managerService.checkAuthority();
 		 Manager m = this.managerService.findByPrincipal();
+		 
 		 Assert.isTrue(m.getApplication().contains(a));
 		 Assert.isTrue(a.getStatus().equals("PENDING"));
 		 Assert.isTrue(status.equals("REJECTED") || status.equals("DUE"));
+		 
 		 a.setStatus(status);
 		 return a;
 	 }
@@ -99,26 +101,42 @@ public class ApplicationService {
 	// 12.2 (listing)
 	public Collection<Application> findApplicationsByManager(int id) {
 		Collection<Application> res = new ArrayList<Application>();
+		
 		Manager m = this.managerService.create();
-		// comprobamos que la application seleccionada sea de este manager
+		
 		m = managerService.findByPrincipal();
+		managerService.checkAuthority();
+		
 		Assert.notNull(m);
+		
 		res.addAll(applicationRepository.findApplicationsByManager(id));
 		Assert.notNull(res);
+		
 		return res;
 	}
 
 	// 13.2
-	// TODO: falta lo de agruparlos por status
 	public Collection<Application> findApplicationByExplorer(int id) {
 		Collection<Application> res = new ArrayList<Application>();
+		
 		Explorer e = this.explorerService.create();
-		// comprobamos que la application seleccionada sea de este explorer
+		
 		e = explorerService.findByPrincipal();
+		explorerService.checkAuthority();
+		
 		Assert.notNull(e);
-		// añadimos todas las application mediante la query
+		
 		res.addAll(applicationRepository.findApplicationByExplorer(id));
 		Assert.notNull(res);
+		
 		return res;
+	}
+	
+	// 13.3
+	public void applicationAccepted(CC creditCard, Application application){
+		Assert.isTrue(application.getStatus().equals("DUE"));
+		Assert.notNull(creditCard);
+		application.setStatus("ACCEPTED");
+		application.setCreditCard(creditCard);
 	}
 }

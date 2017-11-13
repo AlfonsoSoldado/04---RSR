@@ -53,11 +53,12 @@ public class RangerService {
 		Curriculum curriculum = new Curriculum();
 		Collection<Trip> trip = new ArrayList<Trip>();
 		folder = this.folderService.systemFolders();
-		res.setSocialId(socialId);
-		res.setFolders(folder);
+		
 		authority.setAuthority(Authority.RANGER);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);
+		res.setSocialId(socialId);
+		res.setFolders(folder);
 		res.setCurriculum(curriculum);
 		res.setTrip(trip);
 		res.setSuspicious(false);

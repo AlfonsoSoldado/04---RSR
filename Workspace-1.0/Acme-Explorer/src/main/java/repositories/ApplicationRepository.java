@@ -19,4 +19,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 	//13.2
 	@Query("select a from Explorer e join e.application a where e.id = ?1 group by a.status ")
 	Collection<Application> findApplicationByExplorer(int id);
+	
 }

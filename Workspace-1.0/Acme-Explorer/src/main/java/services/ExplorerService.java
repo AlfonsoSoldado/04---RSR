@@ -56,17 +56,18 @@ public class ExplorerService {
 		Application application = new Application();
 		Collection<Finder> finder = new ArrayList<Finder>();
 		Collection<Emergency> emergency = new ArrayList<Emergency>();
-
 		folder = this.folderService.systemFolders();
-		res.setSocialId(socialId);
-		res.setFolders(folder);
+		
 		authority.setAuthority(Authority.EXPLORER);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);
+		res.setSocialId(socialId);
+		res.setFolders(folder);
 		res.setStories(story);
 		res.setApplication(application);
 		res.setFinder(finder);
 		res.setEmergency(emergency);
+		
 		return res;
 	}
 

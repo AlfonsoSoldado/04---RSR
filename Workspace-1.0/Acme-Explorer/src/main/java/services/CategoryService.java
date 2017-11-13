@@ -22,11 +22,9 @@ public class CategoryService {
 	private CategoryRepository categoryRepository;
 	
 	// Supporting services
-	@Autowired
-	private ActorService actorService;
-	@Autowired
-	private TripService tripService;
 	
+	@Autowired
+	private AdministratorService administratorService;
 	
 	// Constructors
 	
@@ -37,16 +35,20 @@ public class CategoryService {
 	// Simple CRUD methods
 	
 	public Category create() {
-		Assert.isTrue(this.actorService.checkAuthority("ADMIN"));
+		administratorService.checkAuthority();
+		
 		Category res;
 		res = new Category();
+		
 		Collection<Category> categories = new ArrayList<Category>();
 		Collection<Trip> trip = new ArrayList<Trip>();
 		Trip trip1;
-		trip1 = tripService.create();
+		trip1 = new Trip();
 		trip.add(trip1);
+		
 		res.setCategories(categories);
 		res.setTrip(trip);
+		
 		return res;
 	}
 	
@@ -66,7 +68,7 @@ public class CategoryService {
 	}
 	
 	public Category save(Category category) {
-		Assert.isTrue(this.actorService.checkAuthority("ADMIN"));
+		administratorService.checkAuthority();
 		Assert.notNull(category);
 		Category res;
 		res = this.categoryRepository.save(category);
@@ -74,7 +76,7 @@ public class CategoryService {
 	}
 	
 	public void delete(Category category) {
-		Assert.isTrue(this.actorService.checkAuthority("ADMIN"));
+		administratorService.checkAuthority();
 		Assert.notNull(category);
 		Assert.isTrue(category.getId() != 0);
 		Assert.isTrue(this.categoryRepository.exists(category.getId()));

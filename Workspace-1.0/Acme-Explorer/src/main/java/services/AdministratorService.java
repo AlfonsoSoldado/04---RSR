@@ -46,11 +46,13 @@ public class AdministratorService {
 
 	public Administrator create() {
 		Administrator res = new Administrator();
+		
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		Collection<SocialId> socialId = new ArrayList<SocialId>();
 		Collection<Folder> folder = new ArrayList<Folder>();
 		folder = this.folderService.systemFolders();
+		
 		authority.setAuthority(Authority.ADMIN);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);
@@ -75,7 +77,7 @@ public class AdministratorService {
 	}
 
 	public Administrator save(Administrator administrator) {
-		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		checkAuthority();
 		Assert.notNull(administrator);
 		Administrator res;
 		res = this.administratorRepository.save(administrator);

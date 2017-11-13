@@ -42,6 +42,7 @@ public class AuditorService {
 
 	public Auditor create() {
 		Auditor res = new Auditor();
+		
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		Collection<SocialId> socialId = new ArrayList<SocialId>();
@@ -49,6 +50,7 @@ public class AuditorService {
 		Collection<Note> note = new ArrayList<Note>();
 		Collection<Audit> audit = new ArrayList<Audit>();
 		folder = this.folderService.systemFolders();
+		
 		authority.setAuthority(Authority.AUDITOR);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);

@@ -55,11 +55,12 @@ public class ManagerService {
 		Collection<Survival> survival = new ArrayList<Survival>();
 		Collection<Trip> trip = new ArrayList<Trip>();
 		folder = this.folderService.systemFolders();
-		res.setSocialId(socialId);
-		res.setFolders(folder);
+		
 		authority.setAuthority(Authority.MANAGER);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);
+		res.setSocialId(socialId);
+		res.setFolders(folder);
 		res.setSuspicious(false);
 		res.setApplication(application);
 		res.setSurvival(survival);
