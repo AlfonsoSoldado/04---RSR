@@ -34,6 +34,10 @@ public class TripService {
 
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private ExplorerService explorerService;
+	
 
 	// Constructors
 	public TripService() {
@@ -193,6 +197,15 @@ public class TripService {
 		Collection<Trip> trips = new ArrayList<Trip>();
 		trips = tripRepository.cancelTrip();
 		Assert.isTrue(trips.contains(trip));
+		trip.setCancelled(true);
+	}
+	
+	//13.4
+	public void tripApplicationExplorer(int id){
+		explorerService.checkAuthority();
+		Trip trip = new Trip();
+		trip = tripRepository.tripApplicationExplorer(id);
+		Assert.notNull(trip);
 		trip.setCancelled(true);
 	}
 
