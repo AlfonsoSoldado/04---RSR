@@ -20,7 +20,12 @@ public class ValueService {
 	private ValueRepository valueRepository;
 
 	// Supporting services
-
+	@Autowired
+	private TripService tripService;
+	
+	@Autowired
+	private TagService tagService;
+	
 	// Constructors
 
 	public ValueService() {
