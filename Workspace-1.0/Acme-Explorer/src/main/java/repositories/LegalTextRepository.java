@@ -1,5 +1,6 @@
 package repositories;
 
+
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,7 +13,11 @@ import domain.LegalText;
 public interface LegalTextRepository extends JpaRepository<LegalText, Integer> {
 
 	// 14.2
-	@Query("select l from LegalText l where l.draftMode = true and l.legalText = ?1")
-	Collection<LegalText> findLegalTextDraftTrue(int id);
+	@Query("select l from LegalText l where l.draftMode = true")
+	Collection<LegalText> findLegalTextDraftTrue();
+	
+	// 14.2
+	@Query("select l from LegalText l where l.draftMode = false and l.trip = ?1")
+	Collection<LegalText> findLegalTextsByTrip(int id);
 
 }

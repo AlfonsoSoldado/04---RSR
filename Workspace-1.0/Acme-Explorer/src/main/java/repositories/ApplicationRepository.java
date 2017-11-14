@@ -25,11 +25,11 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 	Collection<Application> findListApplication(int id);
 	
 	// 12.2
-	@Query("select a from Manager m join m.application a where m.id = ?1 and a.status like PENDING")
+	@Query("select a from Manager m join m.application a where m.id = ?1 and a.status = 'PENDING'")
 	Collection<Application> findListApplicationPending(int id);
 	
 	// 13.3
-	@Query("select a from Application a where a.status like DUE")
+	@Query("select a from Application a where a.status = 'DUE'")
 	Collection<Application> findListApplicationDue();
 	
 }

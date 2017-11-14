@@ -70,6 +70,7 @@ public class LegalTextService {
 		administratorService.checkAuthority();
 
 		Assert.notNull(legalText);
+		Assert.isTrue(findLegalTextDraftTrue(legalText));
 		LegalText res;
 		res = this.legalTextRepository.save(legalText);
 		return res;
@@ -79,6 +80,7 @@ public class LegalTextService {
 		administratorService.checkAuthority();
 
 		Assert.notNull(legalText);
+		Assert.isTrue(findLegalTextDraftTrue(legalText));
 		Assert.isTrue(legalText.getId() != 0);
 		Assert.isTrue(this.legalTextRepository.exists(legalText.getId()));
 		this.legalTextRepository.delete(legalText);
@@ -88,9 +90,28 @@ public class LegalTextService {
 
 	// 14.2
 	
-	public Collection<LegalText> findLegalTextDraftTrue(int id) {
+	public Boolean findLegalTextDraftTrue(LegalText legalText) {
+		administratorService.checkAuthority();
+		Assert.notNull(legalText);
+		
+		Boolean res = false;
+		
+		Collection<LegalText> legalTexts = new ArrayList<LegalText>();
+		legalTexts = legalTextRepository.findLegalTextDraftTrue();
+		Assert.notNull(legalTexts);
+		if(legalTexts.contains(legalText)){
+			res = true;
+		}
+		return res;
+	}
+	
+	// 14.2
+	
+	public Collection<LegalText> findLegalTextsByTrip(Trip trip){
+		administratorService.checkAuthority();
+		Assert.notNull(trip);
 		Collection<LegalText> res = new ArrayList<LegalText>();
-		res.addAll(legalTextRepository.findLegalTextDraftTrue(id));
+		res = legalTextRepository.findLegalTextsByTrip(trip.getId());
 		Assert.notNull(res);
 		return res;
 	}
