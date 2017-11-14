@@ -73,4 +73,12 @@ public class FolderServiceTest extends AbstractTest {
 		 folder = this.folderService.findOne(super.getEntityId("customBoxRanger1"));
 		 this.folderService.delete(folder);
 	 }
+	 
+	 @Test
+	 public void testSystemFolders(){
+		 Collection<Folder> folders;
+		 folders = new ArrayList<Folder>();
+		 folders = this.folderService.systemFolders();
+		 Assert.notNull(folders);
+	 }
 }

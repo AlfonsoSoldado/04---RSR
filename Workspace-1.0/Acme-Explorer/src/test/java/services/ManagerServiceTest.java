@@ -132,4 +132,18 @@ public class ManagerServiceTest extends AbstractTest {
 		
 		this.managerService.save(manager);
 	}
+	
+	@Test
+	public void testDeleteManager(){
+		Manager manager;
+		manager = this.managerService.findOne(super.getEntityId("manager1"));
+		this.managerService.delete(manager);
+	}
+	
+	@Test
+	public void testFindByPrincipalManager(){
+		Manager manager;
+		manager = this.managerService.findByPrincipal();
+		Assert.notNull(manager);
+	}
 }

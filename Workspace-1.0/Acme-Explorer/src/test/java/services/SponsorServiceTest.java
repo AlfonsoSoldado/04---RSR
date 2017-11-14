@@ -28,6 +28,7 @@ public class SponsorServiceTest extends AbstractTest {
 
 	// Supporting services --------------
 
+	@Autowired
 	private SponsorshipService sponsorShipService;
 
 	// Test -----------------------------
@@ -45,6 +46,14 @@ public class SponsorServiceTest extends AbstractTest {
 		sponsor = this.sponsorService.findOne(super.getEntityId("sponsor1"));
 		Assert.notNull(sponsor);
 	}
+	
+	@Test
+	public void testFindAllSponsor(){
+		Collection<Sponsor> sponsor;
+		sponsor = new ArrayList<Sponsor>();
+		sponsor = this.sponsorService.findAll();
+		Assert.notNull(sponsor);
+	}
 
 	@Test
 	public void testSaveSponsor() {
@@ -58,6 +67,8 @@ public class SponsorServiceTest extends AbstractTest {
 		sponsorShips = new ArrayList<Sponsorship>();
 		sponsorShips.add(sponsorShip);
 		sponsor.setSponsorship(sponsorShips);
+		
+		this.sponsorService.save(sponsor);
 
 	}
 
