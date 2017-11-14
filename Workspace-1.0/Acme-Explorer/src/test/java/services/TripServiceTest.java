@@ -177,18 +177,52 @@ public class TripServiceTest extends AbstractTest{
 		Assert.notNull(trips);
 	}
 	
+	@Test
+	public void testEditByManager(){
+		Trip trip;
+		trip = new Trip();
+		Integer intTrip;
+		intTrip = super.getEntityId("trip1");
+		trip = this.tripService.editByManager(intTrip);
+		Assert.notNull(trip);
+	}
+	
+	@Test
+	public void testFindTripsByExplorer(){
+		Collection<Trip> trips;
+		trips = new ArrayList<Trip>();
+		Integer intExplorer;
+		intExplorer = super.getEntityId("explorer1");
+		trips.addAll(this.tripService.findTripsByExplorer(intExplorer));
+		Assert.notNull(trips);
+	}
+	
+	@Test
+	public void testBrowseTripsByActor(){
+		Collection<Trip> trips;
+		trips = new ArrayList<Trip>();
+		trips = this.tripService.browseTripsByActor();
+		Assert.notNull(trips);
+	}
+	
+	@Test
+	public void testFindTrips(){
+		Collection<Trip> trips;
+		trips = new ArrayList<Trip>();
+		trips = this.tripService.findTrips("trip1");
+		Assert.notNull(trips);
+	}
+	
+	@Test
+	public void testFindTripsByCategory(){
+		
+	}
 	
 	
+	@Test
+	public void testCancelTrip(){
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}
 	
 	
 	
