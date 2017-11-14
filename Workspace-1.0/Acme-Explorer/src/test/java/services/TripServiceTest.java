@@ -41,9 +41,6 @@ public class TripServiceTest extends AbstractTest{
 	// Supporting services --------------
 	@Autowired
 	private ManagerService managerService;
-
-	@Autowired
-	private ActorService actorService;
 	
 	
 	// Test -----------------------------
@@ -112,7 +109,7 @@ public class TripServiceTest extends AbstractTest{
 		trip.setSurvival(survivals);
 		
 		Manager manager;
-		manager = new Manager();
+		manager = this.managerService.create();
 		trip.setManager(manager);
 		
 		Collection<Story> stories;
@@ -213,15 +210,21 @@ public class TripServiceTest extends AbstractTest{
 		Assert.notNull(trips);
 	}
 	
+	//TODO: revisar
 	@Test
 	public void testFindTripsByCategory(){
-		
+		Collection<Trip> trips;
+		trips = new ArrayList<Trip>();
+		Category c = new Category();
+		trips.addAll(this.tripService.findTripsByCategory(c));
 	}
 	
 	
 	@Test
 	public void testCancelTrip(){
-	
+		Trip trip;
+		trip = this.tripService.findOne(super.getEntityId("trip2"));
+		this.tripService.cancelTrip(trip);
 	}
 	
 	
