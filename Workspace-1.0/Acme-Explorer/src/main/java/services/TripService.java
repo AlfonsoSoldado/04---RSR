@@ -209,5 +209,13 @@ public class TripService {
 		
 		return res;
 	}
+	
+	// 12.3
+	public void cancelTrip(Trip trip){
+		Collection<Trip> trips = new ArrayList<Trip>();
+		trips = tripRepository.cancelTrip();
+		Assert.isTrue(trips.contains(trip));
+		trip.setCancelled(true);
+	}
 
 }

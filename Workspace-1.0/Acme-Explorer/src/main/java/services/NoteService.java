@@ -11,7 +11,9 @@ import org.springframework.util.Assert;
 
 import repositories.NoteRepository;
 import domain.Auditor;
+import domain.Manager;
 import domain.Note;
+import domain.Survival;
 
 @Service
 @Transactional
@@ -69,6 +71,8 @@ public class NoteService {
 	}
 	
 	public Note save(Note note) {
+		auditorService.checkAuthority();
+		
 		Assert.notNull(note);
 		Assert.isTrue(note.getId() == 0);
 		
@@ -77,6 +81,16 @@ public class NoteService {
 		return res;
 	}
 
+	public void delete(Note note) {
+		auditorService.checkAuthority();
+		
+		Assert.notNull(note);
+		Assert.isTrue(note.getId() == 0);
+		
+		Assert.isTrue(this.noteRepository.exists(note.getId()));
+		this.noteRepository.delete(note);
+	}
+	
 	// 33 Once a note is written, it cannot be modified at all or deleted.
 
 	// Other business methods
