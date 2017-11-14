@@ -137,9 +137,15 @@ public class ApplicationService {
 	
 	// 13.3
 	public void applicationAccepted(CC creditCard, Application application){
-		Assert.isTrue(application.getStatus().equals("DUE"));
 		Assert.notNull(creditCard);
-		application.setStatus("ACCEPTED");
-		application.setCreditCard(creditCard);
+		Assert.notNull(application);
+		
+		Collection<Application> applications = new ArrayList<>();
+		applications = applicationRepository.findListApplicationDue();
+		
+		if(applications.contains(application)){
+			application.setStatus("ACCEPTED");
+			application.setCreditCard(creditCard);
+		}
 	}
 }
