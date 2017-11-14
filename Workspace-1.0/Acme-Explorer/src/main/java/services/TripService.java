@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TripRepository;
-import security.Authority;
 import domain.Application;
 import domain.Audit;
 import domain.Category;
@@ -32,13 +31,9 @@ public class TripService {
 	private TripRepository tripRepository;
 
 	// Supporting services
-	// 12
+
 	@Autowired
 	private ManagerService managerService;
-
-	// 13
-	@Autowired
-	private ActorService actorService;
 
 	// Constructors
 	public TripService() {
@@ -98,23 +93,6 @@ public class TripService {
 		Assert.notNull(trip);
 		Trip res;
 		
-		// 12.3
-		if(trip.getPublication().before(trip.getTripStart())){
-			trip.setCancelled(true);
-		}
-		// 13.4
-		Collection<Trip> trips = new ArrayList<Trip>();
-		Date date = new Date(System.currentTimeMillis()-1);
-		Assert.isTrue(actorService.findByPrincipal().getUserAccount()
-				.getAuthorities().contains(Authority.EXPLORER));
-		trips.addAll(tripRepository.findTripsAccepted());
-		for(Trip t: trips){
-			if(t.getTripStart().after(date) && t.getCancelled() == false){
-				t.setCancelled(true);
-			}
-		}
-		//14.2
-		Assert.isTrue(trip.getLegalText().getDraftMode());
 		res = this.tripRepository.save(trip);
 		return res;
 	}

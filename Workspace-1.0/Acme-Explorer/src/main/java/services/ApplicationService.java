@@ -84,6 +84,7 @@ public class ApplicationService {
 
 	// 12.2 (changing)
 	 public void changingStatus(Application a, String status) {
+		 explorerService.checkAuthority();
 		 Assert.notNull(a);
 		 Assert.notNull(status);
 		 Assert.isTrue(status.equals("REJECTED") || status.equals("DUE"));
@@ -103,6 +104,7 @@ public class ApplicationService {
 
 	// 12.2 (listing)
 	public Collection<Application> findListApplication(Manager manager) {
+		explorerService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
 		
 		Manager m = this.managerService.create();
@@ -120,6 +122,7 @@ public class ApplicationService {
 
 	// 13.2
 	public Collection<Application> findApplicationByExplorer(int id) {
+		explorerService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
 		
 		Explorer e = this.explorerService.create();
@@ -137,6 +140,7 @@ public class ApplicationService {
 	
 	// 13.3
 	public void applicationAccepted(CC creditCard, Application application){
+		explorerService.checkAuthority();
 		Assert.notNull(creditCard);
 		Assert.notNull(application);
 		
