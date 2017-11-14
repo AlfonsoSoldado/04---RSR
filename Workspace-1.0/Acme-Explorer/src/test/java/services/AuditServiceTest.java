@@ -18,98 +18,94 @@ import domain.Auditor;
 import domain.Trip;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-				"classpath:spring/datasource.xml",
-				"classpath:spring/config/packages.xml"})
+@ContextConfiguration(locations = { "classpath:spring/datasource.xml",
+		"classpath:spring/config/packages.xml" })
 @Transactional
-public class AuditServiceTest extends AbstractTest{
-	
+public class AuditServiceTest extends AbstractTest {
+
 	// Service under test ----------------
-	
+
 	@Autowired
 	private AuditService auditService;
-	
-	
-	
+
 	// Supporting services ----------------
 	@Autowired
 	private TripService tripService;
 	@Autowired
 	private AuditorService auditorService;
-	
-	
-	
+
 	// Test ------------------------------
-	
-	@Test 
-	public void testCreateAudit(){
+
+	@Test
+	public void testCreateAudit() {
 		Audit audit;
 		audit = this.auditService.create();
 		Assert.notNull(audit);
 	}
-	
-	@Test 
-	public void testFindAllAudit(){
+
+	@Test
+	public void testFindAllAudit() {
 		Collection<Audit> audits;
 		audits = this.auditService.findAll();
 		Assert.notNull(audits);
-		
+
 	}
-	
+
 	@Test
-	public void testFindOneAudit(){
+	public void testFindOneAudit() {
 		Audit audit;
 		audit = this.auditService.findOne(super.getEntityId("audit1"));
 		Assert.notNull(audit);
 	}
 
 	@Test
-	public void testSaveAudit(){
+	public void testSaveAudit() {
 		Audit audit;
 		audit = this.auditService.create();
-		
 
-		Date moment = new Date(System.currentTimeMillis() -1);
+		Date moment = new Date(System.currentTimeMillis() - 1);
 		audit.setMoment(moment);
-		
+
 		audit.setTitle("Audit 1");
-		
+
 		audit.setDescription("Sample title");
-		
+
 		Collection<String> attachment = new ArrayList<String>();
 		attachment.add("Att1");
 		attachment.add("Att2");
 		attachment.add("Att3");
 		audit.setAttachment(attachment);
-		
+
 		audit.setDraftMode(true);
-		
+
 		Trip trip;
 		trip = this.tripService.create();
 		audit.setTrip(trip);
-		
+
 		Auditor auditor;
 		auditor = this.auditorService.create();
 		audit.setAuditor(auditor);
-		
+
 		this.auditorService.save(auditor);
 	}
-	
+
 	@Test
-	public void testDeleteAudit(){
+	public void testDeleteAudit() {
 		Audit audit;
 		audit = this.auditService.findOne(super.getEntityId("audit1"));
 		this.auditService.delete(audit);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Test
+	public void testFindAuditDraftTrue() {
+
+		Boolean res;
+		Audit audit;
+		audit = this.auditService.findOne(super.getEntityId("audit2"));
+		Assert.notNull(audit);
+
+		res = this.auditService.findAuditDraftTrue(audit);
+		Assert.notNull(res);
+	}
+
 }
