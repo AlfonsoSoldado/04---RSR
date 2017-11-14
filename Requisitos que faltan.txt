@@ -5,8 +5,6 @@
 14.5 (Relación con message de actor)
 34 (Mirar método aparte)
 35.1 (Falta lo del spam word)
-35.2 (Ban)
-35.3 (Unban)
 43.1 Mirar asociación con respecto a sus Trips (Quitar asociación en delete de Survival)
 44.1
 44.2

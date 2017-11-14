@@ -19,6 +19,8 @@ import domain.Actor;
 import domain.Audit;
 import domain.Category;
 import domain.Curriculum;
+import domain.Manager;
+import domain.Ranger;
 import domain.Trip;
 
 @Service
@@ -184,7 +186,21 @@ public class ActorService {
 	
 	// 35.3
 	public void unbanActor(Actor actor){
-		
+		administratorService.checkAuthority();
+		Collection<Actor> res = new ArrayList<Actor>();
+		res.addAll(rangerRepository.unbanRanger());
+		res.addAll(managerRepository.unbanManager());
+		if(res.contains(actor)){
+			if(actor.getClass().equals(Ranger.class)){
+				Authority auth = new Authority();
+				auth.setAuthority("RANGER");
+				actor.getUserAccount().addAuthority(auth);
+			} else if(actor.getClass().equals(Manager.class)) {
+				Authority auth2 = new Authority();
+				auth2.setAuthority("MANAGER");
+				actor.getUserAccount().addAuthority(auth2);
+			}
+		}
 	}
 	
 	
