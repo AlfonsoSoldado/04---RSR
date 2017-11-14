@@ -37,7 +37,7 @@ public interface ApplicationRepository extends
 //	@Query("select a from Explorer e join e.application a where e.id = ?1 and a.status = 'ACCEPTED' and select from Trip t t.publication < CURRENT_DATE")
 //	Application applicationExplorer(int explorer, int application);
 	
-	@Query("select t from Explorer e join e.application a join a.trip t where e.id = ?1 and a.status = 'ACCEPTED' and t.publication < CURRENT_DATE")
+	@Query("select t from Explorer e join e.application a join a.trip t where e.id = ?1 and a.status = 'ACCEPTED' and t.tripStart < CURRENT_DATE")
 	Trip applicationExplorer(int explorer);
 
 }
