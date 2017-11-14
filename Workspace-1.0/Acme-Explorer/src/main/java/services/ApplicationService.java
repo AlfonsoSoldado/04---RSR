@@ -83,23 +83,26 @@ public class ApplicationService {
 	// Other business methods
 
 	// 12.2 (changing)
-	 public Application changingStatus(Application a, String status) {
+	 public void changingStatus(Application a, String status) {
 		 Assert.notNull(a);
 		 Assert.notNull(status);
+		 Assert.isTrue(status.equals("REJECTED") || status.equals("DUE"));
 		 
 		 managerService.checkAuthority();
 		 Manager m = this.managerService.findByPrincipal();
 		 
-		 Assert.isTrue(m.getApplication().contains(a));
-		 Assert.isTrue(a.getStatus().equals("PENDING"));
-		 Assert.isTrue(status.equals("REJECTED") || status.equals("DUE"));
+		 Assert.notNull(m);
 		 
-		 a.setStatus(status);
-		 return a;
+		 Collection<Application> applications = new ArrayList<Application>();
+		 applications = applicationRepository.findListApplicationPending(m.getId());
+		 
+		 if(applications.contains(a)){
+			 a.setStatus(status);
+		 }
 	 }
 
 	// 12.2 (listing)
-	public Collection<Application> findListApplication(int id) {
+	public Collection<Application> findListApplication(Manager manager) {
 		Collection<Application> res = new ArrayList<Application>();
 		
 		Manager m = this.managerService.create();
@@ -109,7 +112,7 @@ public class ApplicationService {
 		
 		Assert.notNull(m);
 		
-		res.addAll(applicationRepository.findListApplication(id));
+		res.addAll(applicationRepository.findListApplication(manager.getId()));
 		Assert.notNull(res);
 		
 		return res;
