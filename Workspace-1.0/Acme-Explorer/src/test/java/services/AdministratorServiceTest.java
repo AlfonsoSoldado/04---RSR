@@ -124,14 +124,4 @@ public class AdministratorServiceTest extends AbstractTest{
 		Assert.notNull(res);
 	}
 	
-	@Test
-	public void testSendNotificationBroadcast(){
-		
-		Message message;
-		message= this.messageService.findOne(super.getEntityId("message1"));
-		Assert.notNull(message);
-		this.administratorService.SendNotificationBroadcast(message);
-		
-		
-	}
 }
