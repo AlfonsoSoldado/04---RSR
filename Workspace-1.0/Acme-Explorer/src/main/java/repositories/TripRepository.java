@@ -34,4 +34,8 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 	// 10.3
 	@Query("select t from Trip t where t.ticker like ?1 or t.title like ?1 or t.description like ?1")
 	Collection<Trip> findTrips(String search);
+	
+	// 12.3
+	@Query("select t from Trip t where t.publication < CURRENT_DATE and t.tripStart < CURRENT_DATE and t.cancelled == false")
+	Collection<Trip> cancelTrip();
 }

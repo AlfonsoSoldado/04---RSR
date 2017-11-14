@@ -2,8 +2,7 @@
 11.3
 11.4
 13.4 CREEMOS QUE ESTÁ MAL ESPECIFICADO (Seguramente meter en application en vez de en trip)
-33.1 (El save no estamos seguros)
-33.2 (Falta que si está en draftMode "they cannot be modified or deleted")
+14.5 (Relación con message de actor)
 34 (Mirar método a parte)
 35.1 (falta lo del spam word)
 35.2 
