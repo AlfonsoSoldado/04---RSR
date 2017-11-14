@@ -13,6 +13,6 @@ public interface MessageRepository extends JpaRepository<Message, Integer>{
 	@Query("select a from Actor a, Message m where a=m.sender")
 	Actor senderActor();
 	
-	@Query("select a from Actor a, Message m where a=m.recipient")
-	Actor recipientActor();
+//	@Query("select a from Actor a, Message m where a=m.recipient")
+//	Actor recipientActor();
 }
