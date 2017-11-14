@@ -19,3 +19,5 @@ Para cuando hay requisito del estilo: Cualquier actor... Poner el checkAuthority
 
 
 HACER TODO MEDIANTE CONSULTAS
+
+13.3 (Mirar query DUE y PENDING comillas)
