@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Application;
+import domain.Trip;
 
 @Repository
 public interface ApplicationRepository extends
@@ -33,7 +34,10 @@ public interface ApplicationRepository extends
 	Collection<Application> findListApplicationDue();
 
 	// 13.4
-	@Query("select a from Explorer e join e.application a where e.id = ?1 and a.status = 'ACCEPTED' and select from Trip t t.publication < CURRENT_DATE")
-	Application applicationExplorer(int explorer, int application);
+//	@Query("select a from Explorer e join e.application a where e.id = ?1 and a.status = 'ACCEPTED' and select from Trip t t.publication < CURRENT_DATE")
+//	Application applicationExplorer(int explorer, int application);
+	
+	@Query("select t from Explorer e join e.application a join a.trip t where e.id = ?1 and a.status = 'ACCEPTED' and t.publication < CURRENT_DATE")
+	Trip applicationExplorer(int explorer);
 
 }
