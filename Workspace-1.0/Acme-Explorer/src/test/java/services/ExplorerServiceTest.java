@@ -143,4 +143,11 @@ public class ExplorerServiceTest extends AbstractTest{
 		explorer = this.explorerService.findOne(super.getEntityId("explorer1"));
 		this.explorerService.delete(explorer);
 	}
+	
+	@Test
+	public void testFindByPrincipalExplorer(){
+		Explorer explorer;
+		explorer = this.explorerService.findByPrincipal();
+		Assert.notNull(explorer);
+	}
 }
