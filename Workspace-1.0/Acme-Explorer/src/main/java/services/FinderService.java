@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.FinderRepository;
-import security.Authority;
 import domain.Explorer;
 import domain.Finder;
 import domain.Trip;
@@ -28,9 +27,6 @@ public class FinderService {
 	
 	@Autowired
 	private ExplorerService explorerService;
-	
-	@Autowired
-	private ActorService actorService;
 	
 	// Constructors
 	
