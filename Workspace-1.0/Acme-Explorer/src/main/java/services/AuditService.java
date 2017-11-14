@@ -30,9 +30,6 @@ public class AuditService {
 	@Autowired
 	private AuditorService auditorService;
 
-	@Autowired
-	private ActorService actorService;
-
 	// Constructors
 
 	public AuditService() {
@@ -87,7 +84,7 @@ public class AuditService {
 		Assert.isTrue(findAuditDraftTrue(audit));
 		UserAccount ua = LoginService.getPrincipal();
 		Assert.notNull(ua);
-		Actor a = actorService.findOne(ua.getId());
+		Actor a = auditorService.findOne(ua.getId());
 		Assert.notNull(a);
 		Assert.notNull(audit);
 		Audit res;

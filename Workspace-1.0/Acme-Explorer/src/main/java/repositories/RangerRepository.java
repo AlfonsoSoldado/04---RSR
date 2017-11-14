@@ -18,4 +18,11 @@ public interface RangerRepository extends JpaRepository<Ranger, Integer>{
 	@Query("select r from Ranger r where r.suspicious is true")
 	Collection<Ranger> rangersSuspicious();
 	
+	//35.2
+	@Query("select r from Ranger r where r.suspicious = true")
+	Collection<Ranger> banRanger();
+	
+	//35.2
+	@Query("select r from Ranger r where r.suspicious = false")
+	Collection<Ranger> unbanRanger();
 }

@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import repositories.ManagerRepository;
+import repositories.RangerRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
@@ -26,6 +29,12 @@ public class ActorService {
 
 	@Autowired
 	private ActorRepository actorRepository;
+	
+	@Autowired
+	private RangerRepository rangerRepository;
+	
+	@Autowired
+	private ManagerRepository managerRepository;
 
 	// Supporting services
 
@@ -34,6 +43,9 @@ public class ActorService {
 	
 	@Autowired
 	private TripService tripService;
+	
+	@Autowired
+	private AdministratorService administratorService;
 
 	// Constructors
 
@@ -153,6 +165,26 @@ public class ActorService {
 		Assert.notNull(res);
 		return res;
 
+	}
+	
+	// 35.2
+	public void banActor(Actor actor){
+		administratorService.checkAuthority();
+		Collection<Actor> res = new ArrayList<Actor>();
+		res.addAll(rangerRepository.banRanger());
+		res.addAll(managerRepository.banManager());
+		if(res.contains(actor)){
+			Collection<Authority> authorities = new ArrayList<Authority>();
+			authorities.addAll(actor.getUserAccount().getAuthorities());
+			for(Authority a: authorities){
+				actor.getUserAccount().removeAuthority(a);
+			}
+		}
+	}
+	
+	// 35.3
+	public void unbanActor(Actor actor){
+		
 	}
 	
 	
