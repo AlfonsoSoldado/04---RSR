@@ -69,16 +69,11 @@ public class SponsorServiceTest extends AbstractTest {
 
 	}
 
-	// TODO
 	@Test
 	public void testFindByPrincipal() {
-
-	}
-
-	// TODO
-	@Test
-	public void testCheckAuthority() {
-
+		Sponsor sponsor;
+		sponsor = this.sponsorService.findByPrincipal();
+		Assert.notNull(sponsor);
 	}
 
 }

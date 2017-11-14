@@ -23,4 +23,5 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 	//30.2
 	@Query("select t.audit from Trip t where t.id = ?1")
 	Collection<Audit> findAuditsByTrip(int id);
+	
 }

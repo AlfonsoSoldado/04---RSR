@@ -73,6 +73,9 @@ public class FinderServiceTest extends AbstractTest {
 		Date end = new Date(System.currentTimeMillis() -50);
 		finder.setEnd(end);
 		
+		Date cache = new Date(System.currentTimeMillis() -1);
+		finder.setCache(cache);
+		
 		Collection<Trip> result = new ArrayList<Trip>();
 		Trip trip;
 		trip = tripService.create();
@@ -83,15 +86,23 @@ public class FinderServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	// TODO: testEditByExplorer
-	public void testEditByExplorer(){
-		
-	}
-	
-	@Test
-	// TODO: testFindSearchCriterial
 	public void testFindSearchCriterial(){
+		Collection<Trip> trips;
+		Finder finder;
+		String singleKey;
+		Double minPrice, maxPrice;
+		Date start, end;
 		
+		finder = this.finderService.findOne(super.getEntityId("finder1"));
+		singleKey = finder.getSingleKey();
+		minPrice = finder.getMinPrice();
+		maxPrice = finder.getMaxPrice();
+		start = finder.getStart();
+		end = finder.getEnd();
+		trips = new ArrayList<Trip>();
+		
+		trips = this.finderService.findSearchCriterial(singleKey, start, end, minPrice, maxPrice);
+		Assert.notNull(trips);
 	}
 	
 	
