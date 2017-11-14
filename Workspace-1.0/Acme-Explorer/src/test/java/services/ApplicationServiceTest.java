@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -40,6 +41,8 @@ public class ApplicationServiceTest extends AbstractTest {
 	
 	@Autowired
 	private TripService tripService;
+	
+	
 			
 	// Test --------------------------------------
 	
@@ -201,5 +204,50 @@ public class ApplicationServiceTest extends AbstractTest {
 		Application application;
 		application = this.applicationService.findOne(super.getEntityId("application1"));
 		this.applicationService.delete(application);
+	}
+	
+	@Test
+	public void testFindListApplication(){
+		
+		Manager manager;
+		manager= this.managerService.findOne(super.getEntityId("manager1"));
+		Assert.notNull(manager);
+		
+		Collection<Application> res = new ArrayList<Application>();
+		res= this.applicationService.findListApplication(manager);
+		Assert.notNull(res);
+	}
+	
+	@Test
+	public void testFindApplicationByExplorer(){
+		
+		int id;
+		Explorer explorer;
+		explorer= this.explorerService.findOne(super.getEntityId("Explorer1"));
+		Assert.notNull(explorer);
+		
+		Collection<Application> res= new ArrayList<Application>();
+		res= this.applicationService.findApplicationByExplorer(explorer.getId());
+		Assert.notNull(explorer);
+	}
+	
+	@Test
+	public void testApplicationAccepted(){
+		CC cc;
+		cc= new CC();
+		cc.setHolderName("BBVA");
+		cc.setBrandName("MasterCard");
+		cc.setNumber("4099537775843795");
+		cc.setExpirationMonth(02);
+		cc.setExpirationYear(2019);
+		cc.setCVV(123);
+		Assert.notNull(cc);
+		
+		Application application;
+		application= this.applicationService.findOne(super.getEntityId("application2"));
+		Assert.notNull(application);
+		
+		this.applicationService.applicationAccepted(cc, application);
+		
 	}
 }

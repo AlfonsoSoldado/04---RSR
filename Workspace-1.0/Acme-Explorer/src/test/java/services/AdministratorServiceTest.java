@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Administrator;
+import domain.Message;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,7 +28,7 @@ public class AdministratorServiceTest extends AbstractTest{
 	private AdministratorService administratorService;
 	
 	// Supporting services -----------------------
-	
+	private MessageService messageService;
 	// Test --------------------------------------
 	
 	@Test
@@ -70,5 +71,67 @@ public class AdministratorServiceTest extends AbstractTest{
 		Administrator administrator;
 		administrator = this.administratorService.findOne(super.getEntityId("administrator1"));
 		this.administratorService.delete(administrator);
+	}
+	
+	@Test
+	public void testFindByPrincipal(){
+		Administrator administrator;
+		administrator= this.administratorService.findByPrincipal();
+		Assert.notNull(administrator);
+	}
+	
+	@Test
+	public void testApplicationPending(){
+		Double res;
+		res= this.administratorService.applicationPending();
+		Assert.notNull(res);
+		
+	}
+	
+	@Test
+	public void testApplicationDue(){
+		Double res;
+		res= this.administratorService.applicationDue();
+		Assert.notNull(res);
+	}
+	
+	@Test
+	public void testApplicationAccepted(){
+		Double res;
+		res=this.administratorService.applicationAccepted();
+		Assert.notNull(res);
+	}
+	
+	@Test 
+	public void testApplicationCancelled(){
+		Double res;
+		res=this.administratorService.applicationCancelled();
+		Assert.notNull(res);
+		
+	}
+	
+	@Test
+	public void ratioRangerEndorser(){
+		Double res;
+		res=this.administratorService.ratioRangerEndorser();
+		Assert.notNull(res);
+	}
+	
+	@Test
+	public void avgMinMaxSqrtManager(){
+		Object[] res;
+		res=this.administratorService.avgMinMaxSqtrManager();
+		Assert.notNull(res);
+	}
+	
+	@Test
+	public void testSendNotificationBroadcast(){
+		
+		Message message;
+		message= this.messageService.findOne(super.getEntityId("message1"));
+		Assert.notNull(message);
+		this.administratorService.SendNotificationBroadcast(message);
+		
+		
 	}
 }

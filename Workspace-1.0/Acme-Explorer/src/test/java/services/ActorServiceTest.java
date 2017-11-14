@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import security.UserAccount;
 import utilities.AbstractTest;
 import domain.Actor;
 
@@ -27,6 +28,11 @@ public class ActorServiceTest extends AbstractTest{
 	
 	@Autowired
 	private ActorService actorService;
+	
+	// Supporting services --------------
+	@Autowired
+	private TripService tripService;
+	private UserAccount userAccountService;
 	
 	// Test --------------------------------------
 	
@@ -62,4 +68,26 @@ public class ActorServiceTest extends AbstractTest{
 		actor = this.actorService.findOne(super.getEntityId("administrator1"));
 		this.actorService.delete(actor);
 	}
+	
+	//TODO
+	@Test
+	public void testCheckUserLogin(){
+		
+	}
+	@Test
+	public void testFindByPrincipal(){
+		Actor actor;
+		actor= this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+	}
+	
+	//TODO
+	@Test
+	public void testCheckAuthority(){
+		
+	}
+	
+	
+	
+	
 }

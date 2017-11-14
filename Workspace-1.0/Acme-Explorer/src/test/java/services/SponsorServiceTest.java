@@ -58,6 +58,8 @@ public class SponsorServiceTest extends AbstractTest {
 		sponsorShips = new ArrayList<Sponsorship>();
 		sponsorShips.add(sponsorShip);
 		sponsor.setSponsorship(sponsorShips);
+		
+		this.sponsorService.save(sponsor);
 
 	}
 
