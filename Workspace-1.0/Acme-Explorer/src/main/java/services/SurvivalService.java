@@ -8,8 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SurvivalRepository;
-import domain.Application;
-import domain.Explorer;
 import domain.Manager;
 import domain.Survival;
 import domain.Trip;
@@ -26,12 +24,6 @@ public class SurvivalService {
 	// Supporting services
 	@Autowired
 	private ManagerService managerService;
-	
-	@Autowired
-	private ActorService actorService;
-	
-	@Autowired
-	private ExplorerService explorerService;
 
 	// Constructors
 

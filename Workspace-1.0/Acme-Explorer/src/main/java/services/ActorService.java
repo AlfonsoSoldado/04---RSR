@@ -100,28 +100,6 @@ public class ActorService {
 		return result;
 	}
 
-//	public boolean checkAuthority(String authority) {
-//		boolean res;
-//		Actor actor;
-//		Collection<Authority> authorities;
-//		res = false;
-//
-//		try {
-//			actor = this.findByPrincipal();
-//			authorities = actor.getUserAccount().getAuthorities();
-//			for (Authority auth : authorities) {
-//				if (auth.getAuthority().equals(authority.toUpperCase())) {
-//					res = true;
-//					break;
-//				}
-//			}
-//		} catch (IllegalArgumentException e) {
-//			res = false;
-//		}
-//
-//		return res;
-//	}
-
 	public UserAccount findByUserAccount(Actor actor) {
 		Assert.notNull(actor);
 		UserAccount res;
