@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Explorer;
 import domain.Survival;
 import domain.Trip;
 
@@ -26,6 +27,13 @@ public class SurvivalServiceTest extends AbstractTest {
 	private SurvivalService survivalService;
 
 	// Supporting services -----------------------
+	
+	@Autowired
+	private TripService tripService;
+	
+	@Autowired
+	private ExplorerService explorerService;
+	
 	
 	// Test --------------------------------------
 
@@ -55,9 +63,13 @@ public class SurvivalServiceTest extends AbstractTest {
 	@Test
 	public void testSaveSurvival() {
 		Survival survival;
-		survival = new Survival();
-		Trip trip = new Trip();
+		Trip trip;
+		
+		survival = this.survivalService.create();
+		trip = this.tripService.create();		
 		survival.setTrip(trip);
+		
+		this.survivalService.save(survival);
 	}
 	
 	@Test
@@ -66,4 +78,55 @@ public class SurvivalServiceTest extends AbstractTest {
 		survival = this.survivalService.findOne(super.getEntityId("survival1"));
 		this.survivalService.delete(survival);
 	}
+	
+	@Test
+	public void testFindSurvivalByTrips(){
+		Collection<Survival> survivals;
+		survivals = this.survivalService.findSurvivalByTrips();
+		Assert.notNull(survivals);
+	}
+	
+	@Test
+	public void testFindOneByTrips(){
+		Survival survival, res;
+		int id;
+		
+		survival = this.survivalService.findOne(super.getEntityId("survival1"));
+		id = survival.getId();
+		
+		res = this.survivalService.findOneByTrips(id);
+		Assert.notNull(res);
+	}
+	
+	@Test
+	// TODO: no sé si está bien.
+	public void testSaveByTrips(){
+		Survival survival;
+		Trip trip;
+		
+		survival = this.survivalService.create();
+		trip = this.tripService.create();		
+		survival.setTrip(trip);
+		
+		this.survivalService.save(survival);
+	}
+	
+	@Test
+	public void testDeleteTrips(){
+		Survival survival;
+		survival = this.survivalService.findOne(super.getEntityId("surval1"));
+		this.survivalService.deleteByTrips(survival);
+	}
+	
+	@Test 
+	public void testEnrolSurvival(){
+		Explorer explorer;
+		Survival survival;
+		
+		explorer = this.explorerService.findOne(super.getEntityId("explorer1"));
+		survival = this.survivalService.findOne(super.getEntityId("survival1"));
+		
+		this.survivalService.enrolSurvival(explorer, survival);
+	}
+	
 }

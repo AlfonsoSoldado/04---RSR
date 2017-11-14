@@ -87,6 +87,13 @@ public class NoteServiceTest extends AbstractTest{
 	}
 	
 	@Test
+	public void testDeleteNote(){
+		Note note;
+		note = this.noteService.findOne(super.getEntityId("note2"));
+		this.noteService.delete(note);
+	}
+	
+	@Test
 	public void testFindNotesByAuditor(){
 		Collection<Note> notes;
 		Auditor auditor;

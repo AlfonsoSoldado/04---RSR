@@ -194,6 +194,7 @@ public class TripService {
 	
 	// 12.3
 	public void cancelTrip(Trip trip){
+		managerService.checkAuthority();
 		Collection<Trip> trips = new ArrayList<Trip>();
 		trips = tripRepository.cancelTrip();
 		Assert.isTrue(trips.contains(trip));
@@ -201,10 +202,12 @@ public class TripService {
 	}
 	
 	//13.4
-	public void tripApplicationExplorer(int id){
+	public void tripApplicationExplorer(Trip trip){
 		explorerService.checkAuthority();
-		Trip trip = new Trip();
-		trip = tripRepository.tripApplicationExplorer(id);
+		Collection<Trip> trips = new ArrayList<Trip>();
+		trips = tripRepository.findTripsAccepted();
+		
+		Assert.isTrue(trips.contains(trip));
 		Assert.notNull(trip);
 		trip.setCancelled(true);
 	}

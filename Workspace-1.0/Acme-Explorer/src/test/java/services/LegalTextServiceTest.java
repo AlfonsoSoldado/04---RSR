@@ -88,4 +88,25 @@ public class LegalTextServiceTest extends AbstractTest{
 		text = this.legalTextService.findOne(super.getEntityId("legalText2"));
 		this.legalTextService.delete(text);		
 	}
+	
+	@Test
+	public void testFindLegalTextDraftTrue(){
+		Boolean res;
+		LegalText legalText;
+		legalText = this.legalTextService.findOne(super.getEntityId("legalText2"));
+		res = this.legalTextService.findLegalTextDraftTrue(legalText);
+		Assert.notNull(res);
+	}
+	
+	@Test
+	public void testFindLegalTextByTrip(){
+		Collection<LegalText> texts;
+		Trip trip;
+		
+		texts = new ArrayList<LegalText>();
+		trip = this.tripService.findOne(super.getEntityId("trip2"));
+		
+		texts = this.legalTextService.findLegalTextsByTrip(trip);
+		Assert.notNull(texts);
+	}
 }

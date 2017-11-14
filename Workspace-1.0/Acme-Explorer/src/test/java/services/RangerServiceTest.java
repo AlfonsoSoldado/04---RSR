@@ -80,7 +80,8 @@ public class RangerServiceTest extends AbstractTest{
 		trips =new ArrayList<Trip>();
 		trips.add(trip);
 		ranger.setTrip(trips);
-		
+	
+		this.rangerService.save(ranger);
 	}
 	
 	@Test

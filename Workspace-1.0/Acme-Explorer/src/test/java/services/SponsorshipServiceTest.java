@@ -1,5 +1,8 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +32,10 @@ public class SponsorshipServiceTest extends AbstractTest{
 	
 	// Supporting services --------------
 	
+	@Autowired
 	private SponsorService sponsorService;
+	
+	@Autowired
 	private TripService tripService;
 	
 	
@@ -54,6 +60,14 @@ public class SponsorshipServiceTest extends AbstractTest{
 	}
 	
 	@Test
+	public void testFindAllSponsorship(){
+		Collection<Sponsorship> sponsorship;
+		sponsorship = new ArrayList<Sponsorship>();
+		sponsorship = this.sponsorshipService.findAll();
+		Assert.notNull(sponsorship);
+	}
+	
+	@Test
 	public void testSaveSponsorship(){
 		Sponsorship sponsorship;
 		sponsorship= this.sponsorshipService.create();
@@ -74,6 +88,8 @@ public class SponsorshipServiceTest extends AbstractTest{
 		Trip trip;
 		trip= this.tripService.create();
 		sponsorship.setTrip(trip);
+		
+		this.sponsorshipService.save(sponsorship);
 	}
 	
 	@Test

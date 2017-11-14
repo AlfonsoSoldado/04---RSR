@@ -221,26 +221,4 @@ public class AdministratorService {
 		res = this.administratorRepository.avgMinMaxSqtr5();
 		return res;
 	}
-
-	// 14.5
-	public void SendNotificationBroadcast(Message message) {
-		Actor actor = this.actorService.findByPrincipal();
-		Assert.notNull(actor);
-
-		Folder notificationBox = new Folder();
-		notificationBox.setName("Notification");
-
-		Collection<Folder> folders = message.getFolder();
-		Collection<Message> mensajes = new ArrayList<>();
-		mensajes.add(message);
-
-		for (Folder f : folders) {
-			if (f.getName().equals("Notification")) {
-
-				f.setMessages(mensajes);
-			}
-		}
-
-	}
-
 }

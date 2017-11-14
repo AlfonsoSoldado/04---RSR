@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import repositories.ConfigurationRepository;
 import repositories.ManagerRepository;
+import repositories.MessageRepository;
 import repositories.RangerRepository;
 import security.Authority;
 import security.LoginService;
@@ -19,7 +21,10 @@ import domain.Actor;
 import domain.Audit;
 import domain.Category;
 import domain.Curriculum;
+import domain.Folder;
+import domain.ListSuspicious;
 import domain.Manager;
+import domain.Message;
 import domain.Ranger;
 import domain.Trip;
 
@@ -37,6 +42,12 @@ public class ActorService {
 	
 	@Autowired
 	private ManagerRepository managerRepository;
+	
+	@Autowired
+	private ConfigurationRepository configurationRepository;
+	
+	@Autowired
+	private MessageRepository messageRepository;
 
 	// Supporting services
 
@@ -202,6 +213,91 @@ public class ActorService {
 			}
 		}
 	}
+
+	// 14.5
+	public void SendNotificationBroadcast(Message message) {
+		administratorService.checkAuthority();
+
+		Collection<Folder> folders = new ArrayList<Folder>();
+		folders = actorRepository.findFoldersByNotification();
+
+		Collection<Message> messages = new ArrayList<Message>();
+
+		for (Folder f : folders) {
+			messages.addAll(f.getMessages());
+			messages.add(message);
+
+			f.setMessages(messages);
+
+			messages.clear();
+		}
+	}
+	public void checkSpamWords() {
+		administratorService.checkAuthority();
+		Collection<String> spamWords = new ArrayList<String>();
+		spamWords = configurationRepository.findSpamWords();
+		
+		Collection<Message> messages = new ArrayList<Message>();
+		messages = messageRepository.findMessages();
+		
+		for(String s: spamWords){
+			for(Message m: messages){
+				if(m.getBody().contains(s) || m.getSubject().contains(s)){
+					m.setSpam(true);
+				}
+			}
+		}
+	}
+	
+	public void actorToSuspiciousList(){
+		administratorService.checkAuthority();
+		
+		checkSpamWords();
+		
+		ListSuspicious ls = new ListSuspicious();
+		
+		Collection<Actor> actors = new ArrayList<Actor>();
+		
+		Collection<Message> rangerMessages = new ArrayList<Message>();
+		rangerMessages = messageRepository.findRangerMessages();
+		
+		Collection<Message> managerMessages = new ArrayList<Message>();
+		managerMessages = messageRepository.findManagerMessages();
+		
+		for(Message m: rangerMessages){
+			Ranger r;
+			r = (Ranger) m.getSender();
+			
+			if(r.getSuspicious() == false){
+				r.setSuspicious(true);
+			}
+			
+			
+			actors = ls.getSuspicious();
+			actors.add(r);
+			
+			ls.setSuspicious(actors);
+			
+			actors.clear();
+		}
+		
+		for(Message m: managerMessages){
+			Manager ma;
+			ma = (Manager) m.getSender();
+			
+			if(ma.getSuspicious()==false){
+				ma.setSuspicious(true);
+			}
+			
+			actors = ls.getSuspicious();
+			actors.add(ma);
+			
+			ls.setSuspicious(actors);
+			
+			actors.clear();
+		}
+	}
+}
 	
 	
 //	public void sendMessage(Message message, Actor sender, Actor receiver) {
@@ -244,20 +340,3 @@ public class ActorService {
 //
 //	}
 	
-	
-	
-//	private boolean checkSpamWords(final Message message) {
-//		boolean res;
-//
-//		res = false;
-//		SpamWords bu = null;
-//		Collection<String> paspam = bu.getWords();
-//		
-//		for (String spam : paspam) {
-//			res = message.getBody().contains(spam);
-//			if (res == true)
-//				break;
-//		}
-//		return res;
-//	}
-}

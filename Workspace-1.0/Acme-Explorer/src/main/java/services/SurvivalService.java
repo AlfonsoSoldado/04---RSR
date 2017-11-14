@@ -27,6 +27,9 @@ public class SurvivalService {
 	// Supporting services
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private ExplorerService explorerService;
 
 	// Constructors
 
@@ -91,6 +94,7 @@ public class SurvivalService {
 	
 	// 43.1
 	public Survival findOneByTrips(int survival) {
+		managerService.checkAuthority();
 		Assert.isTrue(survival != 0);
 		Survival res = null;
 		Collection<Survival> survivals = new ArrayList<Survival>();
@@ -106,6 +110,7 @@ public class SurvivalService {
 	
 	// 43.1
 	public Survival saveByTrips(Survival survival) {
+		managerService.checkAuthority();
 		Assert.notNull(survival);
 		Survival res;
 		Collection<Survival> survivals = new ArrayList<Survival>();
@@ -117,6 +122,7 @@ public class SurvivalService {
 	
 	// 43.1
 	public void deleteByTrips(Survival survival) {
+		managerService.checkAuthority();
 		Assert.notNull(survival);
 		Assert.isTrue(survival.getId() != 0);
 		Collection<Survival> survivals = new ArrayList<Survival>();
@@ -127,6 +133,7 @@ public class SurvivalService {
 	
 	// 44.1
 	public void enrolSurvival(Explorer explorer, Survival survival){
+		explorerService.checkAuthority();
 		Trip trip;
 		Integer cont = 0;
 		trip = survivalRepository.enrolSurvivalExplorer(explorer.getId(), survival.getId());
