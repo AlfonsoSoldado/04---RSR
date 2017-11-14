@@ -99,7 +99,7 @@ public class ApplicationService {
 	 }
 
 	// 12.2 (listing)
-	public Collection<Application> findApplicationsByManager(int id) {
+	public Collection<Application> findListApplication(int id) {
 		Collection<Application> res = new ArrayList<Application>();
 		
 		Manager m = this.managerService.create();
@@ -109,7 +109,7 @@ public class ApplicationService {
 		
 		Assert.notNull(m);
 		
-		res.addAll(applicationRepository.findApplicationsByManager(id));
+		res.addAll(applicationRepository.findListApplication(id));
 		Assert.notNull(res);
 		
 		return res;
