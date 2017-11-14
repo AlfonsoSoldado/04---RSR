@@ -92,6 +92,7 @@ public class AuditServiceTest extends AbstractTest{
 		auditor = this.auditorService.create();
 		audit.setAuditor(auditor);
 		
+		this.auditorService.save(auditor);
 	}
 	
 	@Test
