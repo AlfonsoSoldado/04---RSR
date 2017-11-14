@@ -49,7 +49,7 @@ public class RangerServiceTest extends AbstractTest{
 	}
 	
 	@Test 
-	public void testFinAllRanger(){
+	public void testFindAllRanger(){
 		Collection<Ranger> rangers;
 		rangers = new ArrayList<Ranger>();
 		rangers = this.rangerService.findAll();
@@ -91,20 +91,18 @@ public class RangerServiceTest extends AbstractTest{
 	}
 	
 	@Test
-	// TODO: testRangerSuspicious()
 	public void testRangerSuspicious(){
-		
+		Collection<Ranger> suspicious;
+		suspicious = new ArrayList<Ranger>();
+		suspicious = this.rangerService.rangersSuspicious();
+		Assert.notNull(suspicious);
 	}
 	
 	@Test
-	// TODO: testFindByPrincipal()
 	public void testFindByPrincipal(){
-		
+		Ranger ranger;
+		ranger = this.rangerService.findByPrincipal();
+		Assert.notNull(ranger);
 	}
 	
-	@Test
-	// TODO: testCheckAuthority()
-	public void testCheckAuthority(){
-		
-	}
 }
