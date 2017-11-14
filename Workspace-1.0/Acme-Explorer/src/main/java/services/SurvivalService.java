@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SurvivalRepository;
+import domain.Application;
+import domain.Explorer;
 import domain.Manager;
 import domain.Survival;
 import domain.Trip;
@@ -35,7 +38,6 @@ public class SurvivalService {
 	
 	//43.1: creating
 	public Survival create(){
-		this.managerService.checkAuthority();
 		Manager m = new Manager();
 		Trip trip = new Trip();
 		Survival survival = new Survival();
@@ -43,11 +45,8 @@ public class SurvivalService {
 		survival.setManager(m);
 		return survival;
 	}
-	
-	
 
 	public Collection<Survival> findAll() {
-		this.managerService.checkAuthority();
 		Collection<Survival> res;
 		res = this.survivalRepository.findAll();
 		Assert.notNull(res);
@@ -55,7 +54,6 @@ public class SurvivalService {
 	}
 
 	public Survival findOne(int survival) {
-		this.managerService.checkAuthority();
 		Assert.isTrue(survival != 0);
 		Survival res;
 		res = this.survivalRepository.findOne(survival);
@@ -64,7 +62,6 @@ public class SurvivalService {
 	}
 
 	public Survival save(Survival survival) {
-		this.managerService.checkAuthority();
 		Assert.notNull(survival);
 		Survival res;
 		res = this.survivalRepository.save(survival);
@@ -72,31 +69,82 @@ public class SurvivalService {
 	}
 
 	public void delete(Survival survival) {
-		this.managerService.checkAuthority();
 		Assert.notNull(survival);
 		Assert.isTrue(survival.getId() != 0);
 		Assert.isTrue(this.survivalRepository.exists(survival.getId()));
-		Manager m = survival.getManager();
-		Manager a = managerService.findByPrincipal();
-		Assert.isTrue(m.equals(a));
 		this.survivalRepository.delete(survival);
 	}
 
 	// Other business methods	
 	
+	// 43.1
+	public Collection<Survival> findSurvivalByTrips(){
+		managerService.checkAuthority();
+		Collection<Survival> res = new ArrayList<Survival>();
+		Manager manager;
+		manager = managerService.findByPrincipal();
+		
+		res = survivalRepository.findSurvivalByManager(manager.getId());
+		Assert.notNull(res);
+		return res;
+	}
+	
+	// 43.1
+	public Survival findOneByTrips(int survival) {
+		Assert.isTrue(survival != 0);
+		Survival res = null;
+		Collection<Survival> survivals = new ArrayList<Survival>();
+		survivals = findSurvivalByTrips();
+		for(Survival s: survivals){
+			if(s.getId() == survival){
+				res = s;
+			}
+		}
+		Assert.notNull(res);
+		return res;
+	}
+	
+	// 43.1
+	public Survival saveByTrips(Survival survival) {
+		Assert.notNull(survival);
+		Survival res;
+		Collection<Survival> survivals = new ArrayList<Survival>();
+		survivals = findSurvivalByTrips();
+		Assert.isTrue(survivals.contains(survival));
+		res = this.survivalRepository.save(survival);
+		return res;
+	}
+	
+	// 43.1
+	public void deleteByTrips(Survival survival) {
+		Assert.notNull(survival);
+		Assert.isTrue(survival.getId() != 0);
+		Collection<Survival> survivals = new ArrayList<Survival>();
+		survivals = findSurvivalByTrips();
+		Assert.isTrue(survivals.contains(survival));
+		this.survivalRepository.delete(survival);
+	}
+	
 	// 44.1
-//	public Survival enrolSurvival(Survival survival){
-//		this.explorerService.checkAuthority();
-//		Explorer explorer;
-//		explorer = this.explorerService.findByPrincipal();
-//		Assert.notNull(explorer);
-//		
-//		Trip trip;
-//		trip = this.survivalRepository.enrolSurvivalExplorer(explorer.getId(), survival.getId());
-//		for(Application a: trip.getApplication()){
-//			if(a.getStatus().equals("ACCEPTED")){
-//				
-//			}
-//		}
-//	}
+	public void enrolSurvival(Explorer explorer, Survival survival){
+		Trip trip;
+		Integer cont = 0;
+		trip = survivalRepository.enrolSurvivalExplorer(explorer.getId(), survival.getId());
+		
+		Collection<Survival> survivals = new ArrayList<Survival>();
+		survivals = trip.getSurvival();
+		
+		Assert.isTrue(survivals.contains(survival));
+		
+		Collection<Application> applications = new ArrayList<Application>();
+		applications = survival.getTrip().getApplication();
+		
+		for(Application a: applications){
+			if(a.getStatus().equals("ACCEPTED")){
+				cont++;
+			}
+		}
+		Assert.isTrue(cont>0);
+		//TODO: Terminar haciendo relación EXPLORER <--> SURVIVAL
+	}
 }

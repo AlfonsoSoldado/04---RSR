@@ -54,7 +54,7 @@ public class TagServiceTest extends AbstractTest{
 	public void testFindOneTag(){
 		Tag tag;
 		tag = this.tagService.findOne(super.getEntityId("tag1"));
-		//Assert.notNull(tag);
+		Assert.notNull(tag);
 	}
 	
 	@Test 
@@ -73,14 +73,12 @@ public class TagServiceTest extends AbstractTest{
 	@Test 
 	public void testUpdateTag(){
 		Tag tag;
-		int id;
 		String newName;
 		
 		tag = this.tagService.findOne(super.getEntityId("tag1"));
-		id = tag.getId(); 
 		newName = "New";
 		
-		this.tagService.update(id, newName);
+		this.tagService.update(tag, newName);
 	}
 	
 	@Test
