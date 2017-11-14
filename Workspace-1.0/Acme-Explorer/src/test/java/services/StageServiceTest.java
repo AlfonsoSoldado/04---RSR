@@ -70,6 +70,8 @@ public class StageServiceTest extends AbstractTest{
 		Trip trip;
 		trip= this.tripService.create();
 		stage.setTrip(trip);
+		
+		this.stageService.save(stage);
 	}
 		
 	@Test

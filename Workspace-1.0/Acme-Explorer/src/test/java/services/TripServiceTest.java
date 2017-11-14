@@ -227,6 +227,11 @@ public class TripServiceTest extends AbstractTest{
 		this.tripService.cancelTrip(trip);
 	}
 	
+	@Test
+	// TODO: hacer testTripApplicationExplorer
+	public void testTripApplicationExplorer(){
+		
+	}
 	
 	
 	

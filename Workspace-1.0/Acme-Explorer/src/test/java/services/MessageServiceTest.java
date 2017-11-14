@@ -104,4 +104,12 @@ public class MessageServiceTest extends AbstractTest{
 		message = this.messageService.findOne(super.getEntityId("message2"));
 		this.messageService.delete(message);
 	}
+	
+	@Test
+	public void testCopyMessage(){
+		Message res, message;
+		message = this.messageService.findOne(super.getEntityId("message1"));
+		res = this.messageService.copyMessage(message);
+		Assert.notNull(res);
+	}
 }

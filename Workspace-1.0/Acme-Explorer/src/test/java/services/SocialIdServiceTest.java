@@ -66,7 +66,8 @@ public class SocialIdServiceTest extends AbstractTest{
 		socialId.setNameSocialNetwork("Pepe Perez");
 		
 		socialId.setSocialNetwork("");
-		
+	
+		this.socialIdService.save(socialId);
 	}
 	
 	@Test
