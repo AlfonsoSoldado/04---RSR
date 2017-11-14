@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Manager;
 import domain.Survival;
 import domain.Trip;
 

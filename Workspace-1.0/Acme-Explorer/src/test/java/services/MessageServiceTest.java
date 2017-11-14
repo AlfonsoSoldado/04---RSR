@@ -43,7 +43,7 @@ public class MessageServiceTest extends AbstractTest{
 	public void testCreateMessage(){
 		Message message;
 		message = this.messageService.create();
-		//Assert.notNull(message);
+		Assert.notNull(message);
 	}
 	
 	@Test

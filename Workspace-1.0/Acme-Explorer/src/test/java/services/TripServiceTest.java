@@ -13,8 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Application;
+import domain.Audit;
+import domain.Category;
+import domain.LegalText;
+import domain.Manager;
+import domain.Note;
 import domain.Ranger;
+import domain.Stage;
+import domain.Story;
+import domain.Survival;
 import domain.Trip;
+import domain.Value;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -94,13 +104,78 @@ public class TripServiceTest extends AbstractTest{
 		
 		//Relationships
 		Ranger ranger;
-		//ranger = this.rangerService.create();
+		ranger = new Ranger();
+		trip.setRanger(ranger);
 		
+		Collection<Survival> survivals;
+		survivals = new ArrayList<Survival>();
+		trip.setSurvival(survivals);
+		
+		Manager manager;
+		manager = new Manager();
+		trip.setManager(manager);
+		
+		Collection<Story> stories;
+		stories = new ArrayList<Story>();
+		trip.setStory(stories);
+		
+		Collection<Stage> stages;
+		stages = new ArrayList<Stage>();
+		Stage stage1;
+		stage1 = new Stage();
+		Stage stage2;
+		stage2 = new Stage();
+		stages.add(stage1);
+		stages.add(stage2);
+		trip.setStage(stages);
+		
+		Category category;
+		category = new Category();
+		trip.setCategory(category);
+		
+		LegalText legalText;
+		legalText = new LegalText();
+		trip.setLegalText(legalText);
+		
+		Collection<Application> applications;
+		applications = new ArrayList<Application>();
+		Application application1;
+		application1 = new Application();
+		Application application2;
+		application2 = new Application();
+		applications.add(application1);
+		applications.add(application2);
+		trip.setApplication(applications);
+		
+		Collection<Audit> audits;
+		audits = new ArrayList<Audit>();
+		trip.setAudit(audits);
+		
+		Collection<Note> notes;
+		notes = new ArrayList<Note>();
+		trip.setNote(notes);
+		
+		Collection<Value> values;
+		values = new ArrayList<Value>();
+		trip.setValue(values);
 	}
 	
+	@Test
+	public void testDeteleTrip(){
+		Trip trip;
+		trip = this.tripService.findOne(super.getEntityId("trip2"));
+		this.tripService.delete(trip);
+	}
 	
-	
-	
+	@Test
+	public void testFindTripsByManager(){
+		Collection<Trip> trips;
+		trips = new ArrayList<Trip>();
+		Integer intManager;
+		intManager = super.getEntityId("manager1");
+		trips.addAll(this.tripService.findTripsByManager(intManager));
+		Assert.notNull(trips);
+	}
 	
 	
 	

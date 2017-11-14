@@ -87,8 +87,16 @@ public class NoteServiceTest extends AbstractTest{
 	}
 	
 	@Test
-	// TODO: testFindNotesByAuditor()
 	public void testFindNotesByAuditor(){
+		Collection<Note> notes;
+		Auditor auditor;
+		int id;
 		
+		notes = new ArrayList<Note>();
+		auditor = this.auditorService.findOne(super.getEntityId("auditor1"));
+		id = auditor.getId();
+		
+		notes = this.noteService.findNotesByAuditor(id);
+		Assert.notNull(notes);
 	}
 }

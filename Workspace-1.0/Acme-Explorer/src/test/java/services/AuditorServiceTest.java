@@ -13,7 +13,6 @@ import org.springframework.util.Assert;
 import utilities.AbstractTest;
 import domain.Audit;
 import domain.Auditor;
-import domain.Curriculum;
 import domain.Folder;
 import domain.Message;
 import domain.Note;
