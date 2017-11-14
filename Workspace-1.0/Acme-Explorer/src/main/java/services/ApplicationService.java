@@ -13,7 +13,6 @@ import domain.Application;
 import domain.CC;
 import domain.Explorer;
 import domain.Manager;
-import domain.Trip;
 
 @Service
 @Transactional
@@ -153,10 +152,4 @@ public class ApplicationService {
 			application.setCreditCard(creditCard);
 		}
 	}
-	
-	// 13.4
-//	public void applicationExplorer() {
-//		explorerService.checkAuthority();
-//	}
-	
 }

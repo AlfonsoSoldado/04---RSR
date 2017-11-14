@@ -20,7 +20,7 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 	Collection<Trip> findTripsByExplorer(int id);
 
 	// 13.4
-	@Query("select t from Trip t join t.application a where a.status like 'ACCEPTED'")
+	@Query("select t from Trip t join t.application a where a.status = 'ACCEPTED' and t.tripStart > CURRENT_DATE")
 	Collection<Trip> findTripsAccepted();
 
 	// 10.2
@@ -36,10 +36,6 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 	Collection<Trip> findTrips(String search);
 	
 	// 12.3
-	@Query("select t from Trip t where t.publication < CURRENT_DATE and t.tripStart < CURRENT_DATE and t.cancelled == false")
+	@Query("select t from Trip t where t.publication < CURRENT_DATE and t.tripStart < CURRENT_DATE and t.cancelled = false")
 	Collection<Trip> cancelTrip();
-	
-	//13.4
-	@Query("select t from Explorer e join e.application a join a.trip t where e.id = ?1 and a.status = 'ACCEPTED' and t.tripStart < CURRENT_DATE")
-	Trip tripApplicationExplorer(int explorer);
 }

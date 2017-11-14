@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +78,32 @@ public class StoryService {
 	}
 
 	// Other business methods
+	
+	// 44.2
+	public Story writeStory(Trip trip, String title, String pieceText, Collection<String> link){
+		Assert.notNull(trip);
+		Collection<Trip> trips = new ArrayList<Trip>();
+		trips = storyRepository.findTripsForStory();
+		
+		Assert.isTrue(trips.contains(trip));
+		Collection<Story> stories = new ArrayList<Story>();
+		stories.addAll(trip.getStory());
+		
+		Story story;
+		story = create();
+		
+		story.setLink(link);
+		story.setPieceText(pieceText);
+		story.setTitle(title);
+		story.setTrip(trip);
+		
+		stories.add(story);
+		
+		Assert.notNull(story);
+		
+		trip.setStory(stories);
+		
+		return story;
+	}
 
 }

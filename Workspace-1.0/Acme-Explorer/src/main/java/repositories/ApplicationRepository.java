@@ -31,9 +31,5 @@ public interface ApplicationRepository extends
 	// 13.3
 	@Query("select a from Application a where a.status = 'DUE'")
 	Collection<Application> findListApplicationDue();
-
-	// 13.4
-//	@Query("select a from Explorer e join e.application a where e.id = ?1 and a.status = 'ACCEPTED' and select from Trip t t.publication < CURRENT_DATE")
-//	Application applicationExplorer(int explorer, int application);
 	
 }
