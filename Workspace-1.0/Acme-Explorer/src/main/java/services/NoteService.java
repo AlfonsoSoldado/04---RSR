@@ -11,9 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.NoteRepository;
 import domain.Auditor;
-import domain.Manager;
 import domain.Note;
-import domain.Survival;
 
 @Service
 @Transactional
