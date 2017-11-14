@@ -152,4 +152,9 @@ public class ApplicationService {
 			application.setCreditCard(creditCard);
 		}
 	}
+	
+	// 13.4
+	public void applicationExplorer() {
+		explorerService.checkAuthority();
+	}
 }
