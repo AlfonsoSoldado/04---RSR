@@ -87,7 +87,7 @@ public class SurvivalService {
 		Manager manager;
 		manager = managerService.findByPrincipal();
 		
-		res = survivalRepository.findSurvivalByManager(manager.getId());
+		res.addAll(survivalRepository.findSurvivalByManager(manager.getId()));
 		Assert.notNull(res);
 		return res;
 	}

@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.Test;
@@ -82,7 +83,8 @@ public class SurvivalServiceTest extends AbstractTest {
 	@Test
 	public void testFindSurvivalByTrips(){
 		Collection<Survival> survivals;
-		survivals = this.survivalService.findSurvivalByTrips();
+		survivals = new ArrayList<Survival>();
+		survivals.addAll(this.survivalService.findSurvivalByTrips());
 		Assert.notNull(survivals);
 	}
 	
