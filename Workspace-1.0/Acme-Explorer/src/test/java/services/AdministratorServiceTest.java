@@ -116,4 +116,12 @@ public class AdministratorServiceTest extends AbstractTest{
 		Assert.notNull(res);
 	}
 	
+	@Test
+	public void testFindByPrincipal(){
+		authenticate("admin");
+		Administrator administrator;
+		administrator= this.administratorService.findByPrincipal();
+		Assert.notNull(administrator);
+		unauthenticate();
+	}
 }
