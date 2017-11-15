@@ -12,10 +12,8 @@ import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Actor;
 import domain.Administrator;
 import domain.Folder;
-import domain.Message;
 import domain.SocialId;
 import domain.Trip;
 
@@ -29,9 +27,6 @@ public class AdministratorService {
 	private AdministratorRepository administratorRepository;
 
 	// Supporting services
-
-	@Autowired
-	private ActorService actorService;
 
 	@Autowired
 	private FolderService folderService;
