@@ -70,7 +70,7 @@ public class LegalTextService {
 		administratorService.checkAuthority();
 
 		Assert.notNull(legalText);
-		Assert.isTrue(findLegalTextDraftTrue(legalText));
+		Assert.isTrue(legalText.getDraftMode()==true);
 		LegalText res;
 		res = this.legalTextRepository.save(legalText);
 		return res;
@@ -80,7 +80,7 @@ public class LegalTextService {
 		administratorService.checkAuthority();
 
 		Assert.notNull(legalText);
-		Assert.isTrue(findLegalTextDraftTrue(legalText));
+		Assert.isTrue(legalText.getDraftMode()==true);
 		Assert.isTrue(legalText.getId() != 0);
 		Assert.isTrue(this.legalTextRepository.exists(legalText.getId()));
 		this.legalTextRepository.delete(legalText);
@@ -88,22 +88,22 @@ public class LegalTextService {
 
 	// Other business methods
 
-	// 14.2
-	
-	public Boolean findLegalTextDraftTrue(LegalText legalText) {
-		administratorService.checkAuthority();
-		Assert.notNull(legalText);
-		
-		Boolean res = false;
-		
-		Collection<LegalText> legalTexts = new ArrayList<LegalText>();
-		legalTexts = legalTextRepository.findLegalTextDraftTrue();
-		Assert.notNull(legalTexts);
-		if(legalTexts.contains(legalText)){
-			res = true;
-		}
-		return res;
-	}
+//	// 14.2
+//	
+//	public Boolean findLegalTextDraftTrue(LegalText legalText) {
+//		administratorService.checkAuthority();
+//		Assert.notNull(legalText);
+//		
+//		Boolean res = false;
+//		
+//		Collection<LegalText> legalTexts = new ArrayList<LegalText>();
+//		legalTexts = legalTextRepository.findLegalTextDraftTrue();
+//		Assert.notNull(legalTexts);
+//		if(legalTexts.contains(legalText)){
+//			res = true;
+//		}
+//		return res;
+//	}
 	
 	// 14.2
 	

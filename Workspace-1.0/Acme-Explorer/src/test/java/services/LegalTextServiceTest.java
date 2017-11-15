@@ -99,16 +99,16 @@ public class LegalTextServiceTest extends AbstractTest{
 		unauthenticate();
 	}
 	
-	@Test
-	public void testFindLegalTextDraftTrue(){
-		authenticate("admin");
-		Boolean res;
-		LegalText legalText;
-		legalText = this.legalTextService.findOne(super.getEntityId("legalText2"));
-		res = this.legalTextService.findLegalTextDraftTrue(legalText);
-		Assert.notNull(res);
-		unauthenticate();
-	}
+//	@Test
+//	public void testFindLegalTextDraftTrue(){
+//		authenticate("admin");
+//		Boolean res;
+//		LegalText legalText;
+//		legalText = this.legalTextService.findOne(super.getEntityId("legalText2"));
+//		res = this.legalTextService.findLegalTextDraftTrue(legalText);
+//		Assert.notNull(res);
+//		unauthenticate();
+//	}
 	
 	@Test
 	public void testFindLegalTextByTrip(){
@@ -117,7 +117,7 @@ public class LegalTextServiceTest extends AbstractTest{
 		Trip trip;
 		
 		texts = new ArrayList<LegalText>();
-		trip = this.tripService.findOne(super.getEntityId("trip2"));
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		
 		texts = this.legalTextService.findLegalTextsByTrip(trip);
 		Assert.notNull(texts);

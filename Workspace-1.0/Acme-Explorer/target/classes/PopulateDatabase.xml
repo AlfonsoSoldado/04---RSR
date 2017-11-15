@@ -1399,7 +1399,7 @@
 	<property name="body" value="A comment of something" />
 	<property name="numberLaw" value = "10" />
 	<property name="moment" value="23/10/2013 19:13" />
-	<property name="draftMode" value="true" />
+	<property name="draftMode" value="false" />
 	<property name="trip" ref="trip1" />
 	</bean>
 	
