@@ -73,6 +73,8 @@ public class ValueServiceTest extends AbstractTest{
 		tags = new ArrayList<Tag>();
 		tags.add(tag);
 		value.setTag(tags);
+		
+		this.valueService.save(value);
 	}
 	
 	@Test 

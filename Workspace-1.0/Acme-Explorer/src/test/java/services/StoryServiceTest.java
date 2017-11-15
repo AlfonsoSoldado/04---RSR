@@ -93,4 +93,22 @@ public class StoryServiceTest extends AbstractTest{
 		story = this.storyService.findOne(super.getEntityId("story1"));
 		this.storyService.delete(story);
 	}
+	
+	@Test
+	public void testWriteStory(){
+		Story story;
+		Trip trip;
+		String title, pieceText, link1;
+		Collection<String> link;
+		
+		title ="Sample Title";
+		pieceText = "Another example.";
+		link1 = "http://www.google.com";
+		link = new ArrayList<String>();
+		link.add(link1);
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
+		
+		story = this.storyService.writeStory(trip, title, pieceText, link);
+		Assert.notNull(story);
+	}
 }

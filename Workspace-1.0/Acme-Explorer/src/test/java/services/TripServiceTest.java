@@ -155,6 +155,8 @@ public class TripServiceTest extends AbstractTest{
 		Collection<Value> values;
 		values = new ArrayList<Value>();
 		trip.setValue(values);
+		
+		this.tripService.save(trip);
 	}
 	
 	@Test
@@ -230,7 +232,9 @@ public class TripServiceTest extends AbstractTest{
 	@Test
 	// TODO: hacer testTripApplicationExplorer
 	public void testTripApplicationExplorer(){
-		
+		Trip trip;
+		trip = this.tripService.findOne(super.getEntityId("trip2"));
+		this.tripService.tripApplicationExplorer(trip);
 	}
 	
 	

@@ -112,7 +112,7 @@ public class SurvivalServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void testDeleteTrips(){
+	public void testByDeleteTrips(){
 		Survival survival;
 		survival = this.survivalService.findOne(super.getEntityId("surval1"));
 		this.survivalService.deleteByTrips(survival);
