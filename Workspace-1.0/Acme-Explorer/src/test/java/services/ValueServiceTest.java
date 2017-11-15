@@ -61,14 +61,14 @@ public class ValueServiceTest extends AbstractTest{
 	@Test 
 	public void testSaveValue(){
 		Value value;
-		value = this.valueService.create();
+		value = this.valueService.findOne(super.getEntityId("value1"));
 		
 		Trip trip;
-		trip = this.tripService.create();
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		value.setTrip(trip);
 		
 		Tag tag;
-		tag = this.tagService.create();
+		tag = this.tagService.findOne(super.getEntityId("tag1"));
 		Collection<Tag> tags;
 		tags = new ArrayList<Tag>();
 		tags.add(tag);
