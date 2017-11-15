@@ -24,13 +24,13 @@ SocialId
 Stage
 Audit
 LegalText
+Ranger
+Explorer
 
 
 FALTA:
 Actor
 Application
-Explorer (Hacer save bien)
-Ranger (Hacer save bien)
 Story
 Survival
 Trip
