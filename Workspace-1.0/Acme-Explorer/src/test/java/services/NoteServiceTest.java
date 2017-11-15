@@ -40,28 +40,35 @@ public class NoteServiceTest extends AbstractTest{
 	
 	@Test
 	public void testCreateNote(){
+		authenticate("auditor01");
 		Note note;
 		note = this.noteService.create();
 		Assert.notNull(note);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testFindAllNote(){
+		authenticate("auditor01");
 		Collection<Note> notes;
 		notes = new ArrayList<Note>();
 		notes = this.noteService.findAll();
 		Assert.notNull(notes);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testFindOneNote(){
+		authenticate("auditor01");
 		Note note;
 		note = this.noteService.findOne(super.getEntityId("note1"));
 		Assert.notNull(note);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testSaveNote(){
+		authenticate("auditor01");
 		Note note;
 		note = this.noteService.create();
 		
@@ -76,22 +83,17 @@ public class NoteServiceTest extends AbstractTest{
 		note.setMomentReply(momentReply);
 		
 		Auditor auditor;
-		auditor = this.auditorService.create();
+		auditor = this.auditorService.findOne(super.getEntityId("auditor1"));
 		note.setAuditor(auditor);
 		
 		Trip trip;
-		trip = this.tripService.create();
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		note.setTrip(trip);
 		
 		this.noteService.save(note);
+		unauthenticate();
 	}
 	
-	@Test
-	public void testDeleteNote(){
-		Note note;
-		note = this.noteService.findOne(super.getEntityId("note2"));
-		this.noteService.delete(note);
-	}
 	
 	@Test
 	public void testFindNotesByAuditor(){
