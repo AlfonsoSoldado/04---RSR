@@ -285,7 +285,6 @@ public class TripServiceTest extends AbstractTest{
 	}
 	
 	@Test
-	// TODO: hacer testTripApplicationExplorer
 	public void testTripApplicationExplorer(){
 		authenticate("manager01");
 		Trip trip;
@@ -293,17 +292,4 @@ public class TripServiceTest extends AbstractTest{
 		this.tripService.tripApplicationExplorer(trip);
 		unauthenticate();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
