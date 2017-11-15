@@ -156,7 +156,89 @@ public class ActorService {
 		res = this.tripService.findTripsByCategory(category);
 		return res;
 	}
+	
+	// 11.2
+	
+	public void editPersonalData(String name, String phoneNumber, String surname, String address, String email){
+		checkAuthority();
+		Actor actor;
+		actor = findByPrincipal();
+		
+		actor.setName(name);
+		actor.setPhoneNumber(phoneNumber);
+		actor.setSurname(surname);
+		actor.setAddress(address);
+		actor.setEmail(email);
+	}
 
+	// 11.4
+	
+	public void createFolder(Folder folder){
+		checkAuthority();
+		Actor actor;
+		actor = findByPrincipal();
+		
+		Collection<Folder> folders = new ArrayList<Folder>();
+		folders = actorRepository.findSystemFolders(actor.getId());
+		
+		Assert.isTrue(!actor.getFolders().contains(folder));
+		Assert.isTrue(!folders.contains(folder));
+		
+		folders.clear();
+		
+		folders.addAll(actor.getFolders());
+		folders.add(folder);
+		
+		actor.setFolders(folders);
+		
+		folders.clear();
+	}
+	
+	// 11.4
+	
+	public void editFolder(Folder folder, String name){
+		checkAuthority();
+		Actor actor;
+		actor = findByPrincipal();
+		
+		Collection<Folder> folders = new ArrayList<Folder>();
+		folders = actorRepository.findSystemFolders(actor.getId());
+		
+		Assert.isTrue(actor.getFolders().contains(folder));
+		Assert.isTrue(!folders.contains(folder));
+		
+		for(Folder f: folders){
+			if(f.equals(folder)){
+				f.setName(name);
+			}
+		}
+		
+		folders.clear();
+	}
+	
+	// 11.4
+	
+	public void deleteFolder(Folder folder){
+		checkAuthority();
+		Actor actor;
+		actor = findByPrincipal();
+		
+		Collection<Folder> folders = new ArrayList<Folder>();
+		folders = actorRepository.findSystemFolders(actor.getId());
+		
+		Assert.isTrue(actor.getFolders().contains(folder));
+		Assert.isTrue(!folders.contains(folder));
+		
+		folders.clear();
+		
+		folders.addAll(actor.getFolders());
+		folders.remove(folder);
+		
+		actor.setFolders(folders);
+		
+		folders.clear();
+	}
+	
 	// 30.1
 	public Collection<Curriculum> findCurriculumRangerByTrip(int id) {
 		Collection<Curriculum> res = new ArrayList<Curriculum>();
