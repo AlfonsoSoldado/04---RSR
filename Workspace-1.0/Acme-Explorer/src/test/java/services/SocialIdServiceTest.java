@@ -11,9 +11,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.SocialId;
-
 import utilities.AbstractTest;
+import domain.Administrator;
+import domain.SocialId;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -30,13 +30,18 @@ public class SocialIdServiceTest extends AbstractTest{
 	
 	// Supporting services ---------------
 	
+	@Autowired
+	private AdministratorService administratorService;
+	
 	// Test ------------------------------
 	
 	@Test
 	public void testCreateSocialId(){
+		authenticate("admin");
 		SocialId socialId;
 		socialId = this.socialIdService.create();
 		Assert.notNull(socialId);
+		unauthenticate();
 	}
 	
 	@Test
@@ -56,6 +61,7 @@ public class SocialIdServiceTest extends AbstractTest{
 	
 	@Test
 	public void testSaveSocialId(){
+		authenticate("admin");
 		SocialId socialId;
 		socialId = this.socialIdService.create();
 		
@@ -63,11 +69,17 @@ public class SocialIdServiceTest extends AbstractTest{
 		
 		socialId.setNick("Pepito");
 		
-		socialId.setNameSocialNetwork("Pepe Perez");
+		Administrator admin;
+		admin = administratorService.findOne(super.getEntityId("administrator1"));
 		
-		socialId.setSocialNetwork("");
+		socialId.setActor(admin);
+		
+		socialId.setNameSocialNetwork("Pepito Grillo");
+		
+		socialId.setSocialNetwork("http://www.pepitogrillo.com");
 	
 		this.socialIdService.save(socialId);
+		unauthenticate();
 	}
 	
 	@Test
