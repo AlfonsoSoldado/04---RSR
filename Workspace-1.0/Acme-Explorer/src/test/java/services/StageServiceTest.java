@@ -31,6 +31,7 @@ public class StageServiceTest extends AbstractTest{
 		
 	// Supporting services --------------
 	
+	@Autowired
 	private TripService tripService;
 		
 		
