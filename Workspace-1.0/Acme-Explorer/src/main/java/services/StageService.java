@@ -28,7 +28,7 @@ public class StageService {
 	}
 
 	// Simple CRUD methods
-	
+
 	public Stage create() {
 		Stage stage;
 		stage = new Stage();

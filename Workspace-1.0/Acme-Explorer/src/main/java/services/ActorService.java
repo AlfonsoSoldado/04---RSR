@@ -241,22 +241,18 @@ public class ActorService {
 	}
 	
 	// 30.1
+	
 	public Collection<Curriculum> findCurriculumRangerByTrip(int id) {
 		Collection<Curriculum> res = new ArrayList<Curriculum>();
-
-		// Añadimos todos los Curriculum mediante la query.
-
 		res.addAll(actorRepository.findCurriculumRangerByTrip(id));
 		Assert.notNull(res);
 		return res;
 	}
 
 	// 30.2
+	
 	public Collection<Audit> findAuditByTrip(int id) {
 		Collection<Audit> res = new ArrayList<Audit>();
-
-		// Añadimos todos los Audit mediante la query
-
 		res.addAll(actorRepository.findAuditsByTrip(id));
 		Assert.notNull(res);
 		return res;
@@ -264,10 +260,11 @@ public class ActorService {
 	}
 
 	// 35.2
+	
 	public void banActor(Actor actor) {
 		administratorService.checkAuthority();
 		Collection<Actor> res = new ArrayList<Actor>();
-		res.addAll(rangerRepository.banRanger());
+		res.addAll(rangerRepository.rangersSuspicious());
 		res.addAll(managerRepository.banManager());
 		if (res.contains(actor)) {
 			Collection<Authority> authorities = new ArrayList<Authority>();
@@ -279,6 +276,7 @@ public class ActorService {
 	}
 
 	// 35.3
+	
 	public void unbanActor(Actor actor) {
 		administratorService.checkAuthority();
 		Collection<Actor> res = new ArrayList<Actor>();
@@ -298,6 +296,7 @@ public class ActorService {
 	}
 
 	// 14.5
+	
 	public void SendNotificationBroadcast(Message message) {
 		administratorService.checkAuthority();
 
@@ -315,6 +314,8 @@ public class ActorService {
 			messages.clear();
 		}
 	}
+	
+	// 35.1
 
 	public void checkSpamWords() {
 		administratorService.checkAuthority();
@@ -380,6 +381,8 @@ public class ActorService {
 			actors.clear();
 		}
 	}
+	
+	// 11.3
 
 	public void sendMessage(Collection<Actor> recipients, Actor sender,
 			Message message) {

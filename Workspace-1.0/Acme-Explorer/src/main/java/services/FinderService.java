@@ -81,6 +81,8 @@ public class FinderService {
 	}
 
 	// Other business methods
+	
+	// 34.1
 
 	public Collection<Trip> findSearchCriterial(String singleKey, Date start, Date end, Double minPrice, Double maxPrice){
 		Collection<Trip> res = new ArrayList<Trip>();

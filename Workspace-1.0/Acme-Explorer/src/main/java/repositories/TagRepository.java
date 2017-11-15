@@ -11,7 +11,7 @@ import domain.Tag;
 @Repository
 public interface TagRepository extends JpaRepository<Tag, Integer>{
 	
+	// 14.3
 	@Query("select t from Tag t join t.value v where v.trip is null")
 	Collection<Tag> findTagNotTrip();
-	
 }

@@ -29,8 +29,10 @@ public class AuditServiceTest extends AbstractTest {
 	private AuditService auditService;
 
 	// Supporting services ----------------
+
 	@Autowired
 	private TripService tripService;
+
 	@Autowired
 	private AuditorService auditorService;
 
@@ -104,18 +106,4 @@ public class AuditServiceTest extends AbstractTest {
 		this.auditService.delete(audit);
 		unauthenticate();
 	}
-
-//	@Test
-//	public void testFindAuditDraftTrue() {
-//		authenticate("auditor01");
-//		Boolean res;
-//		Audit audit;
-//		audit = this.auditService.findOne(super.getEntityId("audit1"));
-//		Assert.notNull(audit);
-//
-//		res = this.auditService.findAuditDraftTrue(audit);
-//		Assert.notNull(res);
-//		unauthenticate();
-//	}
-
 }

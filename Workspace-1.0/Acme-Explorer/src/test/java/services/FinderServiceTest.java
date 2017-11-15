@@ -18,41 +18,41 @@ import domain.Finder;
 import domain.Trip;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-				"classpath:spring/datasource.xml",
-				"classpath:spring/config/packages.xml"})
+@ContextConfiguration(locations = { "classpath:spring/datasource.xml",
+		"classpath:spring/config/packages.xml" })
 @Transactional
 public class FinderServiceTest extends AbstractTest {
-	
+
 	// Service under test ---------------
+
 	@Autowired
 	private FinderService finderService;
-	
+
 	// Supporting services --------------
-	
+
 	@Autowired
 	private TripService tripService;
-	
+
 	// Test -----------------------------
 
 	@Test
-	public void testCreateFinder(){
+	public void testCreateFinder() {
 		Finder finder;
 		finder = this.finderService.create();
 		Assert.notNull(finder);
 	}
-	
+
 	@Test
-	public void testFindOneFinder(){
+	public void testFindOneFinder() {
 		authenticate("explorer01");
 		Finder finder;
 		finder = this.finderService.findOne(super.getEntityId("finder1"));
 		Assert.notNull(finder);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testFindAllFinder(){
+	public void testFindAllFinder() {
 		authenticate("explorer01");
 		Collection<Finder> finders;
 		finders = new ArrayList<Finder>();
@@ -60,40 +60,40 @@ public class FinderServiceTest extends AbstractTest {
 		Assert.notNull(finders);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testSaveFinder(){
+	public void testSaveFinder() {
 		authenticate("explorer01");
 		Finder finder;
 		finder = this.finderService.create();
-		
+
 		finder.setSingleKey("Mexico");
-		
+
 		finder.setMinPrice(80.3);
-		
+
 		finder.setMaxPrice(407.4);
-		
+
 		Date start = new Date(System.currentTimeMillis() - 1);
 		finder.setStart(start);
-		
-		Date end = new Date(System.currentTimeMillis() -50);
+
+		Date end = new Date(System.currentTimeMillis() - 50);
 		finder.setEnd(end);
-		
-		Date cache = new Date(System.currentTimeMillis() -1);
+
+		Date cache = new Date(System.currentTimeMillis() - 1);
 		finder.setCache(cache);
-		
+
 		Collection<Trip> result = new ArrayList<Trip>();
 		Trip trip;
 		trip = tripService.findOne(super.getEntityId("trip1"));
 		result.add(trip);
 		finder.setTrip(result);
-		
+
 		this.finderService.save(finder);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testFindSearchCriterial(){
+	public void testFindSearchCriterial() {
 		Collection<Trip> trips;
 		String singleKey = "Beach";
 		Calendar cal = Calendar.getInstance();
@@ -108,10 +108,9 @@ public class FinderServiceTest extends AbstractTest {
 		Date end = cal2.getTime();
 		Double minPrice = 80.;
 		Double maxPrice = 100.;
-		
-		trips = this.finderService.findSearchCriterial(singleKey, start, end, minPrice, maxPrice);
+
+		trips = this.finderService.findSearchCriterial(singleKey, start, end,
+				minPrice, maxPrice);
 		Assert.notNull(trips);
 	}
-	
-	
 }

@@ -83,6 +83,7 @@ public class ApplicationService {
 	// Other business methods
 
 	// 12.2 (changing)
+	
 	 public void changingStatus(Application a, String status) {
 		 managerService.checkAuthority();
 		 Assert.notNull(a);
@@ -102,6 +103,7 @@ public class ApplicationService {
 	 }
 
 	// 12.2 (listing)
+	 
 	public Collection<Application> findListApplication(Manager manager) {
 		managerService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
@@ -113,6 +115,7 @@ public class ApplicationService {
 	}
 
 	// 13.2
+	
 	public Collection<Application> findApplicationByExplorer(Explorer explorer) {
 		explorerService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
@@ -124,6 +127,7 @@ public class ApplicationService {
 	}
 	
 	// 13.3
+	
 	public void applicationAccepted(CC creditCard, Application application){
 		explorerService.checkAuthority();
 		Assert.notNull(creditCard);

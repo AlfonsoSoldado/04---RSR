@@ -39,7 +39,8 @@ public class SurvivalService {
 
 	// Simple CRUD methods
 	
-	//43.1: creating
+	//43.1
+	
 	public Survival create(){
 		Manager m = new Manager();
 		Trip trip = new Trip();
@@ -81,6 +82,7 @@ public class SurvivalService {
 	// Other business methods	
 	
 	// 43.1
+	
 	public Collection<Survival> findSurvivalByTrips(){
 		managerService.checkAuthority();
 		Collection<Survival> res = new ArrayList<Survival>();
@@ -93,6 +95,7 @@ public class SurvivalService {
 	}
 	
 	// 43.1
+	
 	public Survival findOneByTrips(int survival) {
 		managerService.checkAuthority();
 		Assert.isTrue(survival != 0);
@@ -109,6 +112,7 @@ public class SurvivalService {
 	}
 	
 	// 43.1
+	
 	public Survival saveByTrips(Survival survival) {
 		managerService.checkAuthority();
 		Assert.notNull(survival);
@@ -121,6 +125,7 @@ public class SurvivalService {
 	}
 	
 	// 43.1
+	
 	public void deleteByTrips(Survival survival) {
 		managerService.checkAuthority();
 		Assert.notNull(survival);
@@ -132,38 +137,6 @@ public class SurvivalService {
 	}
 	
 	// 44.1
-//	public void enrolSurvival(Explorer explorer, Survival survival){
-//		explorerService.checkAuthority();
-//		
-//		Collection<Survival> survivals = new ArrayList<Survival>();
-//		Collection<Survival> res = new ArrayList<Survival>();
-//		Collection<Explorer> explorers = new ArrayList<Explorer>();
-//		
-//		//Assert.isTrue(survivals.contains(survival));
-//		
-//		Trip trip;
-//		trip = survivalRepository.findTripBySurvival(explorer.getId());
-//		
-//		Collection<Application> applications = new ArrayList<Application>();
-//		applications = survivalRepository.enrolSurvivalExplorer(trip.getId());
-//		//Assert.isTrue(applications.contains(survival));
-//		
-//		res.addAll(explorer.getSurvival());
-//		res.add(survival);
-//		
-//		explorer.setSurvival(res);
-//		
-//		res.clear();
-//		
-//		for(Survival s: trip.getSurvival()){
-//			explorers.addAll(s.getExplorer());
-//			explorers.add(explorer);
-//			
-//			s.setExplorer(explorers);
-//			
-//			explorers.clear();
-//		}		
-//	}
 	
 	public void enrolSurvival(Explorer explorer, Survival survival){
 		explorerService.checkAuthority();
@@ -173,6 +146,7 @@ public class SurvivalService {
 		Collection<Survival> survivals = new ArrayList<Survival>();
 		Collection<Survival> res = new ArrayList<Survival>();
 		Collection<Explorer> explorers = new ArrayList<Explorer>();
+		survivals = survivalRepository.findSurvivalByExplorer(explorer.getId());
 		
 		for(Survival s: survivals){
 			if(s.equals(survival)){

@@ -20,7 +20,7 @@ public class ValueService {
 	private ValueRepository valueRepository;
 
 	// Supporting services
-	
+
 	// Constructors
 
 	public ValueService() {
@@ -28,7 +28,7 @@ public class ValueService {
 	}
 
 	// Simple CRUD methods
-	
+
 	public Value create() {
 		Value value;
 		value = new Value();

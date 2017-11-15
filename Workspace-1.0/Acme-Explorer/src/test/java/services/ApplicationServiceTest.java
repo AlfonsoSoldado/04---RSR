@@ -21,34 +21,31 @@ import domain.Manager;
 import domain.Trip;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-				"classpath:spring/datasource.xml",
-				"classpath:spring/config/packages.xml"})
+@ContextConfiguration(locations = { "classpath:spring/datasource.xml",
+		"classpath:spring/config/packages.xml" })
 @Transactional
 public class ApplicationServiceTest extends AbstractTest {
 
 	// Service under test -------------------------
-	
+
 	@Autowired
 	private ApplicationService applicationService;
-			
+
 	// Supporting services -----------------------
-			
+
 	@Autowired
 	private ExplorerService explorerService;
-	
+
 	@Autowired
 	private ManagerService managerService;
-	
+
 	@Autowired
 	private TripService tripService;
-	
-	
-			
+
 	// Test --------------------------------------
-	
-	//Application explorer
-	
+
+	// Application explorer
+
 	@Test
 	public void testCreateApplicationExplorer() {
 		authenticate("explorer01");
@@ -57,7 +54,7 @@ public class ApplicationServiceTest extends AbstractTest {
 		Assert.notNull(application);
 		unauthenticate();
 	}
-	
+
 	@Test
 	public void testFindAllApplicationExplorer() {
 		authenticate("explorer01");
@@ -65,27 +62,26 @@ public class ApplicationServiceTest extends AbstractTest {
 		applications = this.applicationService.findAll();
 		Assert.notNull(applications);
 	}
-	
+
 	@Test
 	public void testFindOneApplicationExplorer() {
 		authenticate("explorer01");
 		Application application;
-		application = this.applicationService.findOne(super.getEntityId("application1"));
+		application = this.applicationService.findOne(super
+				.getEntityId("application1"));
 		Assert.notNull(application);
 	}
-	
+
 	@Test
 	public void testSaveApplicationExplorer() {
 		this.authenticate("explorer01");
 		Application application;
 		application = this.applicationService.create();
-		
 
 		Trip trip;
 		Manager manager;
 		Explorer explorer;
-		
-		
+
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, 2017);
 		cal.set(Calendar.MONTH, 2);
@@ -101,11 +97,11 @@ public class ApplicationServiceTest extends AbstractTest {
 		cc.setExpirationMonth(02);
 		cc.setExpirationYear(2019);
 		cc.setCVV(123);
-		
+
 		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		manager = this.managerService.findOne(super.getEntityId("manager1"));
 		explorer = this.explorerService.findOne(super.getEntityId("explorer1"));
-		
+
 		application.setMoment(moment);
 		application.setStatus(status);
 		application.setComment(comment);
@@ -114,23 +110,22 @@ public class ApplicationServiceTest extends AbstractTest {
 		application.setTrip(trip);
 		application.setManager(manager);
 		application.setExplorer(explorer);
-		
+
 		this.applicationService.save(application);
 		unauthenticate();
 	}
-	
+
 	@Test
 	public void testDeleteApplicationExplorer() {
 		authenticate("explorer01");
 		Application application;
-		application = this.applicationService.findOne(super.getEntityId("application1"));
+		application = this.applicationService.findOne(super
+				.getEntityId("application1"));
 		this.applicationService.delete(application);
 	}
-	
-	
+
 	// Application manager
-	
-	
+
 	@Test
 	public void testCreateApplicationManager() {
 		authenticate("manager01");
@@ -139,7 +134,7 @@ public class ApplicationServiceTest extends AbstractTest {
 		Assert.notNull(application);
 		unauthenticate();
 	}
-	
+
 	@Test
 	public void testFindAllApplicationManager() {
 		authenticate("manager01");
@@ -147,26 +142,26 @@ public class ApplicationServiceTest extends AbstractTest {
 		applications = this.applicationService.findAll();
 		Assert.notNull(applications);
 	}
-	
+
 	@Test
 	public void testFindOneApplicationManager() {
 		authenticate("manager01");
 		Application application;
-		application = this.applicationService.findOne(super.getEntityId("application1"));
+		application = this.applicationService.findOne(super
+				.getEntityId("application1"));
 		Assert.notNull(application);
 	}
-	
+
 	@Test
 	public void testSaveApplicationManager() {
 		authenticate("manager01");
 		Application application;
 		application = this.applicationService.create();
-		
+
 		Trip trip;
 		Manager manager;
 		Explorer explorer;
-		
-		
+
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, 2017);
 		cal.set(Calendar.MONTH, 2);
@@ -182,11 +177,11 @@ public class ApplicationServiceTest extends AbstractTest {
 		cc.setExpirationMonth(02);
 		cc.setExpirationYear(2019);
 		cc.setCVV(123);
-		
+
 		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		manager = this.managerService.findOne(super.getEntityId("manager1"));
 		explorer = this.explorerService.findOne(super.getEntityId("explorer1"));
-		
+
 		application.setMoment(moment);
 		application.setStatus(status);
 		application.setComment(comment);
@@ -199,62 +194,62 @@ public class ApplicationServiceTest extends AbstractTest {
 		this.applicationService.save(application);
 		unauthenticate();
 	}
-	
+
 	@Test
 	public void testDeleteApplicationManager() {
 		authenticate("manager01");
 		Application application;
-		application = this.applicationService.findOne(super.getEntityId("application1"));
+		application = this.applicationService.findOne(super
+				.getEntityId("application1"));
 		this.applicationService.delete(application);
 	}
-	
+
 	@Test
-	public void testChangingStatus(){
+	public void testChangingStatus() {
 		authenticate("manager01");
 		Application a;
-		a=this.applicationService.findOne(super.getEntityId("application1"));
+		a = this.applicationService.findOne(super.getEntityId("application1"));
 		Assert.notNull(a);
-		
+
 		String status;
-		status="REJECTED";
+		status = "REJECTED";
 		Assert.notNull(status);
-		
+
 		this.applicationService.changingStatus(a, status);
 		unauthenticate();
 	}
-	
-	
+
 	@Test
-	public void testFindListApplication(){
+	public void testFindListApplication() {
 		authenticate("manager01");
 		Manager manager;
-		manager= this.managerService.findOne(super.getEntityId("manager1"));
+		manager = this.managerService.findOne(super.getEntityId("manager1"));
 		Assert.notNull(manager);
-		
+
 		Collection<Application> res = new ArrayList<Application>();
-		res= this.applicationService.findListApplication(manager);
+		res = this.applicationService.findListApplication(manager);
 		Assert.notNull(res);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testFindApplicationByExplorer(){
+	public void testFindApplicationByExplorer() {
 		authenticate("explorer01");
 		Explorer explorer;
-		explorer= this.explorerService.findOne(super.getEntityId("explorer1"));
+		explorer = this.explorerService.findOne(super.getEntityId("explorer1"));
 		Assert.notNull(explorer);
-		
-		Collection<Application> res= new ArrayList<Application>();
-		res= this.applicationService.findApplicationByExplorer(explorer);
+
+		Collection<Application> res = new ArrayList<Application>();
+		res = this.applicationService.findApplicationByExplorer(explorer);
 		Assert.notNull(res);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testApplicationAccepted(){
+	public void testApplicationAccepted() {
 		authenticate("explorer01");
 		CC cc;
-		cc= new CC();
+		cc = new CC();
 		cc.setHolderName("BBVA");
 		cc.setBrandName("MasterCard");
 		cc.setNumber("4099537775843795");
@@ -262,11 +257,12 @@ public class ApplicationServiceTest extends AbstractTest {
 		cc.setExpirationYear(2019);
 		cc.setCVV(123);
 		Assert.notNull(cc);
-		
+
 		Application application;
-		application= this.applicationService.findOne(super.getEntityId("application2"));
+		application = this.applicationService.findOne(super
+				.getEntityId("application2"));
 		Assert.notNull(application);
-		
+
 		this.applicationService.applicationAccepted(cc, application);
 		unauthenticate();
 	}

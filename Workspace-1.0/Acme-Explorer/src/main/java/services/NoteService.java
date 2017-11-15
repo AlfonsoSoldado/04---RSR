@@ -23,6 +23,7 @@ public class NoteService {
 	private NoteRepository noteRepository;
 
 	// Supporting services
+	
 	@Autowired
 	private AuditorService auditorService;
 
@@ -34,14 +35,14 @@ public class NoteService {
 
 	// Simple CRUD methods
 
-	// 33
+	// 33.1
+	
 	public Note create() {
 		auditorService.checkAuthority();
 
 		Note res = new Note();
 		Auditor a = new Auditor();
 		Date d = new Date();
-		// Confirmo que es un actor registrado
 		a = auditorService.findByPrincipal();
 		Assert.notNull(a);
 		res.setMoment(d);
@@ -67,23 +68,22 @@ public class NoteService {
 		Assert.notNull(res);
 		return res;
 	}
-	
+
 	public Note save(Note note) {
 		auditorService.checkAuthority();
-		
+
 		Assert.notNull(note);
 		Assert.isTrue(note.getId() == 0);
-		
+
 		Note res;
 		res = this.noteRepository.save(note);
 		return res;
 	}
-	
-	// 33 Once a note is written, it cannot be modified at all or deleted.
 
 	// Other business methods
 
-	// 33
+	// 33.1
+	
 	public Collection<Note> findNotesByAuditor(int id) {
 		Collection<Note> res = new ArrayList<Note>();
 
@@ -91,14 +91,4 @@ public class NoteService {
 		Assert.notNull(res);
 		return res;
 	}
-
-	// 32
-	// public Collection<Note> findNotesByManagerID(int id) {
-	//
-	// Collection<Note> res = new ArrayList<Note>();
-	// res = this.noteRepository.findNotesByManager(id);
-	// Assert.notNull(res);
-	// return res;
-	//
-	// }
 }

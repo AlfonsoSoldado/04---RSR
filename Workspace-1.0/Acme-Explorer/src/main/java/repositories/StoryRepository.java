@@ -10,9 +10,9 @@ import domain.Story;
 import domain.Trip;
 
 @Repository
-public interface StoryRepository extends JpaRepository<Story, Integer>{
+public interface StoryRepository extends JpaRepository<Story, Integer> {
 
 	// 44.2
-		@Query("select t from Trip t join t.application a where a.status = 'ACCEPTED' and t.tripEnd < CURRENT_DATE")
-		Collection<Trip> findTripsForStory();
+	@Query("select t from Trip t join t.application a where a.status = 'ACCEPTED' and t.tripEnd < CURRENT_DATE")
+	Collection<Trip> findTripsForStory();
 }

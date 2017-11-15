@@ -15,11 +15,9 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Application;
-import domain.Audit;
 import domain.Category;
 import domain.LegalText;
 import domain.Manager;
-import domain.Note;
 import domain.Ranger;
 import domain.Stage;
 import domain.Story;
@@ -42,27 +40,30 @@ public class TripServiceTest extends AbstractTest{
 	// Supporting services --------------
 	@Autowired
 	private ManagerService managerService;
+	
 	@Autowired
 	private RangerService rangerServices;
+	
 	@Autowired
 	private CategoryService categoryServices;
+	
 	@Autowired
 	private LegalTextService legalTextService;
+	
 	@Autowired
 	private ApplicationService applicationService;
+	
 	@Autowired
 	private SurvivalService survivalService;
+	
 	@Autowired
 	private StoryService storyService;
+	
 	@Autowired
 	private StageService stageService;
-	@Autowired
-	private AuditService auditService;
-	@Autowired
-	private NoteService noteService;
+	
 	@Autowired
 	private ValueService valueService;
-	
 	
 	// Test -----------------------------
 	
@@ -88,16 +89,125 @@ public class TripServiceTest extends AbstractTest{
 		Assert.notNull(trip);
 	}
 	
+//	@Test
+//	public void testSaveTrip(){
+//		//authenticate("admin");
+//		authenticate("manager01");
+//		Trip trip;
+//		trip = this.tripService.findOne(super.getEntityId("trip1"));
+//		
+//		trip.setTitle("Funciona");
+//		
+//	
+//		this.tripService.save(trip);
+//		unauthenticate();
+//	}
+	
 	@Test
 	public void testSaveTrip(){
-		//authenticate("admin");
-		authenticate("manager01");
+//		Manager m = this.managerService.findByPrincipal();
+//		Administrator a = this.administratorService.findByPrincipal();
+//		if(m.getId() != 0) {
+//			authenticate("manager01");
+//		} else if (a.getId() != 0) {
+//			authenticate("admin");
+//		}
+		authenticate("admin");
 		Trip trip;
-		trip = this.tripService.findOne(super.getEntityId("trip1"));
+		trip = this.tripService.create();
 		
-		trip.setTitle("Funciona");
+		Collection<Survival> survival = new ArrayList<Survival>(); 
+		Collection<Story> story = new ArrayList<Story>();
+		Collection<Stage> stage = new ArrayList<Stage>();
+		Collection<Application> application = new ArrayList<Application>();
+//		Collection<Audit> audit = new ArrayList<Audit>();
+//		Collection <Note> note = new ArrayList<Note>();
+		Collection<Value> value = new ArrayList<Value>();
+		Ranger ranger;
+		Survival survival1;
+		Manager manager;
+		Story story1;
+		Stage stage1;
+		Category category;
+		LegalText legalText;
+		Application application1;
+//		Audit audit1;
+//		Note note1; 
+		Value value1;
 		
 	
+		String ticker, title, description, reason, req1;
+		Double price;
+		Collection<String> requirement = new ArrayList<String>();
+		Date publication, tripStart, tripEnd;
+		Boolean cancelled = false;
+		
+		Calendar pu = Calendar.getInstance();
+		pu.set(Calendar.YEAR, 2017);
+		pu.set(Calendar.MONTH, 2);
+		pu.set(Calendar.DAY_OF_MONTH, 13);
+		Calendar start = Calendar.getInstance();
+		start.set(Calendar.YEAR, 2017);
+		start.set(Calendar.MONTH, 6);
+		start.set(Calendar.DAY_OF_MONTH, 13);
+		Calendar end = Calendar.getInstance();
+		end.set(Calendar.YEAR, 2017);
+		end.set(Calendar.MONTH, 6);
+		end.set(Calendar.DAY_OF_MONTH, 22);
+		
+		publication = pu.getTime();
+		tripStart = start.getTime();
+		tripEnd = end.getTime();
+		
+		ticker = "171020-JUHE";
+		title = "Beach";
+		description = "Something";
+		price = 80.;
+		req1 = "Sample";
+		requirement.add(req1);
+		reason = "Reason";
+		
+		ranger = this.rangerServices.findOne(super.getEntityId("ranger1"));
+		survival1 = this.survivalService.findOne(super.getEntityId("survival1"));
+		survival.add(survival1);
+		manager = this.managerService.findOne(super.getEntityId("manager1"));
+		story1 = this.storyService.findOne(super.getEntityId("story1"));
+		story.add(story1);
+		stage1 = this.stageService.findOne(super.getEntityId("stage1"));
+		stage.add(stage1);
+		category = this.categoryServices.findOne(super.getEntityId("CATEGORY"));
+		legalText = this.legalTextService.findOne(super.getEntityId("legalText1"));
+		application1 = this.applicationService.findOne(super.getEntityId("application1"));
+		application.add(application1);
+//		audit1 = this.auditService.findOne(super.getEntityId("audit1"));
+//		audit.add(audit1);
+//		note1 = this.noteService.findOne(super.getEntityId("note1"));
+//		note.add(note1);
+		value1 = this.valueService.findOne(super.getEntityId("value1"));
+		value.add(value1);
+		
+		trip.setTicker(ticker);
+		trip.setTitle(title);
+		trip.setDescription(description);
+		trip.setPrice(price);
+		trip.setRequirement(requirement);
+		trip.setPublication(publication);
+		trip.setTripStart(tripStart);
+		trip.setTripEnd(tripEnd);
+		trip.setReason(reason);
+		trip.setCancelled(cancelled);
+		trip.setRanger(ranger);
+		trip.setSurvival(survival);
+		trip.setManager(manager);
+		trip.setStory(story);
+		trip.setStage(stage);
+		trip.setCategory(category);
+		trip.setLegalText(legalText);
+		trip.setApplication(application);
+//		trip.setAudit(audit);
+//		trip.setNote(note);
+		trip.setValue(value);
+		
 		this.tripService.save(trip);
 		unauthenticate();
 	}

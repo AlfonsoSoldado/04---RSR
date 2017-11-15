@@ -15,12 +15,9 @@ public interface RangerRepository extends JpaRepository<Ranger, Integer>{
 	@Query("select r from Ranger r where r.userAccount.id=?1")
 	Ranger findRangerByUserAccountId(int uA);
 	
-	@Query("select r from Ranger r where r.suspicious is true")
-	Collection<Ranger> rangersSuspicious();
-	
-	//35.2
+	// 35.1 and 35.2
 	@Query("select r from Ranger r where r.suspicious = true")
-	Collection<Ranger> banRanger();
+	Collection<Ranger> rangersSuspicious();
 	
 	//35.2
 	@Query("select r from Ranger r where r.suspicious = false")

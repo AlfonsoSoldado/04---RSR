@@ -22,6 +22,10 @@ public interface SurvivalRepository extends JpaRepository<Survival, Integer> {
 	Collection<Application> enrolSurvivalExplorer(int trip);
 
 	// 43.1
+	@Query("select s from Survival s join s.explorer m where m.id = ?1")
+	Collection<Survival> findSurvivalByExplorer(int explorer);
+
+	// 43.1
 	@Query("select s from Survival s join s.manager m where m.id = ?1")
 	Collection<Survival> findSurvivalByManager(int manager);
 }

@@ -86,7 +86,4 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	// B-3
 	@Query("select count(t)/((select count(t2) from Trip t2)+0.0) from Trip t where t.audit.size=1")
 	Object[] avgMinMaxSqtr5();
-	
-	
-
 }

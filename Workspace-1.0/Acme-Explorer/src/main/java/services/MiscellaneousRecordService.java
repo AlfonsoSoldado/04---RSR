@@ -28,14 +28,14 @@ public class MiscellaneousRecordService {
 	}
 
 	// Simple CRUD methods
-	
-	public MiscellaneousRecord create(){
+
+	public MiscellaneousRecord create() {
 		MiscellaneousRecord res;
-		
+
 		res = new MiscellaneousRecord();
 		return res;
 	}
-	
+
 	public MiscellaneousRecord findOne(int miscellaneousRecord) {
 		Assert.isTrue(miscellaneousRecord != 0);
 		MiscellaneousRecord res;
@@ -46,7 +46,7 @@ public class MiscellaneousRecordService {
 
 	public Collection<MiscellaneousRecord> findAll() {
 		Collection<MiscellaneousRecord> res;
-		
+
 		res = this.miscellaneousRecordRepository.findAll();
 		Assert.notNull(res);
 		return res;
@@ -54,7 +54,7 @@ public class MiscellaneousRecordService {
 
 	public MiscellaneousRecord save(MiscellaneousRecord miscellaneousRecord) {
 		Assert.notNull(miscellaneousRecord);
-		
+
 		MiscellaneousRecord res;
 		res = this.miscellaneousRecordRepository.save(miscellaneousRecord);
 		return res;
@@ -65,7 +65,7 @@ public class MiscellaneousRecordService {
 		Assert.isTrue(miscellaneousRecord.getId() != 0);
 		Assert.isTrue(this.miscellaneousRecordRepository
 				.exists(miscellaneousRecord.getId()));
-		
+
 		this.miscellaneousRecordRepository.delete(miscellaneousRecord);
 	}
 

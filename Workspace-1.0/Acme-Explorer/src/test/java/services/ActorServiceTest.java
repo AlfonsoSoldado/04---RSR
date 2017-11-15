@@ -35,13 +35,13 @@ public class ActorServiceTest extends AbstractTest {
 	// Supporting services --------------
 	@Autowired
 	private TripService tripService;
-	
+
 	@Autowired
 	private MessageService messageService;
-	
+
 	@Autowired
 	private FolderService folderService;
-	
+
 	@Autowired
 	private CategoryService categoryService;
 

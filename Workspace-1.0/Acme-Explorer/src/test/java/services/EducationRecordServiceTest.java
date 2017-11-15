@@ -14,45 +14,44 @@ import utilities.AbstractTest;
 import domain.EducationRecord;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-				"classpath:spring/datasource.xml",
-				"classpath:spring/config/packages.xml"})
+@ContextConfiguration(locations = { "classpath:spring/datasource.xml",
+		"classpath:spring/config/packages.xml" })
 @Transactional
 public class EducationRecordServiceTest extends AbstractTest {
 
 	// Service under test -------------------------
-	
+
 	@Autowired
 	private EducationRecordService educationRecordService;
-	
+
 	// Supporting services -----------------------
-	
-	
+
 	// Test --------------------------------------
-	
+
 	@Test
 	public void testCreateEducationRecord() {
 		EducationRecord educationRecord;
 		educationRecord = this.educationRecordService.create();
 		Assert.notNull(educationRecord);
 	}
-	
+
 	@Test
 	public void testFindAllEducationRecord() {
 		Collection<EducationRecord> educationRecords;
 		educationRecords = this.educationRecordService.findAll();
 		Assert.notNull(educationRecords);
 	}
-	
+
 	@Test
 	public void testFindOneEducationRecord() {
 		EducationRecord educationRecord;
-		educationRecord = this.educationRecordService.findOne(super.getEntityId("educationRecord1"));
+		educationRecord = this.educationRecordService.findOne(super
+				.getEntityId("educationRecord1"));
 		Assert.notNull(educationRecord);
 	}
-	
+
 	@Test
-	public void testSaveEducationRecord(){
+	public void testSaveEducationRecord() {
 		EducationRecord educationRecord;
 		educationRecord = this.educationRecordService.create();
 		educationRecord.setComment("comentario modificado");
@@ -61,11 +60,13 @@ public class EducationRecordServiceTest extends AbstractTest {
 		educationRecord.setTitle("Titulo education");
 		this.educationRecordService.save(educationRecord);
 	}
-	
+
 	@Test
 	public void testDeleteEducationRecord() {
-		EducationRecord educationRecord;;
-		educationRecord = this.educationRecordService.findOne(super.getEntityId("educationRecord1"));
+		EducationRecord educationRecord;
+		;
+		educationRecord = this.educationRecordService.findOne(super
+				.getEntityId("educationRecord1"));
 		this.educationRecordService.delete(educationRecord);
 	}
 }

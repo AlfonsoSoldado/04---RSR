@@ -8,5 +8,4 @@ import domain.ProfessionalRecord;
 @Repository
 public interface ProfessionalRecordRepository extends JpaRepository<ProfessionalRecord, Integer>{
 
-	
 }

@@ -14,45 +14,44 @@ import utilities.AbstractTest;
 import domain.EndorserRecord;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-				"classpath:spring/datasource.xml",
-				"classpath:spring/config/packages.xml"})
+@ContextConfiguration(locations = { "classpath:spring/datasource.xml",
+		"classpath:spring/config/packages.xml" })
 @Transactional
-public class EndorserRecordServiceTest extends AbstractTest{
+public class EndorserRecordServiceTest extends AbstractTest {
 
 	// Service under test -------------------------
-	
+
 	@Autowired
 	private EndorserRecordService endorserRecordService;
-	
+
 	// Supporting services -----------------------
-	
-	
+
 	// Test --------------------------------------
-	
+
 	@Test
 	public void testCreateEndorserRecord() {
 		EndorserRecord endorserRecord;
 		endorserRecord = this.endorserRecordService.create();
 		Assert.notNull(endorserRecord);
 	}
-	
+
 	@Test
 	public void testFindAllEndorserRecord() {
 		Collection<EndorserRecord> endorserRecords;
 		endorserRecords = this.endorserRecordService.findAll();
 		Assert.notNull(endorserRecords);
 	}
-	
+
 	@Test
 	public void testFindOneEndorserRecord() {
 		EndorserRecord endorserRecord;
-		endorserRecord = this.endorserRecordService.findOne(super.getEntityId("endorserRecord1"));
+		endorserRecord = this.endorserRecordService.findOne(super
+				.getEntityId("endorserRecord1"));
 		Assert.notNull(endorserRecord);
 	}
-	
+
 	@Test
-	public void testSaveEndorserRecord(){
+	public void testSaveEndorserRecord() {
 		EndorserRecord endorserRecord;
 		endorserRecord = this.endorserRecordService.create();
 		endorserRecord.setComment("Otro comentario");
@@ -61,11 +60,13 @@ public class EndorserRecordServiceTest extends AbstractTest{
 		endorserRecord.setLikedln("http://www.linkedin.com");
 		this.endorserRecordService.save(endorserRecord);
 	}
-	
+
 	@Test
 	public void testDeleteEndorserRecord() {
-		EndorserRecord endorserRecord;;
-		endorserRecord = this.endorserRecordService.findOne(super.getEntityId("endorserRecord1"));
+		EndorserRecord endorserRecord;
+		;
+		endorserRecord = this.endorserRecordService.findOne(super
+				.getEntityId("endorserRecord1"));
 		this.endorserRecordService.delete(endorserRecord);
 	}
 }

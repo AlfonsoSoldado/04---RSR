@@ -78,10 +78,11 @@ public class AuditService {
 	}
 
 	// 33.2
+
 	public Audit save(Audit audit) {
 		auditorService.checkAuthority();
 
-		Assert.isTrue(audit.getDraftMode()==true);
+		Assert.isTrue(audit.getDraftMode() == true);
 		UserAccount ua = LoginService.getPrincipal();
 		Assert.notNull(ua);
 		Actor a = auditorService.findOne(ua.getId());
@@ -93,10 +94,11 @@ public class AuditService {
 	}
 
 	// 33.2
+
 	public void delete(Audit audit) {
 		auditorService.checkAuthority();
 
-		Assert.isTrue(audit.getDraftMode()==true);
+		Assert.isTrue(audit.getDraftMode() == true);
 		Assert.notNull(audit);
 		Assert.isTrue(audit.getId() != 0);
 		Assert.isTrue(this.auditRepository.exists(audit.getId()));
@@ -105,23 +107,4 @@ public class AuditService {
 
 	// Other business methods
 
-//	// 33.2
-//	public Boolean findAuditDraftTrue(Audit audit) {
-//		auditorService.checkAuthority();
-//		Assert.notNull(audit);
-//		
-//		Boolean res = false;
-//		
-//		Auditor auditor;
-//		auditor = auditorService.findByPrincipal();
-//		
-//		Assert.notNull(auditor);
-//		Collection<Audit> audits = new ArrayList<Audit>();
-//		audits = auditRepository.findAuditDraftTrue(auditor.getId());
-//		Assert.notNull(audits);
-//		if(audits.contains(audit)){
-//			res = true;
-//		}
-//		return res;
-//	}
 }

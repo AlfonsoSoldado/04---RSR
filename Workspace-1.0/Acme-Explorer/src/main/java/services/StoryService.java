@@ -80,12 +80,9 @@ public class StoryService {
 	// Other business methods
 	
 	// 44.2
+	
 	public Story writeStory(Trip trip, String title, String pieceText, Collection<String> link){
 		Assert.notNull(trip);
-		//Collection<Trip> trips = new ArrayList<Trip>();
-		//trips = storyRepository.findTripsForStory();
-		
-		//Assert.isTrue(trips.contains(trip));
 		Explorer ex;
 		ex = this.explorerService.findByPrincipal();
 		Collection<Story> stories = new ArrayList<Story>();
@@ -102,12 +99,8 @@ public class StoryService {
 		
 		stories.add(story);
 		
-		
 		trip.setStory(stories);
-
 		Assert.notNull(stories);
-		
 		return story;
 	}
-
 }

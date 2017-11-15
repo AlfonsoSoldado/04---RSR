@@ -21,10 +21,10 @@ public class TagService {
 	private TagRepository tagRepository;
 
 	// Supporting services
-	
+
 	@Autowired
 	private AdministratorService administratorService;
-	
+
 	// Constructors
 
 	public TagService() {
@@ -32,7 +32,7 @@ public class TagService {
 	}
 
 	// Simple CRUD methods
-	
+
 	public Tag create() {
 		Tag tag;
 		tag = new Tag();
@@ -70,24 +70,23 @@ public class TagService {
 	}
 
 	// Other business methods
-	
-	//14.3
-	 public Tag update(Tag tag, String newName){
-		 administratorService.checkAuthority();
-		 Assert.notNull(tag);
-		 Assert.notNull(newName);
-		 Collection<Tag> t = new ArrayList<Tag>();
-		 
-		 Tag res = new Tag();
-		 
-		 t.addAll(tagRepository.findTagNotTrip());
-		 
-		 res = tagRepository.findOne(tag.getId());
-		 
-		 Assert.notNull(res);
-		 res.setName(newName);
-		 return res;
-	 }
-	
 
+	// 14.3
+
+	public Tag update(Tag tag, String newName) {
+		administratorService.checkAuthority();
+		Assert.notNull(tag);
+		Assert.notNull(newName);
+		Collection<Tag> t = new ArrayList<Tag>();
+
+		Tag res = new Tag();
+
+		t.addAll(tagRepository.findTagNotTrip());
+
+		res = tagRepository.findOne(tag.getId());
+
+		Assert.notNull(res);
+		res.setName(newName);
+		return res;
+	}
 }

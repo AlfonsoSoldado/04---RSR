@@ -32,10 +32,8 @@ public class AuditorServiceTest extends AbstractTest {
 	@Autowired
 	private NoteService noteService;
 
-	
 	@Autowired
 	private AuditService auditService;
-
 
 	// Test --------------------------------------
 
@@ -65,26 +63,26 @@ public class AuditorServiceTest extends AbstractTest {
 		authenticate("auditor01");
 		Auditor auditor;
 		auditor = this.auditorService.create();
-		
+
 		Note note;
 		Audit audit;
 		Collection<Note> notes = new ArrayList<Note>();
 		Collection<Audit> audits = new ArrayList<Audit>();
-		
+
 		note = this.noteService.findOne(super.getEntityId("note1"));
 		audit = this.auditService.findOne(super.getEntityId("audit1"));
 		notes.add(note);
 		audits.add(audit);
-		
+
 		auditor = this.auditorService.findOne(super.getEntityId("auditor1"));
-		
+
 		auditor.setNote(notes);
 		auditor.setAudit(audits);
 		auditor.setName("Pepito");
 		auditor.setSurname("Martos");
 		auditor.setEmail("pepito@hotmail.com");
 		auditor.setAddress("C/Rosa");
-		
+
 		this.auditorService.save(auditor);
 		unauthenticate();
 	}
@@ -104,6 +102,4 @@ public class AuditorServiceTest extends AbstractTest {
 		Assert.notNull(auditor);
 		unauthenticate();
 	}
-	
-
 }

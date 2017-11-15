@@ -114,14 +114,4 @@ public class MessageServiceTest extends AbstractTest{
 		this.messageService.delete(message);
 		unauthenticate();
 	}
-	
-	@Test
-	public void testCopyMessage(){
-		authenticate("ranger01");
-		Message res, message;
-		message = this.messageService.findOne(super.getEntityId("message1"));
-		res = this.messageService.copyMessage(message);
-		Assert.notNull(res);
-		unauthenticate();
-	}
 }

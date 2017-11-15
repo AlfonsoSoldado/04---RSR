@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 import domain.Application;
 
 @Repository
-public interface ApplicationRepository extends
-		JpaRepository<Application, Integer> {
+public interface ApplicationRepository extends JpaRepository<Application, Integer> {
 
 	// 12.3
 	@Query("select a from Manager m join m.application a where m.id = ?1")

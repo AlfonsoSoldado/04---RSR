@@ -23,5 +23,4 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer>{
 	//35.2
 	@Query("select m from Manager m where m.suspicious = false")
 	Collection<Ranger> unbanManager();
-	
 }

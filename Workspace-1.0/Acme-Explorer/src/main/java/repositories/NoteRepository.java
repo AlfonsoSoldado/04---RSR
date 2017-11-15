@@ -9,14 +9,9 @@ import org.springframework.stereotype.Repository;
 import domain.Note;
 
 @Repository
-public interface NoteRepository extends JpaRepository<Note, Integer>{
-	
-	//33
+public interface NoteRepository extends JpaRepository<Note, Integer> {
+
+	// 33
 	@Query("select n from Note n where n.auditor.id = ?1")
 	Collection<Note> findNotesByAuditor(int id);
-	
-	//32
-//	@Query("select n from Note n where n.manager.id = ?1")
-//	Collection<Note> findNotesByManager(int id);
-	
 }

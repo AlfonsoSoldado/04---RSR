@@ -21,7 +21,7 @@ public class SocialIdService {
 	private SocialIdRepository socialIdRepository;
 
 	// Supporting services
-	
+
 	@Autowired
 	private ActorService actorService;
 
@@ -32,7 +32,7 @@ public class SocialIdService {
 	}
 
 	// Simple CRUD methods
-	
+
 	public SocialId create() {
 		SocialId socialId;
 		Actor actor;

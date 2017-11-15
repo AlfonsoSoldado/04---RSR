@@ -22,7 +22,7 @@ public class SponsorshipService {
 	private SponsorshipRepository sponsorshipRepository;
 
 	// Supporting services
-	
+
 	@Autowired
 	private SponsorService sponsorService;
 
@@ -33,7 +33,7 @@ public class SponsorshipService {
 	}
 
 	// Simple CRUD methods
-	
+
 	public Sponsorship create() {
 		Sponsorship sponsorship;
 		Sponsor sponsor;

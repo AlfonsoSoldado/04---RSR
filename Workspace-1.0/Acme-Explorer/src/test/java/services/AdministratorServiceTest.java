@@ -13,48 +13,47 @@ import org.springframework.util.Assert;
 import utilities.AbstractTest;
 import domain.Administrator;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-				"classpath:spring/datasource.xml",
-				"classpath:spring/config/packages.xml"})
+@ContextConfiguration(locations = { "classpath:spring/datasource.xml",
+		"classpath:spring/config/packages.xml" })
 @Transactional
-public class AdministratorServiceTest extends AbstractTest{
-	
+public class AdministratorServiceTest extends AbstractTest {
+
 	// Service under test -------------------------
-	
+
 	@Autowired
 	private AdministratorService administratorService;
-	
+
 	// Supporting services -----------------------
 
 	// Test --------------------------------------
-	
+
 	@Test
-	public void testCreateAdministrator(){
+	public void testCreateAdministrator() {
 		authenticate("admin");
 		Administrator administrator;
 		administrator = this.administratorService.create();
 		Assert.notNull(administrator);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testFindAllAdministrator(){
+	public void testFindAllAdministrator() {
 		Collection<Administrator> administrators;
 		administrators = this.administratorService.findAll();
 		Assert.notNull(administrators);
 	}
-	
+
 	@Test
-	public void testFindOneAdministrator(){
+	public void testFindOneAdministrator() {
 		Administrator administrator;
-		administrator = this.administratorService.findOne(super.getEntityId("administrator1"));
+		administrator = this.administratorService.findOne(super
+				.getEntityId("administrator1"));
 		Assert.notNull(administrator);
 	}
-	
+
 	@Test
-	public void testSaveAdministrator(){
+	public void testSaveAdministrator() {
 		this.authenticate("admin");
 		Administrator administrator;
 		administrator = this.administratorService.create();
@@ -64,63 +63,64 @@ public class AdministratorServiceTest extends AbstractTest{
 		this.administratorService.save(administrator);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testDeleteAdministrator(){
+	public void testDeleteAdministrator() {
 		Administrator administrator;
-		administrator = this.administratorService.findOne(super.getEntityId("administrator1"));
+		administrator = this.administratorService.findOne(super
+				.getEntityId("administrator1"));
 		this.administratorService.delete(administrator);
 	}
-	
+
 	@Test
-	public void testApplicationPending(){
+	public void testApplicationPending() {
 		Double res;
-		res= this.administratorService.applicationPending();
+		res = this.administratorService.applicationPending();
 		Assert.notNull(res);
-		
+
 	}
-	
+
 	@Test
-	public void testApplicationDue(){
+	public void testApplicationDue() {
 		Double res;
-		res= this.administratorService.applicationDue();
-		Assert.notNull(res);
-	}
-	
-	@Test
-	public void testApplicationAccepted(){
-		Double res;
-		res=this.administratorService.applicationAccepted();
+		res = this.administratorService.applicationDue();
 		Assert.notNull(res);
 	}
-	
-	@Test 
-	public void testApplicationCancelled(){
-		Double res;
-		res=this.administratorService.applicationCancelled();
-		Assert.notNull(res);
-		
-	}
-	
+
 	@Test
-	public void ratioRangerEndorser(){
+	public void testApplicationAccepted() {
 		Double res;
-		res=this.administratorService.ratioRangerEndorser();
+		res = this.administratorService.applicationAccepted();
 		Assert.notNull(res);
 	}
-	
+
 	@Test
-	public void avgMinMaxSqrtManager(){
+	public void testApplicationCancelled() {
+		Double res;
+		res = this.administratorService.applicationCancelled();
+		Assert.notNull(res);
+
+	}
+
+	@Test
+	public void ratioRangerEndorser() {
+		Double res;
+		res = this.administratorService.ratioRangerEndorser();
+		Assert.notNull(res);
+	}
+
+	@Test
+	public void avgMinMaxSqrtManager() {
 		Object[] res;
-		res=this.administratorService.avgMinMaxSqtrManager();
+		res = this.administratorService.avgMinMaxSqtrManager();
 		Assert.notNull(res);
 	}
-	
+
 	@Test
-	public void testFindByPrincipal(){
+	public void testFindByPrincipal() {
 		authenticate("admin");
 		Administrator administrator;
-		administrator= this.administratorService.findByPrincipal();
+		administrator = this.administratorService.findByPrincipal();
 		Assert.notNull(administrator);
 		unauthenticate();
 	}
