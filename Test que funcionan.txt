@@ -26,11 +26,10 @@ Audit
 LegalText
 Ranger
 Explorer
-
+Application
+Story
 
 FALTA:
 Actor
-Application
-Story
 Survival
 Trip
