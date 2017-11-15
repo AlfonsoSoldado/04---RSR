@@ -126,7 +126,7 @@ public class ActorServiceTest extends AbstractTest{
 		
 		Collection<Trip> res;
 		res= new ArrayList<Trip>();
-		res.addAll(this.actorService.searchTripsByCategory(category.getId()));
+		res.addAll(this.actorService.searchTripsByCategory(category));
 		Assert.notNull(res);
 		
 	}
