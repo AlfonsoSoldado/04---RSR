@@ -1,0 +1,14 @@
+
+Administrator
+Note
+Value
+Finder
+Auditor
+Category
+Configuration
+Curriculum
+EducationRecord
+Emergency
+EndorserRecord
+Folder
+Tag
