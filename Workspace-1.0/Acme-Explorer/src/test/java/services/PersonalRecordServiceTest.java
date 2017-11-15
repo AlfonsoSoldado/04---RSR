@@ -15,68 +15,66 @@ import utilities.AbstractTest;
 import domain.PersonalRecord;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-				"classpath:spring/datasource.xml",
-				"classpath:spring/config/packages.xml"})
+@ContextConfiguration(locations = { "classpath:spring/datasource.xml",
+		"classpath:spring/config/packages.xml" })
 @Transactional
-public class PersonalRecordServiceTest extends AbstractTest{
+public class PersonalRecordServiceTest extends AbstractTest {
 
 	// Service under test ------------------
-	
+
 	@Autowired
 	private PersonalRecordService personalRecordService;
-	
-	
+
 	// Supporting services -----------------
-	
-	
-	
+
 	// Test --------------------------------
-	
+
 	@Test
-	public void testCreatePersonalRecord(){
+	public void testCreatePersonalRecord() {
 		PersonalRecord personal;
 		personal = this.personalRecordService.create();
 		Assert.notNull(personal);
 	}
-	
+
 	@Test
-	public void testFindAllPersonalRecord(){
+	public void testFindAllPersonalRecord() {
 		Collection<PersonalRecord> personal;
 		personal = new ArrayList<PersonalRecord>();
 		personal = this.personalRecordService.findAll();
 		Assert.notNull(personal);
 	}
-	
+
 	@Test
-	public void testFindOnePersonalRecord(){
+	public void testFindOnePersonalRecord() {
 		PersonalRecord personal;
-		personal = this.personalRecordService.findOne(super.getEntityId("personalRecord1"));
+		personal = this.personalRecordService.findOne(super
+				.getEntityId("personalRecord1"));
 		Assert.notNull(personal);
 	}
-	
+
 	@Test
-	public void testSavePersonalRecord(){
+	public void testSavePersonalRecord() {
 		PersonalRecord personal;
 		personal = this.personalRecordService.create();
-		
+
 		personal.setName("Juan");
-		
+
 		personal.setPhoto("http://www.google.es");
-		
+
 		personal.setEmail("juan@hotmail.com");
-		
+
 		personal.setPhoneNumber("654789054");
-		
+
 		personal.setLikedln("http://www.likedlin.com");
-		
+
 		this.personalRecordService.save(personal);
 	}
-	
+
 	@Test
-	public void testDeletePersonalRecord(){
+	public void testDeletePersonalRecord() {
 		PersonalRecord personal;
-		personal = this.personalRecordService.findOne(super.getEntityId("personalRecord2"));
+		personal = this.personalRecordService.findOne(super
+				.getEntityId("personalRecord2"));
 		this.personalRecordService.delete(personal);
 	}
 }

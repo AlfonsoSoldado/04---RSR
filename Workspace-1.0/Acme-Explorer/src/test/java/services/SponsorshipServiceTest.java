@@ -18,84 +18,78 @@ import domain.Sponsorship;
 import domain.Trip;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-				"classpath:spring/datasource.xml",
-				"classpath:spring/config/packages.xml"})
+@ContextConfiguration(locations = { "classpath:spring/datasource.xml",
+		"classpath:spring/config/packages.xml" })
 @Transactional
-public class SponsorshipServiceTest extends AbstractTest{
+public class SponsorshipServiceTest extends AbstractTest {
 
-	
 	// Service under test ---------------
-	
+
 	@Autowired
 	private SponsorshipService sponsorshipService;
-	
+
 	// Supporting services --------------
-	
+
 	@Autowired
 	private SponsorService sponsorService;
-	
+
 	@Autowired
 	private TripService tripService;
-	
-	
+
 	// Test -----------------------------
-	
+
 	@Test
-	public void testCreateSponsorship(){
-		
+	public void testCreateSponsorship() {
 		Sponsorship sponsorship;
-		sponsorship=this.sponsorshipService.findOne(super.getEntityId("sponsorship1"));
+		sponsorship = this.sponsorshipService.findOne(super
+				.getEntityId("sponsorship1"));
 		Assert.notNull(sponsorship);
-		
 	}
-	
+
 	@Test
-	public void testFindOneponsorship(){
-		
+	public void testFindOneponsorship() {
 		Sponsorship sponsorship;
-		sponsorship= this.sponsorshipService.findOne(super.getEntityId("sponsorship1"));
+		sponsorship = this.sponsorshipService.findOne(super
+				.getEntityId("sponsorship1"));
 		Assert.notNull(sponsorship);
-		
 	}
-	
+
 	@Test
-	public void testFindAllSponsorship(){
+	public void testFindAllSponsorship() {
 		Collection<Sponsorship> sponsorship;
 		sponsorship = new ArrayList<Sponsorship>();
 		sponsorship = this.sponsorshipService.findAll();
 		Assert.notNull(sponsorship);
 	}
-	
+
 	@Test
-	public void testSaveSponsorship(){
+	public void testSaveSponsorship() {
 		Sponsorship sponsorship;
-		sponsorship= this.sponsorshipService.findOne(super.getEntityId("sponsorship1"));
-		
-		
-		
+		sponsorship = this.sponsorshipService.findOne(super
+				.getEntityId("sponsorship1"));
 		sponsorship.setBanner("http://www.example.com");
 		sponsorship.setInfoPage("http://www.example.es");
-		
+
 		CC creditCard;
 		creditCard = new CC();
 		sponsorship.setCreditCard(creditCard);
-		
+
 		Sponsor sponsor;
-		sponsor=this.sponsorService.create();
+		sponsor = this.sponsorService.create();
 		sponsorship.setSponsor(sponsor);
-		
+
 		Trip trip;
-		trip= this.tripService.findOne(super.getEntityId("trip1"));
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		sponsorship.setTrip(trip);
-		
+
 		this.sponsorshipService.save(sponsorship);
 	}
-	
+
 	@Test
-	public void testDeleteSponsorship(){
+	public void testDeleteSponsorship() {
 		Sponsorship sponsorship;
-		sponsorship=this.sponsorshipService.findOne(super.getEntityId("sponsorship1"));
+		sponsorship = this.sponsorshipService.findOne(super
+				.getEntityId("sponsorship1"));
 		this.sponsorshipService.delete(sponsorship);
 	}
 }

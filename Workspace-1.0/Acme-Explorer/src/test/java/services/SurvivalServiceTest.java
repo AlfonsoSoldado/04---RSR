@@ -28,14 +28,13 @@ public class SurvivalServiceTest extends AbstractTest {
 	private SurvivalService survivalService;
 
 	// Supporting services -----------------------
-	
+
 	@Autowired
 	private TripService tripService;
-	
+
 	@Autowired
 	private ExplorerService explorerService;
-	
-	
+
 	// Test --------------------------------------
 
 	@Test
@@ -46,48 +45,48 @@ public class SurvivalServiceTest extends AbstractTest {
 		Assert.notNull(survival);
 		unauthenticate();
 	}
-	
+
 	@Test
 	public void testFindAllSurvival() {
 		Collection<Survival> survival;
 		survival = this.survivalService.findAll();
 		Assert.notNull(survival);
 	}
-	
+
 	@Test
 	public void testFindOneSurvival() {
 		Survival survival;
 		survival = this.survivalService.findOne(super.getEntityId("survival1"));
 		Assert.notNull(survival);
 	}
-	
+
 	@Test
 	public void testSaveSurvival() {
 		Survival survival;
 		Trip trip;
-		
+
 		survival = this.survivalService.findOne(super.getEntityId("survival1"));
-		trip = this.tripService.findOne(super.getEntityId("trip1"));		
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		survival.setTrip(trip);
-		
+
 		this.survivalService.save(survival);
 	}
-	
+
 	@Test
 	public void testDeleteSurvival() {
 		Survival survival;
 		survival = this.survivalService.findOne(super.getEntityId("survival1"));
 		this.survivalService.delete(survival);
 	}
-	
+
 	@Test
-	public void testFindSurvivalByTrips(){
+	public void testFindSurvivalByTrips() {
 		authenticate("manager01");
 		Collection<Survival> survivals;
 
-		survivals= new ArrayList<Survival>();
+		survivals = new ArrayList<Survival>();
 		Survival survival;
-		survival= this.survivalService.findOne(super.getEntityId("survival1"));
+		survival = this.survivalService.findOne(super.getEntityId("survival1"));
 		survivals.add(survival);
 		survivals = this.survivalService.findSurvivalByTrips();
 
@@ -97,53 +96,52 @@ public class SurvivalServiceTest extends AbstractTest {
 		Assert.notNull(survivals);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testFindOneByTrips(){
+	public void testFindOneByTrips() {
 		authenticate("manager01");
 		Survival survival, res;
 		int id;
-		
+
 		survival = this.survivalService.findOne(super.getEntityId("survival1"));
 		id = survival.getId();
-		
+
 		res = this.survivalService.findOneByTrips(id);
 		Assert.notNull(res);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testSaveByTrips(){
+	public void testSaveByTrips() {
 		Survival survival;
 		Trip trip;
-		
+
 		survival = this.survivalService.findOne(super.getEntityId("survival2"));
-		trip = this.tripService.findOne(super.getEntityId("trip2"));		
+		trip = this.tripService.findOne(super.getEntityId("trip2"));
 		survival.setTrip(trip);
-		
+
 		this.survivalService.save(survival);
 	}
-	
+
 	@Test
-	public void testByDeleteTrips(){
+	public void testByDeleteTrips() {
 		authenticate("manager01");
 		Survival survival;
 		survival = this.survivalService.findOne(super.getEntityId("survival1"));
 		this.survivalService.deleteByTrips(survival);
 		unauthenticate();
 	}
-	
-	@Test 
-	public void testEnrolSurvival(){
+
+	@Test
+	public void testEnrolSurvival() {
 		authenticate("explorer02");
 		Explorer explorer;
 		Survival survival;
-		
+
 		explorer = this.explorerService.findOne(super.getEntityId("explorer2"));
 		survival = this.survivalService.findOne(super.getEntityId("survival2"));
-		
+
 		this.survivalService.enrolSurvival(explorer, survival);
 		unauthenticate();
 	}
-	
 }

@@ -17,58 +17,56 @@ import domain.Story;
 import domain.Trip;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-				"classpath:spring/datasource.xml",
-				"classpath:spring/config/packages.xml"})
+@ContextConfiguration(locations = { "classpath:spring/datasource.xml",
+		"classpath:spring/config/packages.xml" })
 @Transactional
-public class StoryServiceTest extends AbstractTest{
+public class StoryServiceTest extends AbstractTest {
 
 	// Service under test -------------
-	
+
 	@Autowired
 	private StoryService storyService;
-	
-	
+
 	// Supporting services ------------
-	
+
 	@Autowired
 	private TripService tripService;
-	
+
 	@Autowired
 	private ExplorerService explorerService;
-	
+
 	// Test ---------------------------
-	
-	@Test 
-	public void testCreateStory(){
+
+	@Test
+	public void testCreateStory() {
 		Story story;
 		story = this.storyService.findOne(super.getEntityId("story1"));
 		Assert.notNull(story);
 	}
-	
-	@Test 
-	public void testFindAllStory(){
+
+	@Test
+	public void testFindAllStory() {
 		Collection<Story> stories;
 		stories = new ArrayList<Story>();
 		stories = this.storyService.findAll();
 		Assert.notNull(stories);
 	}
-	
+
 	@Test
-	public void testFindOneStory(){
+	public void testFindOneStory() {
 		Story story;
 		story = this.storyService.findOne(super.getEntityId("story1"));
 		Assert.notNull(story);
 	}
-	
+
 	@Test
-	public void testSaveStory(){
+	public void testSaveStory() {
 		Story story;
 		String title, pieceText, link1;
 		Collection<String> link;
 		Trip trip;
 		Explorer writer;
-		
+
 		story = this.storyService.findOne(super.getEntityId("story1"));
 		title = "Sample";
 		pieceText = "Piece text";
@@ -77,38 +75,38 @@ public class StoryServiceTest extends AbstractTest{
 		link.add(link1);
 		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		writer = this.explorerService.findOne(super.getEntityId("explorer1"));
-		
+
 		story.setTitle(title);
 		story.setPieceText(pieceText);
 		story.setLink(link);
 		story.setTrip(trip);
 		story.setWriter(writer);
-		
-		this.storyService.save(story);		
+
+		this.storyService.save(story);
 	}
-	
+
 	@Test
-	public void testDeleteStory(){
+	public void testDeleteStory() {
 		Story story;
 		story = this.storyService.findOne(super.getEntityId("story1"));
 		this.storyService.delete(story);
 	}
-	
+
 	@Test
-	public void testWriteStory(){
+	public void testWriteStory() {
 		authenticate("explorer01"); // <---- writer
 		Story story;
 		Trip trip;
 		String title, pieceText, link1;
 		Collection<String> link;
-		
-		title ="Sample Title";
+
+		title = "Sample Title";
 		pieceText = "Another example.";
 		link1 = "http://www.google.com";
 		link = new ArrayList<String>();
 		link.add(link1);
 		trip = this.tripService.findOne(super.getEntityId("trip2"));
-		
+
 		story = this.storyService.writeStory(trip, title, pieceText, link);
 		Assert.notNull(story);
 		unauthenticate();

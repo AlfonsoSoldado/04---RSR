@@ -46,9 +46,9 @@ public class SponsorServiceTest extends AbstractTest {
 		sponsor = this.sponsorService.findOne(super.getEntityId("sponsor1"));
 		Assert.notNull(sponsor);
 	}
-	
+
 	@Test
-	public void testFindAllSponsor(){
+	public void testFindAllSponsor() {
 		Collection<Sponsor> sponsor;
 		sponsor = new ArrayList<Sponsor>();
 		sponsor = this.sponsorService.findAll();
@@ -62,14 +62,14 @@ public class SponsorServiceTest extends AbstractTest {
 		sponsor = this.sponsorService.create();
 
 		Sponsorship sponsorShip;
-		sponsorShip = this.sponsorShipService.findOne(super.getEntityId("sponsorship1"));
+		sponsorShip = this.sponsorShipService.findOne(super
+				.getEntityId("sponsorship1"));
 		Collection<Sponsorship> sponsorShips;
 		sponsorShips = new ArrayList<Sponsorship>();
 		sponsorShips.add(sponsorShip);
 		sponsor.setSponsorship(sponsorShips);
-		
-		this.sponsorService.save(sponsor);
 
+		this.sponsorService.save(sponsor);
 	}
 
 	@Test
@@ -80,17 +80,15 @@ public class SponsorServiceTest extends AbstractTest {
 		Assert.notNull(sponsor);
 		this.sponsorService.delete(sponsor);
 		unauthenticate();
-
 	}
 
 	@Test
 	public void testFindByPrincipal() {
 		authenticate("sponsor01");
 		Sponsor sponsor;
-		sponsor= this.sponsorService.findOne(super.getEntityId("sponsor2"));
+		sponsor = this.sponsorService.findOne(super.getEntityId("sponsor2"));
 		sponsor = this.sponsorService.findByPrincipal();
 		Assert.notNull(sponsor);
 		unauthenticate();
 	}
-
 }
