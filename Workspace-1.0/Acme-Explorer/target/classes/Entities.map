@@ -1,5 +1,9 @@
 #./src/main/resources/Entities.map
+<<<<<<< HEAD
 #Wed Nov 15 10:07:40 CET 2017
+=======
+#Wed Nov 15 10:34:52 CET 2017
+>>>>>>> f0d10b2fd120e0812f548a4e837886fb6fe4f8dc
 trashBoxExplorer4=2870
 trashBoxExplorer3=2864
 trashBoxExplorer2=2858
