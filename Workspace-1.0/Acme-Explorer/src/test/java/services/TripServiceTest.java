@@ -41,14 +41,23 @@ public class TripServiceTest extends AbstractTest{
 	// Supporting services --------------
 	@Autowired
 	private ManagerService managerService;
-	
+	private RangerService rangerServices;
+	private CategoryService categoryServices;
+	private LegalTextService legalTextService;
+	private ApplicationService applicationService;
+	private SurvivalService survivalService;
+	private StoryService storyService;
+	private StageService stageService;
+	private AuditService auditService;
+	private NoteService noteService;
+	private ValueService valueService;
 	
 	// Test -----------------------------
 	
 	@Test
 	public void testCreateTrip(){
 		Trip trip;
-		trip = this.tripService.create();
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		Assert.notNull(trip);
 	}
 	
@@ -70,7 +79,7 @@ public class TripServiceTest extends AbstractTest{
 	@Test
 	public void testSaveTrip(){
 		Trip trip;
-		trip = this.tripService.create();
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		
 		//attributes
 		trip.setTicker("171042-JUHP");
@@ -102,58 +111,79 @@ public class TripServiceTest extends AbstractTest{
 		//Relationships
 		Ranger ranger;
 		ranger = new Ranger();
+		ranger= this.rangerServices.findOne(super.getEntityId("ranger1"));
 		trip.setRanger(ranger);
 		
 		Collection<Survival> survivals;
 		survivals = new ArrayList<Survival>();
+		Survival survival1;
+		survival1= this.survivalService.findOne(super.getEntityId("survival1"));
+		Survival survival2;
+		survival2= this.survivalService.findOne(super.getEntityId("survival2"));
+		
+		survivals.add(survival1);
+		survivals.add(survival2);
 		trip.setSurvival(survivals);
 		
 		Manager manager;
-		manager = this.managerService.create();
+		manager = this.managerService.findOne(super.getEntityId("manager1"));
 		trip.setManager(manager);
 		
 		Collection<Story> stories;
 		stories = new ArrayList<Story>();
+		Story story1;
+		story1= this.storyService.findOne(super.getEntityId("story1"));
+		
+		stories.add(story1);
 		trip.setStory(stories);
 		
 		Collection<Stage> stages;
 		stages = new ArrayList<Stage>();
 		Stage stage1;
-		stage1 = new Stage();
+		stage1 = this.stageService.findOne(super.getEntityId("stage1"));
 		Stage stage2;
-		stage2 = new Stage();
+		stage2 = this.stageService.findOne(super.getEntityId("stage2"));
 		stages.add(stage1);
 		stages.add(stage2);
 		trip.setStage(stages);
 		
 		Category category;
-		category = new Category();
+		category = this.categoryServices.findOne(super.getEntityId("category1"));
 		trip.setCategory(category);
 		
 		LegalText legalText;
-		legalText = new LegalText();
+		legalText = this.legalTextService.findOne(super.getEntityId("legatText1"));;
 		trip.setLegalText(legalText);
 		
 		Collection<Application> applications;
 		applications = new ArrayList<Application>();
 		Application application1;
-		application1 = new Application();
+		application1 = this.applicationService.findOne(super.getEntityId("application1"));
 		Application application2;
-		application2 = new Application();
+		application2 = this.applicationService.findOne(super.getEntityId("application2"));
 		applications.add(application1);
 		applications.add(application2);
 		trip.setApplication(applications);
 		
 		Collection<Audit> audits;
 		audits = new ArrayList<Audit>();
+		Audit audit;
+		audit= this.auditService.findOne(super.getEntityId("audit1"));
+		audits.add(audit);
 		trip.setAudit(audits);
 		
 		Collection<Note> notes;
 		notes = new ArrayList<Note>();
+		Note note;
+		note= this.noteService.findOne(super.getEntityId("note1"));
+		notes.add(note);
 		trip.setNote(notes);
 		
 		Collection<Value> values;
 		values = new ArrayList<Value>();
+		Value value1;
+		value1= this.valueService.findOne(super.getEntityId("value1"));
+		values.add(value1);
 		trip.setValue(values);
 		
 		this.tripService.save(trip);
@@ -161,29 +191,47 @@ public class TripServiceTest extends AbstractTest{
 	
 	@Test
 	public void testDeteleTrip(){
+		authenticate("manager01");
 		Trip trip;
-		trip = this.tripService.findOne(super.getEntityId("trip2"));
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
+		Assert.notNull(trip);
 		this.tripService.delete(trip);
+		unauthenticate();
+		
 	}
 	
 	@Test
 	public void testFindTripsByManager(){
+		authenticate("manager01");
 		Collection<Trip> trips;
 		trips = new ArrayList<Trip>();
+		Trip trip;
+		trip=this.tripService.findOne(super.getEntityId("trip2"));
+		Assert.notNull(trip);
+		trips.add(trip);
+		
+		Manager manager;
+		manager= this.managerService.findOne(super.getEntityId("manager2"));
+		Assert.notNull(manager);
+		
 		Integer intManager;
-		intManager = super.getEntityId("manager1");
+		intManager = manager.getId();
 		trips.addAll(this.tripService.findTripsByManager(intManager));
 		Assert.notNull(trips);
+		
+		unauthenticate();
 	}
 	
 	@Test
 	public void testEditByManager(){
+		authenticate("manager01");
 		Trip trip;
 		trip = new Trip();
 		Integer intTrip;
 		intTrip = super.getEntityId("trip1");
 		trip = this.tripService.editByManager(intTrip);
 		Assert.notNull(trip);
+		unauthenticate();
 	}
 	
 	@Test
@@ -217,24 +265,33 @@ public class TripServiceTest extends AbstractTest{
 	public void testFindTripsByCategory(){
 		Collection<Trip> trips;
 		trips = new ArrayList<Trip>();
-		Category c = new Category();
+		Category c = this.categoryServices.findOne(super.getEntityId("category1"));
+		Assert.notNull(c);
+		
 		trips.addAll(this.tripService.findTripsByCategory(c));
 	}
 	
 	
 	@Test
 	public void testCancelTrip(){
+		
+		authenticate("manager01");
 		Trip trip;
 		trip = this.tripService.findOne(super.getEntityId("trip2"));
+		Assert.notNull(trip);
 		this.tripService.cancelTrip(trip);
+		
+		unauthenticate();
 	}
 	
 	@Test
 	// TODO: hacer testTripApplicationExplorer
 	public void testTripApplicationExplorer(){
+		authenticate("manager01");
 		Trip trip;
 		trip = this.tripService.findOne(super.getEntityId("trip2"));
 		this.tripService.tripApplicationExplorer(trip);
+		unauthenticate();
 	}
 	
 	

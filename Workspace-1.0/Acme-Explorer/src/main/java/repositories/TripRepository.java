@@ -28,7 +28,7 @@ public interface TripRepository extends JpaRepository<Trip, Integer> {
 	Collection<Trip> browseTripsByActor();
 
 	// 10.4 
-	@Query("select t from Trip t where t.category.id = ?1")
+	@Query("select t from Trip t join  t.category c where c.id = ?1")
 	Collection<Trip> browseTripsByCategories(int id);
 
 	// 10.3

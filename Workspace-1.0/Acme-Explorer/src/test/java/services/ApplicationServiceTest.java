@@ -84,9 +84,7 @@ public class ApplicationServiceTest extends AbstractTest {
 		manager.setAddress("C/ Jueves");
 		manager.setEmail("fernan@gmail.com");
 		manager.setName("Fernando");
-		Collection<Application> applicationManager = manager.getApplication();
-		applicationManager.add(application);
-		manager.setApplication(applicationManager);
+		manager.setApplication(application);
 		application.setManager(manager);
 		
 		Date moment = new Date(System.currentTimeMillis() - 1);
@@ -103,6 +101,12 @@ public class ApplicationServiceTest extends AbstractTest {
 		
 		CC creditCard;
 		creditCard = new CC();
+		creditCard.setHolderName("Francisco");
+		creditCard.setBrandName("VISA");
+		creditCard.setExpirationMonth(10);
+		creditCard.setExpirationYear(2);
+		creditCard.setCVV(112);
+		creditCard.setNumber("4099537775843795");
 		application.setCreditCard(creditCard);
 		
 		Explorer explorer;
@@ -156,7 +160,7 @@ public class ApplicationServiceTest extends AbstractTest {
 	
 	@Test
 	public void testSaveApplicationManager() {
-		this.authenticate("manager01");
+		authenticate("manager01");
 		Application application;
 		application = this.applicationService.create();
 		
@@ -165,8 +169,7 @@ public class ApplicationServiceTest extends AbstractTest {
 		manager.setAddress("C/ Viernes");
 		manager.setEmail("francisco@gmail.com");
 		manager.setName("Francisco");
-		Collection<Application> applicationManager = manager.getApplication();
-		applicationManager.add(application);
+		Application applicationManager = manager.getApplication();
 		manager.setApplication(applicationManager);
 		application.setManager(manager);
 		
@@ -208,8 +211,9 @@ public class ApplicationServiceTest extends AbstractTest {
 	
 	@Test
 	public void testChangingStatus(){
+		authenticate("manager01");
 		Application a;
-		a=this.applicationService.findOne(super.getEntityId("application"));
+		a=this.applicationService.findOne(super.getEntityId("application1"));
 		Assert.notNull(a);
 		
 		String status;
@@ -217,12 +221,13 @@ public class ApplicationServiceTest extends AbstractTest {
 		Assert.notNull(status);
 		
 		this.applicationService.changingStatus(a, status);
+		unauthenticate();
 	}
 	
 	
 	@Test
 	public void testFindListApplication(){
-		
+		authenticate("manager01");
 		Manager manager;
 		manager= this.managerService.findOne(super.getEntityId("manager1"));
 		Assert.notNull(manager);
@@ -230,23 +235,25 @@ public class ApplicationServiceTest extends AbstractTest {
 		Collection<Application> res = new ArrayList<Application>();
 		res= this.applicationService.findListApplication(manager);
 		Assert.notNull(res);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testFindApplicationByExplorer(){
-		
-		int id;
+		authenticate("explorer01");
 		Explorer explorer;
-		explorer= this.explorerService.findOne(super.getEntityId("Explorer1"));
+		explorer= this.explorerService.findOne(super.getEntityId("explorer1"));
 		Assert.notNull(explorer);
 		
 		Collection<Application> res= new ArrayList<Application>();
-		res= this.applicationService.findApplicationByExplorer(explorer.getId());
-		Assert.notNull(explorer);
+		res= this.applicationService.findApplicationByExplorer(explorer);
+		Assert.notNull(res);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testApplicationAccepted(){
+		authenticate("explorer01");
 		CC cc;
 		cc= new CC();
 		cc.setHolderName("BBVA");
@@ -262,6 +269,6 @@ public class ApplicationServiceTest extends AbstractTest {
 		Assert.notNull(application);
 		
 		this.applicationService.applicationAccepted(cc, application);
-		
+		unauthenticate();
 	}
 }

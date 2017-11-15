@@ -51,7 +51,7 @@ public class ManagerService {
 		Authority authority = new Authority();
 		Collection<SocialId> socialId = new ArrayList<SocialId>();
 		Collection<Folder> folder = new ArrayList<Folder>();
-		Collection<Application> application = new ArrayList<Application>();
+		Application application = new Application();
 		Collection<Survival> survival = new ArrayList<Survival>();
 		Collection<Trip> trip = new ArrayList<Trip>();
 		folder = this.folderService.systemFolders();
