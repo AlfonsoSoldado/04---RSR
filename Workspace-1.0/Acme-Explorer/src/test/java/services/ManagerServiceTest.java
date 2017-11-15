@@ -55,9 +55,11 @@ public class ManagerServiceTest extends AbstractTest {
 	
 	@Test
 	public void testCreateManager() {
+		authenticate("admin");
 		Manager manager;
 		manager = this.managerService.create();
 		Assert.notNull(manager);
+		unauthenticate();
 	}
 	
 	@Test
@@ -83,11 +85,11 @@ public class ManagerServiceTest extends AbstractTest {
 		manager.setPhoneNumber("653123456");
 		
 		Message received;
-		received = this.messageService.create();
+		received = this.messageService.findOne(super.getEntityId("message2"));
 		manager.setReceived(received);
 		
 		Message sent;
-		sent = this.messageService.create();
+		sent = this.messageService.findOne(super.getEntityId("message1"));
 		Collection<Message> sents = manager.getSent();
 		sents.add(sent);
 		manager.setSent(sents);
@@ -101,7 +103,7 @@ public class ManagerServiceTest extends AbstractTest {
 		manager.setSurname("Cano");
 		
 		Survival survival;
-		survival = this.survivalService.create();
+		survival = this.survivalService.findOne(super.getEntityId("survival1"));
 		Collection<Survival> survivals = manager.getSurvival();
 		survivals.add(survival);
 		manager.setSurvival(survivals);
@@ -109,7 +111,7 @@ public class ManagerServiceTest extends AbstractTest {
 		manager.setSuspicious(false);
 		
 		Trip trip;
-		trip = this.tripService.create();
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		Collection<Trip> trips = manager.getTrip();
 		trips.add(trip);
 		manager.setTrip(trips);
@@ -117,13 +119,13 @@ public class ManagerServiceTest extends AbstractTest {
 		manager.setAddress("C/ Castilla");
 		
 		Application application;
-		application = this.applicationService.create();
+		application = this.applicationService.findOne(super.getEntityId("application1"));
 		manager.setApplication(application);
 		
 		manager.setEmail("managerimportante@gmail.com");
 		
 		Folder customFolder;
-		customFolder = this.folderService.create();
+		customFolder = this.folderService.findOne(super.getEntityId("customBoxManager1"));
 		Collection<Folder> folders = manager.getFolders();
 		folders.add(customFolder);
 		manager.setFolders(folders);
@@ -140,8 +142,10 @@ public class ManagerServiceTest extends AbstractTest {
 	
 	@Test
 	public void testFindByPrincipalManager(){
+		authenticate("manager01");
 		Manager manager;
 		manager = this.managerService.findByPrincipal();
 		Assert.notNull(manager);
+		unauthenticate();
 	}
 }
