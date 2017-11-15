@@ -89,9 +89,11 @@ public class ActorServiceTest extends AbstractTest{
 	}
 	@Test
 	public void testFindByPrincipal(){
+		authenticate("admin");
 		Actor actor;
 		actor= this.actorService.findByPrincipal();
 		Assert.notNull(actor);
+		unauthenticate();
 	}
 	
 	
@@ -151,7 +153,7 @@ public class ActorServiceTest extends AbstractTest{
 	public void testFindAuditByTrip(){
 		int i;
 		Trip trip;
-		trip= this.tripService.findOne(super.getEntityId("Trip2"));
+		trip= this.tripService.findOne(super.getEntityId("trip2"));
 		Assert.notNull(trip);
 		i=trip.getId();
 		
@@ -164,21 +166,24 @@ public class ActorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testBanActor(){
+		authenticate("admin");
 		Actor actor;
 		actor= this.actorService.findOne(super.getEntityId("ranger1"));
 		Assert.notNull(actor);
 		
 		this.actorService.banActor(actor);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testUnBanActor(){
+		authenticate("admin");
 		Actor actor;
-		actor= this.actorService.findOne(super.getEntityId("actor2"));
+		actor= this.actorService.findOne(super.getEntityId("ranger1"));
 		Assert.notNull(actor);
 		
 		this.actorService.unbanActor(actor);
-		
+		unauthenticate();
 	}
 	
 	@Test
@@ -192,12 +197,16 @@ public class ActorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testCheckSpamWords(){
+		authenticate("admin");
 		this.actorService.checkSpamWords();
+		unauthenticate();
 	}
 	
 	@Test
 	public void testActorToSuspiciousList(){
+		authenticate("admin");
 		this.actorService.actorToSuspiciousList();
+		unauthenticate();
 	}
 	
 	@Test
@@ -207,7 +216,7 @@ public class ActorServiceTest extends AbstractTest{
 		Assert.notNull(actores);
 				
 		Actor sender;
-		sender=this.actorService.findOne(super.getEntityId("actor2"));
+		sender=this.actorService.findOne(super.getEntityId("ranger1"));
 		Assert.notNull(sender);
 		
 		Message message;
@@ -220,9 +229,9 @@ public class ActorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testDeleteMessage(){
-		
+		authenticate("ranger01");
 		Actor actor;
-		actor=this.actorService.findOne(super.getEntityId("actor1"));
+		actor=this.actorService.findOne(super.getEntityId("ranger1"));
 		Assert.notNull(actor);
 		
 		Message message;
@@ -230,8 +239,7 @@ public class ActorServiceTest extends AbstractTest{
 		Assert.notNull(message);
 		
 		this.actorService.deleteMessage(actor, message);
-		
-		
+		unauthenticate();
 	}
 	
 	@Test
