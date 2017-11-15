@@ -27,10 +27,9 @@ LegalText
 Ranger
 Explorer
 Application
-
+Story
 
 FALTA:
 Actor
-Story
 Survival
 Trip
