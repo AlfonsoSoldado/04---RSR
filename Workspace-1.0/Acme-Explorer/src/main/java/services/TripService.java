@@ -192,7 +192,7 @@ public class TripService {
 		res = new ArrayList<Trip>();
 		Assert.notNull(category);
 		Assert.isTrue(category.getId() != 0);
-		res.addAll(this.tripRepository.browseTripsByCategories(category.getId()));
+		res.addAll(tripRepository.browseTripsByCategories(category.getId()));
 		
 		return res;
 	}
