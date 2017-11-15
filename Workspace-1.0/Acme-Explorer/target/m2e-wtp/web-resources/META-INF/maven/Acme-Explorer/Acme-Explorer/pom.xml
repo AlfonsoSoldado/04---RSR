@@ -19,9 +19,9 @@
 
 	<!-- Artifact identification and properties -->
 
-	<groupId>Design-and-Testing</groupId>
-	<artifactId>Acme</artifactId>
-	<version>1.12</version>
+	<groupId>Acme-Explorer</groupId>
+	<artifactId>Acme-Explorer</artifactId>
+	<version>4.0</version>
 	<packaging>war</packaging>
 	
 	<properties>
@@ -30,9 +30,9 @@
 
 	<!-- Indexing information -->
 
-	<name>Acme</name>
-	<url>http://www.Acme.com</url>
-	<description>This is D&amp;T's sample project.</description>
+	<name>Acme-Explorer</name>
+	<url>http://www.Acme-Explorer.com</url>
+	<description>This is an Acme-Explorer project.</description>
 	
 	<!-- Build commands -->
 

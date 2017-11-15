@@ -14,7 +14,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<img src="images/logo.png" alt="Sample Co., Inc." />
+	<img src="images/logo.png" alt="Acme-Explorer Co., Inc." />
 </div>
 
 <div>
