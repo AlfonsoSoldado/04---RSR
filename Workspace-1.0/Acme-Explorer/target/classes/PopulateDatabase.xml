@@ -1977,7 +1977,7 @@
 	<!-- FINDER1 -->
 	
 	<bean id="finder1" class="domain.Finder">
-	<property name="singleKey" value="Punta Cana" />
+	<property name="singleKey" value="Beach" />
 	<property name="minPrice" value="50.6" />
 	<property name="maxPrice" value="458.6" />
 	<property name="start" value="12/12/2017" />
