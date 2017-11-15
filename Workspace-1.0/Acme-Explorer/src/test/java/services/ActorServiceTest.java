@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import security.Authority;
 import security.UserAccount;
 import utilities.AbstractTest;
 import domain.Actor;
@@ -21,7 +20,6 @@ import domain.Category;
 import domain.Curriculum;
 import domain.Folder;
 import domain.Message;
-import domain.Ranger;
 import domain.Trip;
 
 
@@ -248,7 +246,7 @@ public class ActorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testMoveMessage(){
-		authenticate("ranger1");
+		authenticate("ranger01");
 		Message message;
 		message= this.messageService.findOne(super.getEntityId("message1"));
 		Assert.notNull(message);

@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Curriculum;
+import domain.Folder;
 import domain.Ranger;
 import domain.Trip;
 
@@ -37,7 +38,8 @@ public class RangerServiceTest extends AbstractTest{
 	@Autowired
 	private TripService tripService;
 	
-	
+	@Autowired
+	private FolderService folderService;
 	
 	// Test -----------------------------
 	
@@ -70,6 +72,18 @@ public class RangerServiceTest extends AbstractTest{
 		ranger = this.rangerService.create();
 		
 		ranger.setSuspicious(false);
+		
+		ranger.setName("Alba");
+		ranger.setEmail("alf@gmail.com");
+		ranger.setSurname("Gonz");
+		ranger.setPhoneNumber("678234543");
+		
+		Collection<Folder> folders = new ArrayList<Folder>();
+		Folder folder;
+		folder = folderService.findOne(super.getEntityId("customBoxRanger1"));
+		folders.add(folder);
+		
+		ranger.setFolders(folders);
 		
 		Curriculum curriculum;
 		curriculum = this.curriculumService.findOne(super.getEntityId("curriculum1"));
