@@ -84,16 +84,16 @@ public class SurvivalServiceTest extends AbstractTest {
 	public void testFindSurvivalByTrips(){
 		authenticate("explorer01");
 		Collection<Survival> survivals;
-<<<<<<< HEAD
+
 		survivals= new ArrayList<Survival>();
 		Survival survival;
 		survival= this.survivalService.findOne(super.getEntityId("survival1"));
 		survivals.add(survival);
 		survivals = this.survivalService.findSurvivalByTrips();
-=======
+
 		survivals = new ArrayList<Survival>();
 		survivals.addAll(this.survivalService.findSurvivalByTrips());
->>>>>>> fbfc72f386f57658afebd893170a6b2e08b67fd2
+
 		Assert.notNull(survivals);
 		unauthenticate();
 	}
