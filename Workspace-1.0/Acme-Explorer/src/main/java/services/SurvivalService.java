@@ -139,14 +139,14 @@ public class SurvivalService {
 		Collection<Survival> res = new ArrayList<Survival>();
 		Collection<Explorer> explorers = new ArrayList<Explorer>();
 		
-		Assert.isTrue(survivals.contains(survival));
+		//Assert.isTrue(survivals.contains(survival));
 		
 		Trip trip;
 		trip = survivalRepository.findTripBySurvival(explorer.getId());
 		
 		Collection<Application> applications = new ArrayList<Application>();
 		applications = survivalRepository.enrolSurvivalExplorer(trip.getId());
-		Assert.isTrue(applications.contains(survival));
+		//Assert.isTrue(applications.contains(survival));
 		
 		res.addAll(explorer.getSurvival());
 		res.add(survival);
