@@ -108,7 +108,7 @@ public class ActorServiceTest extends AbstractTest{
 	public void testSearchTripsBySingleKey(){
 		
 		String key;
-		key="Punta Cana";
+		key="Punta";
 		Assert.notNull(key);
 		
 		Collection<Trip> res;
@@ -119,13 +119,13 @@ public class ActorServiceTest extends AbstractTest{
 	
 	@Test 
 	public void testSearchTripsByCategory(){
-		Category category;
-		category= this.categoryService.findOne(super.getEntityId("category1"));
+		Category category = new Category();
+		category= this.categoryService.findOne(super.getEntityId("category2"));
 		Assert.notNull(category);
 		
 		Collection<Trip> res;
 		res= new ArrayList<Trip>();
-		res= this.actorService.searchTripsByCategory(category);
+		res.addAll(this.actorService.searchTripsByCategory(category.getId()));
 		Assert.notNull(res);
 		
 	}
@@ -134,15 +134,15 @@ public class ActorServiceTest extends AbstractTest{
 	public void testFindCurriculumRangerByTrip(){
 		
 		int i;
-		Ranger ranger;
-		ranger= this.rangerService.findOne(super.getEntityId("Ranger1"));
-		Assert.notNull(ranger);
-		i= ranger.getId();
+		Trip trip;
+		trip= this.tripService.findOne(super.getEntityId("trip1"));
+		Assert.notNull(trip);
+		i= trip.getId();
 		
 		
 		Collection<Curriculum> res;
 		res= new ArrayList<Curriculum>();
-		res=this.actorService.findCurriculumRangerByTrip(i);
+		res.addAll(this.actorService.findCurriculumRangerByTrip(i));
 		Assert.notNull(res);
 		
 	}
@@ -165,7 +165,7 @@ public class ActorServiceTest extends AbstractTest{
 	@Test
 	public void testBanActor(){
 		Actor actor;
-		actor= this.actorService.findOne(super.getEntityId("actor1"));
+		actor= this.actorService.findOne(super.getEntityId("ranger1"));
 		Assert.notNull(actor);
 		
 		this.actorService.banActor(actor);
