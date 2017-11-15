@@ -82,10 +82,12 @@ public class StoryService {
 	// 44.2
 	public Story writeStory(Trip trip, String title, String pieceText, Collection<String> link){
 		Assert.notNull(trip);
-		Collection<Trip> trips = new ArrayList<Trip>();
-		trips = storyRepository.findTripsForStory();
+		//Collection<Trip> trips = new ArrayList<Trip>();
+		//trips = storyRepository.findTripsForStory();
 		
-		Assert.isTrue(trips.contains(trip));
+		//Assert.isTrue(trips.contains(trip));
+		Explorer ex;
+		ex = this.explorerService.findByPrincipal();
 		Collection<Story> stories = new ArrayList<Story>();
 		stories.addAll(trip.getStory());
 		
@@ -96,12 +98,14 @@ public class StoryService {
 		story.setPieceText(pieceText);
 		story.setTitle(title);
 		story.setTrip(trip);
+		story.setWriter(ex);
 		
 		stories.add(story);
 		
-		Assert.notNull(story);
 		
 		trip.setStory(stories);
+
+		Assert.notNull(stories);
 		
 		return story;
 	}

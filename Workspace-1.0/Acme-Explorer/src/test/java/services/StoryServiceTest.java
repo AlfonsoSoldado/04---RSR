@@ -96,7 +96,6 @@ public class StoryServiceTest extends AbstractTest{
 	
 	@Test
 	public void testWriteStory(){
-		
 		Story story;
 		Trip trip;
 		String title, pieceText, link1;
