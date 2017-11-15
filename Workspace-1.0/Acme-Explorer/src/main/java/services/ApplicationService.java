@@ -84,12 +84,11 @@ public class ApplicationService {
 
 	// 12.2 (changing)
 	 public void changingStatus(Application a, String status) {
-		 explorerService.checkAuthority();
+		 managerService.checkAuthority();
 		 Assert.notNull(a);
 		 Assert.notNull(status);
 		 Assert.isTrue(status.equals("REJECTED") || status.equals("DUE"));
 		 
-		 managerService.checkAuthority();
 		 Manager m = this.managerService.findByPrincipal();
 		 
 		 Assert.notNull(m);
@@ -104,13 +103,12 @@ public class ApplicationService {
 
 	// 12.2 (listing)
 	public Collection<Application> findListApplication(Manager manager) {
-		explorerService.checkAuthority();
+		managerService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
 		
 		Manager m = this.managerService.create();
 		
 		m = managerService.findByPrincipal();
-		managerService.checkAuthority();
 		
 		Assert.notNull(m);
 		
@@ -128,7 +126,6 @@ public class ApplicationService {
 		Explorer e = this.explorerService.create();
 		
 		e = explorerService.findByPrincipal();
-		explorerService.checkAuthority();
 		
 		Assert.notNull(e);
 		
