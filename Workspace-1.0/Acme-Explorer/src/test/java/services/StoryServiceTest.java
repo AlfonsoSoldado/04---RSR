@@ -42,7 +42,7 @@ public class StoryServiceTest extends AbstractTest{
 	@Test 
 	public void testCreateStory(){
 		Story story;
-		story = this.storyService.create();
+		story = this.storyService.findOne(super.getEntityId("story1"));
 		Assert.notNull(story);
 	}
 	
@@ -69,14 +69,14 @@ public class StoryServiceTest extends AbstractTest{
 		Trip trip;
 		Explorer writer;
 		
-		story = this.storyService.create();
+		story = this.storyService.findOne(super.getEntityId("story1"));
 		title = "Sample";
 		pieceText = "Piece text";
 		link1 = "http://www.google.es";
 		link = new ArrayList<String>();
 		link.add(link1);
-		trip = this.tripService.create();
-		writer = this.explorerService.create();
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
+		writer = this.explorerService.findOne(super.getEntityId("explorer1"));
 		
 		story.setTitle(title);
 		story.setPieceText(pieceText);
@@ -96,6 +96,7 @@ public class StoryServiceTest extends AbstractTest{
 	
 	@Test
 	public void testWriteStory(){
+		
 		Story story;
 		Trip trip;
 		String title, pieceText, link1;
@@ -106,7 +107,7 @@ public class StoryServiceTest extends AbstractTest{
 		link1 = "http://www.google.com";
 		link = new ArrayList<String>();
 		link.add(link1);
-		trip = this.tripService.findOne(super.getEntityId("trip1"));
+		trip = this.tripService.findOne(super.getEntityId("trip2"));
 		
 		story = this.storyService.writeStory(trip, title, pieceText, link);
 		Assert.notNull(story);
