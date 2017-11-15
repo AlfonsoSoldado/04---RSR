@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
@@ -28,7 +29,8 @@ public class Explorer extends Actor {
 	private Collection<Emergency> emergency;
 	private Collection<Story> stories;
 	private Application application;
-
+	private Collection<Survival> survival;
+	
 	@Valid
 	@NotNull
 	@OneToMany
@@ -69,5 +71,15 @@ public class Explorer extends Actor {
 
 	public void setApplication(Application application) {
 		this.application = application;
+	}
+	
+	@Valid
+	@ManyToMany(mappedBy = "explorer")
+	public Collection<Survival> getSurvival() {
+		return survival;
+	}
+
+	public void setSurvival(Collection<Survival> survival) {
+		this.survival = survival;
 	}
 }
