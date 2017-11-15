@@ -31,9 +31,6 @@ public class RangerService {
 
 	@Autowired
 	private FolderService folderService;
-	
-	@Autowired
-	private ActorService actorService;
 
 	// Constructors
 
@@ -44,8 +41,8 @@ public class RangerService {
 	// Simple CRUD methods
 
 	public Ranger create() {
-		Assert.isTrue(!this.actorService.checkAuthority());
 		Ranger res = new Ranger();
+
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		Collection<SocialId> socialId = new ArrayList<SocialId>();
@@ -53,7 +50,7 @@ public class RangerService {
 		Curriculum curriculum = new Curriculum();
 		Collection<Trip> trip = new ArrayList<Trip>();
 		folder = this.folderService.systemFolders();
-		
+
 		authority.setAuthority(Authority.RANGER);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);
@@ -62,6 +59,7 @@ public class RangerService {
 		res.setCurriculum(curriculum);
 		res.setTrip(trip);
 		res.setSuspicious(false);
+
 		return res;
 	}
 
@@ -95,9 +93,9 @@ public class RangerService {
 	}
 
 	// Other business methods
-	
-	//35.1
-	public Collection<Ranger> rangersSuspicious(){
+
+	// 35.1
+	public Collection<Ranger> rangersSuspicious() {
 		Collection<Ranger> res = new ArrayList<Ranger>();
 		// añadimos todas los rangers mediante la query
 		res.addAll(rangerRepository.rangersSuspicious());

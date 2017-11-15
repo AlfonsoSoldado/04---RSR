@@ -19,18 +19,18 @@ Note
 PersonalRecord
 Professional
 Sponsorship
+Sponsor
+SocialId
+Stage
 
 
 FALTA:
 Actor
 Application
 Audit
-Explorer
-LegalText (Falta meter en xml draftmode = false)
-Ranger
-SocialId
-Sponsor
-Stage
+Explorer (Hacer save bien)
+LegalText
+Ranger (Hacer save bien)
 Story
 Survival
 Trip

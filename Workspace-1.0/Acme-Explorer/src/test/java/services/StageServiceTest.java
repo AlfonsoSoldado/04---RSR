@@ -31,6 +31,7 @@ public class StageServiceTest extends AbstractTest{
 		
 	// Supporting services --------------
 	
+	@Autowired
 	private TripService tripService;
 		
 		
@@ -61,14 +62,13 @@ public class StageServiceTest extends AbstractTest{
 	@Test
 	public void testSaveStage(){
 		Stage stage;
-		stage= this.stageService.create();
+		stage= this.stageService.findOne(super.getEntityId("stage1"));
+		Trip trip;
+		trip= this.tripService.findOne(super.getEntityId("trip1"));
 		
 		stage.setTitle("First");
 		stage.setDescription("Something");
 		stage.setPrice(528.4);
-		
-		Trip trip;
-		trip= this.tripService.create();
 		stage.setTrip(trip);
 		
 		this.stageService.save(stage);
