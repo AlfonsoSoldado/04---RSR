@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -41,16 +42,27 @@ public class TripServiceTest extends AbstractTest{
 	// Supporting services --------------
 	@Autowired
 	private ManagerService managerService;
+	@Autowired
 	private RangerService rangerServices;
+	@Autowired
 	private CategoryService categoryServices;
+	@Autowired
 	private LegalTextService legalTextService;
+	@Autowired
 	private ApplicationService applicationService;
+	@Autowired
 	private SurvivalService survivalService;
+	@Autowired
 	private StoryService storyService;
+	@Autowired
 	private StageService stageService;
+	@Autowired
 	private AuditService auditService;
+	@Autowired
 	private NoteService noteService;
+	@Autowired
 	private ValueService valueService;
+	
 	
 	// Test -----------------------------
 	
@@ -78,115 +90,16 @@ public class TripServiceTest extends AbstractTest{
 	
 	@Test
 	public void testSaveTrip(){
+		//authenticate("admin");
+		authenticate("manager01");
 		Trip trip;
 		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		
-		//attributes
-		trip.setTicker("171042-JUHP");
-		trip.setTitle("title");
-		trip.setDescription("descripcion");
-		trip.setPrice(40.5);
+		trip.setTitle("Funciona");
 		
-		Collection<String> requirements;
-		requirements = new ArrayList<String>();
-		String r1 = "requirement 1";
-		String r2 = "requirement 2";
-		requirements.add(r1);
-		requirements.add(r2);
-		trip.setRequirement(requirements);
-		
-		//TODO: mirar si peta las fechas
-		Date d = new Date(System.currentTimeMillis()-1);
-		trip.setPublication(d);
-		
-		Date d2 = new Date(System.currentTimeMillis()-3);
-		trip.setTripStart(d2);
-		
-		Date d3 = new Date(System.currentTimeMillis()-2);
-		trip.setTripEnd(d3);
-		
-		trip.setReason("reason");
-		trip.setCancelled(false);
-		
-		//Relationships
-		Ranger ranger;
-		ranger = new Ranger();
-		ranger= this.rangerServices.findOne(super.getEntityId("ranger1"));
-		trip.setRanger(ranger);
-		
-		Collection<Survival> survivals;
-		survivals = new ArrayList<Survival>();
-		Survival survival1;
-		survival1= this.survivalService.findOne(super.getEntityId("survival1"));
-		Survival survival2;
-		survival2= this.survivalService.findOne(super.getEntityId("survival2"));
-		
-		survivals.add(survival1);
-		survivals.add(survival2);
-		trip.setSurvival(survivals);
-		
-		Manager manager;
-		manager = this.managerService.findOne(super.getEntityId("manager1"));
-		trip.setManager(manager);
-		
-		Collection<Story> stories;
-		stories = new ArrayList<Story>();
-		Story story1;
-		story1= this.storyService.findOne(super.getEntityId("story1"));
-		
-		stories.add(story1);
-		trip.setStory(stories);
-		
-		Collection<Stage> stages;
-		stages = new ArrayList<Stage>();
-		Stage stage1;
-		stage1 = this.stageService.findOne(super.getEntityId("stage1"));
-		Stage stage2;
-		stage2 = this.stageService.findOne(super.getEntityId("stage2"));
-		stages.add(stage1);
-		stages.add(stage2);
-		trip.setStage(stages);
-		
-		Category category;
-		category = this.categoryServices.findOne(super.getEntityId("category1"));
-		trip.setCategory(category);
-		
-		LegalText legalText;
-		legalText = this.legalTextService.findOne(super.getEntityId("legatText1"));;
-		trip.setLegalText(legalText);
-		
-		Collection<Application> applications;
-		applications = new ArrayList<Application>();
-		Application application1;
-		application1 = this.applicationService.findOne(super.getEntityId("application1"));
-		Application application2;
-		application2 = this.applicationService.findOne(super.getEntityId("application2"));
-		applications.add(application1);
-		applications.add(application2);
-		trip.setApplication(applications);
-		
-		Collection<Audit> audits;
-		audits = new ArrayList<Audit>();
-		Audit audit;
-		audit= this.auditService.findOne(super.getEntityId("audit1"));
-		audits.add(audit);
-		trip.setAudit(audits);
-		
-		Collection<Note> notes;
-		notes = new ArrayList<Note>();
-		Note note;
-		note= this.noteService.findOne(super.getEntityId("note1"));
-		notes.add(note);
-		trip.setNote(notes);
-		
-		Collection<Value> values;
-		values = new ArrayList<Value>();
-		Value value1;
-		value1= this.valueService.findOne(super.getEntityId("value1"));
-		values.add(value1);
-		trip.setValue(values);
-		
+	
 		this.tripService.save(trip);
+		unauthenticate();
 	}
 	
 	@Test
@@ -286,7 +199,7 @@ public class TripServiceTest extends AbstractTest{
 	
 	@Test
 	public void testTripApplicationExplorer(){
-		authenticate("manager01");
+		authenticate("explorer01");
 		Trip trip;
 		trip = this.tripService.findOne(super.getEntityId("trip2"));
 		this.tripService.tripApplicationExplorer(trip);
