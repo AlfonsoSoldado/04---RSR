@@ -207,6 +207,20 @@ public class ApplicationServiceTest extends AbstractTest {
 	}
 	
 	@Test
+	public void testChangingStatus(){
+		Application a;
+		a=this.applicationService.findOne(super.getEntityId("application"));
+		Assert.notNull(a);
+		
+		String status;
+		status="REJECTED";
+		Assert.notNull(status);
+		
+		this.applicationService.changingStatus(a, status);
+	}
+	
+	
+	@Test
 	public void testFindListApplication(){
 		
 		Manager manager;
