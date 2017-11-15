@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.Test;
@@ -12,10 +13,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Application;
-import domain.Folder;
 import domain.Manager;
-import domain.Message;
-import domain.SocialId;
 import domain.Survival;
 import domain.Trip;
 
@@ -34,12 +32,6 @@ public class ManagerServiceTest extends AbstractTest {
 	// Supporting services -----------------------
 	
 	@Autowired
-	private MessageService messageService;
-	
-	@Autowired
-	private SocialIdService socialIdService;
-	
-	@Autowired
 	private SurvivalService survivalService;
 	
 	@Autowired
@@ -48,8 +40,6 @@ public class ManagerServiceTest extends AbstractTest {
 	@Autowired
 	private ApplicationService applicationService;
 	
-	@Autowired
-	private FolderService folderService;
 	
 	// Test --------------------------------------
 	
@@ -78,59 +68,34 @@ public class ManagerServiceTest extends AbstractTest {
 	
 	@Test
 	public void testSaveManager() {
+		authenticate("admin");
 		Manager manager;
 		manager = this.managerService.create();
 		
-		manager.setName("Pedro");
-		manager.setPhoneNumber("653123456");
-		
-		Message received;
-		received = this.messageService.findOne(super.getEntityId("message2"));
-		manager.setReceived(received);
-		
-		Message sent;
-		sent = this.messageService.findOne(super.getEntityId("message1"));
-		Collection<Message> sents = manager.getSent();
-		sents.add(sent);
-		manager.setSent(sents);
-		
-		SocialId socialId;
-		socialId = this.socialIdService.create();
-		Collection<SocialId> socialIds = manager.getSocialId();
-		socialIds.add(socialId);
-		manager.setSocialId(socialIds);
-		
-		manager.setSurname("Cano");
-		
-		Survival survival;
-		survival = this.survivalService.findOne(super.getEntityId("survival1"));
-		Collection<Survival> survivals = manager.getSurvival();
-		survivals.add(survival);
-		manager.setSurvival(survivals);
-		
-		manager.setSuspicious(false);
-		
-		Trip trip;
-		trip = this.tripService.findOne(super.getEntityId("trip1"));
-		Collection<Trip> trips = manager.getTrip();
-		trips.add(trip);
-		manager.setTrip(trips);
-		
-		manager.setAddress("C/ Castilla");
-		
+		Collection<Survival> survival = new ArrayList<Survival>();
+		Collection<Trip> trip = new ArrayList<Trip>();
 		Application application;
+		Survival survival1;
+		Trip trip1;
+		
+		trip1 = this.tripService.findOne(super.getEntityId("trip1"));
 		application = this.applicationService.findOne(super.getEntityId("application1"));
+		survival1 = this.survivalService.findOne(super.getEntityId("survival1"));
+		survival.add(survival1);
+		trip.add(trip1);
+		Boolean suspicious = false;
+		
+		manager.setName("Manuel");
+		manager.setSurname("Perez");
+		manager.setEmail("manuelp@hotmail.com");
+		manager.setSuspicious(suspicious);
+		manager.setSurvival(survival);
+		manager.setTrip(trip);
 		manager.setApplication(application);
 		
-		manager.setEmail("managerimportante@gmail.com");
-		
-		Folder customFolder;
-		customFolder = this.folderService.findOne(super.getEntityId("customBoxManager1"));
-		Collection<Folder> folders = manager.getFolders();
-		folders.add(customFolder);
-		manager.setFolders(folders);
 		
 		this.managerService.save(manager);
+		unauthenticate();
 	}
 	
 	@Test
