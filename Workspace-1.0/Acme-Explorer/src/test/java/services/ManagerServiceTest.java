@@ -118,9 +118,7 @@ public class ManagerServiceTest extends AbstractTest {
 		
 		Application application;
 		application = this.applicationService.create();
-		Collection<Application> applications = manager.getApplication();
-		applications.add(application);
-		manager.setApplication(applications);
+		manager.setApplication(application);
 		
 		manager.setEmail("managerimportante@gmail.com");
 		
