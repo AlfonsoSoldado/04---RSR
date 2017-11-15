@@ -29,6 +29,6 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 	Collection<Audit> findAuditsByTrip(int id);
 	
 	//11.4
-	@Query("select f from Actor a join a.folders f where f.systemfolder = true and a.id = ?1")
+	@Query("select f from Actor a join a.folders f where f.systemFolder = true and a.id = ?1")
 	Collection<Folder> findSystemFolders(int id);
 }
