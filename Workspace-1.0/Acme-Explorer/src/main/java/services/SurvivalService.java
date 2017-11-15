@@ -134,24 +134,34 @@ public class SurvivalService {
 	// 44.1
 	public void enrolSurvival(Explorer explorer, Survival survival){
 		explorerService.checkAuthority();
-		Trip trip;
-		Integer cont = 0;
-		trip = survivalRepository.enrolSurvivalExplorer(explorer.getId(), survival.getId());
 		
 		Collection<Survival> survivals = new ArrayList<Survival>();
-		survivals = trip.getSurvival();
+		Collection<Survival> res = new ArrayList<Survival>();
+		Collection<Explorer> explorers = new ArrayList<Explorer>();
 		
 		Assert.isTrue(survivals.contains(survival));
 		
-		Collection<Application> applications = new ArrayList<Application>();
-		applications = survival.getTrip().getApplication();
+		Trip trip;
+		trip = survivalRepository.findTripBySurvival(explorer.getId());
 		
-		for(Application a: applications){
-			if(a.getStatus().equals("ACCEPTED")){
-				cont++;
-			}
-		}
-		Assert.isTrue(cont>0);
-		//TODO: Terminar haciendo relación EXPLORER <--> SURVIVAL
+		Collection<Application> applications = new ArrayList<Application>();
+		applications = survivalRepository.enrolSurvivalExplorer(trip.getId());
+		Assert.isTrue(applications.contains(survival));
+		
+		res.addAll(explorer.getSurvival());
+		res.add(survival);
+		
+		explorer.setSurvival(res);
+		
+		res.clear();
+		
+		for(Survival s: trip.getSurvival()){
+			explorers.addAll(s.getExplorer());
+			explorers.add(explorer);
+			
+			s.setExplorer(explorers);
+			
+			explorers.clear();
+		}		
 	}
 }

@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Administrator;
-import domain.Message;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,7 +27,7 @@ public class AdministratorServiceTest extends AbstractTest{
 	private AdministratorService administratorService;
 	
 	// Supporting services -----------------------
-	private MessageService messageService;
+
 	// Test --------------------------------------
 	
 	@Test
@@ -71,13 +70,6 @@ public class AdministratorServiceTest extends AbstractTest{
 		Administrator administrator;
 		administrator = this.administratorService.findOne(super.getEntityId("administrator1"));
 		this.administratorService.delete(administrator);
-	}
-	
-	@Test
-	public void testFindByPrincipal(){
-		Administrator administrator;
-		administrator= this.administratorService.findByPrincipal();
-		Assert.notNull(administrator);
 	}
 	
 	@Test
