@@ -19,6 +19,8 @@ Note
 PersonalRecord
 Professional
 Sponsorship
+Sponsor
+SocialId
 
 
 FALTA:
@@ -28,8 +30,6 @@ Audit
 Explorer
 LegalText (Falta meter en xml draftmode = false)
 Ranger
-SocialId
-Sponsor
 Stage
 Story
 Survival
