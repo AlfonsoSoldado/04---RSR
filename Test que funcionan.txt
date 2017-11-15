@@ -11,5 +11,26 @@ EducationRecord
 Emergency
 EndorserRecord
 Folder
+Manager
 Tag
-LegalText(Falta meter en xml draftmode = false)
+Message
+Miscellaneous
+Note
+PersonalRecord
+Professional
+Sponsorship
+
+
+FALTA:
+Actor
+Application
+Audit
+Explorer
+LegalText (Falta meter en xml draftmode = false)
+Ranger
+SocialId
+Sponsor
+Stage
+Story
+Survival
+Trip
