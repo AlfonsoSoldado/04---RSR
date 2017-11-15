@@ -42,7 +42,7 @@ public class ConfigurationServiceTest extends AbstractTest{
 	@Test
 	public void testFindOneConfiguration(){
 		Configuration conf;
-		conf = this.configurationService.findOne(super.getEntityId("configuration1"));
+		conf = this.configurationService.findOne(super.getEntityId("configuration"));
 		Assert.notNull(conf);
 	}
 	
@@ -95,7 +95,7 @@ public class ConfigurationServiceTest extends AbstractTest{
 	@Test 
 	public void testDeleteConfiguration(){
 		Configuration conf;
-		conf = this.configurationService.findOne(super.getEntityId("configuration1"));
+		conf = this.configurationService.findOne(super.getEntityId("configuration"));
 		this.configurationService.delete(conf);
 	}
 }

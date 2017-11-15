@@ -80,6 +80,7 @@ public class ExplorerServiceTest extends AbstractTest{
 	
 	@Test
 	public void testSaveExplorer() {
+		authenticate("explorer01");
 		Explorer explorer;
 		explorer = this.explorerService.create();
 		
@@ -135,6 +136,7 @@ public class ExplorerServiceTest extends AbstractTest{
 		folders.add(customFolder);
 		explorer.setFolders(folders);
 		this.explorerService.save(explorer);
+		unauthenticate();
 	}
 	
 	@Test
@@ -146,8 +148,10 @@ public class ExplorerServiceTest extends AbstractTest{
 	
 	@Test
 	public void testFindByPrincipalExplorer(){
+		authenticate("explorer01");
 		Explorer explorer;
 		explorer = this.explorerService.findByPrincipal();
 		Assert.notNull(explorer);
+		unauthenticate();
 	}
 }
