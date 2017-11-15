@@ -99,7 +99,6 @@ public class Finder extends DomainEntity {
 	private Collection<Trip> trip;
 
 	@Valid
-	@NotEmpty
 	@OneToMany
 	public Collection<Trip> getTrip() {
 		return trip;

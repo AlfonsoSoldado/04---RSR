@@ -106,12 +106,6 @@ public class ApplicationService {
 		managerService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
 		
-		Manager m = this.managerService.create();
-		
-		m = managerService.findByPrincipal();
-		
-		Assert.notNull(m);
-		
 		res.addAll(applicationRepository.findListApplication(manager.getId()));
 		Assert.notNull(res);
 		
@@ -119,17 +113,11 @@ public class ApplicationService {
 	}
 
 	// 13.2
-	public Collection<Application> findApplicationByExplorer(int id) {
+	public Collection<Application> findApplicationByExplorer(Explorer explorer) {
 		explorerService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
 		
-		Explorer e = this.explorerService.create();
-		
-		e = explorerService.findByPrincipal();
-		
-		Assert.notNull(e);
-		
-		res.addAll(applicationRepository.findApplicationByExplorer(id));
+		res.addAll(applicationRepository.findApplicationByExplorer(explorer.getId()));
 		Assert.notNull(res);
 		
 		return res;
