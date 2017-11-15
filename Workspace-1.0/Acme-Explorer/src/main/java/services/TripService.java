@@ -198,8 +198,11 @@ public class TripService {
 		managerService.checkAuthority();
 		Collection<Trip> trips = new ArrayList<Trip>();
 		trips = tripRepository.cancelTrip();
-		Assert.isTrue(trips.contains(trip));
-		trip.setCancelled(true);
+		for(Trip t: trips){
+			if(t.equals(trip)){
+				t.setCancelled(true);
+			}
+		}
 	}
 	
 	//13.4

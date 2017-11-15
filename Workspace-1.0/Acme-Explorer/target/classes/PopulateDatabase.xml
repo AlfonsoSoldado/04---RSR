@@ -1531,8 +1531,8 @@
 	<property name="title" value="Beach" />
 	<property name="description" value="Something" />
 	<property name="price" value="80.0" />
-	<property name="publication" value="24/10/2017" />
-	<property name="tripStart" value="12/12/2017" />
+	<property name="publication" value="24/10/2016" />
+	<property name="tripStart" value="12/12/2016" />
 	<property name="tripEnd" value="20/12/2017" />
 	<property name="reason" value="Because yes" />
 	<property name="cancelled" value="false" />
