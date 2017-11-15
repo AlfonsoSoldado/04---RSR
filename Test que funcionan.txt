@@ -11,6 +11,7 @@ EducationRecord
 Emergency
 EndorserRecord
 Folder
+Manager
 Tag
 Message
 Miscellaneous
@@ -26,7 +27,6 @@ Application
 Audit
 Explorer
 LegalText (Falta meter en xml draftmode = false)
-Manager
 Ranger
 SocialId
 Sponsor
