@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import security.UserAccountService;
 import utilities.AbstractTest;
 import domain.Curriculum;
 import domain.Folder;
@@ -38,9 +37,6 @@ public class RangerServiceTest extends AbstractTest{
 	
 	@Autowired
 	private TripService tripService;
-	
-	@Autowired
-	private UserAccountService userAccountService;
 	
 	@Autowired
 	private FolderService folderService;
