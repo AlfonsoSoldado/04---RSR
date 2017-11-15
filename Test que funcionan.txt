@@ -12,3 +12,4 @@ Emergency
 EndorserRecord
 Folder
 Tag
+LegalText(Falta meter en xml draftmode = false)
