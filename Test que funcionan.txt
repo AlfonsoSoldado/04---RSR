@@ -22,14 +22,14 @@ Sponsorship
 Sponsor
 SocialId
 Stage
+Audit
+LegalText
 
 
 FALTA:
 Actor
 Application
-Audit
 Explorer (Hacer save bien)
-LegalText
 Ranger (Hacer save bien)
 Story
 Survival
