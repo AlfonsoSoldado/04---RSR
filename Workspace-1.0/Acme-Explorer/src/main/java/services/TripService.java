@@ -183,12 +183,12 @@ public class TripService {
 	}
 	
 	// 10.4
-	public Collection<Trip> findTripsByCategory(int category){
+	public Collection<Trip> findTripsByCategory(Category category){
 		Collection<Trip> res;
 		res = new ArrayList<Trip>();
 		Assert.notNull(category);
-		Assert.isTrue(category != 0);
-		res.addAll(this.tripRepository.browseTripsByCategories(category));
+		Assert.isTrue(category.getId() != 0);
+		res.addAll(this.tripRepository.browseTripsByCategories(category.getId()));
 		
 		return res;
 	}
