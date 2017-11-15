@@ -132,36 +132,72 @@ public class SurvivalService {
 	}
 	
 	// 44.1
+//	public void enrolSurvival(Explorer explorer, Survival survival){
+//		explorerService.checkAuthority();
+//		
+//		Collection<Survival> survivals = new ArrayList<Survival>();
+//		Collection<Survival> res = new ArrayList<Survival>();
+//		Collection<Explorer> explorers = new ArrayList<Explorer>();
+//		
+//		//Assert.isTrue(survivals.contains(survival));
+//		
+//		Trip trip;
+//		trip = survivalRepository.findTripBySurvival(explorer.getId());
+//		
+//		Collection<Application> applications = new ArrayList<Application>();
+//		applications = survivalRepository.enrolSurvivalExplorer(trip.getId());
+//		//Assert.isTrue(applications.contains(survival));
+//		
+//		res.addAll(explorer.getSurvival());
+//		res.add(survival);
+//		
+//		explorer.setSurvival(res);
+//		
+//		res.clear();
+//		
+//		for(Survival s: trip.getSurvival()){
+//			explorers.addAll(s.getExplorer());
+//			explorers.add(explorer);
+//			
+//			s.setExplorer(explorers);
+//			
+//			explorers.clear();
+//		}		
+//	}
+	
 	public void enrolSurvival(Explorer explorer, Survival survival){
 		explorerService.checkAuthority();
+		
+		Trip trip;
 		
 		Collection<Survival> survivals = new ArrayList<Survival>();
 		Collection<Survival> res = new ArrayList<Survival>();
 		Collection<Explorer> explorers = new ArrayList<Explorer>();
 		
-		//Assert.isTrue(survivals.contains(survival));
-		
-		Trip trip;
-		trip = survivalRepository.findTripBySurvival(explorer.getId());
-		
-		Collection<Application> applications = new ArrayList<Application>();
-		applications = survivalRepository.enrolSurvivalExplorer(trip.getId());
-		//Assert.isTrue(applications.contains(survival));
-		
-		res.addAll(explorer.getSurvival());
-		res.add(survival);
-		
-		explorer.setSurvival(res);
-		
-		res.clear();
-		
-		for(Survival s: trip.getSurvival()){
-			explorers.addAll(s.getExplorer());
-			explorers.add(explorer);
-			
-			s.setExplorer(explorers);
-			
-			explorers.clear();
-		}		
+		for(Survival s: survivals){
+			if(s.equals(survival)){
+				trip = survivalRepository.findTripBySurvival(explorer.getId());
+				
+				Collection<Application> applications = new ArrayList<Application>();
+				applications = survivalRepository.enrolSurvivalExplorer(trip.getId());
+				for(Application a: applications){
+					if(explorer.getApplication().equals(a) && explorer.getSurvival().contains(survival)){
+						res.addAll(explorer.getSurvival());
+						res.add(survival);
+						
+						explorer.setSurvival(res);
+						
+						res.clear();
+						
+						explorers.addAll(s.getExplorer());
+						explorers.add(explorer);
+						
+						s.setExplorer(explorers);
+						
+						explorers.clear();
+					}
+				}
+			}
+		}
 	}
 }

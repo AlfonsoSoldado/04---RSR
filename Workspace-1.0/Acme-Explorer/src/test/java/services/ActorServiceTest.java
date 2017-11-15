@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import security.UserAccount;
 import utilities.AbstractTest;
 import domain.Actor;
 import domain.Audit;
@@ -22,40 +21,41 @@ import domain.Folder;
 import domain.Message;
 import domain.Trip;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-				"classpath:spring/datasource.xml",
-				"classpath:spring/config/packages.xml"})
+@ContextConfiguration(locations = { "classpath:spring/datasource.xml",
+		"classpath:spring/config/packages.xml" })
 @Transactional
-public class ActorServiceTest extends AbstractTest{
-	
+public class ActorServiceTest extends AbstractTest {
+
 	// Service under test -------------------------
-	
+
 	@Autowired
 	private ActorService actorService;
-	
+
 	// Supporting services --------------
 	@Autowired
 	private TripService tripService;
-	private UserAccount userAccountService;
-	private CategoryService categoryService;
-	private RangerService rangerService;
+	
+	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
 	private FolderService folderService;
 	
-	
+	@Autowired
+	private CategoryService categoryService;
+
 	// Test --------------------------------------
-	
+
 	@Test
-	public void testFindAllActor(){
+	public void testFindAllActor() {
 		Collection<Actor> actors;
 		actors = this.actorService.findAll();
 		Assert.notNull(actors);
 	}
-	
+
 	@Test
-	public void testFindOneActor(){
+	public void testFindOneActor() {
 		Actor actor;
 		actor = this.actorService.findOne(super.getEntityId("administrator1"));
 		Assert.notNull(actor);
@@ -72,201 +72,192 @@ public class ActorServiceTest extends AbstractTest{
 		this.actorService.save(res);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testDeleteActor(){
+	public void testDeleteActor() {
 		Actor actor;
 		actor = this.actorService.findOne(super.getEntityId("administrator1"));
 		this.actorService.delete(actor);
 	}
-	
+
 	@Test
-	public void testCheckUserLogin(){
-		
-		
-		
+	public void testCheckUserLogin() {
+
 	}
+
 	@Test
-	public void testFindByPrincipal(){
+	public void testFindByPrincipal() {
 		authenticate("admin");
 		Actor actor;
-		actor= this.actorService.findByPrincipal();
+		actor = this.actorService.findByPrincipal();
 		Assert.notNull(actor);
 		unauthenticate();
 	}
-	
-	
-	
+
 	@Test
-	public void testBrowseAllTrips(){
+	public void testBrowseAllTrips() {
 		Collection<Trip> res;
-		res= new ArrayList<Trip>();
-		res= this.actorService.browseAllTrips();
+		res = new ArrayList<Trip>();
+		res = this.actorService.browseAllTrips();
 		Assert.notNull(res);
 	}
-	
+
 	@Test
-	public void testSearchTripsBySingleKey(){
-		
+	public void testSearchTripsBySingleKey() {
+
 		String key;
-		key="Punta";
+		key = "Punta";
 		Assert.notNull(key);
-		
+
 		Collection<Trip> res;
-		res= new ArrayList<Trip>();
+		res = new ArrayList<Trip>();
 		res = this.actorService.searchTripsBySingleKey(key);
 		Assert.notNull(res);
 	}
-	
-	@Test 
-	public void testSearchTripsByCategory(){
+
+	@Test
+	public void testSearchTripsByCategory() {
 		Category category = new Category();
-		category= this.categoryService.findOne(super.getEntityId("category2"));
+		category = this.categoryService.findOne(super.getEntityId("category1"));
 		Assert.notNull(category);
-		
+
 		Collection<Trip> res;
-		res= new ArrayList<Trip>();
+		res = new ArrayList<Trip>();
 		res.addAll(this.actorService.searchTripsByCategory(category));
 		Assert.notNull(res);
-		
+
 	}
-	
+
 	@Test
-	public void testFindCurriculumRangerByTrip(){
-		
+	public void testFindCurriculumRangerByTrip() {
+
 		int i;
 		Trip trip;
-		trip= this.tripService.findOne(super.getEntityId("trip1"));
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		Assert.notNull(trip);
-		i= trip.getId();
-		
-		
+		i = trip.getId();
+
 		Collection<Curriculum> res;
-		res= new ArrayList<Curriculum>();
+		res = new ArrayList<Curriculum>();
 		res.addAll(this.actorService.findCurriculumRangerByTrip(i));
 		Assert.notNull(res);
-		
+
 	}
-	
+
 	@Test
-	public void testFindAuditByTrip(){
+	public void testFindAuditByTrip() {
 		int i;
 		Trip trip;
-		trip= this.tripService.findOne(super.getEntityId("trip2"));
+		trip = this.tripService.findOne(super.getEntityId("trip2"));
 		Assert.notNull(trip);
-		i=trip.getId();
-		
+		i = trip.getId();
+
 		Collection<Audit> res;
-		res=new ArrayList<Audit>();
-		res=this.actorService.findAuditByTrip(i);
+		res = new ArrayList<Audit>();
+		res = this.actorService.findAuditByTrip(i);
 		Assert.notNull(res);
-		
+
 	}
-	
+
 	@Test
-	public void testBanActor(){
+	public void testBanActor() {
 		authenticate("admin");
 		Actor actor;
-		actor= this.actorService.findOne(super.getEntityId("ranger1"));
+		actor = this.actorService.findOne(super.getEntityId("ranger1"));
 		Assert.notNull(actor);
-		
+
 		this.actorService.banActor(actor);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testUnBanActor(){
+	public void testUnBanActor() {
 		authenticate("admin");
 		Actor actor;
-		actor= this.actorService.findOne(super.getEntityId("ranger1"));
+		actor = this.actorService.findOne(super.getEntityId("ranger1"));
 		Assert.notNull(actor);
-		
+
 		this.actorService.unbanActor(actor);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testSendNotificationBroadcast(){
+	public void testSendNotificationBroadcast() {
 		authenticate("admin");
 		Message message;
-		message= this.messageService.findOne(super.getEntityId("message1"));
+		message = this.messageService.findOne(super.getEntityId("message1"));
 		Assert.notNull(message);
-		
+
 		this.actorService.SendNotificationBroadcast(message);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testCheckSpamWords(){
+	public void testCheckSpamWords() {
 		authenticate("admin");
 		this.actorService.checkSpamWords();
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testActorToSuspiciousList(){
+	public void testActorToSuspiciousList() {
 		authenticate("admin");
 		this.actorService.actorToSuspiciousList();
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testSendMessage(){
+	public void testSendMessage() {
 		authenticate("ranger01");
 		Collection<Actor> actores;
-		actores= new ArrayList<Actor>();
+		actores = new ArrayList<Actor>();
 		Assert.notNull(actores);
-				
+
 		Actor sender;
-		sender=this.actorService.findOne(super.getEntityId("ranger1"));
+		sender = this.actorService.findOne(super.getEntityId("ranger1"));
 		Assert.notNull(sender);
-		
+
 		Message message;
-		message= this.messageService.findOne(super.getEntityId("message2"));
+		message = this.messageService.findOne(super.getEntityId("message2"));
 		Assert.notNull(message);
-		
+
 		this.actorService.sendMessage(actores, sender, message);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testDeleteMessage(){
+	public void testDeleteMessage() {
 		authenticate("ranger01");
 		Actor actor;
-		actor=this.actorService.findOne(super.getEntityId("ranger1"));
+		actor = this.actorService.findOne(super.getEntityId("ranger1"));
 		Assert.notNull(actor);
-		
+
 		Message message;
-		message= this.messageService.findOne(super.getEntityId("message1"));
+		message = this.messageService.findOne(super.getEntityId("message1"));
 		Assert.notNull(message);
-		
+
 		this.actorService.deleteMessage(actor, message);
 		unauthenticate();
 	}
-	
+
 	@Test
-	public void testMoveMessage(){
+	public void testMoveMessage() {
 		authenticate("ranger01");
 		Message message;
-		message= this.messageService.findOne(super.getEntityId("message1"));
+		message = this.messageService.findOne(super.getEntityId("message1"));
 		Assert.notNull(message);
-		
+
 		Actor actor;
-		actor=this.actorService.findOne(super.getEntityId("ranger1"));
+		actor = this.actorService.findOne(super.getEntityId("ranger1"));
 		Assert.notNull(actor);
-		
+
 		Folder folder;
-		folder= this.folderService.findOne(super.getEntityId("customBoxRanger1"));
+		folder = this.folderService.findOne(super
+				.getEntityId("customBoxRanger1"));
 		Assert.notNull(folder);
-		
+
 		this.actorService.moveMessage(message, actor, folder);
 		unauthenticate();
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }
