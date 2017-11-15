@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import security.Authority;
 import security.UserAccount;
 import utilities.AbstractTest;
 import domain.Actor;
@@ -188,11 +189,13 @@ public class ActorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testSendNotificationBroadcast(){
+		authenticate("admin");
 		Message message;
 		message= this.messageService.findOne(super.getEntityId("message1"));
 		Assert.notNull(message);
 		
 		this.actorService.SendNotificationBroadcast(message);
+		unauthenticate();
 	}
 	
 	@Test
@@ -211,6 +214,7 @@ public class ActorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testSendMessage(){
+		authenticate("ranger01");
 		Collection<Actor> actores;
 		actores= new ArrayList<Actor>();
 		Assert.notNull(actores);
@@ -224,7 +228,7 @@ public class ActorServiceTest extends AbstractTest{
 		Assert.notNull(message);
 		
 		this.actorService.sendMessage(actores, sender, message);
-		
+		unauthenticate();
 	}
 	
 	@Test
@@ -244,21 +248,21 @@ public class ActorServiceTest extends AbstractTest{
 	
 	@Test
 	public void testMoveMessage(){
-		
+		authenticate("ranger1");
 		Message message;
 		message= this.messageService.findOne(super.getEntityId("message1"));
 		Assert.notNull(message);
 		
 		Actor actor;
-		actor=this.actorService.findOne(super.getEntityId("actor1"));
+		actor=this.actorService.findOne(super.getEntityId("ranger1"));
 		Assert.notNull(actor);
 		
 		Folder folder;
-		folder= this.folderService.findOne(super.getEntityId("folder1"));
+		folder= this.folderService.findOne(super.getEntityId("customBoxRanger1"));
 		Assert.notNull(folder);
 		
 		this.actorService.moveMessage(message, actor, folder);
-		
+		unauthenticate();
 	}
 	
 	
