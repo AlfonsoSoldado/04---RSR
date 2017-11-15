@@ -265,12 +265,10 @@ public class TripServiceTest extends AbstractTest{
 	public void testFindTripsByCategory(){
 		Collection<Trip> trips;
 		trips = new ArrayList<Trip>();
-		Category c = this.categoryServices.findOne(super.getEntityId("category1"));
+		Category c = this.categoryServices.findOne(super.getEntityId("category2"));
 		Assert.notNull(c);
-		int id;
-		id= c.getId();
 		
-		trips.addAll(this.tripService.findTripsByCategory(id));
+		trips.addAll(this.tripService.findTripsByCategory(c));
 	}
 	
 	
