@@ -76,7 +76,7 @@ public class CategoryServiceTest extends AbstractTest{
 		category.setCategories(categories);
 		
 		Trip trip;
-		trip = this.tripService.create();
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		Collection<Trip> trips = new ArrayList<Trip>();
 		trips = category.getTrip();
 		trips.add(trip);

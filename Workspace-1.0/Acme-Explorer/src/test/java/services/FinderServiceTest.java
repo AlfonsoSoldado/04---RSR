@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -94,18 +95,19 @@ public class FinderServiceTest extends AbstractTest {
 	@Test
 	public void testFindSearchCriterial(){
 		Collection<Trip> trips;
-		Finder finder;
-		String singleKey;
-		Double minPrice, maxPrice;
-		Date start, end;
-		
-		finder = this.finderService.findOne(super.getEntityId("finder1"));
-		singleKey = finder.getSingleKey();
-		minPrice = finder.getMinPrice();
-		maxPrice = finder.getMaxPrice();
-		start = finder.getStart();
-		end = finder.getEnd();
-		trips = new ArrayList<Trip>();
+		String singleKey = "Beach";
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2017);
+		cal.set(Calendar.MONTH, 12);
+		cal.set(Calendar.DAY_OF_MONTH, 12);
+		Calendar cal2 = Calendar.getInstance();
+		cal2.set(Calendar.YEAR, 2017);
+		cal2.set(Calendar.MONTH, 12);
+		cal2.set(Calendar.DAY_OF_MONTH, 20);
+		Date start = cal.getTime();
+		Date end = cal2.getTime();
+		Double minPrice = 80.;
+		Double maxPrice = 100.;
 		
 		trips = this.finderService.findSearchCriterial(singleKey, start, end, minPrice, maxPrice);
 		Assert.notNull(trips);

@@ -2179,6 +2179,7 @@
 		<list></list>
 	</property>
 	<property name="userAccount" ref="userAccount6" />
+	<property name="application" ref="application1" />
 	<property name="survival">
 		<list>
 			<ref bean="survival1"/>
@@ -2188,11 +2189,6 @@
 		<list>
 			<ref bean="trip1"/>
 			<ref bean="trip2"/>
-		</list>
-	</property>
-	<property name="application">
-		<list>
-			<ref bean="application1"/>
 		</list>
 	</property>
 	<property name="folders">
@@ -2225,6 +2221,7 @@
 		<list></list>
 	</property>
 	<property name="userAccount" ref="userAccount7" />
+	<property name="application" ref="application2" />
 	<property name="survival">
 		<list>
 			<ref bean="survival2"/>
@@ -2233,11 +2230,6 @@
 	<property name="trip">
 		<list>
 			
-		</list>
-	</property>
-	<property name="application">
-		<list>
-			<ref bean="application2"/>
 		</list>
 	</property>
 	<property name="folders">
@@ -2270,6 +2262,7 @@
 		<list></list>
 	</property>
 	<property name="userAccount" ref="userAccount15" />
+	<property name="application" ref="application3" />
 	<property name="survival">
 		<list>
 			<ref bean="survival2"/>
@@ -2278,11 +2271,6 @@
 	<property name="trip">
 		<list>
 			
-		</list>
-	</property>
-	<property name="application">
-		<list>
-			<ref bean="application3"/>
 		</list>
 	</property>
 	<property name="folders">
@@ -2315,6 +2303,7 @@
 		<list></list>
 	</property>
 	<property name="userAccount" ref="userAccount16" />
+	<property name="application" ref="application4" />
 	<property name="survival">
 		<list>
 			<ref bean="survival2"/>
@@ -2323,11 +2312,6 @@
 	<property name="trip">
 		<list>
 			
-		</list>
-	</property>
-	<property name="application">
-		<list>
-			<ref bean="application4"/>
 		</list>
 	</property>
 	<property name="folders">

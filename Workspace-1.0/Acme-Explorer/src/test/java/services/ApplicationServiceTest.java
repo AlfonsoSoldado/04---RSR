@@ -84,9 +84,7 @@ public class ApplicationServiceTest extends AbstractTest {
 		manager.setAddress("C/ Jueves");
 		manager.setEmail("fernan@gmail.com");
 		manager.setName("Fernando");
-		Collection<Application> applicationManager = manager.getApplication();
-		applicationManager.add(application);
-		manager.setApplication(applicationManager);
+		manager.setApplication(application);
 		application.setManager(manager);
 		
 		Date moment = new Date(System.currentTimeMillis() - 1);
@@ -171,8 +169,7 @@ public class ApplicationServiceTest extends AbstractTest {
 		manager.setAddress("C/ Viernes");
 		manager.setEmail("francisco@gmail.com");
 		manager.setName("Francisco");
-		Collection<Application> applicationManager = manager.getApplication();
-		applicationManager.add(application);
+		Application applicationManager = manager.getApplication();
 		manager.setApplication(applicationManager);
 		application.setManager(manager);
 		
