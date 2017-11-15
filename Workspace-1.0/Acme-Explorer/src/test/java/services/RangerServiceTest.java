@@ -13,7 +13,6 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Curriculum;
-import domain.Folder;
 import domain.Ranger;
 import domain.Trip;
 
@@ -38,8 +37,7 @@ public class RangerServiceTest extends AbstractTest{
 	@Autowired
 	private TripService tripService;
 	
-	@Autowired
-	private FolderService folderService;
+	
 	
 	// Test -----------------------------
 	
@@ -68,35 +66,29 @@ public class RangerServiceTest extends AbstractTest{
 	
 	@Test
 	public void testSaveRanger(){
+		authenticate("ranger01");
 		Ranger ranger;
 		ranger = this.rangerService.create();
-		
-		ranger.setSuspicious(false);
-		
-		ranger.setName("Alba");
-		ranger.setEmail("alf@gmail.com");
-		ranger.setSurname("Gonz");
-		ranger.setPhoneNumber("678234543");
-		
-		Collection<Folder> folders = new ArrayList<Folder>();
-		Folder folder;
-		folder = folderService.findOne(super.getEntityId("customBoxRanger1"));
-		folders.add(folder);
-		
-		ranger.setFolders(folders);
-		
 		Curriculum curriculum;
+		Collection<Trip> trip = new ArrayList<Trip>();
+		Trip trip1;
+		
 		curriculum = this.curriculumService.findOne(super.getEntityId("curriculum1"));
+		trip1 = this.tripService.findOne(super.getEntityId("trip1"));
+		trip.add(trip1);
+		
+		
+		Boolean suspicious = false;
+		
+		ranger.setSuspicious(suspicious);
 		ranger.setCurriculum(curriculum);
-
-		Trip trip;
-		trip = this.tripService.findOne(super.getEntityId("trip1"));
-		Collection<Trip> trips;
-		trips =new ArrayList<Trip>();
-		trips.add(trip);
-		ranger.setTrip(trips);
-	
+		ranger.setTrip(trip);
+		ranger.setName("Juan");
+		ranger.setSurname("Sanchez");
+		ranger.setEmail("juanranger@hotmail.com");
+		
 		this.rangerService.save(ranger);
+		unauthenticate();
 	}
 	
 	@Test
