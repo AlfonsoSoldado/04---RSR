@@ -267,10 +267,8 @@ public class TripServiceTest extends AbstractTest{
 		trips = new ArrayList<Trip>();
 		Category c = this.categoryServices.findOne(super.getEntityId("category1"));
 		Assert.notNull(c);
-		int id;
-		id= c.getId();
 		
-		trips.addAll(this.tripService.findTripsByCategory(id));
+		trips.addAll(this.tripService.findTripsByCategory(c));
 	}
 	
 	
@@ -279,7 +277,7 @@ public class TripServiceTest extends AbstractTest{
 		
 		authenticate("manager01");
 		Trip trip;
-		trip = this.tripService.findOne(super.getEntityId("trip2"));
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		Assert.notNull(trip);
 		this.tripService.cancelTrip(trip);
 		
@@ -287,7 +285,6 @@ public class TripServiceTest extends AbstractTest{
 	}
 	
 	@Test
-	// TODO: hacer testTripApplicationExplorer
 	public void testTripApplicationExplorer(){
 		authenticate("manager01");
 		Trip trip;
@@ -295,17 +292,4 @@ public class TripServiceTest extends AbstractTest{
 		this.tripService.tripApplicationExplorer(trip);
 		unauthenticate();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

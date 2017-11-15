@@ -1531,8 +1531,8 @@
 	<property name="title" value="Beach" />
 	<property name="description" value="Something" />
 	<property name="price" value="80.0" />
-	<property name="publication" value="24/10/2017" />
-	<property name="tripStart" value="12/12/2017" />
+	<property name="publication" value="24/10/2016" />
+	<property name="tripStart" value="12/12/2016" />
 	<property name="tripEnd" value="20/12/2017" />
 	<property name="reason" value="Because yes" />
 	<property name="cancelled" value="false" />
@@ -1599,7 +1599,7 @@
 		</list>
 	</property>
 	<property name="publication" value="25/10/2017" />
-	<property name="tripStart" value="25/12/2017" />
+	<property name="tripStart" value="25/12/2019" />
 	<property name="tripEnd" value="28/12/2017" />
 	<property name="reason"><null/></property>
 	<property name="ranger" ref="ranger2" />
@@ -2556,7 +2556,7 @@
 	<property name="explorer" ref="explorer4" />
 	<property name="manager" ref="manager4" />
 	<property name="trip" ref="trip2"/>
-	<property name="status" value="PENDING" />
+	<property name="status" value="ACCEPTED" />
 	</bean>
 	
 										<!-- GPS -->
