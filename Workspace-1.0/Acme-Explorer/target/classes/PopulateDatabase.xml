@@ -1399,7 +1399,7 @@
 	<property name="body" value="A comment of something" />
 	<property name="numberLaw" value = "10" />
 	<property name="moment" value="23/10/2013 19:13" />
-	<property name="draftMode" value="true" />
+	<property name="draftMode" value="false" />
 	<property name="trip" ref="trip1" />
 	</bean>
 	
@@ -1599,7 +1599,7 @@
 		</list>
 	</property>
 	<property name="publication" value="25/10/2017" />
-	<property name="tripStart" value="25/12/2017" />
+	<property name="tripStart" value="25/12/2019" />
 	<property name="tripEnd" value="28/12/2017" />
 	<property name="reason"><null/></property>
 	<property name="ranger" ref="ranger2" />
@@ -2556,7 +2556,7 @@
 	<property name="explorer" ref="explorer4" />
 	<property name="manager" ref="manager4" />
 	<property name="trip" ref="trip2"/>
-	<property name="status" value="PENDING" />
+	<property name="status" value="ACCEPTED" />
 	</bean>
 	
 										<!-- GPS -->
