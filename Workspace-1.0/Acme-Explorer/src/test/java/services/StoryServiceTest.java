@@ -96,6 +96,10 @@ public class StoryServiceTest extends AbstractTest{
 	
 	@Test
 	public void testWriteStory(){
+<<<<<<< HEAD
+		authenticate("explorer01"); // <---- writer
+=======
+>>>>>>> 5d969cf12d6620cfd0a42a2f64baa1fa63a09d26
 		Story story;
 		Trip trip;
 		String title, pieceText, link1;
@@ -110,5 +114,6 @@ public class StoryServiceTest extends AbstractTest{
 		
 		story = this.storyService.writeStory(trip, title, pieceText, link);
 		Assert.notNull(story);
+		unauthenticate();
 	}
 }

@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.Test;
@@ -15,10 +16,8 @@ import domain.Application;
 import domain.Emergency;
 import domain.Explorer;
 import domain.Finder;
-import domain.Folder;
-import domain.Message;
-import domain.SocialId;
 import domain.Story;
+import domain.Survival;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -35,10 +34,7 @@ public class ExplorerServiceTest extends AbstractTest{
 	// Supporting services -----------------------
 	
 	@Autowired
-	private MessageService messageService;
-	
-	@Autowired
-	private SocialIdService socialIdService;
+	private SurvivalService survivalService;
 	
 	@Autowired
 	private StoryService storyService;
@@ -52,8 +48,6 @@ public class ExplorerServiceTest extends AbstractTest{
 	@Autowired
 	private FinderService finderService;
 
-	@Autowired
-	private FolderService folderService;
 			
 	// Test --------------------------------------
 	
@@ -84,57 +78,36 @@ public class ExplorerServiceTest extends AbstractTest{
 		Explorer explorer;
 		explorer = this.explorerService.create();
 		
-		explorer.setName("ExplorerNuevo");
-		explorer.setPhoneNumber("655112233");
-		
-		Message received;
-		received = this.messageService.create();
-		explorer.setReceived(received);
-		
-		Message sent;
-		sent = this.messageService.create();
-		Collection<Message> sents = explorer.getSent();
-		sents.add(sent);
-		explorer.setSent(sents);
-		
-		SocialId socialId;
-		socialId = this.socialIdService.create();
-		Collection<SocialId> socialIds = explorer.getSocialId();
-		socialIds.add(socialId);
-		explorer.setSocialId(socialIds);
-		
-		Story story;
-		story = this.storyService.create();
-		Collection<Story> stories = explorer.getStories();
-		stories.add(story);
-		explorer.setStories(stories);
-		
-		explorer.setSurname("García");
-		explorer.setAddress("C/ Barcelona");
-		
+		Collection<Finder> finder = new ArrayList<Finder>();
+		Collection<Emergency> emergency = new ArrayList<Emergency>();
+		Collection<Story> story = new ArrayList<Story>();
+		Collection<Survival> survival = new ArrayList<Survival>();
+		Finder finder1;
+		Emergency emergency1;
+		Story story1;
+		Survival survival1;
 		Application application;
-		application = this.applicationService.create();
+		
+		finder1 = this.finderService.findOne(super.getEntityId("finder1"));
+		emergency1 = this.emergencyService.findOne(super.getEntityId("emergency1"));
+		story1 = this.storyService.findOne(super.getEntityId("story1"));
+		survival1 = this.survivalService.findOne(super.getEntityId("survival1"));
+		application = this.applicationService.findOne(super.getEntityId("application1"));
+		
+		finder.add(finder1);
+		emergency.add(emergency1);
+		story.add(story1);
+		survival.add(survival1);
+		
+		explorer.setFinder(finder);
+		explorer.setEmergency(emergency);
+		explorer.setStories(story);
 		explorer.setApplication(application);
-	
-		explorer.setEmail("explorernuevo@gmail.com");
-
-		Emergency emergency;
-		emergency = this.emergencyService.create();
-		Collection<Emergency> emergencies = explorer.getEmergency();
-		emergencies.add(emergency);
-		explorer.setEmergency(emergencies);
+		explorer.setSurvival(survival);
+		explorer.setName("Ana");
+		explorer.setSurname("Martin");
+		explorer.setEmail("anaexpl@hotmail.com");
 		
-		Finder finder;
-		finder = this.finderService.create();
-		Collection<Finder> finders = explorer.getFinder();
-		finders.add(finder);
-		explorer.setFinder(finders);
-		
-		Folder customFolder;
-		customFolder = this.folderService.create();
-		Collection<Folder> folders = explorer.getFolders();
-		folders.add(customFolder);
-		explorer.setFolders(folders);
 		this.explorerService.save(explorer);
 		unauthenticate();
 	}
