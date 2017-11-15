@@ -62,7 +62,7 @@ public class SponsorServiceTest extends AbstractTest {
 		sponsor = this.sponsorService.create();
 
 		Sponsorship sponsorShip;
-		sponsorShip = this.sponsorShipService.create();
+		sponsorShip = this.sponsorShipService.findOne(super.getEntityId("sponsorship1"));
 		Collection<Sponsorship> sponsorShips;
 		sponsorShips = new ArrayList<Sponsorship>();
 		sponsorShips.add(sponsorShip);
@@ -74,17 +74,23 @@ public class SponsorServiceTest extends AbstractTest {
 
 	@Test
 	public void testDeleteSponsor() {
+		authenticate("sponsor01");
 		Sponsor sponsor;
-		sponsor = this.sponsorService.findOne(super.getEntityId("ranger2"));
+		sponsor = this.sponsorService.findOne(super.getEntityId("sponsor2"));
+		Assert.notNull(sponsor);
 		this.sponsorService.delete(sponsor);
+		unauthenticate();
 
 	}
 
 	@Test
 	public void testFindByPrincipal() {
+		authenticate("sponsor01");
 		Sponsor sponsor;
+		sponsor= this.sponsorService.findOne(super.getEntityId("sponsor2"));
 		sponsor = this.sponsorService.findByPrincipal();
 		Assert.notNull(sponsor);
+		unauthenticate();
 	}
 
 }

@@ -45,7 +45,7 @@ public class SponsorshipServiceTest extends AbstractTest{
 	public void testCreateSponsorship(){
 		
 		Sponsorship sponsorship;
-		sponsorship=this.sponsorshipService.create();
+		sponsorship=this.sponsorshipService.findOne(super.getEntityId("sponsorship1"));
 		Assert.notNull(sponsorship);
 		
 	}
@@ -70,7 +70,7 @@ public class SponsorshipServiceTest extends AbstractTest{
 	@Test
 	public void testSaveSponsorship(){
 		Sponsorship sponsorship;
-		sponsorship= this.sponsorshipService.create();
+		sponsorship= this.sponsorshipService.findOne(super.getEntityId("sponsorship1"));
 		
 		
 		
@@ -86,7 +86,7 @@ public class SponsorshipServiceTest extends AbstractTest{
 		sponsorship.setSponsor(sponsor);
 		
 		Trip trip;
-		trip= this.tripService.create();
+		trip= this.tripService.findOne(super.getEntityId("trip1"));
 		sponsorship.setTrip(trip);
 		
 		this.sponsorshipService.save(sponsorship);
