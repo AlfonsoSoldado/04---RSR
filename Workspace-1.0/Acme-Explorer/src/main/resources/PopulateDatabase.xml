@@ -1827,6 +1827,11 @@
 		</list>
 	</property>
 	<property name="received" ref="message1"/>
+	<property name="survival">
+		<list>
+			<ref bean="survival1"/>
+		</list>
+	</property>
 	</bean>							
 	
 	<!-- EXPLORER2 -->
@@ -1872,6 +1877,11 @@
 		</list>
 	</property>
 	<property name="received" ref="message2"/>
+	<property name="survival">
+		<list>
+			<ref bean="survival2"/>
+		</list>
+	</property>
 	</bean>
 	
 	<!-- EXPLORER3 -->
@@ -1915,6 +1925,10 @@
 		</list>
 	</property>
 	<property name="received"><null/></property>
+	<property name="survival">
+		<list>
+		</list>
+	</property>
 	</bean>
 	
 	<bean id="explorer4" class="domain.Explorer">
@@ -2424,6 +2438,11 @@
 	<property name="location" ref="gps1" />
 	<property name="trip" ref="trip1" />
 	<property name="manager" ref="manager1" />
+	<property name="explorer">
+		<list>
+			<ref bean="explorer1"/>
+		</list>
+	</property>
 	</bean>
 	
 	<!-- SURVIVAL2 -->
@@ -2435,6 +2454,11 @@
 	<property name="location" ref="gps2" />
 	<property name="trip" ref="trip2" />
 	<property name="manager" ref="manager2" />
+	<property name="explorer">
+		<list>
+			<ref bean="explorer2"/>
+		</list>
+	</property>
 	</bean>
 	
 										<!-- AUDIT -->
