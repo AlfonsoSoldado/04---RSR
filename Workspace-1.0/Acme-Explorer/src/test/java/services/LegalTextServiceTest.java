@@ -39,28 +39,35 @@ public class LegalTextServiceTest extends AbstractTest{
 	
 	@Test
 	public void testCreateLegalText(){
+		authenticate("admin");
 		LegalText text;
 		text = this.legalTextService.create();
 		Assert.notNull(text);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testFindAllLegalText(){
+		authenticate("admin");
 		Collection<LegalText> texts;
 		texts = new ArrayList<LegalText>();
 		texts = this.legalTextService.findAll();
 		Assert.notNull(texts);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testFindOneLegalText(){
+		authenticate("admin");
 		LegalText text;
 		text = this.legalTextService.findOne(super.getEntityId("legalText1"));
 		Assert.notNull(text);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testSaveLegalText(){
+		authenticate("admin");
 		LegalText text;
 		text = this.legalTextService.create();
 		
@@ -76,30 +83,36 @@ public class LegalTextServiceTest extends AbstractTest{
 		text.setDraftMode(true);
 		
 		Trip trip;
-		trip  = this.tripService.create();
+		trip  = tripService.findOne(super.getEntityId("trip1"));
 		text.setTrip(trip);
 		
 		this.legalTextService.save(text);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testDeleteLegalText(){
+		authenticate("admin");
 		LegalText text;
 		text = this.legalTextService.findOne(super.getEntityId("legalText2"));
-		this.legalTextService.delete(text);		
+		this.legalTextService.delete(text);	
+		unauthenticate();
 	}
 	
 	@Test
 	public void testFindLegalTextDraftTrue(){
+		authenticate("admin");
 		Boolean res;
 		LegalText legalText;
 		legalText = this.legalTextService.findOne(super.getEntityId("legalText2"));
 		res = this.legalTextService.findLegalTextDraftTrue(legalText);
 		Assert.notNull(res);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testFindLegalTextByTrip(){
+		authenticate("admin");
 		Collection<LegalText> texts;
 		Trip trip;
 		
@@ -108,5 +121,6 @@ public class LegalTextServiceTest extends AbstractTest{
 		
 		texts = this.legalTextService.findLegalTextsByTrip(trip);
 		Assert.notNull(texts);
+		unauthenticate();
 	}
 }
