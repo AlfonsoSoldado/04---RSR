@@ -34,9 +34,6 @@ public class ExplorerService {
 
 	@Autowired
 	private FolderService folderService;
-	
-	@Autowired
-	private ActorService actorService;
 
 	// Constructors
 
@@ -47,7 +44,6 @@ public class ExplorerService {
 	// Simple CRUD methods
 
 	public Explorer create() {
-		Assert.isTrue(!this.actorService.checkAuthority());
 		Explorer res = new Explorer();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();

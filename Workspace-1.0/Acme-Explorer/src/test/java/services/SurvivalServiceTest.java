@@ -66,8 +66,8 @@ public class SurvivalServiceTest extends AbstractTest {
 		Survival survival;
 		Trip trip;
 		
-		survival = this.survivalService.create();
-		trip = this.tripService.create();		
+		survival = this.survivalService.findOne(super.getEntityId("survival1"));
+		trip = this.tripService.findOne(super.getEntityId("trip1"));		
 		survival.setTrip(trip);
 		
 		this.survivalService.save(survival);
@@ -82,14 +82,25 @@ public class SurvivalServiceTest extends AbstractTest {
 	
 	@Test
 	public void testFindSurvivalByTrips(){
+		authenticate("explorer01");
 		Collection<Survival> survivals;
+
+		survivals= new ArrayList<Survival>();
+		Survival survival;
+		survival= this.survivalService.findOne(super.getEntityId("survival1"));
+		survivals.add(survival);
+		survivals = this.survivalService.findSurvivalByTrips();
+
 		survivals = new ArrayList<Survival>();
 		survivals.addAll(this.survivalService.findSurvivalByTrips());
+
 		Assert.notNull(survivals);
+		unauthenticate();
 	}
 	
 	@Test
 	public void testFindOneByTrips(){
+		authenticate("explorer01");
 		Survival survival, res;
 		int id;
 		
@@ -98,16 +109,16 @@ public class SurvivalServiceTest extends AbstractTest {
 		
 		res = this.survivalService.findOneByTrips(id);
 		Assert.notNull(res);
+		unauthenticate();
 	}
 	
 	@Test
-	// TODO: no sé si está bien.
 	public void testSaveByTrips(){
 		Survival survival;
 		Trip trip;
 		
-		survival = this.survivalService.create();
-		trip = this.tripService.create();		
+		survival = this.survivalService.findOne(super.getEntityId("survival2"));
+		trip = this.tripService.findOne(super.getEntityId("trip2"));		
 		survival.setTrip(trip);
 		
 		this.survivalService.save(survival);
@@ -115,13 +126,16 @@ public class SurvivalServiceTest extends AbstractTest {
 	
 	@Test
 	public void testByDeleteTrips(){
+		authenticate("manager01");
 		Survival survival;
-		survival = this.survivalService.findOne(super.getEntityId("survival1"));
+		survival = this.survivalService.findOne(super.getEntityId("survival2"));
 		this.survivalService.deleteByTrips(survival);
+		unauthenticate();
 	}
 	
 	@Test 
 	public void testEnrolSurvival(){
+		authenticate("admin");
 		Explorer explorer;
 		Survival survival;
 		
@@ -129,6 +143,7 @@ public class SurvivalServiceTest extends AbstractTest {
 		survival = this.survivalService.findOne(super.getEntityId("survival1"));
 		
 		this.survivalService.enrolSurvival(explorer, survival);
+		unauthenticate();
 	}
 	
 }

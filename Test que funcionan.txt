@@ -21,16 +21,16 @@ Professional
 Sponsorship
 Sponsor
 SocialId
+Stage
 
 
 FALTA:
 Actor
 Application
 Audit
-Explorer
-LegalText (Falta meter en xml draftmode = false)
-Ranger
-Stage
+Explorer (Hacer save bien)
+LegalText
+Ranger (Hacer save bien)
 Story
 Survival
 Trip
