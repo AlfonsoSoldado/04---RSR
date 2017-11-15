@@ -19,6 +19,7 @@ import domain.Finder;
 import domain.Folder;
 import domain.SocialId;
 import domain.Story;
+import domain.Survival;
 
 @Service
 @Transactional
@@ -57,6 +58,7 @@ public class ExplorerService {
 		Collection<Finder> finder = new ArrayList<Finder>();
 		Collection<Emergency> emergency = new ArrayList<Emergency>();
 		folder = this.folderService.systemFolders();
+		Collection<Survival> survivals = new ArrayList<Survival>();
 		
 		authority.setAuthority(Authority.EXPLORER);
 		userAccount.addAuthority(authority);
@@ -67,6 +69,7 @@ public class ExplorerService {
 		res.setApplication(application);
 		res.setFinder(finder);
 		res.setEmergency(emergency);
+		res.setSurvival(survivals);
 		
 		return res;
 	}

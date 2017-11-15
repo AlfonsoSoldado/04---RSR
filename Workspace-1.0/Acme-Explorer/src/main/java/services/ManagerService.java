@@ -45,8 +45,9 @@ public class ManagerService {
 	// Simple CRUD methods
 	
 	public Manager create() {
-		administratorService.checkAuthority();
 		Manager res = new Manager();
+		
+		administratorService.checkAuthority();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		Collection<SocialId> socialId = new ArrayList<SocialId>();

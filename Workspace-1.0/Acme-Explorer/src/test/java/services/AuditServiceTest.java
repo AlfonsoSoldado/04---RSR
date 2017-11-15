@@ -85,7 +85,7 @@ public class AuditServiceTest extends AbstractTest {
 		audit.setDraftMode(true);
 
 		Trip trip;
-		trip = this.tripService.create();
+		trip = tripService.findOne(super.getEntityId("trip1"));
 		audit.setTrip(trip);
 
 		Auditor auditor;

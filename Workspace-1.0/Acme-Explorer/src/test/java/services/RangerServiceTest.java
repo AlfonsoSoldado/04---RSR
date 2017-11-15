@@ -45,6 +45,7 @@ public class RangerServiceTest extends AbstractTest{
 	public void testCreateRanger(){
 		Ranger ranger;
 		ranger = this.rangerService.create();
+		
 		Assert.notNull(ranger);
 	}
 	
@@ -71,11 +72,11 @@ public class RangerServiceTest extends AbstractTest{
 		ranger.setSuspicious(false);
 		
 		Curriculum curriculum;
-		curriculum = this.curriculumService.create();
+		curriculum = this.curriculumService.findOne(super.getEntityId("curriculum1"));
 		ranger.setCurriculum(curriculum);
 
 		Trip trip;
-		trip = this.tripService.create();
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
 		Collection<Trip> trips;
 		trips =new ArrayList<Trip>();
 		trips.add(trip);
@@ -101,9 +102,11 @@ public class RangerServiceTest extends AbstractTest{
 	
 	@Test
 	public void testFindByPrincipal(){
+		authenticate("ranger01");
 		Ranger ranger;
 		ranger = this.rangerService.findByPrincipal();
 		Assert.notNull(ranger);
+		unauthenticate();
 	}
 	
 }
