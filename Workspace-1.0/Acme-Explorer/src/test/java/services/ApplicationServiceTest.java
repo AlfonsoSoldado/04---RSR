@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -79,42 +80,39 @@ public class ApplicationServiceTest extends AbstractTest {
 		Application application;
 		application = this.applicationService.create();
 		
-		Manager manager;
-		manager = this.managerService.create();
-		manager.setAddress("C/ Jueves");
-		manager.setEmail("fernan@gmail.com");
-		manager.setName("Fernando");
-		manager.setApplication(application);
-		application.setManager(manager);
-		
-		Date moment = new Date(System.currentTimeMillis() - 1);
-		application.setMoment(moment);
-		
-		application.setReason("Muy mala comida");
-		application.setStatus("DUE");
-		
+
 		Trip trip;
-		trip = this.tripService.create();
-		application.setTrip(trip);
-		
-		application.setComment("comentario de un explorer");
-		
-		CC creditCard;
-		creditCard = new CC();
-		creditCard.setHolderName("Francisco");
-		creditCard.setBrandName("VISA");
-		creditCard.setExpirationMonth(10);
-		creditCard.setExpirationYear(2);
-		creditCard.setCVV(112);
-		creditCard.setNumber("4099537775843795");
-		application.setCreditCard(creditCard);
-		
+		Manager manager;
 		Explorer explorer;
-		explorer = this.explorerService.create();
-		explorer.setAddress("C/ Venecia");
-		explorer.setEmail("otromas@gmail.com");
-		explorer.setName("Gonzalo");
-		explorer.setApplication(application);
+		
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2017);
+		cal.set(Calendar.MONTH, 2);
+		cal.set(Calendar.DAY_OF_MONTH, 12);
+		Date moment = cal.getTime();
+		String status = "ACCEPTED";
+		String comment = "Comment";
+		String reason = "Reason";
+		CC cc = new CC();
+		cc.setHolderName("BBVA");
+		cc.setBrandName("MasterCard");
+		cc.setNumber("4099537775843795");
+		cc.setExpirationMonth(02);
+		cc.setExpirationYear(2019);
+		cc.setCVV(123);
+		
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
+		manager = this.managerService.findOne(super.getEntityId("manager1"));
+		explorer = this.explorerService.findOne(super.getEntityId("explorer1"));
+		
+		application.setMoment(moment);
+		application.setStatus(status);
+		application.setComment(comment);
+		application.setReason(reason);
+		application.setCreditCard(cc);
+		application.setTrip(trip);
+		application.setManager(manager);
 		application.setExplorer(explorer);
 		
 		this.applicationService.save(application);
@@ -164,39 +162,40 @@ public class ApplicationServiceTest extends AbstractTest {
 		Application application;
 		application = this.applicationService.create();
 		
-		Manager manager;
-		manager = this.managerService.create();
-		manager.setAddress("C/ Viernes");
-		manager.setEmail("francisco@gmail.com");
-		manager.setName("Francisco");
-		Application applicationManager = manager.getApplication();
-		manager.setApplication(applicationManager);
-		application.setManager(manager);
-		
-		Date moment = new Date(System.currentTimeMillis() - 1);
-		application.setMoment(moment);
-		
-		application.setReason("Mala atención");
-		application.setStatus("DUE");
-		
 		Trip trip;
-		trip = this.tripService.create();
-		application.setTrip(trip);
-		
-		application.setComment("comentario de un manager");
-		
-		CC creditCard;
-		creditCard = new CC();
-		application.setCreditCard(creditCard);
-		
+		Manager manager;
 		Explorer explorer;
-		explorer = this.explorerService.create();
-		explorer.setAddress("C/ Italia");
-		explorer.setEmail("otroemailmas@gmail.com");
-		explorer.setName("ManagerNuevo");
-		explorer.setApplication(application);
-		application.setExplorer(explorer);
 		
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2017);
+		cal.set(Calendar.MONTH, 2);
+		cal.set(Calendar.DAY_OF_MONTH, 12);
+		Date moment = cal.getTime();
+		String status = "ACCEPTED";
+		String comment = "Comment";
+		String reason = "Reason";
+		CC cc = new CC();
+		cc.setHolderName("BBVA");
+		cc.setBrandName("MasterCard");
+		cc.setNumber("4099537775843795");
+		cc.setExpirationMonth(02);
+		cc.setExpirationYear(2019);
+		cc.setCVV(123);
+		
+		trip = this.tripService.findOne(super.getEntityId("trip1"));
+		manager = this.managerService.findOne(super.getEntityId("manager1"));
+		explorer = this.explorerService.findOne(super.getEntityId("explorer1"));
+		
+		application.setMoment(moment);
+		application.setStatus(status);
+		application.setComment(comment);
+		application.setReason(reason);
+		application.setCreditCard(cc);
+		application.setTrip(trip);
+		application.setManager(manager);
+		application.setExplorer(explorer);
+
 		this.applicationService.save(application);
 		unauthenticate();
 	}

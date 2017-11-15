@@ -21,6 +21,7 @@ import domain.Stage;
 import domain.Story;
 import domain.Survival;
 import domain.Trip;
+import domain.Value;
 
 @Service
 @Transactional
@@ -62,8 +63,10 @@ public class TripService {
 		Category category = new Category();
 		Ranger ranger = new Ranger();
 		Collection<Survival> survivals = new ArrayList<Survival>();
-		// TODO: meter value??
+		Collection<Value> value = new ArrayList<Value>();
 		Trip trip = new Trip();
+		
+		
 		m.getTrip().add(trip);
 		trip.setManager(m);
 		trip.setAudit(audits);
@@ -75,6 +78,7 @@ public class TripService {
 		trip.setCategory(category);
 		trip.setRanger(ranger);
 		trip.setSurvival(survivals);
+		trip.setValue(value);
 		return trip;
 	}
 
@@ -188,7 +192,7 @@ public class TripService {
 		res = new ArrayList<Trip>();
 		Assert.notNull(category);
 		Assert.isTrue(category.getId() != 0);
-		res.addAll(this.tripRepository.browseTripsByCategories(category.getId()));
+		res.addAll(tripRepository.browseTripsByCategories(category.getId()));
 		
 		return res;
 	}
@@ -198,19 +202,25 @@ public class TripService {
 		managerService.checkAuthority();
 		Collection<Trip> trips = new ArrayList<Trip>();
 		trips = tripRepository.cancelTrip();
-		Assert.isTrue(trips.contains(trip));
-		trip.setCancelled(true);
+		for(Trip t: trips){
+			if(t.equals(trip)){
+				t.setCancelled(true);
+			}
+		}
 	}
 	
 	//13.4
 	public void tripApplicationExplorer(Trip trip){
 		explorerService.checkAuthority();
+		Assert.notNull(trip);
 		Collection<Trip> trips = new ArrayList<Trip>();
 		trips = tripRepository.findTripsAccepted();
 		
-		Assert.isTrue(trips.contains(trip));
-		Assert.notNull(trip);
-		trip.setCancelled(true);
+		for(Trip t: trips){
+			if(t.equals(trip)){
+				t.setCancelled(true);
+			}
+		}
 	}
 
 }
